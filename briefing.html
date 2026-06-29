@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📰 晨间新闻速览 · {{DATE}}</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  
+  :root{
+    --bg:#f8f9fa;
+    --surface:#fff;
+    --surface-alt:#f2f3f5;
+    --border:#e8eaed;
+    --border-light:#f0f1f3;
+    --text:#1a1d23;
+    --text-secondary:#5a5f6b;
+    --text-tertiary:#8a8f98;
+    --blue:#0066cc;
+    --blue-light:#e8f0fe;
+    --blue-bg:#f0f5ff;
+    --green:#059669;
+    --green-bg:#ecfdf5;
+    --red:#dc2626;
+    --red-bg:#fef2f2;
+    --amber:#d97706;
+    --amber-bg:#fffbeb;
+    --purple:#7c3aed;
+    --purple-bg:#f5f3ff;
+    --radius:10px;
+    --shadow:0 1px 4px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.03);
+    --font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --font-serif:'Noto Serif SC',Georgia,'Times New Roman',serif;
+  }
+
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
+  
+  .container{max-width:680px;margin:0 auto;padding:0}
+
+  /* Header */
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .h-left{display:flex;align-items:center;gap:10px}
+  .h-icon{width:34px;height:34px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff}
+  .h-title{font-size:16px;font-weight:600;letter-spacing:-.3px}
+  .h-meta{font-size:11px;color:var(--text-tertiary);margin-top:1px}
+  .h-badge{font-size:10px;font-weight:500;color:var(--blue);background:var(--blue-light);padding:3px 12px;border-radius:20px;letter-spacing:.3px}
+  
+  /* Market Insight Bar */
+  .insight-bar{background:var(--blue-bg);margin:0 0 20px;padding:12px 20px;font-size:13px;color:var(--text-secondary);line-height:1.5;border-bottom:1px solid var(--border-light)}
+  .insight-bar strong{color:var(--text)}
+
+  /* Content Sections */
+  .section{padding:20px}
+  .section+.section{border-top:1px solid var(--border-light)}
+  
+  .sec-label{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
+
+  /* Market Grid */
+  .mkt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
+  @media(min-width:480px){.mkt-grid{grid-template-columns:repeat(4,1fr)}}
+  .mkt-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .mkt-label{font-size:10px;color:var(--text-tertiary);font-weight:500;margin-bottom:1px}
+  .mkt-val{font-size:16px;font-weight:600;font-family:var(--font-mono)}
+  .mkt-chg{font-size:11px;font-weight:500;margin-left:2px}
+  .mkt-chg.up{color:var(--green)}.mkt-chg.down{color:var(--red)}.mkt-chg.neu{color:var(--text-tertiary)}
+  
+  /* Mini Sparkline Bars */
+  .spark{position:absolute;bottom:4px;right:10px;opacity:.2}
+  .spark-inner{display:flex;align-items:flex-end;gap:2px;height:18px}
+  .bar{width:4px;border-radius:2px 2px 0 0;min-height:2px;transition:height .2s}
+  .bar.up{background:var(--green)}.bar.down{background:var(--red)}
+
+  /* Ticker Rows */
+  .ticker-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .ticker{display:flex;align-items:center;padding:8px 14px;font-size:13px;border-bottom:1px solid var(--border-light)}
+  .ticker:last-child{border-bottom:none}
+  .ticker-ico{width:18px;text-align:center;margin-right:8px;font-size:13px}
+  .ticker-nm{font-weight:500;min-width:70px}
+  .ticker-bar{flex:1;height:4px;background:var(--border);border-radius:2px;margin:0 10px;overflow:hidden;max-width:60px}
+  .ticker-fill{height:100%;border-radius:2px}
+  .ticker-fill.up{background:var(--green)}.ticker-fill.down{background:var(--red)}
+  .ticker-px{font-family:var(--font-mono);font-weight:500;min-width:65px;text-align:right;font-size:12px;color:var(--text-secondary)}
+  .ticker-ch{min-width:48px;text-align:right;font-weight:500;font-size:11px}
+  .ticker-ch.up{color:var(--green)}.ticker-ch.down{color:var(--red)}
+
+  /* News Cards */
+  .news{display:flex;flex-direction:column;gap:10px}
+  .news-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .news-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--border)}
+  .news-card.pos::before{background:var(--green)}
+  .news-card.neg::before{background:var(--red)}
+  .news-card.neu::before{background:var(--text-tertiary)}
+  
+  .news-tag{font-size:9px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;padding:2px 8px;border-radius:3px;display:inline-block;margin-bottom:5px}
+  .nt-mi{background:#eef0ff;color:#5e6ad2}
+  .nt-macro{background:var(--red-bg);color:var(--red)}
+  .nt-tech{background:var(--green-bg);color:var(--green)}
+  .nt-crypto{background:var(--amber-bg);color:var(--amber)}
+  .nt-policy{background:#f0fdf4;color:#16a34a}
+  .nt-ind{background:var(--purple-bg);color:var(--purple)}
+  
+  .news-t{font-size:15px;font-weight:600;line-height:1.35;margin-bottom:3px;letter-spacing:-.15px}
+  .news-t a{color:inherit;text-decoration:none}
+  .news-t a:hover{color:var(--blue)}
+  .news-d{font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:5px}
+  .news-f{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--text-tertiary)}
+  .nl{color:var(--blue);text-decoration:none;font-weight:500;font-size:11px}
+  .nl:hover{text-decoration:underline}
+  .ip{font-size:10px;font-weight:500;padding:1px 8px;border-radius:20px}
+  .ip.pos{background:var(--green-bg);color:var(--green)}
+  .ip.neg{background:var(--red-bg);color:var(--red)}
+  .ip.neu{background:var(--surface-alt);color:var(--text-tertiary)}
+
+  /* Crypto Grid */
+  .crypto{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .c-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 6px;text-align:center;box-shadow:var(--shadow)}
+  .c-sym{font-size:11px;font-weight:600;margin-bottom:2px}
+  .c-px{font-size:13px;font-weight:600;font-family:var(--font-mono)}
+  .c-chg{font-size:10px;font-weight:500}
+  .c-chg.up{color:var(--green)}.c-chg.down{color:var(--red)}
+  .c-bar{height:3px;border-radius:2px;margin-top:5px;overflow:hidden;background:var(--border)}
+  .c-bar .f{height:100%;border-radius:2px}
+  .c-bar .f.up{background:var(--green)}.c-bar .f.down{background:var(--red)}
+  .c-src{font-size:10px;color:var(--text-tertiary);text-align:center;margin-top:6px}
+
+  /* Focus List */
+  .focus{display:flex;flex-direction:column;gap:8px}
+  .f-item{display:flex;gap:10px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--blue);box-shadow:var(--shadow);font-size:13px;line-height:1.5}
+  .f-n{font-weight:600;color:var(--blue);min-width:18px}
+  .f-t{color:var(--text-secondary)}
+  .f-t strong{color:var(--text)}
+
+  /* Verdict */
+  .verdict{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-top:10px;border-left:3px solid var(--blue);box-shadow:var(--shadow)}
+  .v-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+  .v-text{font-size:14px;color:var(--text-secondary);line-height:1.6}
+
+  /* Footer */
+  .footer{text-align:center;padding:20px 20px 32px;font-size:10px;color:var(--text-tertiary);line-height:1.7;border-top:1px solid var(--border-light)}
+
+  /* Responsive */
+  @media(max-width:480px){
+    .section{padding:16px 14px}
+    .mkt-grid{gap:6px}
+    .mkt-cell{padding:10px 11px;border-radius:8px}
+    .mkt-val{font-size:14px}
+    .news-card{padding:12px 14px;border-radius:8px}
+    .news-t{font-size:14px}
+    .crypto{gap:4px}
+    .c-cell{padding:8px 4px;border-radius:8px}
+    .c-px{font-size:11px}
+    .f-item{padding:10px 12px;font-size:12px}
+  }
+
+  /* Print */
+  @media print{body{background:#fff}.container{max-width:none;padding:0}.header{position:static}.mkt-cell,.news-card,.ticker-list,.c-cell,.f-item,.verdict{box-shadow:none;border-color:#ddd;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="h-left">
+    <div class="h-icon">📰</div>
+    <div>
+      <div class="h-title">晨间新闻速览</div>
+      <div class="h-meta">{{DATE}} · {{DOW}} · {{TIME}}</div>
+    </div>
+  </div>
+  <span class="h-badge">非高峰</span>
+</div>
+
+<!-- Insight Bar -->
+<div class="insight-bar">
+  💡 <strong>隔夜启示：</strong>{{MARKET_DIRECTION}}
+</div>
+
+<!-- 📊 美股收盘 -->
+<div class="section">
+  <div class="sec-label">📊 隔夜美股收盘 · {{DATE_PREV}}</div>
+  <div class="mkt-grid" id="mktGrid"></div>
+  <div style="margin-top:12px">
+    <div class="ticker-list" id="tickerList"></div>
+  </div>
+  <div style="margin-top:10px;padding:10px 14px;background:var(--surface-alt);border-radius:var(--radius);font-size:12px;color:var(--text-secondary);text-align:center">
+    <strong style="color:var(--text)">🔄 → 港股/A股：</strong>{{HK_IMPLICATION}}
+  </div>
+</div>
+
+<!-- 🔴 持仓新闻 -->
+<div class="section">
+  <div class="sec-label">🔴 直接影响持仓</div>
+  <div class="news" id="holdingNews"></div>
+</div>
+
+<!-- 🌍 宏观 -->
+<div class="section" style="background:var(--surface-alt)">
+  <div class="sec-label">🌍 宏观 &amp; 政策</div>
+  <div class="news" id="macroNews"></div>
+</div>
+
+<!-- 🔬 科技 -->
+<div class="section">
+  <div class="sec-label">🔬 科技 &amp; 行业</div>
+  <div class="news" id="techNews"></div>
+</div>
+
+<!-- ₿ 加密货币 -->
+<div class="section" style="background:var(--surface-alt)">
+  <div class="sec-label">₿ 虚拟货币 · CoinGecko</div>
+  <div class="crypto" id="cryptoGrid"></div>
+  <div class="c-src">更新时间：{{TIME}} CST</div>
+</div>
+
+<!-- 🎯 今日关注 -->
+<div class="section">
+  <div class="sec-label">🎯 今日关注 &amp; 总结</div>
+  <div class="focus" id="focusList"></div>
+  <div class="verdict">
+    <div class="v-label">💬 综合判断</div>
+    <div class="v-text" id="verdictText"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  数据源：RSS 19源 · CoinGecko API · Google Finance · web_search<br>
+  数据时间：{{TIME}} CST · 非高峰时段运行 · 每日自动生成<br>
+  ⚠️ 本报告由AI自动生成，仅供参考，不构成投资建议 · 风险自负
+</div>
+</div>
+
+<script>
+// Sparkline helper
+function spark(vals){
+  const mx=Math.max(...vals.map(Math.abs),.01);
+  return vals.map(v=>{const p=Math.abs(v)/mx*100;const c=v>=0?'up':'down';return `<div class="bar ${c}" style="height:${Math.max(p*.5,2)}%"></div>`;}).join('');
+}
+
+// Market data
+(function(){
+  const d=[
+    {l:'道琼斯',v:'51,876',c:'+0.09%',cl:'up',bars:[.7,.5,.9,1.2,.8,.3,.6,.4,.5,.09]},
+    {l:'标普500',v:'6,182',c:'+0.42%',cl:'up',bars:[.3,.6,.8,1.1,.9,.5,.7,.6,.8,.42]},
+    {l:'纳斯达克',v:'25,298',c:'+0.80%',cl:'up',bars:[.2,.4,.7,1.3,1,.6,.9,.7,1.1,.8]},
+    {l:'黄金',v:'$4,057',c:'-0.96%',cl:'down',bars:[.5,.3,.8,.2,-.4,-.6,-.3,-.8,-.9,-.96]},
+    {l:'原油',v:'$69.99',c:'+1.10%',cl:'up',bars:[.1,.3,.5,.7,.9,.6,.4,.8,1,1.1]},
+    {l:'美元指数',v:'104.2',c:'-0.04%',cl:'neu',bars:[.2,.1,-.1,-.3,-.2,-.1,0,-.1,-.2,-.04]},
+    {l:'A50期指',v:'14,632',c:'+0.51%',cl:'up',bars:[.4,.6,.3,.8,.5,.7,.6,.9,.7,.51]},
+    {l:'离岸人民币',v:'7.25',c:'+0.09%',cl:'up',bars:[.1,0,.2,.3,.1,.2,0,.1,.2,.09]},
+  ];
+  document.getElementById('mktGrid').innerHTML=d.map(m=>
+    `<div class="mkt-cell">
+      <div class="mkt-label">${m.l}</div>
+      <div class="mkt-val">${m.v} <span class="mkt-chg ${m.cl}">${m.c}</span></div>
+      <div class="spark"><div class="spark-inner">${spark(m.bars.slice(-6))}</div></div>
+    </div>`
+  ).join('');
+})();
+
+// Tickers
+(function(){
+  const t=[
+    {i:'🍎',n:'Apple',p:'$246.80',c:'+0.72%',cl:'up',b:72},
+    {i:'🎮',n:'英伟达',p:'$132.50',c:'+1.85%',cl:'up',b:85},
+    {i:'🚗',n:'特斯拉',p:'$205.30',c:'+2.14%',cl:'up',b:100},
+    {i:'🖥',n:'微软',p:'$468.20',c:'+0.54%',cl:'up',b:54},
+    {i:'☁️',n:'亚马逊',p:'$198.40',c:'+1.32%',cl:'up',b:70},
+    {i:'🔍',n:'谷歌',p:'$182.60',c:'+0.38%',cl:'up',b:38},
+    {i:'📘',n:'Meta',p:'$512.30',c:'+0.95%',cl:'up',b:95},
+  ];
+  document.getElementById('tickerList').innerHTML=t.map(x=>
+    `<div class="ticker">
+      <span class="ticker-ico">${x.i}</span>
+      <span class="ticker-nm">${x.n}</span>
+      <div class="ticker-bar"><div class="ticker-fill ${x.cl}" style="width:${x.b}%"></div></div>
+      <span class="ticker-px">${x.p}</span>
+      <span class="ticker-ch ${x.cl}">${x.c}</span>
+    </div>`
+  ).join('');
+})();
+
+// News - Holdings
+(function(){
+  const n=[
+    {tg:'小米',tc:'nt-mi',cl:'pos',imp:'🟢 利好',
+     t:'小米SU7新一代交付破10万，YU7订单超预期',
+     d:'小米汽车宣布新一代SU7累计交付突破10万辆，YU7长续航版预订量超预期，6月交付目标2.5万辆。产能爬坡顺利，Q3有望进一步放量。',
+     dt:'6月29日',url:'#'},
+    {tg:'智能驾驶',tc:'nt-mi',cl:'pos',imp:'🟢 利好',
+     t:'城市NOA政策再放宽，L3试点扩至20城',
+     d:'工信部扩大L3级自动驾驶试点范围，新增10城市，明确2027年前完成法规修订。利好智能驾驶全产业链，尤其算法与传感器环节。',
+     dt:'6月28日',url:'#'},
+    {tg:'白酒',tc:'nt-ind',cl:'neg',imp:'🔴 利空',
+     t:'白酒板块回调，贵州茅台跌至1195元',
+     d:'白酒板块延续调整，贵州茅台收跌2.3%，市场担忧Q2动销数据不及预期。伊力特跟跌1.8%，短期承压。',
+     dt:'6月29日',url:'#'},
+  ];
+  document.getElementById('holdingNews').innerHTML=n.map(x=>
+    `<div class="news-card ${x.cl}">
+      <span class="news-tag ${x.tc}">${x.tg}</span>
+      <div class="news-t"><a href="${x.url}">${x.t}</a></div>
+      <div class="news-d">${x.d}</div>
+      <div class="news-f">
+        <span>${x.dt}</span>
+        <span class="ip ${x.cl}">${x.imp}</span>
+        <a href="${x.url}" class="nl">查看原文 →</a>
+      </div>
+    </div>`
+  ).join('');
+})();
+
+// Macro
+(function(){
+  const n=[
+    {tg:'美联储',tc:'nt-policy',cl:'neu',imp:'⚪ 中性',
+     t:'鲍威尔：通胀取得进展，但尚未达到降息门槛',
+     d:'在欧洲央行论坛上表示近期通胀数据令人鼓舞，但需更多证据才考虑降息。市场对9月降息预期维持65%，11月降息概率约82%。',
+     dt:'6月29日',url:'#'},
+    {tg:'地缘',tc:'nt-macro',cl:'pos',imp:'🟢 利好',
+     t:'美以和谈取得突破，停火协议框架达成',
+     d:'美国斡旋下，以色列与哈马斯就停火协议框架达成一致，中东局势显著缓和。国际油价应声回落，布伦特跌至72美元。',
+     dt:'6月29日',url:'#'},
+  ];
+  document.getElementById('macroNews').innerHTML=n.map(x=>
+    `<div class="news-card ${x.cl}">
+      <span class="news-tag ${x.tc}">${x.tg}</span>
+      <div class="news-t"><a href="${x.url}">${x.t}</a></div>
+      <div class="news-d">${x.d}</div>
+      <div class="news-f">
+        <span>${x.dt}</span>
+        <span class="ip ${x.cl}">${x.imp}</span>
+        <a href="${x.url}" class="nl">查看原文 →</a>
+      </div>
+    </div>`
+  ).join('');
+})();
+
+// Tech
+(function(){
+  const n=[
+    {tg:'DeepSeek',tc:'nt-tech',t:'V4正式版7月中旬上线，引入峰谷定价',
+     d:'DeepSeek宣布V4正式版7月上线，API引入峰谷定价机制。V4 Flash周调用量全球第一。',dt:'6月29日',url:'#'},
+    {tg:'半导体',tc:'nt-tech',t:'碳化硅需求爆发，基本半导体IPO受热捧',
+     d:'基本半导体(09971)招股认购达18倍，SiC赛道获机构看好。',dt:'6月29日',url:'#'},
+  ];
+  document.getElementById('techNews').innerHTML=n.map(x=>
+    `<div class="news-card neu">
+      <span class="news-tag ${x.tc}">${x.tg}</span>
+      <div class="news-t"><a href="${x.url}">${x.t}</a></div>
+      <div class="news-d">${x.d}</div>
+      <div class="news-f"><span>${x.dt}</span><a href="${x.url}" class="nl">查看原文 →</a></div>
+    </div>`
+  ).join('');
+})();
+
+// Crypto
+(function(){
+  const c=[
+    {s:'BTC',p:'$60,381',c:'+1.57%',cl:'up',f:60},
+    {s:'ETH',p:'$1,623',c:'+3.57%',cl:'up',f:100},
+    {s:'BNB',p:'$560',c:'+1.83%',cl:'up',f:66},
+    {s:'SOL',p:'$75.5',c:'+6.20%',cl:'up',f:85},
+    {s:'XRP',p:'$1.06',c:'+1.96%',cl:'up',f:50},
+  ];
+  document.getElementById('cryptoGrid').innerHTML=c.map(x=>
+    `<div class="c-cell">
+      <div class="c-sym">${x.s}</div>
+      <div class="c-px">${x.p}</div>
+      <div class="c-chg ${x.cl}">${x.c}</div>
+      <div class="c-bar"><div class="f ${x.cl}" style="width:${x.f}%"></div></div>
+    </div>`
+  ).join('');
+})();
+
+// Focus
+(function(){
+  const items=[
+    '小米YU7订单数据 — 若官方公布最新订单量或产能指引，将直接影响01810短线走势',
+    '中汽发债(371215)今日上市 — 预测102-107元，建议集合竞价卖出锁定收益',
+    '美以停火协议执行 — 若正式签署，原油回落利好航空/运输板块，可关注',
+    'A股开盘方向 — 隔夜美股科技走强，关注恒生科技ETF(159740)能否跟涨',
+    '鲍威尔讲话后续 — 已消化中性表态，若有鸽派措辞可能提振风险偏好',
+  ];
+  document.getElementById('focusList').innerHTML=items.map((t,i)=>
+    `<div class="f-item"><span class="f-n">${i+1}.</span><span class="f-t">${t}</span></div>`
+  ).join('');
+})();
+
+document.getElementById('verdictText').textContent='隔夜美股科技股领涨，情绪偏暖。今日港股/A股有望高开，需关注量能配合。小米汽车数据向好，是持仓中最值得期待的催化剂。中汽发债今日上市，建议集合竞价卖出落袋。整体风险偏好中等偏上，适合持有观望，不宜追高。';
+</script>
+</body>
+</html>

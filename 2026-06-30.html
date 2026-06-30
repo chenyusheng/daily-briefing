@@ -3,26 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>📰 晨间新闻速览 · 2026年6月30日</title>
+<title>📰 晨间新闻速览 · 2026-06-30</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{--bg:#f8f9fa;--surface:#fff;--surface-alt:#f2f3f5;--border:#e8eaed;--border-light:#f0f1f3;--text:#1a1d23;--text-secondary:#5a5f6b;--text-tertiary:#8a8f98;--blue:#0066cc;--blue-light:#e8f0fe;--blue-bg:#f0f5ff;--green:#059669;--green-bg:#ecfdf5;--red:#dc2626;--red-bg:#fef2f2;--amber:#d97706;--amber-bg:#fffbeb;--purple:#7c3aed;--purple-bg:#f5f3ff;--radius:10px;--shadow:0 1px 4px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.03);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
   body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
   .container{max-width:680px;margin:0 auto;padding:0}
+
   .header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
   .h-left{display:flex;align-items:center;gap:10px}
   .h-icon{width:34px;height:34px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff}
   .h-title{font-size:16px;font-weight:600;letter-spacing:-.3px}
   .h-meta{font-size:11px;color:var(--text-tertiary);margin-top:1px}
   .h-badge{font-size:10px;font-weight:500;color:var(--blue);background:var(--blue-light);padding:3px 12px;border-radius:20px;letter-spacing:.3px}
+
   .insight-bar{background:var(--blue-bg);margin:0;padding:12px 20px;font-size:13px;color:var(--text-secondary);line-height:1.5;border-bottom:1px solid var(--border-light)}
   .insight-bar strong{color:var(--text)}
+
   .section{padding:20px}
   .section+.section{border-top:1px solid var(--border-light)}
   .sec-label{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:14px;display:flex;align-items:center;gap:6px}
   .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
   .section-alt{background:var(--surface-alt)}
+
   .mkt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
   @media(min-width:480px){.mkt-grid{grid-template-columns:repeat(4,1fr)}}
   .mkt-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
@@ -33,6 +37,7 @@
   .spark{position:absolute;bottom:4px;right:10px;opacity:.2}
   .spark-inner{display:flex;align-items:flex-end;gap:2px;height:18px}
   .bar{width:4px;border-radius:2px 2px 0 0;min-height:2px}.bar.up{background:var(--green)}.bar.down{background:var(--red)}
+
   .ticker-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
   .ticker{display:flex;align-items:center;padding:8px 14px;font-size:13px;border-bottom:1px solid var(--border-light)}
   .ticker:last-child{border-bottom:none}
@@ -43,6 +48,7 @@
   .ticker-px{font-family:var(--font-mono);font-weight:500;min-width:65px;text-align:right;font-size:12px;color:var(--text-secondary)}
   .ticker-ch{min-width:48px;text-align:right;font-weight:500;font-size:11px}
   .ticker-ch.up{color:var(--green)}.ticker-ch.down{color:var(--red)}
+
   .news{display:flex;flex-direction:column;gap:10px}
   .news-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
   .news-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--border)}
@@ -55,6 +61,7 @@
   .news-f{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--text-tertiary)}
   .nl{color:var(--blue);text-decoration:none;font-weight:500;font-size:11px}.nl:hover{text-decoration:underline}
   .ip{font-size:10px;font-weight:500;padding:1px 8px;border-radius:20px}.ip.pos{background:var(--green-bg);color:var(--green)}.ip.neg{background:var(--red-bg);color:var(--red)}.ip.neu{background:var(--surface-alt);color:var(--text-tertiary)}
+
   .crypto{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
   .c-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 6px;text-align:center;box-shadow:var(--shadow)}
   .c-sym{font-size:11px;font-weight:600;margin-bottom:2px}
@@ -63,14 +70,37 @@
   .c-bar{height:3px;border-radius:2px;margin-top:5px;overflow:hidden;background:var(--border)}
   .c-bar .f{height:100%;border-radius:2px}.c-bar .f.up{background:var(--green)}.c-bar .f.down{background:var(--red)}
   .c-src{font-size:10px;color:var(--text-tertiary);text-align:center;margin-top:6px}
+
+  /* 🔥 Hot Sectors */
+  .hot-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media(min-width:480px){.hot-grid{grid-template-columns:repeat(3,1fr)}}
+  .hot-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .hot-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px}
+  .hot-card.hot-1::after{background:linear-gradient(90deg,#ef4444,#f97316)}
+  .hot-card.hot-2::after{background:linear-gradient(90deg,#f59e0b,#eab308)}
+  .hot-card.hot-3::after{background:linear-gradient(90deg,#10b981,#059669)}
+  .hot-rank{font-size:10px;font-weight:700;color:var(--text-tertiary);margin-bottom:2px}
+  .hot-name{font-size:15px;font-weight:600;margin-bottom:2px;letter-spacing:-.15px}
+  .hot-name .trend{font-size:12px;margin-left:4px}
+  .hot-desc{font-size:12px;color:var(--text-secondary);line-height:1.5;margin-bottom:4px}
+  .hot-meta{font-size:10px;color:var(--text-tertiary);display:flex;gap:8px}
+  .hot-meta .tag{background:var(--surface-alt);padding:1px 6px;border-radius:3px}
+  .hot-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+  .hot-chip{font-size:10px;padding:1px 8px;border-radius:12px;border:1px solid var(--border)}
+  .hot-chip.up{color:var(--green);border-color:var(--green-bg);background:var(--green-bg)}
+  .hot-chip.down{color:var(--red);border-color:var(--red-bg);background:var(--red-bg)}
+
   .focus{display:flex;flex-direction:column;gap:8px}
   .f-item{display:flex;gap:10px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--blue);box-shadow:var(--shadow);font-size:13px;line-height:1.5}
   .f-n{font-weight:600;color:var(--blue);min-width:18px}
   .f-t{color:var(--text-secondary)}.f-t strong{color:var(--text)}
+
   .verdict{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-top:10px;border-left:3px solid var(--blue);box-shadow:var(--shadow)}
   .v-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
   .v-text{font-size:14px;color:var(--text-secondary);line-height:1.6}
+
   .footer{text-align:center;padding:20px 20px 32px;font-size:10px;color:var(--text-tertiary);line-height:1.7;border-top:1px solid var(--border-light)}
+
   @media(max-width:480px){
     .section{padding:16px 14px}
     .mkt-grid{gap:6px}.mkt-cell{padding:10px 11px;border-radius:8px}.mkt-val{font-size:14px}
@@ -89,122 +119,91 @@
     <div class="h-icon">📰</div>
     <div>
       <div class="h-title">晨间新闻速览</div>
-      <div class="h-meta">2026年6月30日 · 星期二 · 08:00</div>
+      <div class="h-meta">2026-06-30 · 周二 · 09:14 CST</div>
     </div>
   </div>
   <span class="h-badge">非高峰</span>
 </div>
 
-<div class="insight-bar">💡 <strong>隔夜启示：</strong>美股三大指数全线反弹，科技股领涨扭转上周颓势。Alphabet正式加入道指大涨近5%，特斯拉涨超7%。黄金回调约1.5%至$4,026，原油企稳$70附近。港股科技股周一已率先大涨，今日A股有望高开。</div>
+<div class="insight-bar">💡 <strong>隔夜启示：</strong>美股三大指数全线反弹，道指首次站上52,000点创历史新高，科技股全面回升扭转上周颓势。Alphabet正式纳入道指大涨近5%。A股方面医药板块受政策利好批量涨停，半导体接力兆易创新成交431亿。韩国宣布$5,760亿半导体+AI产业投资计划。北向资金连续净流入超150亿。</div>
 
 <!-- Market Overview -->
 <div class="section">
-  <div class="sec-label">📊 隔夜美股收盘 · 6月29日</div>
+  <div class="sec-label">📊 隔夜美股收盘 · 2026-06-29</div>
   <div class="mkt-grid">
     <div class="mkt-cell">
       <div class="mkt-label">道琼斯</div>
-      <div class="mkt-val">52,026</div>
-      <span class="mkt-chg up">+0.29%</span>
-      <div class="spark"><div class="spark-inner"><div class="bar up" style="height:6px"></div><div class="bar up" style="height:8px"></div><div class="bar down" style="height:4px"></div><div class="bar up" style="height:9px"></div><div class="bar down" style="height:5px"></div><div class="bar up" style="height:12px"></div><div class="bar down" style="height:7px"></div><div class="bar up" style="height:14px"></div><div class="bar up" style="height:16px"></div><div class="bar up" style="height:18px"></div></div></div>
+      <div class="mkt-val">52,183</div>
+      <div class="mkt-chg up">+0.59%</div>
+      <div class="spark"><div class="spark-inner"><div class="bar up" style="height:8px"></div><div class="bar up" style="height:12px"></div><div class="bar up" style="height:15px"></div><div class="bar up" style="height:14px"></div><div class="bar up" style="height:18px"></div></div></div>
     </div>
     <div class="mkt-cell">
       <div class="mkt-label">标普500</div>
-      <div class="mkt-val">7,414</div>
-      <span class="mkt-chg up">+0.82%</span>
-      <div class="spark"><div class="spark-inner"><div class="bar down" style="height:4px"></div><div class="bar up" style="height:8px"></div><div class="bar down" style="height:6px"></div><div class="bar up" style="height:10px"></div><div class="bar up" style="height:12px"></div><div class="bar down" style="height:7px"></div><div class="bar up" style="height:14px"></div><div class="bar up" style="height:16px"></div><div class="bar up" style="height:18px"></div><div class="bar up" style="height:18px"></div></div></div>
+      <div class="mkt-val">7,440</div>
+      <div class="mkt-chg up">+1.18%</div>
+      <div class="spark"><div class="spark-inner"><div class="bar up" style="height:6px"></div><div class="bar up" style="height:10px"></div><div class="bar up" style="height:14px"></div><div class="bar up" style="height:16px"></div><div class="bar up" style="height:17px"></div></div></div>
     </div>
     <div class="mkt-cell">
       <div class="mkt-label">纳斯达克</div>
-      <div class="mkt-val">25,600</div>
-      <span class="mkt-chg up">+0.98%</span>
-      <div class="spark"><div class="spark-inner"><div class="bar down" style="height:3px"></div><div class="bar up" style="height:7px"></div><div class="bar up" style="height:9px"></div><div class="bar down" style="height:5px"></div><div class="bar up" style="height:11px"></div><div class="bar up" style="height:13px"></div><div class="bar down" style="height:8px"></div><div class="bar up" style="height:15px"></div><div class="bar up" style="height:17px"></div><div class="bar up" style="height:18px"></div></div></div>
+      <div class="mkt-val">25,820</div>
+      <div class="mkt-chg up">+2.07%</div>
+      <div class="spark"><div class="spark-inner"><div class="bar up" style="height:4px"></div><div class="bar up" style="height:9px"></div><div class="bar up" style="height:13px"></div><div class="bar up" style="height:16px"></div><div class="bar up" style="height:18px"></div></div></div>
     </div>
     <div class="mkt-cell">
-      <div class="mkt-label">黄金</div>
-      <div class="mkt-val">$4,026</div>
-      <span class="mkt-chg down">-1.49%</span>
-      <div class="spark"><div class="spark-inner"><div class="bar up" style="height:14px"></div><div class="bar up" style="height:16px"></div><div class="bar down" style="height:10px"></div><div class="bar down" style="height:8px"></div><div class="bar down" style="height:5px"></div><div class="bar up" style="height:9px"></div><div class="bar down" style="height:4px"></div><div class="bar down" style="height:3px"></div><div class="bar down" style="height:2px"></div><div class="bar down" style="height:2px"></div></div></div>
-    </div>
-    <div class="mkt-cell">
-      <div class="mkt-label">原油 (WTI)</div>
-      <div class="mkt-val">$70.0</div>
-      <span class="mkt-chg up">+0.72%</span>
-      <div class="spark"><div class="spark-inner"><div class="bar up" style="height:8px"></div><div class="bar down" style="height:5px"></div><div class="bar up" style="height:9px"></div><div class="bar down" style="height:6px"></div><div class="bar up" style="height:10px"></div><div class="bar up" style="height:12px"></div><div class="bar down" style="height:7px"></div><div class="bar up" style="height:14px"></div><div class="bar up" style="height:16px"></div><div class="bar up" style="height:16px"></div></div></div>
-    </div>
-    <div class="mkt-cell">
-      <div class="mkt-label">美元指数 (DXY)</div>
-      <div class="mkt-val">101.33</div>
-      <span class="mkt-chg down">-0.03%</span>
-      <div class="spark"><div class="spark-inner"><div class="bar up" style="height:10px"></div><div class="bar up" style="height:12px"></div><div class="bar down" style="height:8px"></div><div class="bar down" style="height:6px"></div><div class="bar up" style="height:9px"></div><div class="bar down" style="height:5px"></div><div class="bar down" style="height:4px"></div><div class="bar up" style="height:7px"></div><div class="bar down" style="height:3px"></div><div class="bar down" style="height:3px"></div></div></div>
-    </div>
-    <div class="mkt-cell">
-      <div class="mkt-label">富时A50期货</div>
-      <div class="mkt-val">14,210</div>
-      <span class="mkt-chg up">+0.35%</span>
-      <div class="spark"><div class="spark-inner"><div class="bar down" style="height:6px"></div><div class="bar up" style="height:9px"></div><div class="bar up" style="height:11px"></div><div class="bar down" style="height:7px"></div><div class="bar up" style="height:13px"></div><div class="bar up" style="height:15px"></div><div class="bar down" style="height:8px"></div><div class="bar up" style="height:14px"></div><div class="bar up" style="height:16px"></div><div class="bar up" style="height:16px"></div></div></div>
-    </div>
-    <div class="mkt-cell">
-      <div class="mkt-label">离岸人民币</div>
-      <div class="mkt-val">7.198</div>
-      <span class="mkt-chg up">+0.08%</span>
-      <div class="spark"><div class="spark-inner"><div class="bar down" style="height:8px"></div><div class="bar down" style="height:6px"></div><div class="bar up" style="height:10px"></div><div class="bar down" style="height:5px"></div><div class="bar up" style="height:12px"></div><div class="bar up" style="height:14px"></div><div class="bar down" style="height:7px"></div><div class="bar up" style="height:13px"></div><div class="bar down" style="height:9px"></div><div class="bar up" style="height:16px"></div></div></div>
+      <div class="mkt-label">纳指100</div>
+      <div class="mkt-val">—</div>
+      <div class="mkt-chg up">+2.25%</div>
+      <div class="spark"><div class="spark-inner"><div class="bar up" style="height:5px"></div><div class="bar up" style="height:10px"></div><div class="bar up" style="height:13px"></div><div class="bar up" style="height:15px"></div><div class="bar up" style="height:18px"></div></div></div>
     </div>
   </div>
   <div style="margin-top:12px">
     <div class="ticker-list">
       <div class="ticker">
-        <span class="ticker-ico">🍎</span>
-        <span class="ticker-nm">Apple</span>
-        <div class="ticker-bar"><div class="ticker-fill down" style="width:15%"></div></div>
-        <span class="ticker-px">$281.16</span>
-        <span class="ticker-ch down">-0.92%</span>
+        <div class="ticker-ico">🔤</div>
+        <div class="ticker-nm">GOOGL</div>
+        <div class="ticker-bar"><div class="ticker-fill up" style="width:49.6%"></div></div>
+        <div class="ticker-px">加入道指</div>
+        <div class="ticker-ch up">+4.96%</div>
       </div>
       <div class="ticker">
-        <span class="ticker-ico">🔷</span>
-        <span class="ticker-nm">英伟达</span>
-        <div class="ticker-bar"><div class="ticker-fill up" style="width:10%"></div></div>
-        <span class="ticker-px">$193.74</span>
-        <span class="ticker-ch up">+0.63%</span>
+        <div class="ticker-ico">🐛</div>
+        <div class="ticker-nm">CAT</div>
+        <div class="ticker-bar"><div class="ticker-fill up" style="width:35.9%"></div></div>
+        <div class="ticker-px">工业领涨</div>
+        <div class="ticker-ch up">+3.59%</div>
       </div>
       <div class="ticker">
-        <span class="ticker-ico">🚗</span>
-        <span class="ticker-nm">特斯拉</span>
-        <div class="ticker-bar"><div class="ticker-fill up" style="width:75%"></div></div>
-        <span class="ticker-px">$408.43</span>
-        <span class="ticker-ch up">+7.56%</span>
+        <div class="ticker-ico">🌐</div>
+        <div class="ticker-nm">CSCO</div>
+        <div class="ticker-bar"><div class="ticker-fill up" style="width:33.5%"></div></div>
+        <div class="ticker-px">网络设备</div>
+        <div class="ticker-ch up">+3.35%</div>
       </div>
       <div class="ticker">
-        <span class="ticker-ico">🪟</span>
-        <span class="ticker-nm">微软</span>
-        <div class="ticker-bar"><div class="ticker-fill down" style="width:20%"></div></div>
-        <span class="ticker-px">$368.25</span>
-        <span class="ticker-ch down">-1.27%</span>
+        <div class="ticker-ico">🚗</div>
+        <div class="ticker-nm">NVDA</div>
+        <div class="ticker-bar"><div class="ticker-fill up" style="width:12.7%"></div></div>
+        <div class="ticker-px">AI芯片</div>
+        <div class="ticker-ch up">+1.27%</div>
       </div>
       <div class="ticker">
-        <span class="ticker-ico">📦</span>
-        <span class="ticker-nm">亚马逊</span>
-        <div class="ticker-bar"><div class="ticker-fill up" style="width:55%"></div></div>
-        <span class="ticker-px">$240.51</span>
-        <span class="ticker-ch up">+3.36%</span>
+        <div class="ticker-ico">⚠️</div>
+        <div class="ticker-nm">HON</div>
+        <div class="ticker-bar"><div class="ticker-fill down" style="width:62.3%"></div></div>
+        <div class="ticker-px">道指最大跌幅</div>
+        <div class="ticker-ch down">-6.23%</div>
       </div>
       <div class="ticker">
-        <span class="ticker-ico">🔍</span>
-        <span class="ticker-nm">Alphabet</span>
-        <div class="ticker-bar"><div class="ticker-fill up" style="width:78%"></div></div>
-        <span class="ticker-px">$353.22</span>
-        <span class="ticker-ch up">+4.69%</span>
-      </div>
-      <div class="ticker">
-        <span class="ticker-ico">📘</span>
-        <span class="ticker-nm">Meta</span>
-        <div class="ticker-bar"><div class="ticker-fill up" style="width:45%"></div></div>
-        <span class="ticker-px">$565.48</span>
-        <span class="ticker-ch up">+2.77%</span>
+        <div class="ticker-ico">📡</div>
+        <div class="ticker-nm">VZ</div>
+        <div class="ticker-bar"><div class="ticker-fill down" style="width:52.4%"></div></div>
+        <div class="ticker-px">被剔出道指</div>
+        <div class="ticker-ch down">-5.24%</div>
       </div>
     </div>
   </div>
   <div style="margin-top:10px;padding:10px 14px;background:var(--surface-alt);border-radius:var(--radius);font-size:12px;color:var(--text-secondary);text-align:center">
-    <strong style="color:var(--text)">🔄 → 港股/A股：</strong>周一港股已率先走强，恒生指数大涨1.57%报23,027点，恒生科技涨超3%。Alphabet入道指带动中概科技情绪向好，叠加隔夜美股科技反弹，今日A股有望高开。关注上证能否突破4,100关口，恒生科技短线支撑23,500。
+    <strong style="color:var(--text)">🔄 → 港股/A股：</strong>美股科技全面反弹利好港股科网板块，恒生科技有望高开。A股医药板块受医保政策利好持续发酵，半导体成交活跃，短期风格偏向成长。北向资金连续净流入，外资加速回补A股。
   </div>
 </div>
 
@@ -213,40 +212,28 @@
   <div class="sec-label">🔴 直接影响持仓</div>
   <div class="news">
     <div class="news-card pos">
-      <span class="news-tag nt-mi">📌 小米</span>
-      <div class="news-t"><a href="https://finance.sina.com.cn/tech/roll/2026-06-30/doc-inifayqn2044313.shtml" target="_blank">小米首款NAS预约超14万人！双盘位16T售4,699元，7月1日众筹</a></div>
-      <div class="news-d">小米智能存储（NAS）将于7月1日开启众筹，提供4TB/8TB/16TB三版本，众筹价2,299元起。App已上架小米应用市场，支持照片自动备份、多端同步。</div>
-      <div class="news-f"><span>2026-06-30</span><span class="ip pos">📈 利好</span><a class="nl" href="https://finance.sina.com.cn/tech/roll/2026-06-30/doc-inifayqn2044313.shtml" target="_blank">来源 →</a></div>
+      <span class="news-tag nt-tech">半导体</span>
+      <div class="news-t">京东方与康宁合作切入玻璃基封装载板，股价月涨60%创2009年来新高</div>
+      <div class="news-d">京东方5月20日公告与康宁签署合作备忘录，在玻璃基封装载板、可折叠玻璃、钙钛矿玻璃基板等领域合作。玻璃基封装载板被视为下一代先进封装的核心方案，京东方借此切入AI算力叙事。全球先进IC载板市场2030年预计达310亿美元。</div>
+      <div class="news-f"><span>36氪</span><span>06-29 19:51</span><a href="https://36kr.com/p/3874045136720899" class="nl">阅读 →</a></div>
     </div>
     <div class="news-card pos">
-      <span class="news-tag nt-mi">🏥 医药</span>
-      <div class="news-t"><a href="https://finance.sina.com.cn/stock/y/2026-06-29/doc-inieznpe2357189.shtml" target="_blank">ADC赛道集中突破！华东医药、百利天恒等药企接连斩获商业化里程碑</a></div>
-      <div class="news-d">近期国内ADC（抗体偶联药物）赛道迎来集中突破，国产ADC海外临床申报持续提速，行业从跟随式研发迈向源头创新、与跨国药企全球同台竞技的新阶段。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://finance.sina.com.cn/stock/y/2026-06-29/doc-inieznpe2357189.shtml" target="_blank">来源 →</a></div>
+      <span class="news-tag nt-tech">AI/芯片</span>
+      <div class="news-t">韩国启动史上最大规模产业投资计划：$5,760亿投向半导体与AI</div>
+      <div class="news-d">韩国政府宣布三星和SK海力士将投资800万亿韩元（约$5,178亿）新建芯片制造基地，目标五年DRAM产能翻倍。三星电子会长和SK集团会长被李在明称为"国民英雄"。计划将半导体、物理AI与AI数据中心定位为韩国产业升级"三角支柱"。</div>
+      <div class="news-f"><span>36氪/Ars Technica</span><span>06-29</span><a href="https://36kr.com/p/3874911939482880" class="nl">阅读 →</a></div>
     </div>
     <div class="news-card pos">
-      <span class="news-tag nt-ind">🚗 智能驾驶</span>
-      <div class="news-t"><a href="https://news.un.org/zh/story/2026/06/1142379" target="_blank">联合国通过自动驾驶全球法规草案，无人驾驶车辆无需监督可上路</a></div>
-      <div class="news-d">联合国欧洲经济委员会通过《自动驾驶系统全球法规草案》，允许无人驾驶车辆在公共道路上无需驾驶员监督即可投入使用，为全球自动驾驶法规统一奠定基础。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://news.un.org/zh/story/2026/06/1142379" target="_blank">来源 →</a></div>
+      <span class="news-tag nt-tech">AI大模型</span>
+      <div class="news-t">马斯克宣布Grok 4.5开启私测，性能或超越Claude Opus；SpaceX计划每月发布全新AI模型</div>
+      <div class="news-d">Grok 4.5基于1.5万亿参数V9基础模型，加入Cursor数据训练，已在SpaceX和特斯拉内部Beta测试。马斯克表示SpaceX今年每月将发布完全从头训练的新模型。叠加此前Grok在推理基准的亮眼表现，AI竞赛进一步升温。</div>
+      <div class="news-f"><span>36氪/界面新闻</span><span>06-30 08:05</span><a href="https://36kr.com/p/3874911939482880" class="nl">阅读 →</a></div>
     </div>
-    <div class="news-card neu">
-      <span class="news-tag nt-ind">🍶 白酒</span>
-      <div class="news-t"><a href="https://finance.sina.com.cn/money/fund/jjgsgd/2026-05-29/doc-inhzqptf9392598.shtml" target="_blank">白酒筹码出清尾声，行业拐点渐近：头部酒企加大分红提振信心</a></div>
-      <div class="news-d">国海证券研报指出，食品饮料板块筹码加速出清，头部名优酒企积极开展市值管理，优质龙头现金分红为板块托底，中长期配置价值显现。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip neu">➡️ 中性</span><a class="nl" href="https://finance.sina.com.cn/money/fund/jjgsgd/2026-05-29/doc-inhzqptf9392598.shtml" target="_blank">来源 →</a></div>
-    </div>
-    <div class="news-card pos">
-      <span class="news-tag nt-mi">🏥 恒生科技/医药</span>
-      <div class="news-t"><a href="https://www.hstong.com/quotes/10001-HSTECH-HK" target="_blank">港股科技股大涨，恒生科技指数涨超3%，恒生生物科技大涨4.28%</a></div>
-      <div class="news-d">6月29日港股大幅走强，恒生科技涨超3%，恒生生物科技涨4.28%。花旗指出中国互联网板块近期跑输大市，但小米、腾讯等龙头带动反弹。恒生指数涨1.57%收23,027。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://www.hstong.com/quotes/10001-HSTECH-HK" target="_blank">来源 →</a></div>
-    </div>
-    <div class="news-card pos">
-      <span class="news-tag nt-ind">📺 面板/算力</span>
-      <div class="news-t"><a href="https://36kr.com/p/3874045136720899?f=rss" target="_blank">烧光5000亿后，京东方开始给股民赚钱：股价大涨60%，切入AI算力叙事</a></div>
-      <div class="news-d">京东方与康宁合作开发玻璃基封装载板，切入AI算力产业链。自5月行情启动以来股价涨约60%，创2009年以来新高。100万股东终迎回报。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://36kr.com/p/3874045136720899?f=rss" target="_blank">来源 →</a></div>
+    <div class="news-card neg">
+      <span class="news-tag nt-macro">内存/诉讼</span>
+      <div class="news-t">三星、SK海力士、美光遭集体诉讼：涉嫌操纵内存价格加剧短缺危机</div>
+      <div class="news-d">诉讼于6月25日在加州联邦法院提起，指控三大DRAM供应商在价格上涨期间限制供应。苹果已因存储芯片成本上涨提高部分产品售价。此案可能影响全球内存供应链定价，对AI算力硬件成本构成上行压力。</div>
+      <div class="news-f"><span>36氪/财联社</span><span>06-30 08:05</span><span class="ip neg">利空存储</span></div>
     </div>
   </div>
 </div>
@@ -255,35 +242,29 @@
 <div class="section section-alt">
   <div class="sec-label">🌍 宏观 &amp; 政策</div>
   <div class="news">
-    <div class="news-card pos">
-      <span class="news-tag nt-macro">💲 美联储</span>
-      <div class="news-t"><a href="https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260624a.htm" target="_blank">美联储年度压力测试：大银行能承受严重衰退，可继续向家庭和企业放贷</a></div>
-      <div class="news-d">美联储年度银行压力测试确认，大型银行在严重经济衰退情景下仍能维持资本充足率，具备持续向家庭和企业放贷的能力，银行体系稳健。</div>
-      <div class="news-f"><span>2026-06-24</span><span class="ip pos">📈 利好</span><a class="nl" href="https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260624a.htm" target="_blank">来源 →</a></div>
+    <div class="news-card neu">
+      <span class="news-tag nt-policy">美联储</span>
+      <div class="news-t">美联储年度压力测试确认：大型银行能抵御严重衰退，可继续放贷</div>
+      <div class="news-d">6月24日发布的年度银行压力测试结果显示，所有参测大银行资本充足，在严重衰退情景下仍能维持放贷能力。这为银行业分红和回购开绿灯，也为市场提供了金融体系稳健的信心信号。</div>
+      <div class="news-f"><span>美联储</span><span>06-24</span><span class="ip pos">利好金融</span></div>
     </div>
-    <div class="news-card pos">
-      <span class="news-tag nt-policy">⚖️ 最高法院</span>
-      <div class="news-t"><a href="https://www.theguardian.com/us-news/2026/jun/29/supreme-court-geofence-warrants-case-decision" target="_blank">美国最高法院裁定地理围栏搜查令需受宪法保护</a></div>
-      <div class="news-d">最高法院对地理围栏搜查令（geofence warrants）做出里程碑式裁决，要求执法机构在使用该技术获取公民位置数据时必须遵循宪法第四修正案保护，数据隐私权取得重大胜利。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://www.theguardian.com/us-news/2026/jun/29/supreme-court-geofence-warrants-case-decision" target="_blank">来源 →</a></div>
-    </div>
-    <div class="news-card pos">
-      <span class="news-tag nt-macro">🇺🇸🇮🇷 地缘</span>
-      <div class="news-t"><a href="https://finance.yahoo.com/markets/stocks/live/stock-market-today-monday-june-29-224230573.html" target="_blank">美伊同意停止互相攻击，和平谈判本周重启，霍尔木兹海峡航运有望恢复</a></div>
-      <div class="news-d">美国与伊朗同意在和平谈判恢复前停止攻击。油价在周末军事冲突后小幅回升至$70/桶，若海峡通行恢复正常，油价有望进一步回落。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://finance.yahoo.com/markets/stocks/live/stock-market-today-monday-june-29-224230573.html" target="_blank">来源 →</a></div>
-    </div>
-    <div class="news-card pos">
-      <span class="news-tag nt-policy">🇨🇳 中国政策</span>
-      <div class="news-t"><a href="https://www.google.com/finance" target="_blank">中国股市受政策流动性支持强劲反弹，上证涨1.16%报4,074点</a></div>
-      <div class="news-d">中国股市受政策流动性支持强劲反弹，上证综指收涨1.16%至4,073.90点。日元汇率跌至40年低点（跌破161.96），美联储维持高利率预期下日美利差持续扩大。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://www.google.com/finance" target="_blank">来源 →</a></div>
+    <div class="news-card neg">
+      <span class="news-tag nt-macro">资金面</span>
+      <div class="news-t">美国养老金即将被动调仓，约300亿美元卖盘"已在路上"</div>
+      <div class="news-d">随着季度末和半年末到来，美国养老金基金将进行资产再平衡。由于二季度美股整体上涨，养老金需要卖出股票以维持目标配置比例，市场预计将释放约300亿美元卖盘。这可能给7月初市场带来短期压力。</div>
+      <div class="news-f"><span>36氪</span><span>06-29 19:00</span><span class="ip neg">短期承压</span></div>
     </div>
     <div class="news-card neu">
-      <span class="news-tag nt-macro">🤖 AI政策</span>
-      <div class="news-t"><a href="https://www.theverge.com/ai-artificial-intelligence/959033/health-location-data-protection-act-ai-warren-scanlon" target="_blank">美国议员提案禁止AI公司出售用户健康数据</a></div>
-      <div class="news-d">Warren和Scanlon议员计划推出新版《健康与位置数据保护法案》，禁止AI聊天机器人（如ChatGPT、Claude）等公司向数据经纪人出售美国人的健康和位置信息。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip neu">➡️ 中性</span><a class="nl" href="https://www.theverge.com/ai-artificial-intelligence/959033/health-location-data-protection-act-ai-warren-scanlon" target="_blank">来源 →</a></div>
+      <span class="news-tag nt-policy">政策</span>
+      <div class="news-t">国务院印发《教育发展"十五五"规划》</div>
+      <div class="news-d">国务院近日正式印发规划，明确未来五年教育发展目标和重点任务。教育板块长期处于估值低位，政策明朗化或带来阶段性关注度提升。</div>
+      <div class="news-f"><span>36氪</span><span>06-29 19:00</span></div>
+    </div>
+    <div class="news-card neu">
+      <span class="news-tag nt-macro">地缘/科技</span>
+      <div class="news-t">美国最高法院限制政府使用地理围栏搜查令</div>
+      <div class="news-d">最高法院裁决大幅限制执法机构使用地理围栏搜查令获取位置数据的能力，但未完全判定违宪。这是一项具有标志性意义的隐私权裁决，对科技公司数据合规和执法实践产生深远影响。</div>
+      <div class="news-f"><span>Ars Technica</span><span>06-29</span></div>
     </div>
   </div>
 </div>
@@ -293,41 +274,128 @@
   <div class="sec-label">🔬 科技 &amp; 行业</div>
   <div class="news">
     <div class="news-card pos">
-      <span class="news-tag nt-tech">🔍 Alphabet</span>
-      <div class="news-t"><a href="https://www.cnbc.com/quotes/AMZN,%20AAPL,%20GOOGL,%20TSLA,%20MSFT,%20FB,%20NVDA" target="_blank">Alphabet正式加入道琼斯工业平均指数，股价大涨4.69%</a></div>
-      <div class="news-d">Alphabet（GOOGL）于6月29日正式取代Verizon加入道指，为指数基金带来大规模被动买入。当日股价跳空高开，盘中最高触及$353.75，涨幅4.7%。分析师认为AI变现加速和云业务高增长是长期驱动力。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://www.cnbc.com/quotes/AMZN,%20AAPL,%20GOOGL,%20TSLA,%20MSFT,%20FB,%20NVDA" target="_blank">来源 →</a></div>
+      <span class="news-tag nt-tech">AI/DeepSeek</span>
+      <div class="news-t">DeepSeek V4正式版官宣7月上线，引入峰谷定价机制</div>
+      <div class="news-d">DeepSeek团队宣布V4正式版计划7月中旬上线，API将引入峰谷定价：高峰时段（9-12点、14-18点）价格为平时2倍。此举旨在合理配置资源、提升服务稳定性，标志着国产大模型商业化进入新阶段。</div>
+      <div class="news-f"><span>36氪</span><span>06-30 08:05</span><span class="ip pos">利好AI生态</span></div>
     </div>
     <div class="news-card pos">
-      <span class="news-tag nt-tech">🇰🇷 半导体</span>
-      <div class="news-t"><a href="https://techcrunch.com/2026/06/29/south-korean-tech-giants-commit-over-550b-to-ease-ramageddon/" target="_blank">韩国科技巨头承诺投资超过5,500亿美元缓解「RAMageddon」内存危机</a></div>
-      <div class="news-d">全球最大的两家内存芯片公司（三星、SK海力士）宣布建设更多内存晶圆厂，韩国定位为AI技术强国。此前AI需求导致DRAM和NAND价格上涨60%-90%，引发消费电子涨价潮。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://techcrunch.com/2026/06/29/south-korean-tech-giants-commit-over-550b-to-ease-ramageddon/" target="_blank">来源 →</a></div>
+      <span class="news-tag nt-tech">半导体</span>
+      <div class="news-t">兆易创新成交431亿冲击涨停，半导体板块全面爆发</div>
+      <div class="news-d">A股市场6月29日，半导体板块集体拉升。神工股份、有研硅、华海清科涨停，兆易创新午后冲击涨停全日成交431.5亿元居A股首位。北方华创获资金净流入7.95亿涨5.76%。科创50月内涨幅超20%。</div>
+      <div class="news-f"><span>新浪财经/东方财富</span><span>06-29</span><span class="ip pos">半导体强</span></div>
     </div>
     <div class="news-card pos">
-      <span class="news-tag nt-tech">🤖 AI</span>
-      <div class="news-t"><a href="https://36kr.com/p/3873965241931014?f=rss" target="_blank">Sand.ai获超亿美元融资，曹越：视频是通往世界模型最重要的路径</a></div>
-      <div class="news-d">视频生成模型公司Sand.ai完成两轮合计超亿美元融资，投资方包括Look Capital、王慧文家办等。公司采用MoE架构，将于2026 Q3发布新一代视频生成模型并开源。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://36kr.com/p/3873965241931014?f=rss" target="_blank">来源 →</a></div>
+      <span class="news-tag nt-tech">IPO/芯片</span>
+      <div class="news-t">百度昆仑芯拟赴港IPO</div>
+      <div class="news-d">百度旗下AI芯片公司昆仑芯计划在香港上市。昆仑芯是国内领先的AI芯片设计公司，其IPO将进一步扩大国产AI芯片的资本支持力度，也反映香港市场对硬科技企业的吸引力持续增强。</div>
+      <div class="news-f"><span>36氪</span><span>06-30 08:05</span></div>
+    </div>
+    <div class="news-card pos">
+      <span class="news-tag nt-tech">AI/融资</span>
+      <div class="news-t">Sand.ai获超亿美元融资：押注MoE视频生成，Q3发布新模型</div>
+      <div class="news-d">视频生成模型公司Sand.ai完成两轮超亿美元融资，投资方包括经纬创投、IDG、百度风投等。其新一代MoE架构视频模型将于Q3发布并开源。CEO曹越认为视频是通往世界模型最重要的路径。</div>
+      <div class="news-f"><span>36氪</span><span>06-29 16:04</span></div>
     </div>
     <div class="news-card neu">
-      <span class="news-tag nt-tech">💾 存储</span>
-      <div class="news-t"><a href="https://36kr.com/p/3873626425332743?f=rss" target="_blank">百度OCR模型Unlimited OCR在HuggingFace、GitHub四榜登顶</a></div>
-      <div class="news-d">百度开源端到端OCR模型Unlimited OCR（3B参数，推理仅570M激活），在OmniDocBench测试取得93.92%综合成绩，刷新端到端OCR纪录。发布次日即登四榜第一。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip neu">➡️ 中性</span><a class="nl" href="https://36kr.com/p/3873626425332743?f=rss" target="_blank">来源 →</a></div>
+      <span class="news-tag nt-ind">科技合作</span>
+      <div class="news-t">Anthropic与加州政府达成协议：Claude半价服务政府机构</div>
+      <div class="news-d">Anthropic与加州州长纽森达成协议，加州政府机构可使用Claude AI模型享受半价优惠。此举加深Anthropic与政府的绑定关系，也加剧了与大选中支持共和党的OpenAI之间的竞争分化。</div>
+      <div class="news-f"><span>TechCrunch</span><span>06-29</span></div>
     </div>
-    <div class="news-card pos">
-      <span class="news-tag nt-tech">📡 通信</span>
-      <div class="news-t"><a href="https://arstechnica.com/tech-policy/2026/06/comcast-is-splitting-its-media-and-broadband-properties/" target="_blank">Comcast宣布分拆媒体和宽带业务，NBCUniversal和Sky独立运营</a></div>
-      <div class="news-d">Comcast宣布将NBCUniversal和Sky分拆为独立公司，释放各部分估值潜力。消息公布后股价大涨，市场看好分拆后各业务聚焦运营。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://arstechnica.com/tech-policy/2026/06/comcast-is-splitting-its-media-and-broadband-properties/" target="_blank">来源 →</a></div>
+  </div>
+</div>
+
+<!-- Hot Sectors -->
+<div class="section">
+  <div class="sec-label">🔥 今日热点追踪</div>
+  <div class="hot-grid">
+    <div class="hot-card hot-1">
+      <div class="hot-rank">🔥 热度 #1</div>
+      <div class="hot-name">医药/CRO/创新药 <span class="trend">🔥</span></div>
+      <div class="hot-desc">国家医保局重磅政策落地，创新药批量涨停。百奥赛图、万邦医药、广生堂、舒泰神、凯莱英涨停，药明康德涨超7%。板块估值处于历史低位，头部创新药企已实现扭亏。</div>
+      <div class="hot-meta">
+        <span class="tag">💰 资金大幅流入</span>
+        <span class="tag">📈 批量涨停</span>
+      </div>
+      <div class="hot-chips">
+        <span class="hot-chip up">药明康德 +7%</span>
+        <span class="hot-chip up">凯莱英 涨停</span>
+        <span class="hot-chip up">估值修复</span>
+      </div>
     </div>
-    <div class="news-card pos">
-      <span class="news-tag nt-tech">🚀 航天</span>
-      <div class="news-t"><a href="https://arstechnica.com/space/2026/06/in-a-bold-move-rocket-lab-acquires-iridium-communications/" target="_blank">Rocket Lab收购Iridium Communications，航天业变革性交易</a></div>
-      <div class="news-d">Rocket Lab宣布收购卫星通信公司Iridium Communications，CEO称"这将成为航天业最具变革性的交易之一"，标志航天产业整合加速。</div>
-      <div class="news-f"><span>2026-06-29</span><span class="ip pos">📈 利好</span><a class="nl" href="https://arstechnica.com/space/2026/06/in-a-bold-move-rocket-lab-acquires-iridium-communications/" target="_blank">来源 →</a></div>
+    <div class="hot-card hot-2">
+      <div class="hot-rank">⚡ 热度 #2</div>
+      <div class="hot-name">半导体/芯片 <span class="trend">📈</span></div>
+      <div class="hot-desc">兆易创新431亿成交额冲击涨停，神工股份、有研硅、华海清科涨停。北方华创净流入7.95亿+5.76%。科创50月内涨超20%。韩国$5,760亿半导体投资叠加国产替代逻辑。</div>
+      <div class="hot-meta">
+        <span class="tag">💰 成交放大</span>
+        <span class="tag">📊 科创50强势</span>
+      </div>
+      <div class="hot-chips">
+        <span class="hot-chip up">兆易创新 431亿</span>
+        <span class="hot-chip up">北方华创 +5.76%</span>
+        <span class="hot-chip up">神工股份 涨停</span>
+      </div>
     </div>
+    <div class="hot-card hot-3">
+      <div class="hot-rank">📊 热度 #3</div>
+      <div class="hot-name">工业气体/新材料 <span class="trend">📈</span></div>
+      <div class="hot-desc">广钢气体尾盘20%涨停，昊华科技、雅克科技涨停。半导体上游材料受益芯片扩产周期，工业气体作为关键耗材需求预期大幅增长。</div>
+      <div class="hot-meta">
+        <span class="tag">💰 板块联动</span>
+        <span class="tag">📈 20%涨停</span>
+      </div>
+      <div class="hot-chips">
+        <span class="hot-chip up">广钢气体 +20%</span>
+        <span class="hot-chip up">昊华科技 涨停</span>
+        <span class="hot-chip up">雅克科技 涨停</span>
+      </div>
+    </div>
+    <div class="hot-card hot-3">
+      <div class="hot-rank">📊 热度 #4</div>
+      <div class="hot-name">猪肉概念 <span class="trend">📈</span></div>
+      <div class="hot-desc">巨星农牧涨停，牧原股份涨超7%。猪周期底部反转预期升温，能繁母猪存栏持续去化，机构看好下半年猪价回暖。板块资金流入明显增加。</div>
+      <div class="hot-meta">
+        <span class="tag">💰 周期反转</span>
+        <span class="tag">📈 牧原+7%</span>
+      </div>
+      <div class="hot-chips">
+        <span class="hot-chip up">巨星农牧 涨停</span>
+        <span class="hot-chip up">牧原股份 +7%</span>
+      </div>
+    </div>
+    <div class="hot-card hot-3">
+      <div class="hot-rank">📊 热度 #5</div>
+      <div class="hot-name">新能源/锂电 <span class="trend">📈</span></div>
+      <div class="hot-desc">宁德时代净流入9亿涨2.98%，多氟多涨停净流入8.21亿。锂电产业链景气回升预期推动板块资金回流，新能源材料龙头获主力大幅加仓。</div>
+      <div class="hot-meta">
+        <span class="tag">💰 主力流入</span>
+        <span class="tag">📈 宁德+3%</span>
+      </div>
+      <div class="hot-chips">
+        <span class="hot-chip up">宁德时代 +2.98%</span>
+        <span class="hot-chip up">多氟多 涨停</span>
+        <span class="hot-chip up">阳光电源 +3%</span>
+      </div>
+    </div>
+    <div class="hot-card hot-3">
+      <div class="hot-rank">⚠️ 回调 #6</div>
+      <div class="hot-name">CPO/PCB概念 <span class="trend">📉</span></div>
+      <div class="hot-desc">前期热门的CPO、PCB概念继续回调，光华科技、宏和科技、山东玻纤跌停，天孚通信跌超7%。高位题材获利了结压力明显，短期关注20日线支撑。</div>
+      <div class="hot-meta">
+        <span class="tag">⚠️ 高位回调</span>
+        <span class="tag">📉 获利了结</span>
+      </div>
+      <div class="hot-chips">
+        <span class="hot-chip down">天孚通信 -7%</span>
+        <span class="hot-chip down">光华科技 跌停</span>
+        <span class="hot-chip down">高位调整</span>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:8px;font-size:11px;color:var(--text-tertiary);text-align:center">
+    基于：资金流向 · 板块涨幅 · 涨停比 · 成交额 · 北向资金 · 舆情热度
   </div>
 </div>
 
@@ -336,37 +404,37 @@
   <div class="sec-label">₿ 虚拟货币 · CoinGecko</div>
   <div class="crypto">
     <div class="c-cell">
-      <div class="c-sym">₿ BTC</div>
-      <div class="c-px">$60,328</div>
-      <div class="c-chg up">+1.25%</div>
-      <div class="c-bar"><div class="f up" style="width:60%"></div></div>
+      <div class="c-sym">BTC</div>
+      <div class="c-px">$59,737</div>
+      <div class="c-chg up">+0.57%</div>
+      <div class="c-bar"><div class="f up" style="width:57%"></div></div>
     </div>
     <div class="c-cell">
-      <div class="c-sym">⟠ ETH</div>
-      <div class="c-px">$1,623</div>
-      <div class="c-chg up">+3.30%</div>
-      <div class="c-bar"><div class="f up" style="width:80%"></div></div>
+      <div class="c-sym">ETH</div>
+      <div class="c-px">$1,590</div>
+      <div class="c-chg up">+1.57%</div>
+      <div class="c-bar"><div class="f up" style="width:78%"></div></div>
     </div>
     <div class="c-cell">
-      <div class="c-sym">🔶 BNB</div>
-      <div class="c-px">$560.71</div>
-      <div class="c-chg up">+1.68%</div>
-      <div class="c-bar"><div class="f up" style="width:55%"></div></div>
+      <div class="c-sym">BNB</div>
+      <div class="c-px">$555</div>
+      <div class="c-chg up">+0.72%</div>
+      <div class="c-bar"><div class="f up" style="width:36%"></div></div>
     </div>
     <div class="c-cell">
-      <div class="c-sym">◎ SOL</div>
-      <div class="c-px">$75.24</div>
-      <div class="c-chg up">+5.30%</div>
-      <div class="c-bar"><div class="f up" style="width:90%"></div></div>
+      <div class="c-sym">SOL</div>
+      <div class="c-px">$74.08</div>
+      <div class="c-chg up">+3.87%</div>
+      <div class="c-bar"><div class="f up" style="width:100%"></div></div>
     </div>
     <div class="c-cell">
-      <div class="c-sym">✕ XRP</div>
-      <div class="c-px">$1.06</div>
-      <div class="c-chg up">+1.76%</div>
-      <div class="c-bar"><div class="f up" style="width:58%"></div></div>
+      <div class="c-sym">XRP</div>
+      <div class="c-px">$1.05</div>
+      <div class="c-chg up">+0.38%</div>
+      <div class="c-bar"><div class="f up" style="width:19%"></div></div>
     </div>
   </div>
-  <div class="c-src">更新时间：08:00 CST · 数据源：CoinGecko (RSS扫描)</div>
+  <div class="c-src">更新时间：09:14 CST · 数据源：CoinGecko API</div>
 </div>
 
 <!-- Focus -->
@@ -374,35 +442,35 @@
   <div class="sec-label">🎯 今日关注 &amp; 总结</div>
   <div class="focus">
     <div class="f-item">
-      <div class="f-n">1</div>
-      <div class="f-t"><strong>美股科技反弹能否延续</strong> — 隔夜Nasdaq +1%、Mag7多数上涨，但AAPL和MSFT依然承压（存储芯片涨价冲击）。关注Nike盘后财报（FY2026 Q4，EPS估$0.13）</div>
+      <div class="f-n">01</div>
+      <div class="f-t"><strong>道指首次站上52,000点创历史新高，科技股全面反弹。</strong> Alphabet纳入道指首日大涨近5%成为最大推手，纳指涨超2%扭转上周颓势。市场情绪回暖，但需关注养老金调仓300亿卖盘对7月初的短期冲击。</div>
     </div>
     <div class="f-item">
-      <div class="f-n">2</div>
-      <div class="f-t"><strong>小米NAS众筹在即</strong> — 7月1日正式开启，首款NAS预约已超14万人。关注智能家居生态链延伸对股价的催化。港股小米近期随科技板块走强</div>
+      <div class="f-n">02</div>
+      <div class="f-t"><strong>韩国$5,760亿半导体+AI投资计划震撼发布。</strong> 三星/SK海力士5年DRAM产能翻倍目标明确，叠加三星/海力士/美光遭DRAM价格操纵诉讼，存储芯片产业链面临重大变局。国产存储/半导体设备替代逻辑有望强化。</div>
     </div>
     <div class="f-item">
-      <div class="f-n">3</div>
-      <div class="f-t"><strong>全球自动驾驶法规里程碑</strong> — 联合国通过无人驾驶无需监督上路法规草案。关注国内智能驾驶产业链（感知、决策、执行）相关标的</div>
+      <div class="f-n">03</div>
+      <div class="f-t"><strong>A股医药板块受医保政策利好批量涨停，半导体成交431亿接力。</strong> 北向资金连续5日净流入超150亿，外资加速回补A股。科创50月涨超20%，市场风格偏向成长。CPO/PCB高位回调，注意高低切换节奏。</div>
     </div>
     <div class="f-item">
-      <div class="f-n">4</div>
-      <div class="f-t"><strong>日本汇率与亚洲市场</strong> — 日元跌至40年低点（161.96），关注日本央行潜在干预。若日元继续贬值，或引发亚洲竞争性贬值担忧</div>
+      <div class="f-n">04</div>
+      <div class="f-t"><strong>AI竞赛白热化：Grok 4.5 vs DeepSeek V4。</strong> 马斯克宣布Grok 4.5性能或超Claude Opus，SpaceX每月发布新模型。DeepSeek V4宣布7月上线并引入峰谷定价。AI大模型军备竞赛从技术转向商业化落地。</div>
     </div>
     <div class="f-item">
-      <div class="f-n">5</div>
-      <div class="f-t"><strong>美伊停火谈判</strong> — 双方同意在谈判期间停止攻击。若霍尔木兹海峡正常化，油价有望回落至$65-68区间，利好通胀预期和全球航运</div>
+      <div class="f-n">05</div>
+      <div class="f-t"><strong>今天关注：</strong>① A股医药/半导体持续性及量能变化 ② 港股科技高开后的承接力度 ③ 美国6月ISM制造业数据（周三公布）④ 北向资金能否延续净流入趋势 ⑤ 季度末养老金调仓对美股的实际影响。</div>
     </div>
   </div>
   <div class="verdict">
     <div class="v-label">💬 综合判断</div>
-    <div class="v-text">隔夜市场情绪明显回暖，美股三大指数全线反弹，科技股领涨。Alphabet入道指为市场注入新催化，特斯拉大涨7%+带动电动车板块。港股周一已率先反应，恒生科技涨超3%。国内半导体（韩国5,500亿美元投资）、智能驾驶（联合国法规里程碑）、AI应用（Sand.ai融资、百度OCR登顶）均有实质性利好。建议关注小米NAS发布的催化效应，医药ADC赛道估值修复机会，以及港A股科技板块的联动反弹。操作上维持适度积极，重点配置AI+半导体+智能驾驶+港股科技，控制存储和消费电子敞口。</div>
+    <div class="v-text">美股在新高附近情绪良好，科技股反弹具备持续性基础，但7月初养老金调仓可能带来2-3%的技术性回调。A股方向明确——医药（政策驱动估值修复）和半导体（成交天量+产业催化）是当前两大主线，科创50强势突破，短期风格偏向成长。韩国天量半导体投资计划和DeepSeek V4发布进一步强化AI产业链中长期逻辑。操作上建议关注科创/创业板成长方向，回避高位CPO/PCB概念。北向资金若能延续流入，将为A股提供增量资金支撑。整体维持"震荡偏强、结构为王"的判断。</div>
   </div>
 </div>
 
 <div class="footer">
-  数据源：RSS 19源 · CoinGecko API · Google Finance · TradingEconomics · web_search<br>
-  数据时间：08:00 CST · 非高峰时段运行 · 每日自动生成<br>
+  数据源：RSS 19源 · CoinGecko API · Google Finance · web_search<br>
+  数据时间：09:14 CST · 非高峰时段运行 · 每日自动生成<br>
   <a href="https://github.com/eason-byte/daily-briefing" style="color:var(--blue)">GitHub</a> · 
   <a href="https://19930808.xyz" style="color:var(--blue)">19930808.xyz</a><br>
   ⚠️ 本报告由AI自动生成，仅供参考，不构成投资建议

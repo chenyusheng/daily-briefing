@@ -36,10 +36,10 @@
   .mkt-label{font-size:12px;color:var(--text-tertiary);font-weight:500;margin-bottom:2px}
   .mkt-val{font-size:18px;font-weight:600;font-family:var(--font-mono)}
   .mkt-chg{font-size:13px;font-weight:500;margin-left:3px}
-  .mkt-chg.up{color:var(--green)}.mkt-chg.down{color:var(--red)}.mkt-chg.neu{color:var(--text-tertiary)}
+  .mkt-chg.up{color:var(--red)}.mkt-chg.down{color:var(--green)}.mkt-chg.neu{color:var(--text-tertiary)}
   .spark{position:absolute;bottom:4px;right:10px;opacity:.15}
   .spark-inner{display:flex;align-items:flex-end;gap:2px;height:20px}
-  .bar{width:4px;border-radius:2px 2px 0 0;min-height:2px}.bar.up{background:var(--green)}.bar.down{background:var(--red)}
+  .bar{width:4px;border-radius:2px 2px 0 0;min-height:2px}.bar.up{background:var(--red)}.bar.down{background:var(--green)}
 
   /* ===== Ticker List ===== */
   .ticker-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
@@ -48,17 +48,17 @@
   .ticker-ico{width:20px;text-align:center;margin-right:10px;font-size:15px}
   .ticker-nm{font-weight:500;min-width:70px}
   .ticker-bar{flex:1;height:5px;background:var(--border);border-radius:2px;margin:0 12px;overflow:hidden;max-width:70px}
-  .ticker-fill{height:100%;border-radius:2px}.ticker-fill.up{background:var(--green)}.ticker-fill.down{background:var(--red)}
+  .ticker-fill{height:100%;border-radius:2px}.ticker-fill.up{background:var(--red)}.ticker-fill.down{background:var(--green)}
   .ticker-px{font-family:var(--font-mono);font-weight:500;min-width:75px;text-align:right;font-size:13px;color:var(--text-secondary)}
   .ticker-ch{min-width:55px;text-align:right;font-weight:500;font-size:12px}
-  .ticker-ch.up{color:var(--green)}.ticker-ch.down{color:var(--red)}
+  .ticker-ch.up{color:var(--red)}.ticker-ch.down{color:var(--green)}
   .hk-implication{margin-top:12px;padding:12px 16px;background:var(--surface-alt);border-radius:var(--radius);font-size:13px;color:var(--text-secondary);text-align:center}
 
   /* ===== News Cards ===== */
   .news{display:flex;flex-direction:column;gap:12px}
   .news-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
   .news-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
-  .news-card.pos::before{background:var(--green)}.news-card.neg::before{background:var(--red)}.news-card.neu::before{background:var(--text-tertiary)}
+  .news-card.pos::before{background:var(--red)}.news-card.neg::before{background:var(--green)}.news-card.neu::before{background:var(--text-tertiary)}
   .news-tag{font-size:10px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;padding:2px 10px;border-radius:3px;display:inline-block;margin-bottom:6px}
   .nt-mi{background:#eef0ff;color:#5e6ad2}.nt-macro{background:var(--red-bg);color:var(--red)}.nt-tech{background:var(--green-bg);color:var(--green)}.nt-crypto{background:var(--amber-bg);color:var(--amber)}.nt-policy{background:#f0fdf4;color:#16a34a}.nt-ind{background:var(--purple-bg);color:var(--purple)}
   .news-t{font-size:16px;font-weight:600;line-height:1.4;margin-bottom:4px;letter-spacing:-.15px}
@@ -66,7 +66,7 @@
   .news-d{font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:8px}
   .news-f{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--text-tertiary)}
   .news-f .nl{color:var(--blue);text-decoration:none;font-weight:500}.nl:hover{text-decoration:underline}
-  .news-f .ip{font-size:11px;font-weight:500;padding:1px 10px;border-radius:20px}.ip.pos{background:var(--green-bg);color:var(--green)}.ip.neg{background:var(--red-bg);color:var(--red)}.ip.neu{background:var(--surface-alt);color:var(--text-tertiary)}
+  .news-f .ip{font-size:11px;font-weight:500;padding:1px 10px;border-radius:20px}.ip.pos{background:var(--red-bg);color:var(--red)}.ip.neg{background:var(--green-bg);color:var(--green)}.ip.neu{background:var(--surface-alt);color:var(--text-tertiary)}
   .news-f .ndate{color:var(--text-tertiary);font-size:11px}
 
   /* ===== Crypto ===== */
@@ -74,9 +74,9 @@
   .c-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 8px;text-align:center;box-shadow:var(--shadow)}
   .c-sym{font-size:12px;font-weight:600;margin-bottom:3px}
   .c-px{font-size:15px;font-weight:600;font-family:var(--font-mono)}
-  .c-chg{font-size:11px;font-weight:500}.c-chg.up{color:var(--green)}.c-chg.down{color:var(--red)}
+  .c-chg{font-size:11px;font-weight:500}.c-chg.up{color:var(--red)}.c-chg.down{color:var(--green)}
   .c-bar{height:4px;border-radius:2px;margin-top:6px;overflow:hidden;background:var(--border)}
-  .c-bar .f{height:100%;border-radius:2px}.c-bar .f.up{background:var(--green)}.c-bar .f.down{background:var(--red)}
+  .c-bar .f{height:100%;border-radius:2px}.c-bar .f.up{background:var(--red)}.c-bar .f.down{background:var(--green)}
   .c-src{font-size:11px;color:var(--text-tertiary);text-align:center;margin-top:8px}
 
   /* ===== Hot Sectors ===== */
@@ -95,8 +95,8 @@
   .hot-meta .tag{background:var(--surface-alt);padding:1px 6px;border-radius:3px}
   .hot-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
   .hot-chip{font-size:11px;padding:2px 10px;border-radius:12px;border:1px solid var(--border)}
-  .hot-chip.up{color:var(--green);border-color:var(--green-bg);background:var(--green-bg)}
-  .hot-chip.down{color:var(--red);border-color:var(--red-bg);background:var(--red-bg)}
+  .hot-chip.up{color:var(--red);border-color:var(--red-bg);background:var(--red-bg)}
+  .hot-chip.down{color:var(--green);border-color:var(--green-bg);background:var(--green-bg)}
 
   /* ===== Stock Analysis ===== */
   .stock-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin-bottom:12px}
@@ -106,14 +106,14 @@
   .sb-name .stag{font-size:10px;font-weight:600;padding:1px 8px;border-radius:3px}
   .sb-name .stag.p1{background:#dcfce7;color:#166534}.sb-name .stag.p2{background:#fef3c7;color:#92400e}.sb-name .stag.p3{background:#fee2e2;color:#991b1b}
   .sb-price{font-size:18px;font-weight:600;font-family:var(--font-mono)}
-  .sb-price .schg{font-size:12px;font-weight:500;margin-left:4px}.sb-price .schg.g{color:var(--green)}.sb-price .schg.r{color:var(--red)}
+  .sb-price .schg{font-size:12px;font-weight:500;margin-left:4px}.sb-price .schg.g{color:var(--red)}.sb-price .schg.r{color:var(--green)}
   .sb-meta{font-size:12px;color:var(--text-tertiary);margin-bottom:6px}
   .sb-table{width:100%;border-collapse:collapse;font-size:12px;margin:4px 0}
   .sb-table td{padding:3px 8px 3px 0;vertical-align:top}
   .sb-table .lbl{color:var(--text-tertiary);white-space:nowrap;width:65px}
   .sb-table .val{color:var(--text)}
   .sb-table .sig{display:inline-block;width:12px;text-align:center}
-  .sb-table .sig.dg{color:var(--green)}.sb-table .sig.dr{color:var(--red)}.sb-table .sig.dy{color:var(--amber)}
+  .sb-table .sig.dg{color:var(--red)}.sb-table .sig.dr{color:var(--green)}.sb-table .sig.dy{color:var(--amber)}
   .sb-verdict{font-size:13px;line-height:1.5;padding:8px 12px;border-radius:6px;margin-top:6px}
   .sb-verdict.g{background:var(--green-bg);color:var(--green);border-left:3px solid var(--green)}
   .sb-verdict.y{background:var(--amber-bg);color:var(--amber);border-left:3px solid var(--amber)}
@@ -165,6 +165,7 @@
     </div>
   </div>
   <span class="h-badge">非高峰</span>
+  <a href="/" class="h-home" style="font-size:20px;text-decoration:none;margin-left:8px" title="返回首页">🏠</a>
 </div>
 
 <!-- Insight Bar -->

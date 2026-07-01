@@ -17,6 +17,17 @@
   .hero-sub{font-size:12px;color:var(--text2);max-width:520px;margin:0 auto}
   .hero-info{margin-top:10px;display:flex;justify-content:center;gap:14px;font-size:11px;color:var(--text3);flex-wrap:wrap}
 
+  /* Search */
+  .search-wrap{max-width:400px;margin:14px auto 0;position:relative}
+  .search-wrap input{width:100%;padding:9px 36px 9px 14px;border:1px solid var(--border);border-radius:10px;font-size:13px;font-family:var(--font);background:var(--surface);color:var(--text);outline:none;transition:border-color .15s}
+  .search-wrap input:focus{border-color:var(--blue)}
+  .search-wrap input::placeholder{color:var(--text3)}
+  .search-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--text3);pointer-events:none}
+  .search-clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text3);cursor:pointer;display:none;background:none;border:none;padding:2px 4px;font-family:var(--font)}
+  .search-active .search-clear{display:block}
+  .search-active .search-icon{display:none}
+
+  /* Tab */
   .tab-bar{display:inline-flex;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:24px;background:var(--surface)}
   .tab-wrap{text-align:center}
   .tab{padding:10px 20px;font-size:13px;font-weight:500;color:var(--text3);cursor:pointer;border:none;background:none;font-family:var(--font);transition:all .15s}
@@ -53,6 +64,25 @@
   .arrow{color:var(--text3);font-size:12px;flex-shrink:0;transition:transform .12s}
   .a-item:hover .arrow{transform:translateX(3px)}
 
+  /* Search Results */
+  .sr-panel{display:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .sr-panel.active{display:block}
+  .sr-h{padding:14px 18px;border-bottom:1px solid var(--border-l);font-size:12px;color:var(--text3)}
+  .sr-h strong{color:var(--text)}
+  .sr-b{padding:6px 18px}
+  .sr-item{display:flex;align-items:center;gap:10px;padding:10px 0;text-decoration:none;color:inherit;border-bottom:1px solid var(--border-l);transition:all .12s}
+  .sr-item:last-child{border-bottom:none}
+  .sr-item:hover{opacity:.8}
+  .sr-cat{font-size:9px;padding:2px 10px;border-radius:12px;flex-shrink:0;font-weight:500}
+  .sr-cat.blue{color:var(--blue);background:var(--blue-l)}
+  .sr-cat.purple{color:var(--purple);background:var(--purple-l)}
+  .sr-cat.green{color:var(--green);background:var(--green-l)}
+  .sr-info{flex:1;min-width:0}
+  .sr-info .sr-title{font-size:12px;font-weight:600;color:var(--text)}
+  .sr-info .sr-desc{font-size:10px;color:var(--text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sr-info .sr-desc em{font-style:normal;background:#fde68a;color:var(--text);padding:0 2px;border-radius:2px}
+  .sr-none{padding:36px 16px;text-align:center;color:var(--text3);font-size:13px}
+
   .empty{padding:36px 16px;text-align:center;color:var(--text3);font-size:12px}
   .empty .eic{font-size:26px;margin-bottom:6px;opacity:.5}
   .loading{text-align:center;padding:36px 16px;color:var(--text3);font-size:12px}
@@ -70,6 +100,11 @@
     .panel-h{padding:11px 12px;font-size:12px}
     .panel-b{padding:8px 12px}
     .a-item{padding:9px 0;gap:6px}.a-date{font-size:12px}.a-desc{display:none}
+    .sr-b{padding:4px 12px}
+    .sr-item{padding:8px 0}
+  }
+  @media(min-width:1024px){
+    .search-wrap{max-width:360px}
   }
   @media(min-width:1400px){
     .container{max-width:1440px}.hero{padding:48px 0 32px}.hero-title{font-size:28px}
@@ -90,6 +125,11 @@
     <span>🌙 非高峰运行</span>
     <span><a href="https://19930808.xyz" style="color:var(--text3);text-decoration:none">19930808.xyz</a></span>
   </div>
+  <div class="search-wrap">
+    <input type="text" id="sq" placeholder="搜索文章、关键词…" oninput="onSearch(this.value)" onkeydown="if(event.key==='Escape'){clearSearch()}">
+    <span class="search-icon">🔍</span>
+    <button class="search-clear" onclick="clearSearch()">✕</button>
+  </div>
 </div>
 
 <div class="tab-wrap">
@@ -100,9 +140,10 @@
   </div>
 </div>
 
+<!-- Dashboard (normal view) -->
 <div class="dashboard two-col" id="dash">
   <div class="panel" id="pnNews">
-    <div class="panel-h"><div class="ic blue">📰</div> 晨间新闻速览 <span class="meta">RSS19 · CoinGecko</span></div>
+    <div class="panel-h"><div class="ic blue">📰</div> 晨间新闻速览 <span class="meta">data/briefings.json</span></div>
     <div class="panel-b" id="bl"></div>
   </div>
   <div class="panel" id="pnPicks">
@@ -115,6 +156,9 @@
   </div>
 </div>
 
+<!-- Search Results Panel -->
+<div class="sr-panel" id="sr"></div>
+
 <div class="footer">
   RSS 19源 · CoinGecko · Yahoo Finance · Tushare Pro · AKShare · 东方财富<br>
   早8:00 · 18:05 CST · deepseek-v4-pro · 非高峰 · ⚠️ 仅供参考<br>
@@ -124,6 +168,10 @@
 </div>
 
 <script>
+// ---- Data store ----
+var D = {briefings:[], stockpicks:[], articles:[]};
+
+// ---- Render helpers ----
 function rl(el, data, prefix, tc, tt) {
   if (!data || !data.length) { el.innerHTML = '<div class="empty"><div class="eic">📭</div>暂无记录</div>'; return; }
   const s={}, u=data.filter(b=>{if(s[b.date])return false;s[b.date]=true;return true});
@@ -157,17 +205,108 @@ window.addEventListener('resize', ()=>{
   }
 });
 
-['bl','sl','ll'].forEach(id => document.getElementById(id).innerHTML='<div class="loading"><div class="spinner"></div>加载中...</div>');
+// ---- Search ----
+function hl(txt, q) {
+  if (!q) return txt;
+  const r = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+  return txt.replace(r, '<em>$1</em>');
+}
 
-fetch('data.json').then(r=>r.json()).then(d=>{
-  rl(document.getElementById('bl'), d.briefings, '', 'blue', '最新');
-  rl(document.getElementById('sl'), d.stockpicks, 'stock-picks/', 'purple', '分析');
-  rl(document.getElementById('ll'), d.learning, '', 'green', '学习');
-  document.getElementById('nc').textContent = (d.briefings||[]).length;
-  document.getElementById('pc').textContent = (d.stockpicks||[]).length;
-  document.getElementById('lc').textContent = (d.learning||[]).length;
-}).catch(()=>{
-  document.getElementById('bl').innerHTML='<div class="empty"><div class="eic">⚠️</div>加载失败</div>';
+function onSearch(val) {
+  const sw = document.querySelector('.search-wrap');
+  const ipt = document.getElementById('sq');
+  const dash = document.getElementById('dash');
+  const sr = document.getElementById('sr');
+  const q = val.trim();
+
+  sw.classList.toggle('search-active', q.length > 0);
+
+  if (q.length < 2) {
+    dash.style.display = '';
+    sr.classList.remove('active');
+    sr.innerHTML = '';
+    return;
+  }
+
+  dash.style.display = 'none';
+  sr.classList.add('active');
+
+  const results = [];
+  const ql = q.toLowerCase();
+
+  D.briefings.forEach(function(item) {
+    if ((item.date||'').toLowerCase().includes(ql) || (item.dow||'').toLowerCase().includes(ql) || (item.desc||'').toLowerCase().includes(ql)) {
+      results.push({item: item, cat: 'briefings', tag: 'blue', tagText: '速览', prefix: ''});
+    }
+  });
+  D.stockpicks.forEach(function(item) {
+    if ((item.date||'').toLowerCase().includes(ql) || (item.dow||'').toLowerCase().includes(ql) || (item.desc||'').toLowerCase().includes(ql)) {
+      results.push({item: item, cat: 'stockpicks', tag: 'purple', tagText: '选股', prefix: 'stock-picks/'});
+    }
+  });
+  D.articles.forEach(function(item) {
+    if ((item.date||'').toLowerCase().includes(ql) || (item.dow||'').toLowerCase().includes(ql) || (item.desc||'').toLowerCase().includes(ql)) {
+      results.push({item: item, cat: 'articles', tag: 'green', tagText: '学习', prefix: ''});
+    }
+  });
+
+  if (results.length === 0) {
+    sr.innerHTML = '<div class="sr-h"></div><div class="sr-b"><div class="sr-none">😕 没有找到匹配 "<strong>' + escHtml(q) + '</strong>" 的结果</div></div>';
+    return;
+  }
+
+  var html = '<div class="sr-h">找到 <strong>' + results.length + '</strong> 条结果</div><div class="sr-b">';
+  results.forEach(function(r) {
+    const p = r.item.path || r.prefix + r.item.date + '.html';
+    html += '<a class="sr-item" href="' + p + '">'
+      + '<span class="sr-cat ' + r.tag + '">' + r.tagText + '</span>'
+      + '<div class="sr-info">'
+      + '<div class="sr-title">' + hl(r.item.date, q) + ' <span style="font-weight:400;color:var(--text3)">' + hl(r.item.dow||'', q) + '</span></div>'
+      + '<div class="sr-desc">' + hl(r.item.desc||'', q) + '</div>'
+      + '</div>'
+      + '<span class="arrow">→</span>'
+      + '</a>';
+  });
+  html += '</div>';
+  sr.innerHTML = html;
+}
+
+function clearSearch() {
+  document.getElementById('sq').value = '';
+  document.querySelector('.search-wrap').classList.remove('search-active');
+  document.getElementById('dash').style.display = '';
+  document.getElementById('sr').classList.remove('active');
+  document.getElementById('sr').innerHTML = '';
+  document.getElementById('sq').focus();
+}
+
+function escHtml(s) {
+  var d = document.createElement('div');
+  d.appendChild(document.createTextNode(s));
+  return d.innerHTML;
+}
+
+// ---- Init ----
+['bl','sl','ll'].forEach(function(id) {
+  document.getElementById(id).innerHTML = '<div class="loading"><div class="spinner"></div>加载中...</div>';
+});
+
+var p1 = fetch('data/briefings.json').then(function(r) { return r.json(); });
+var p2 = fetch('data/stockpicks.json').then(function(r) { return r.json(); });
+var p3 = fetch('data/articles.json').then(function(r) { return r.json(); });
+
+Promise.all([p1, p2, p3]).then(function(arr) {
+  D.briefings = arr[0];
+  D.stockpicks = arr[1];
+  D.articles = arr[2];
+  rl(document.getElementById('bl'), D.briefings, '', 'blue', '最新');
+  rl(document.getElementById('sl'), D.stockpicks, 'stock-picks/', 'purple', '分析');
+  rl(document.getElementById('ll'), D.articles, '', 'green', '学习');
+  document.getElementById('nc').textContent = (D.briefings||[]).length;
+  document.getElementById('pc').textContent = (D.stockpicks||[]).length;
+  document.getElementById('lc').textContent = (D.articles||[]).length;
+}).catch(function() {
+  document.getElementById('bl').innerHTML = '<div class="empty"><div class="eic">⚠️</div>加载失败</div>';
 });
 </script>
 </body>

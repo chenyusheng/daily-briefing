@@ -7,60 +7,74 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{--bg:#f8f9fa;--surface:#fff;--surface-alt:#f2f3f5;--border:#e8eaed;--border-light:#f0f1f3;--text:#1a1d23;--text-secondary:#5a5f6b;--text-tertiary:#8a8f98;--blue:#0066cc;--blue-light:#e8f0fe;--blue-bg:#f0f5ff;--purple:#7c3aed;--purple-light:#f5f3ff;--radius:10px;--shadow:0 1px 4px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.03);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
-  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
-  .container{max-width:640px;margin:0 auto;padding:0}
+  :root{--bg:#f5f6f8;--surface:#fff;--surface-alt:#f0f1f3;--border:#e2e4e8;--text:#1c1e24;--text-secondary:#58606e;--text-tertiary:#8e96a4;--blue:#2266cc;--blue-light:#e6edf7;--purple:#7c3aed;--purple-light:#f3edff;--radius:12px;--shadow:0 1px 3px rgba(0,0,0,.05),0 1px 8px rgba(0,0,0,.03);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;min-height:100vh}
+  .container{max-width:800px;margin:0 auto;padding:0}
+  .hero{background:linear-gradient(135deg,#fff,#f4f6fc,#eef2f9);border-bottom:1px solid var(--border);padding:52px 24px 36px;text-align:center}
+  .hero-icon{font-size:38px;margin-bottom:6px}
+  .hero-title{font-size:28px;font-weight:700;letter-spacing:-.4px;margin-bottom:6px}
+  .hero-sub{font-size:14px;color:var(--text-secondary);max-width:500px;margin:0 auto}
+  .hero-info{margin-top:14px;display:flex;justify-content:center;gap:18px;font-size:12px;color:var(--text-tertiary);flex-wrap:wrap}
+  .hero-info a{color:var(--text-tertiary);text-decoration:none;transition:color .15s}
+  .hero-info a:hover{color:var(--blue)}
 
-  .hero{background:linear-gradient(135deg,#fff,#f4f6fb);border-bottom:1px solid var(--border);padding:40px 20px 32px;text-align:center}
-  .hero-icon{font-size:34px;margin-bottom:4px}
-  .hero-title{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:4px}
-  .hero-sub{font-size:12px;color:var(--text-secondary)}
-  .hero-info{margin-top:12px;display:flex;justify-content:center;gap:16px;font-size:11px;color:var(--text-tertiary);flex-wrap:wrap}
-  .hero-info a{color:var(--text-tertiary);text-decoration:none}
-
-  /* ===== Tab Bar ===== */
   .tab-bar{display:flex;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:100}
-  .tab{flex:1;padding:14px 10px;text-align:center;font-size:13px;font-weight:500;color:var(--text-tertiary);cursor:pointer;border:none;background:none;position:relative;transition:color .15s;font-family:var(--font-sans)}
-  .tab:hover{color:var(--text)}
+  .tab{flex:1;padding:16px 14px;text-align:center;font-size:14px;font-weight:500;color:var(--text-tertiary);cursor:pointer;border:none;background:none;position:relative;transition:color .2s,background .15s;font-family:var(--font-sans);letter-spacing:.2px}
+  .tab:hover{color:var(--text);background:var(--surface-alt)}
   .tab.active{color:var(--text);font-weight:600}
-  .tab.active::after{content:'';position:absolute;bottom:0;left:10%;width:80%;height:2.5px;border-radius:2px 2px 0 0}
+  .tab.active::after{content:'';position:absolute;bottom:0;left:15%;width:70%;height:3px;border-radius:3px 3px 0 0}
   .tab.tab-news.active::after{background:var(--blue)}
   .tab.tab-picks.active::after{background:var(--purple)}
-  .tab .tab-icon{font-size:15px;margin-right:5px}
-  .tab .tab-badge{font-size:10px;font-weight:500;padding:1px 7px;border-radius:10px;margin-left:4px}
+  .tab .tab-icon{font-size:16px;margin-right:6px}
+  .tab .tab-badge{font-size:11px;font-weight:500;padding:1px 8px;border-radius:12px;margin-left:5px}
   .tab.tab-news .tab-badge{background:var(--blue-light);color:var(--blue)}
   .tab.tab-picks .tab-badge{background:var(--purple-light);color:var(--purple)}
 
-  /* ===== Tab Content ===== */
   .tab-content{display:none}
   .tab-content.active{display:block}
-  .section{padding:20px 20px}
+  .section{padding:24px 24px}
 
-  /* ===== Archive List ===== */
-  .archive{display:flex;flex-direction:column;gap:8px}
-  .a-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px 16px;box-shadow:var(--shadow);text-decoration:none;color:inherit;transition:all .15s}
-  .a-item:hover{border-color:var(--blue);box-shadow:0 2px 12px rgba(0,102,204,.1)}
-  .a-left{display:flex;align-items:center;gap:10px}
-  .a-date{font-size:15px;font-weight:600}
-  .a-dow{font-size:11px;color:var(--text-tertiary)}
-  .a-desc{flex:1;margin:0 10px;font-size:11px;color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
-  .a-tag{font-size:9px;font-weight:500;padding:2px 10px;border-radius:20px;flex-shrink:0}
+  .archive{display:flex;flex-direction:column;gap:10px}
+  .a-item{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;text-decoration:none;color:inherit;transition:all .18s;box-shadow:var(--shadow)}
+  .a-item:hover{border-color:var(--blue);box-shadow:0 2px 16px rgba(0,102,204,.1);transform:translateY(-1px)}
+  .a-left{display:flex;align-items:center;gap:12px;flex-shrink:0}
+  .a-date{font-size:16px;font-weight:600;line-height:1.3}
+  .a-dow{font-size:12px;color:var(--text-tertiary);line-height:1.3}
+  .a-desc{flex:1;min-width:0;font-size:13px;color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.4}
+  .a-tag{font-size:10px;font-weight:500;padding:3px 12px;border-radius:20px;flex-shrink:0;letter-spacing:.3px}
   .a-tag.blue{color:var(--blue);background:var(--blue-light)}
   .a-tag.purple{color:var(--purple);background:var(--purple-light)}
-  .a-arrow{color:var(--text-tertiary);font-size:14px;flex-shrink:0}
-  .a-item:hover .a-arrow{color:var(--blue)}
+  .a-arrow{color:var(--text-tertiary);font-size:16px;flex-shrink:0;transition:transform .15s}
+  .a-item:hover .a-arrow{color:var(--blue);transform:translateX(3px)}
 
-  .empty{padding:60px 20px;text-align:center;color:var(--text-tertiary);font-size:13px}
-  .empty .empty-icon{font-size:36px;margin-bottom:8px;opacity:.6}
+  .empty{padding:80px 20px;text-align:center;color:var(--text-tertiary);font-size:14px}
+  .empty .empty-icon{font-size:42px;margin-bottom:10px;opacity:.5}
 
-  .footer{text-align:center;padding:18px 20px 28px;font-size:10px;color:var(--text-tertiary);line-height:1.7;border-top:1px solid var(--border-light)}
-  .footer a{color:var(--blue);text-decoration:none}
+  .loading{text-align:center;padding:80px 20px;color:var(--text-tertiary);font-size:13px}
+  .loading .spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:8px}
+  @keyframes spin{to{transform:rotate(360deg)}}
 
-  @media(max-width:480px){
-    .hero{padding:28px 14px 22px}.hero-title{font-size:20px}
-    .tab{font-size:12px;padding:12px 6px}.tab .tab-icon{margin-right:3px}
-    .section{padding:14px 14px}
-    .a-item{padding:11px 12px}.a-date{font-size:14px}.a-desc{display:none}
+  .footer{text-align:center;padding:22px 24px 32px;font-size:11px;color:var(--text-tertiary);line-height:1.9;border-top:1px solid var(--border-light)}
+
+  @media(max-width:600px){
+    .container{max-width:100%}
+    .hero{padding:32px 16px 26px}.hero-title{font-size:22px}.hero-sub{font-size:13px}
+    .tab{padding:13px 8px;font-size:13px}.tab .tab-icon{margin-right:3px}
+    .section{padding:16px 14px}
+    .a-item{padding:13px 14px;gap:10px}.a-date{font-size:14px}.a-desc{display:none}
+    .empty{padding:60px 14px}
+  }
+  @media(min-width:1024px){
+    .container{max-width:900px}
+    .hero{padding:60px 32px 40px}.hero-title{font-size:32px}.hero-sub{font-size:15px;max-width:600px}
+    .tab{padding:18px 20px;font-size:15px}
+    .section{padding:28px 32px}
+    .archive{gap:12px}
+    .a-item{padding:18px 24px;gap:18px;border-radius:14px}
+    .a-date{font-size:17px}.a-desc{font-size:14px}
+    .a-tag{font-size:11px;padding:4px 14px}
+    .a-arrow{font-size:18px}
+    .footer{padding:28px 32px 38px;font-size:12px}
   }
 </style>
 </head>
@@ -92,40 +106,24 @@
 </div>
 
 <div id="tabNews" class="tab-content active">
-  <div class="section">
-    <div id="briefingList"></div>
-  </div>
+  <div class="section"><div id="briefingList"></div></div>
 </div>
-
 <div id="tabPicks" class="tab-content">
-  <div class="section">
-    <div id="stockpickList"></div>
-  </div>
+  <div class="section"><div id="stockpickList"></div></div>
 </div>
 
 <div class="footer">
   数据源：RSS 19源 · CoinGecko · Yahoo Finance · Tushare Pro · AKShare · 东方财富<br>
   晨间速览早8:00 CST · 双战法选股18:05 CST · deepseek-v4-pro · 非高峰时段<br>
-  ⚠️ 仅供参考，不构成投资建议
+  ⚠️ 仅供参考，不构成投资建议 &nbsp;·&nbsp; <a href="https://19930808.xyz" style="color:var(--blue);text-decoration:none">19930808.xyz</a>
 </div>
 
 </div>
 
 <script>
-// 📰 晨间新闻速览
-const BRIEFINGS = [
-  {"date":"2026-07-01","dow":"周三","desc":"纳指+2.45%创新高，特斯拉+10.2%与SpaceX+9.5%领涨。史上最严电池安全令今日施行。Anthropic Fable模型出口管制预期解除。黄金再触$4000关口。"},
-  {"date":"2026-06-30","dow":"周二","desc":"道指首破52,000历史新高，纳指+2.07%终结五连跌。A股新能源冲高回落、医药+半导体双主线。阳光电源触发站上MA20买入条件。"}
-];
-
-// 📊 双战法选股
-const STOCKPICKS = [
-  {"date":"2026-06-30","dow":"周二","desc":"冰点反抽不适用(正常行情)，龙头主升浪确认芯片半导体主线。水晶光电、中科曙光、新洁能三龙候选。总建议：不动手等回调。"}
-];
-
 function renderList(containerId, data, prefix, tagClass, tagText) {
   const list = document.getElementById(containerId);
-  if (!data.length) {
+  if (!data || !data.length) {
     list.innerHTML = '<div class="empty"><div class="empty-icon">📭</div>暂无记录</div>';
     return;
   }
@@ -133,12 +131,7 @@ function renderList(containerId, data, prefix, tagClass, tagText) {
   const unique = data.filter(b => { if (seen[b.date]) return false; seen[b.date] = true; return true; });
   list.innerHTML = '<div class="archive">' + unique.sort((a,b)=>b.date.localeCompare(a.date)).map(b =>
     `<a class="a-item" href="${prefix}${b.date}.html">
-      <div class="a-left">
-        <div>
-          <div class="a-date">${b.date}</div>
-          <div class="a-dow">${b.dow}</div>
-        </div>
-      </div>
+      <div class="a-left"><div><div class="a-date">${b.date}</div><div class="a-dow">${b.dow}</div></div></div>
       <div class="a-desc">${b.desc || ''}</div>
       <span class="a-tag ${tagClass}">${tagText}</span>
       <span class="a-arrow">→</span>
@@ -151,20 +144,28 @@ function switchTab(name) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelector('.tab-' + name).classList.add('active');
   document.getElementById('tab' + name.charAt(0).toUpperCase() + name.slice(1)).classList.add('active');
-  // Store preference
   try { localStorage.setItem('briefingTab', name); } catch(e) {}
 }
 
-renderList('briefingList', BRIEFINGS, '', 'blue', '最新');
-renderList('stockpickList', STOCKPICKS, 'stock-picks/', 'purple', '分析');
-document.getElementById('newsCount').textContent = BRIEFINGS.length;
-document.getElementById('picksCount').textContent = STOCKPICKS.length;
+// Load data from JSON
+['briefingList','stockpickList'].forEach(id => {
+  document.getElementById(id).innerHTML = '<div class="loading"><div class="spinner"></div><br>加载中...</div>';
+});
 
-// Restore last active tab
-try {
-  const saved = localStorage.getItem('briefingTab');
-  if (saved && saved !== 'news') switchTab(saved);
-} catch(e) {}
+fetch('data.json')
+  .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  .then(d => {
+    renderList('briefingList', d.briefings, '', 'blue', '最新');
+    renderList('stockpickList', d.stockpicks, 'stock-picks/', 'purple', '分析');
+    document.getElementById('newsCount').textContent = (d.briefings || []).length;
+    document.getElementById('picksCount').textContent = (d.stockpicks || []).length;
+  })
+  .catch(e => {
+    document.getElementById('briefingList').innerHTML = '<div class="empty"><div class="empty-icon">⚠️</div>数据加载失败<br><span style="font-size:11px">' + e.message + '</span></div>';
+    document.getElementById('stockpickList').innerHTML = '';
+  });
+
+try { const s = localStorage.getItem('briefingTab'); if (s && s !== 'news') switchTab(s); } catch(e) {}
 </script>
 </body>
 </html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>养家心法 — 炒股养家：情绪周期与龙头战法的集大成者</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --card: #1a1a24;
+    --card-hover: #222233;
+    --accent: #6c5ce7;
+    --accent2: #00cec9;
+    --accent3: #fd79a8;
+    --gold: #fdcb6e;
+    --red: #e17055;
+    --green: #00b894;
+    --text: #e0e0e8;
+    --text-muted: #888899;
+    --border: #2a2a3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 30%, #2d1020 60%, #0a0a1a 100%);
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(253,203,110,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(108,92,231,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(253,121,168,0.05) 0%, transparent 40%);
+    animation: heroGlow 10s ease-in-out infinite alternate;
+  }
+  @keyframes heroGlow {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-20px, -20px) rotate(3deg); }
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+    color: #fff;
+  }
+  .hero h1 .highlight { color: var(--gold); }
+  .hero .subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .hero .subtitle .accent { color: var(--accent); font-weight: 600; }
+  .hero .stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .hero .stats span {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 16px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  .hero .stats span strong { color: #fff; }
+  .hero .nav-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--accent2);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .hero .nav-link:hover { opacity: 1; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  /* Section Headers */
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .badge {
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* Content Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+  }
+  .card:hover { background: var(--card-hover); transform: translateX(3px); }
+  .card h3 { font-size: 1rem; color: #fff; font-weight: 600; margin-bottom: 8px; }
+  .card h3 .icon { margin-right: 6px; }
+  .card p { font-size: 0.88rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+  .card p:last-child { margin-bottom: 0; }
+  .card ul { padding-left: 18px; margin: 8px 0; }
+  .card ul li { font-size: 0.85rem; color: var(--text); line-height: 1.7; margin-bottom: 6px; list-style: none; padding-left: 0; }
+  .card ul li::before { content: '• '; color: var(--accent); }
+  .card .highlight-text { color: var(--gold); font-weight: 600; }
+  .card .red-text { color: var(--red); }
+  .card .green-text { color: var(--green); }
+
+  /* Quote Box */
+  .quote-box {
+    background: linear-gradient(135deg, rgba(253,203,110,0.06), rgba(108,92,231,0.06));
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 0.9rem;
+  }
+  .quote-box .source {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-style: normal;
+  }
+
+  /* System Grid */
+  .system-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  .sys-item {
+    background: rgba(108,92,231,0.06);
+    border: 1px solid rgba(108,92,231,0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .sys-item .label { font-size: 0.72rem; color: var(--text-muted); }
+  .sys-item .value { font-size: 0.88rem; color: var(--accent2); font-weight: 600; margin-top: 2px; }
+
+  /* Phase Grid */
+  .phase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  .phase-card {
+    border-radius: 10px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .phase-card .phase-icon { font-size: 1.4rem; margin-bottom: 4px; }
+  .phase-card .phase-name { font-size: 0.78rem; font-weight: 600; margin-bottom: 4px; }
+  .phase-card .phase-desc { font-size: 0.72rem; opacity: 0.7; }
+  .phase-card.ice { background: rgba(108,92,231,0.12); border: 1px solid rgba(108,92,231,0.2); }
+  .phase-card.warm { background: rgba(0,206,201,0.12); border: 1px solid rgba(0,206,201,0.2); }
+  .phase-card.hot { background: rgba(253,203,110,0.12); border: 1px solid rgba(253,203,110,0.2); }
+  .phase-card.cool { background: rgba(225,112,85,0.12); border: 1px solid rgba(225,112,85,0.2); }
+
+  /* Dragon Type */
+  .dragon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  .dragon-card {
+    background: rgba(0,184,148,0.06);
+    border: 1px solid rgba(0,184,148,0.15);
+    border-radius: 10px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .dragon-card .d-icon { font-size: 1.3rem; }
+  .dragon-card .d-name { font-size: 0.82rem; font-weight: 600; color: var(--green); margin: 4px 0; }
+  .dragon-card .d-desc { font-size: 0.72rem; color: var(--text-muted); }
+
+  /* Tag Row */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+  .tag-purple { background: rgba(108,92,231,0.15); color: var(--accent); }
+  .tag-teal { background: rgba(0,206,201,0.15); color: var(--accent2); }
+  .tag-pink { background: rgba(253,121,168,0.15); color: var(--accent3); }
+  .tag-gold { background: rgba(253,203,110,0.15); color: var(--gold); }
+  .tag-green { background: rgba(0,184,148,0.15); color: var(--green); }
+  .tag-red { background: rgba(225,112,85,0.15); color: var(--red); }
+
+  /* Mistake Grid */
+  .mistake-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+  .mistake-card {
+    background: rgba(225,112,85,0.06);
+    border: 1px solid rgba(225,112,85,0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .mistake-card .num { font-size: 1.1rem; font-weight: 700; color: var(--red); display: block; }
+  .mistake-card .text { font-size: 0.82rem; color: var(--text); margin-top: 2px; }
+
+  /* Gold Box */
+  .gold-box {
+    background: linear-gradient(135deg, rgba(253,203,110,0.08), rgba(108,92,231,0.08));
+    border: 1px solid rgba(253,203,110,0.2);
+    border-radius: 14px;
+    padding: 24px 28px;
+    text-align: center;
+    margin-top: 24px;
+  }
+  .gold-box .big-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .gold-box .sub-text { font-size: 0.88rem; color: var(--text-muted); }
+
+  /* Method Box */
+  .method-box {
+    background: linear-gradient(135deg, rgba(108,92,231,0.06), rgba(0,206,201,0.06));
+    border: 1px solid rgba(108,92,231,0.2);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .method-box h4 { color: var(--accent); font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; }
+  .method-box p, .method-box li { font-size: 0.85rem; color: var(--text); line-height: 1.6; }
+  .method-box ul { padding-left: 18px; margin-top: 6px; }
+  .method-box ul li { margin-bottom: 4px; list-style: none; padding-left: 0; }
+  .method-box ul li::before { content: '• '; color: var(--accent); }
+
+  /* Case Box */
+  .case-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+  }
+  .case-card h4 { font-size: 0.95rem; color: #fff; font-weight: 600; margin-bottom: 6px; }
+  .case-card .meta { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 6px; }
+  .case-card .desc { font-size: 0.85rem; color: var(--text); line-height: 1.65; }
+
+  /* Lesson Box */
+  .lesson-box {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(0,206,201,0.06);
+    border-left: 3px solid var(--accent2);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--accent2);
+    font-weight: 500;
+  }
+
+  @media (max-width: 600px) {
+    .system-grid, .mistake-grid { grid-template-columns: 1fr; }
+    .phase-grid { grid-template-columns: 1fr 1fr; }
+    .dragon-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>养家<span class="highlight">心法</span></h1>
+    <p class="subtitle">
+      情绪周期理论的开创者 · <span class="accent">养家心法</span> 游资圈的必修课<br>
+      从90万亏到40万，再做到数十亿的传奇交易生涯
+    </p>
+    <div class="stats">
+      <span>🏆 <strong>2010年</strong> 成飞集成一战成名</span>
+      <span>📖 <strong>情绪周期</strong> 奠基人</span>
+      <span>🧘 <strong>心法108条</strong> 短线圣经</span>
+      <span>💰 <strong>数十亿</strong> 级别游资</span>
+    </div>
+    <a class="nav-link" href="yu-boluo-journey">📚 延伸阅读：十年悟道之路 →</a>
+  </div>
+</section>
+
+<!-- ============ CONTENT ============ -->
+<div class="container">
+
+  <!-- -- 1. 人物背景 -- -->
+  <h2 class="section-title">🧑‍💼 人物背景 <span class="badge">了解其人</span></h2>
+
+  <div class="card">
+    <p><strong>炒股养家</strong>，本名不详（网名沿用淘股吧ID），A股顶级游资，情绪周期理论的奠基人之一。他最早成名于2010年前后的<strong class="highlight-text">成飞集成（002190）</strong>一战，凭借对市场情绪和资金流向的精准把握，在锂电池概念股的主升浪中获利数倍，一举奠定游资圈地位。</p>
+    <p>据其自述，养家早期经历多次大亏——从90万亏至40万，背负生活压力，通过持续学习淘股吧前辈Asking、职业炒手等的经验，最终形成了自己的交易体系。他长期在淘股吧等平台发表实战经验帖，后来被股民整理为<strong class="highlight-text">\"养家心法\"</strong>，共108条核心心法，被誉为短线交易者的必修课。</p>
+    <p>养家后来管理资金规模达到数十亿级别，在多个龙头股上都有经典操作。他曾在清华大学做过演讲，分享其交易哲学，引用了康德的认识论和佛教的\色即是空\，将交易思考提升到哲学层面。</p>
+  </div>
+
+  <!-- -- 2. 核心投资理念 -- -->
+  <h2 class="section-title">🧠 核心投资理念 <span class="badge">世界观</span></h2>
+
+  <div class="card">
+    <h3><span class="icon">🎯</span>理念一：市场情绪周期 — 超越技术的底层认知</h3>
+    <p>养家心法的最大贡献，是系统性地将<strong class="highlight-text">市场情绪</strong>量化为可观察、可操作的周期框架。他认为：</p>
+    <div class="quote-box">
+      \"交易的本质是群体博弈，追根溯源的话，就是随时衡量，场外的潜在买入者钱的数量和买入倾向，与场内筹码的数量和卖出倾向，当前者大于后者就买入，当后者大于前者就卖出。\"
+      <span class="source">— 炒股养家</span>
+    </div>
+    <p>他将情绪周期分为<strong>多方循环（贪婪主导）</strong>和<strong>空方循环（恐惧主导）</strong>两个对立循环，每个循环又分多个阶段。核心在于通过客观数据（涨停家数、连板高度、封板率、炸板率、赚钱/亏钱效应）来衡量情绪温度。</p>
+
+    <h3 style="margin-top: 16px;"><span class="icon">📊</span>理念二：大局观 — 短线依附于更大的时间架构</h3>
+    <p>养家反复强调\"做的是短线，看的是更大的局\"——短线交易必须依附于中长线的时间架构：</p>
+    <div class="quote-box">
+      \"别人看2天，你需要看3天、5天甚至更长。\"
+      <span class="source">— 炒股养家</span>
+    </div>
+    <p>他提出了大局观的<strong>三维立体视角</strong>：<strong>天时</strong>（政策与宏观）→ <strong>地利</strong>（市场周期）→ <strong>人和</strong>（资金与人气）。并强调要关注\"领先周期品种\"作为整个市场周期的温度计。</p>
+
+    <h3 style="margin-top: 16px;"><span class="icon">🔄</span>理念三：群体博弈与人性永恒</h3>
+    <p>养家深刻理解索罗斯的\"反身性\"理论——参与者基于不健全的认知参与市场，这种认知与市场客观走势相互作用。更深一层，他指出人类的贪婪与恐惧是基因的\"求存模式\"决定的<strong>本能反应</strong>，这种本能使得绝大多数人在面对市场波动时必然会做出追涨杀跌的趋同行为。</p>
+    <div class="quote-box">
+      \"时光荏苒，历史在不断的更替，故事不断发生，形式不断的多变，投机千古年来长存，背后就是人性的恒久不变。\"
+      <span class="source">— 炒股养家</span>
+    </div>
+  </div>
+
+  <!-- -- 3. 情绪周期详解 -- -->
+  <h2 class="section-title">🌊 情绪周期详解 <span class="badge">核心引擎</span></h2>
+
+  <div class="card">
+    <p>情绪周期本质是短线资金群体行为的循环。当一部分人赚钱时，会增加自信并加大投入，形成群体效应推动行情持续；当接力资金接连失手，亏钱效应蔓延，强势股失去承接形成补跌。</p>
+
+    <h3 style="margin: 12px 0 10px; color: var(--accent); font-size: 0.9rem;">情绪四阶段</h3>
+    <div class="phase-grid">
+      <div class="phase-card ice">
+        <div class="phase-icon">❄️</div>
+        <div class="phase-name" style="color: var(--accent);">冰点期</div>
+        <div class="phase-desc">市场恐慌极致<br>批量跌停<br>连板高度被压制</div>
+      </div>
+      <div class="phase-card warm">
+        <div class="phase-icon">🌱</div>
+        <div class="phase-name" style="color: var(--accent2);">回暖期</div>
+        <div class="phase-desc">超跌反弹<br>强势股活跃<br>轻仓试错</div>
+      </div>
+      <div class="phase-card hot">
+        <div class="phase-icon">🔥</div>
+        <div class="phase-name" style="color: var(--gold);">高潮期</div>
+        <div class="phase-desc">主线明确<br>增量涌入<br>重仓龙头</div>
+      </div>
+      <div class="phase-card cool">
+        <div class="phase-icon">💨</div>
+        <div class="phase-name" style="color: var(--red);">退潮期</div>
+        <div class="phase-desc">高位A杀<br>亏钱蔓延<br>果断空仓</div>
+      </div>
+    </div>
+
+    <h3 style="margin: 14px 0 8px; color: var(--accent); font-size: 0.9rem;">情绪量化观测指标</h3>
+    <div class="tag-row">
+      <span class="tag tag-purple">📊 涨停家数</span>
+      <span class="tag tag-teal">💯 封板率</span>
+      <span class="tag tag-gold">📏 连板高度</span>
+      <span class="tag tag-pink">💣 炸板率</span>
+      <span class="tag tag-green">💰 赚钱效应</span>
+      <span class="tag tag-red">💸 亏钱效应</span>
+    </div>
+    <p style="margin-top: 8px;">养家并不依赖主观感觉，而是通过一系列客观数据来衡量情绪温度。当龙头高度不断降低、炸板率飙升时，意味着情绪正在退潮。</p>
+  </div>
+
+  <!-- -- 4. 交易系统 -- -->
+  <h2 class="section-title">⚙️ 交易系统 <span class="badge">实战体系</span></h2>
+
+  <!-- 龙头战法 -->
+  <div class="card">
+    <h3>🐉 龙头战法 — 赚取人气带来的流动溢价</h3>
+    <p>龙头战法是养家体系中<strong class="highlight-text">最具攻击性</strong>的部分。核心在于把握市场共识，赚取人气带来的流动溢价。</p>
+
+    <h4 style="color: var(--accent2); font-size: 0.85rem; margin: 10px 0 6px;">龙头分类</h4>
+    <div class="dragon-grid">
+      <div class="dragon-card">
+        <div class="d-icon">👑</div>
+        <div class="d-name">总龙头</div>
+        <div class="d-desc">涨幅大、抗打压<br>带动性强、属性多</div>
+      </div>
+      <div class="dragon-card">
+        <div class="d-icon">⚡</div>
+        <div class="d-name">日内龙</div>
+        <div class="d-desc">当天率先封板<br>带动板块异动</div>
+      </div>
+      <div class="dragon-card">
+        <div class="d-icon">🔁</div>
+        <div class="d-name">补涨龙</div>
+        <div class="d-desc">龙头滞涨后的<br>板块内接力</div>
+      </div>
+    </div>
+
+    <h4 style="color: var(--accent2); font-size: 0.85rem; margin: 12px 0 6px;">核心买点</h4>
+    <ul>
+      <li><strong>平台突破</strong>：经过充分横盘后放量突破箱体高点</li>
+      <li><strong>弱转强</strong>：隔日竞价超预期高开，量能配合，果断介入</li>
+      <li><strong>龙头首阴低吸</strong>：真龙头第一次分歧收阴，次日低吸</li>
+      <li><strong>分歧介入</strong>：连续涨停后的换手板，筹码充分交换后介入</li>
+    </ul>
+
+    <h4 style="color: var(--accent2); font-size: 0.85rem; margin: 12px 0 6px;">见顶信号</h4>
+    <ul>
+      <li>持续放量滞涨</li>
+      <li>缩量加速后出现量能缺口</li>
+      <li>日内巨幅震荡（天地板/地天板）</li>
+      <li>跌破5日线2天无法修复</li>
+      <li><strong class="red-text">独食龙</strong>（一字无量板）— 见顶后下跌迅猛，走二波概率极低</li>
+    </ul>
+  </div>
+
+  <!-- 首板战法 -->
+  <div class="card">
+    <h3>📝 首板战法 — 稳健的样本积累模式</h3>
+    <p>首板战法是积累样本、分摊风险的稳健打法：</p>
+    <ul>
+      <li><strong>选股</strong>：股性活跃、历史涨停后溢价好、热点题材加持</li>
+      <li><strong>三种打法</strong>：扫板（主动吃涨停价大买单）→ 排板（确定涨停后排队）→ 回封板（被砸开后再次上板）</li>
+      <li><strong>纪律</strong>：除非第二天连板否则必卖，跌停必卖。固定比例分仓</li>
+    </ul>
+  </div>
+
+  <!-- 仓位与风控 -->
+  <div class="card">
+    <h3>📊 仓位管理与风控</h3>
+    <p>养家特别强调，<strong class="highlight-text">回撤控制是高手与散户拉开差距的关键</strong>。</p>
+
+    <h4 style="color: var(--accent2); font-size: 0.85rem; margin: 10px 0 6px;">赢面决定仓位</h4>
+    <div class="system-grid">
+      <div class="sys-item">
+        <div class="label">赢面 ≤ 60%</div>
+        <div class="value">⚠️ 观望</div>
+      </div>
+      <div class="sys-item">
+        <div class="label">赢面 60-70%</div>
+        <div class="value">🔸 小仓</div>
+      </div>
+      <div class="sys-item">
+        <div class="label">赢面 70-80%</div>
+        <div class="value">🔶 中仓</div>
+      </div>
+      <div class="sys-item">
+        <div class="label">赢面 90%+</div>
+        <div class="value">🟢 满仓</div>
+      </div>
+    </div>
+
+    <h4 style="color: var(--accent2); font-size: 0.85rem; margin: 12px 0 6px;">核心纪律</h4>
+    <ul>
+      <li><strong>永不止盈，永不止损</strong>：不以盈亏比例为依据，看好买入，不看好卖出</li>
+      <li><strong>绝不把盈利的做成亏损</strong></li>
+      <li><strong>忘记成本</strong>：假设空仓，你会不会买？如果不会，就卖</li>
+      <li><strong>高频回撤节点要警惕</strong>：大幅获利后信心暴增时，以及连续亏损心态崩溃急于扳本时——停手休息</li>
+      <li><strong>散户 vs 游资的本质区别</strong>：散户习惯\止盈持损\（小赚大赔），游资坚持\止损持盈\（大赚小亏）</li>
+    </ul>
+  </div>
+
+  <!-- 策略匹配 -->
+  <div class="card">
+    <h3>🎯 市场状态匹配策略</h3>
+    <p>养家强调根据不同的市场环境灵活切换策略：</p>
+    <div class="quote-box">
+      \"有赚钱效应的情况下，做热点为主；有恐慌效应的情况下，做超跌为主。\"
+      <span class="source">— 炒股养家</span>
+    </div>
+    <ul>
+      <li><strong>强势阶段</strong>：做最牛的股票（主升浪），增量资金流向最有人气的标的</li>
+      <li><strong>弱势阶段</strong>：尽量减少操作，或只做极短线超跌反弹（寻找情绪崩溃点）</li>
+      <li><strong>震荡阶段</strong>：适合埋伏或用首板试错，等待市场选择方向</li>
+    </ul>
+  </div>
+
+  <!-- -- 5. 经典语录/心法 -- -->
+  <h2 class="section-title">📜 经典心法语录 <span class="badge">108条精华</span></h2>
+
+  <div class="card">
+    <div class="quote-box">
+      \"高手买入龙头，超级高手卖出龙头。\"
+      <span class="source">— 炒股养家 | 龙头的买卖时机哲学</span>
+    </div>
+
+    <div class="quote-box">
+      \"别人贪婪时我更贪婪，别人恐慌时我更恐慌。\"
+      <span class="source">— 炒股养家 | 顺应情绪极端趋势，而非逆势</span>
+    </div>
+
+    <div class="quote-box">
+      \"买入机会，卖出风险，只做对的交易，胜负交给概率。\"
+      <span class="source">— 炒股养家 | 交易的本质是管理概率</span>
+    </div>
+
+    <div class="quote-box">
+      \"得散户心者得天下。人气所向，牛股所在。\"
+      <span class="source">— 炒股养家 | 市场合力才是真正的力量</span>
+    </div>
+
+    <div class="quote-box">
+      \"买在分歧，卖在一致。\"
+      <span class="source">— 炒股养家 | 最经典的操作原则</span>
+    </div>
+
+    <div class="quote-box">
+      \"在任何体系里，都应该有一个最重要的策略：等。我们应该把90%的时间花在等待上，而只把10%的时间花在操作上。\"
+      <span class="source">— 炒股养家 | 耐心是最好的策略</span>
+    </div>
+
+    <div class="quote-box">
+      \"忘记你的成本很重要。忘记成本后，再考虑假设你现在空仓，你会怎么办？\"
+      <span class="source">— 炒股养家 | 客观视角是盈利的前提</span>
+    </div>
+
+    <div class="quote-box">
+      \"慢就是快。长期来看，慢就是快。\"
+      <span class="source">— 炒股养家 | 复利的力量在于稳定</span>
+    </div>
+
+    <div class="quote-box">
+      \"所谓的胜者，更多的是\剩者\，因为\剩者\终究成为\胜者\。\"
+      <span class="source">— 炒股养家 | 活得久比赚得快更重要</span>
+    </div>
+
+    <div class="quote-box">
+      \"控制回撤是生存第一法则，宁可少赚不可大亏。\"
+      <span class="source">— 炒股养家 | 风控永远第一位</span>
+    </div>
+  </div>
+
+  <!-- -- 6. 经典案例 -- -->
+  <h2 class="section-title">📈 经典案例 <span class="badge">实战复盘</span></h2>
+
+  <div class="case-card">
+    <h4>📌 成飞集成（002190）— 2010年成名之战</h4>
+    <div class="meta">时间：2010年 · 锂电池概念主升浪</div>
+    <div class="desc">
+      这是养家最早成名的经典操作。2010年国家大力扶持新能源汽车和锂电池产业，成飞集成作为当时锂电池概念龙头之一，股价在短短几个月内从几元飙升至几十元，成为当时市场的妖股代表。养家在该股主升阶段重仓参与，通过精准的买卖节奏实现了数倍收益。
+    </div>
+    <div class="lesson-box">
+      💡 此战展示了养家对市场情绪、热点题材和资金流向的深刻理解。他识别出锂电池是当时市场最强主线，果断聚焦龙头，不做跟风。
+    </div>
+  </div>
+
+  <div class="case-card">
+    <h4>📌 鸿博股份 — 2023年AI行情经典演绎</h4>
+    <div class="meta">时间：2023年 · AI/算力主线</div>
+    <div class="desc">
+      2023年5月，鸿博股份因与英伟达合作消息成为市场焦点。养家式操作在此完美体现：AI作为新题材（大级别主线），鸿博股份作为板块辨识度最高的龙头，散户和游资合力推动股价短期内上涨5倍。充分验证了\"得散户心者得天下，人气所向，牛股所在\"。
+    </div>
+    <div class="lesson-box">
+      💡 此案例完美展示了养家对\"新题材→预期差→分歧→溢价\"路径的理解。新题材才是龙头诞生的土壤，老题材进去就是接盘。
+    </div>
+  </div>
+
+  <!-- -- 7. 对普通投资者的启示 -- -->
+  <h2 class="section-title">💡 对普通投资者的启示 <span class="badge">借鉴</span></h2>
+
+  <div class="method-box">
+    <h4>🎯 从技术分析到情绪博弈的认知升级</h4>
+    <p>养家最大的贡献不是教你具体的买卖点，而是提供了一套从<strong>技术分析 → 情绪博弈 → 哲学思考</strong>的认知升级路径。普通投资者往往停留在第一层（看K线、指标），而养家带大家看到第二层（市场情绪、群体心理）甚至第三层（人性、哲学）。</p>
+  </div>
+
+  <div class="method-box">
+    <h4>🚫 不要试图预判龙头，等它走出来再上车</h4>
+    <p>\"高手买入龙头，超级高手卖出龙头\"——养家这句话的深层含义是：不要试图买在最低位、吃到一整段。等龙头跑出来再吃中间最肥的一段就足够了。这和宇菠萝的\"一个龙头只吃一口\"异曲同工。</p>
+  </div>
+
+  <div class="method-box">
+    <h4>⏳ 用90%的时间等，10%的时间做</h4>
+    <p>这是对\"克制交易冲动\"最极致的表达。普通投资者天天看盘、天天操作，养家却说90%的时间应该等待。这背后的思维转变是：<strong>不交易就是赚</strong>——少做错，少亏钱。</p>
+  </div>
+
+  <div class="method-box">
+    <h4>📊 把情绪量化，把交易系统化</h4>
+    <p>养家心法不是鸡汤，是一套<strong>可量化、可执行、可验证</strong>的交易体系。从涨停家数到连板高度，从封板率到亏钱效应——所有判断都有客观数据支撑。这点最值得借鉴：把抽象的\"市场感觉\"变成具体的数字。</p>
+  </div>
+
+  <!-- -- 8. 延伸阅读 -- -->
+  <h2 class="section-title">📚 延伸阅读 <span class="badge">继续学习</span></h2>
+
+  <div class="card">
+    <ul>
+      <li><strong>《炒股养家心法》108条完整版</strong> — 在淘股吧、雪球、知乎等平台可搜索到，这是短线交易者的必读文档</li>
+      <li><strong>《股票作手回忆录》</strong> — 养家推荐的经典，理解趋势交易和心理博弈的源头</li>
+      <li><strong>《短线交易大师》</strong> — 养家推荐的进阶读物</li>
+      <li><strong>养家心法五层递进完整体系解析</strong> — <a href="https://winterresearch.com/yangjia" style="color: var(--accent2);">winterresearch.com/yangjia</a>（本文主要参考来源）</li>
+      <li><strong>养家心法深度解析</strong> — 雪球、东方财富财富号上有大量整理版</li>
+      <li><strong>情绪周期相关学习</strong> — 加载本仓库的 <code>ice-point-reversal</code> 和 <code>trend-disagreement-trading</code> skill 查看实战应用</li>
+    </ul>
+  </div>
+
+  <!-- -- Golden Quote -- -->
+  <div class="gold-box">
+    <div class="big-text">\"控制回撤是生存第一法则\"</div>
+    <div class="sub-text">
+      养家心法的核心——不是怎么赚，而是怎么<strong style="color: var(--gold);">不亏</strong>。<br>
+      懂得等待、懂得空仓、懂得执行纪律，才是稳定盈利的终极秘密。
+    </div>
+  </div>
+
+  <!-- -- Cross-link -- -->
+  <div style="margin-top: 40px; padding: 24px; border-radius: 14px; border: 1px solid var(--border); background: var(--card); text-align: center;">
+    <p style="font-size: 0.9rem; color: var(--text-muted; margin-bottom: 8px;">📚 系列学习</p>
+    <a href="yu-boluo-journey" style="color: var(--accent2); font-size: 1rem; font-weight: 600; text-decoration: none;">📖 十年悟道之路：从亏货到稳定盈利 →</a>
+    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;">对比养家和宇菠萝，你会发现核心思想惊人相似——控制贪念、敬畏市场</p>
+  </div>
+
+  <!-- -- Footer -- -->
+  <div style="text-align:center; padding:40px 0 20px; color:var(--text-muted); font-size:0.78rem; border-top:1px solid var(--border); margin-top:40px;">
+    <p>本文基于公开资料整理，内容仅供参考学习，不构成投资建议。</p>
+    <p style="margin-top:4px;">资料来源：冬季研究（winterresearch.com）、东方财富、雪球、淘股吧等公开平台</p>
+    <p style="margin-top:10px;"><a href="../" style="color:var(--accent2); text-decoration:none;">↩ 返回首页</a></p>
+  </div>
+
+</div>
+
+</body>
+</html>

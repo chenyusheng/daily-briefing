@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📰 晨间新闻速览 · 2026-07-06</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#f8f9fa;--surface:#fff;--surface-alt:#f2f3f5;--border:#e8eaed;--border-light:#f0f1f3;--text:#1a1d23;--text-secondary:#5a5f6b;--text-tertiary:#8a8f98;--blue:#0066cc;--blue-light:#e8f0fe;--blue-bg:#f0f5ff;--green:#059669;--green-bg:#ecfdf5;--red:#dc2626;--red-bg:#fef2f2;--amber:#d97706;--amber-bg:#fffbeb;--purple:#7c3aed;--purple-bg:#f5f3ff;--radius:10px;--shadow:0 1px 4px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.03);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7}
+  .container{max-width:800px;margin:0 auto;padding:0}
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:20px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .h-left{display:flex;align-items:center;gap:12px}
+  .h-icon{width:38px;height:38px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+  .h-title{font-size:18px;font-weight:600;letter-spacing:-.3px}
+  .h-meta{font-size:13px;color:var(--text-tertiary);margin-top:2px}
+  .h-badge{font-size:11px;font-weight:500;color:var(--blue);background:var(--blue-light);padding:4px 14px;border-radius:20px;letter-spacing:.3px}
+  .insight-bar{background:var(--blue-bg);margin:0;padding:14px 22px;font-size:14px;color:var(--text-secondary);line-height:1.6;border-bottom:1px solid var(--border-light)}
+  .insight-bar strong{color:var(--text)}
+  .section{padding:24px 22px}
+  .section+.section{border-top:1px solid var(--border-light)}
+  .sec-label{font-size:13px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px;display:flex;align-items:center;gap:6px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
+  .section-alt{background:var(--surface-alt)}
+  .mkt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+  @media(min-width:480px){.mkt-grid{grid-template-columns:repeat(4,1fr)}}
+  .mkt-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .mkt-label{font-size:12px;color:var(--text-tertiary);font-weight:500;margin-bottom:2px}
+  .mkt-val{font-size:18px;font-weight:600;font-family:var(--font-mono)}
+  .mkt-chg{font-size:13px;font-weight:500;margin-left:3px}
+  .mkt-chg.up{color:var(--red)}.mkt-chg.down{color:var(--green)}.mkt-chg.neu{color:var(--text-tertiary)}
+  .ticker-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .ticker{display:flex;align-items:center;padding:10px 16px;font-size:14px;border-bottom:1px solid var(--border-light)}
+  .ticker:last-child{border-bottom:none}
+  .ticker-ico{width:20px;text-align:center;margin-right:10px;font-size:15px}
+  .ticker-nm{font-weight:500;min-width:70px}
+  .ticker-bar{flex:1;height:5px;background:var(--border);border-radius:2px;margin:0 12px;overflow:hidden;max-width:70px}
+  .ticker-fill{height:100%;border-radius:2px}.ticker-fill.up{background:var(--red)}.ticker-fill.down{background:var(--green)}
+  .ticker-px{font-family:var(--font-mono);font-weight:500;min-width:75px;text-align:right;font-size:13px;color:var(--text-secondary)}
+  .ticker-ch{min-width:55px;text-align:right;font-weight:500;font-size:12px}
+  .ticker-ch.up{color:var(--red)}.ticker-ch.down{color:var(--green)}
+  .hk-implication{margin-top:12px;padding:12px 16px;background:var(--surface-alt);border-radius:var(--radius);font-size:13px;color:var(--text-secondary);text-align:center}
+  .news{display:flex;flex-direction:column;gap:12px}
+  .news-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .news-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+  .news-card.pos::before{background:var(--red)}.news-card.neg::before{background:var(--green)}.news-card.neu::before{background:var(--text-tertiary)}
+  .news-tag{font-size:10px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;padding:2px 10px;border-radius:3px;display:inline-block;margin-bottom:6px}
+  .nt-mi{background:#eef0ff;color:#5e6ad2}.nt-macro{background:var(--red-bg);color:var(--red)}.nt-tech{background:var(--green-bg);color:var(--green)}.nt-crypto{background:var(--amber-bg);color:var(--amber)}.nt-policy{background:#f0fdf4;color:#16a34a}.nt-ind{background:var(--purple-bg);color:var(--purple)}
+  .news-t{font-size:16px;font-weight:600;line-height:1.4;margin-bottom:4px;letter-spacing:-.15px}
+  .news-t a{color:inherit;text-decoration:none}.news-t a:hover{color:var(--blue);text-decoration:underline}
+  .news-d{font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:8px}
+  .news-f{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--text-tertiary)}
+  .news-f .nl{color:var(--blue);text-decoration:none;font-weight:500}.nl:hover{text-decoration:underline}
+  .news-f .ip{font-size:11px;font-weight:500;padding:1px 10px;border-radius:20px}.ip.pos{background:var(--red-bg);color:var(--red)}.ip.neg{background:var(--green-bg);color:var(--green)}.ip.neu{background:var(--surface-alt);color:var(--text-tertiary)}
+  .news-f .ndate{color:var(--text-tertiary);font-size:11px}
+  .crypto{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .c-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 8px;text-align:center;box-shadow:var(--shadow)}
+  .c-sym{font-size:12px;font-weight:600;margin-bottom:3px}
+  .c-px{font-size:15px;font-weight:600;font-family:var(--font-mono)}
+  .c-chg{font-size:11px;font-weight:500}.c-chg.up{color:var(--red)}.c-chg.down{color:var(--green)}
+  .c-bar{height:4px;border-radius:2px;margin-top:6px;overflow:hidden;background:var(--border)}
+  .c-bar .f{height:100%;border-radius:2px}.c-bar .f.up{background:var(--red)}.c-bar .f.down{background:var(--green)}
+  .c-src{font-size:11px;color:var(--text-tertiary);text-align:center;margin-top:8px}
+  .hot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(min-width:480px){.hot-grid{grid-template-columns:repeat(3,1fr)}}
+  .hot-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .hot-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px}
+  .hot-card.hot-1::after{background:linear-gradient(90deg,#ef4444,#f97316)}
+  .hot-card.hot-2::after{background:linear-gradient(90deg,#f59e0b,#eab308)}
+  .hot-card.hot-3::after{background:linear-gradient(90deg,#10b981,#059669)}
+  .hot-rank{font-size:11px;font-weight:700;color:var(--text-tertiary);margin-bottom:3px}
+  .hot-name{font-size:16px;font-weight:600;margin-bottom:3px;letter-spacing:-.15px}
+  .hot-desc{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:6px}
+  .hot-meta{font-size:11px;color:var(--text-tertiary);display:flex;gap:8px}
+  .hot-meta .tag{background:var(--surface-alt);padding:1px 6px;border-radius:3px}
+  .hot-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+  .hot-chip{font-size:11px;padding:2px 10px;border-radius:12px;border:1px solid var(--border)}
+  .hot-chip.up{color:var(--red);border-color:var(--red-bg);background:var(--red-bg)}
+  .hot-chip.down{color:var(--green);border-color:var(--green-bg);background:var(--green-bg)}
+  .stock-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin-bottom:12px}
+  .stock-box:last-child{margin-bottom:0}
+  .sb-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .sb-name{font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
+  .sb-name .stag{font-size:10px;font-weight:600;padding:1px 8px;border-radius:3px}
+  .sb-name .stag.p1{background:#dcfce7;color:#166534}.sb-name .stag.p2{background:#fef3c7;color:#92400e}.sb-name .stag.p3{background:#fee2e2;color:#991b1b}
+  .sb-price{font-size:18px;font-weight:600;font-family:var(--font-mono)}
+  .sb-price .schg{font-size:12px;font-weight:500;margin-left:4px}.sb-price .schg.g{color:var(--red)}.sb-price .schg.r{color:var(--green)}
+  .sb-meta{font-size:12px;color:var(--text-tertiary);margin-bottom:6px}
+  .sb-table{width:100%;border-collapse:collapse;font-size:12px;margin:4px 0}
+  .sb-table td{padding:3px 8px 3px 0;vertical-align:top}
+  .sb-table .lbl{color:var(--text-tertiary);white-space:nowrap;width:65px}
+  .sb-table .val{color:var(--text)}
+  .sb-table .sig{display:inline-block;width:12px;text-align:center}
+  .sb-table .sig.dg{color:var(--red)}.sb-table .sig.dr{color:var(--green)}.sb-table .sig.dy{color:var(--amber)}
+  .sb-verdict{font-size:13px;line-height:1.5;padding:8px 12px;border-radius:6px;margin-top:6px}
+  .sb-verdict.g{background:var(--green-bg);color:var(--green);border-left:3px solid var(--green)}
+  .sb-verdict.y{background:var(--amber-bg);color:var(--amber);border-left:3px solid var(--amber)}
+  .sb-verdict.r{background:var(--red-bg);color:var(--red);border-left:3px solid var(--red)}
+  .sb-verdict.b{background:var(--blue-light);color:var(--blue);border-left:3px solid var(--blue)}
+  .focus{display:flex;flex-direction:column;gap:10px}
+  .f-item{display:flex;gap:12px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--blue);box-shadow:var(--shadow);font-size:14px;line-height:1.6}
+  .f-n{font-weight:600;color:var(--blue);min-width:20px}
+  .f-t{color:var(--text-secondary)}.f-t strong{color:var(--text)}
+  .verdict{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-top:12px;border-left:3px solid var(--blue);box-shadow:var(--shadow)}
+  .v-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+  .v-text{font-size:15px;color:var(--text-secondary);line-height:1.7}
+  .footer{text-align:center;padding:24px 22px 36px;font-size:12px;color:var(--text-tertiary);line-height:1.8;border-top:1px solid var(--border-light)}
+  .footer a{color:var(--blue);text-decoration:none}.footer a:hover{text-decoration:underline}
+  @media(max-width:480px){
+    .section{padding:18px 14px}.header{padding:14px 14px}.h-title{font-size:16px}
+    .insight-bar{padding:12px 14px;font-size:13px}
+    .mkt-grid{gap:6px}.mkt-cell{padding:10px 11px;border-radius:8px}.mkt-val{font-size:15px}
+    .news-card{padding:14px 14px;border-radius:8px}.news-t{font-size:15px}.news-d{font-size:13px}
+    .crypto{gap:4px}.c-cell{padding:10px 4px;border-radius:8px}.c-px{font-size:13px}
+    .f-item{padding:12px 14px;font-size:13px}.stock-box{padding:14px 14px}.sb-price{font-size:16px}
+    .hot-grid{gap:6px}.hot-card{padding:12px 14px}
+  }
+  @media(min-width:1024px){
+    .container{max-width:960px}.header{padding:24px 28px}.h-title{font-size:20px}
+    .section{padding:28px 28px}.mkt-grid{grid-template-columns:repeat(6,1fr)}
+    .mkt-cell{padding:18px 20px}.mkt-val{font-size:20px}
+    .news-card{padding:22px 26px}.news-t{font-size:17px}.news-d{font-size:15px}
+    .hot-grid{grid-template-columns:repeat(3,1fr);gap:14px}.hot-card{padding:18px 22px}
+    .stock-box{padding:22px 26px}.sb-price{font-size:20px}
+    .crypto{grid-template-columns:repeat(5,1fr);gap:14px}.c-cell{padding:18px 12px}.c-px{font-size:17px}
+    .f-item{padding:16px 22px;font-size:15px}.footer{padding:28px 28px 40px;font-size:12px}
+  }
+  @media(min-width:1400px){.container{max-width:1080px}.mkt-grid{grid-template-columns:repeat(8,1fr)}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="h-left">
+    <div class="h-icon">📰</div>
+    <div>
+      <div class="h-title">晨间新闻速览</div>
+      <div class="h-meta">2026-07-06 · 周一 · 18:15 CST</div>
+    </div>
+  </div>
+  <span class="h-badge">收盘后</span>
+  <a href="https://eason-byte.github.io/daily-briefing/" class="h-home" style="font-size:20px;text-decoration:none;margin-left:8px" title="返回首页">🏠</a>
+</div>
+
+<div class="insight-bar">💡 <strong>隔夜启示：</strong>美股上周四（7/2）独立日假期前收高，道指逼近53,000。央行今早1万亿买断式逆回购净投放2000亿，结束连续3月缩量。A股今日深强沪弱，科创50独涨+1.04%。下跌家数偏多，资金向科技和煤炭板块集中。</div>
+
+<div class="section">
+  <div class="sec-label">📊 A股今日收盘 · 2026-07-06</div>
+  <div class="mkt-grid">
+    <div class="mkt-cell"><div class="mkt-label">上证指数</div><div class="mkt-val">4,041.24</div><div class="mkt-chg down">-0.06%</div></div>
+    <div class="mkt-cell"><div class="mkt-label">深证成指</div><div class="mkt-val">15,416.80</div><div class="mkt-chg down">-1.16%</div></div>
+    <div class="mkt-cell"><div class="mkt-label">创业板指</div><div class="mkt-val">3,948.86</div><div class="mkt-chg down">-1.77%</div></div>
+    <div class="mkt-cell"><div class="mkt-label">科创50</div><div class="mkt-val">1,996.10</div><div class="mkt-chg up">+1.04%</div></div>
+  </div>
+  <div style="margin-top:14px">
+    <div class="ticker-list">
+      <div class="ticker"><span class="ticker-ico">🍎</span><span class="ticker-nm">Apple</span><div class="ticker-bar"><div class="ticker-fill up" style="width:68%"></div></div><span class="ticker-px">$262.00</span><span class="ticker-ch up">+9.5%</span></div>
+      <div class="ticker"><span class="ticker-ico">🚗</span><span class="ticker-nm">Tesla</span><div class="ticker-bar"><div class="ticker-fill up" style="width:52%"></div></div><span class="ticker-px">$465.00</span><span class="ticker-ch up">+2.1%</span></div>
+      <div class="ticker"><span class="ticker-ico">🚀</span><span class="ticker-nm">SpaceX</span><div class="ticker-bar"><div class="ticker-fill up" style="width:55%"></div></div><span class="ticker-px">—</span><span class="ticker-ch up">N100加入</span></div>
+      <div class="ticker"><span class="ticker-ico">🔷</span><span class="ticker-nm">Nvidia</span><div class="ticker-bar"><div class="ticker-fill up" style="width:45%"></div></div><span class="ticker-px">$195.00</span><span class="ticker-ch up">+1.8%</span></div>
+      <div class="ticker"><span class="ticker-ico">🪟</span><span class="ticker-nm">Microsoft</span><div class="ticker-bar"><div class="ticker-fill up" style="width:40%"></div></div><span class="ticker-px">$510.00</span><span class="ticker-ch up">+0.5%</span></div>
+      <div class="ticker"><span class="ticker-ico">📦</span><span class="ticker-nm">Amazon</span><div class="ticker-bar"><div class="ticker-fill up" style="width:42%"></div></div><span class="ticker-px">$242.00</span><span class="ticker-ch up">+0.8%</span></div>
+      <div class="ticker"><span class="ticker-ico">🔍</span><span class="ticker-nm">Google</span><div class="ticker-bar"><div class="ticker-fill up" style="width:38%"></div></div><span class="ticker-px">$198.00</span><span class="ticker-ch up">+0.6%</span></div>
+      <div class="ticker"><span class="ticker-ico">👤</span><span class="ticker-nm">Meta</span><div class="ticker-bar"><div class="ticker-fill up" style="width:60%"></div></div><span class="ticker-px">$740.00</span><span class="ticker-ch up">+1.2%</span></div>
+    </div>
+  </div>
+  <div class="hk-implication"><strong>📌 注：</strong>美股数据为7/2（周四）收盘，7/3独立日假期休市。美股上周整体强势，道指周涨近2%至~52,900。苹果7/2因五款新iPhone暴涨9.5%。SpaceX本周加入纳斯达克100指数。</div>
+</div>
+
+<div class="section">
+  <div class="sec-label">🔴 直接影响持仓</div>
+  <div class="news">
+
+    <div class="news-card pos">
+      <span class="news-tag nt-macro">央行 · 流动性</span>
+      <div class="news-t"><a href="https://www.huxiu.com/article/4872997.html?f=rss">央行今日1万亿买断式逆回购，净投放2000亿，结束连续3月缩量</a></div>
+      <div class="news-d">7月6日开盘前，央行以固定数量、利率招标开展1万亿元3个月期买断式逆回购，对冲当月8000亿到期后净投放2000亿元。东方金诚王青表示资金面临到期量大、政府债高峰、季初信贷投放三重压力。</div>
+      <div class="news-f"><span class="ip pos">利好</span><span class="nl"><a href="https://www.huxiu.com/article/4872997.html?f=rss">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+    <div class="news-card pos">
+      <span class="news-tag nt-tech">AI · 行业动向</span>
+      <div class="news-t"><a href="https://www.huxiu.com/article/4872993.html?f=rss">字节CEO梁汝波一周两喊话：全力深耕AI，收缩业务宽度</a></div>
+      <div class="news-d">梁汝波6月底要求公司"攀登AI高峰"，随后重申"做有高度的事"。字节、腾讯、阿里不约而同回归各自基因——字节"大力出奇迹"、腾讯"微信+钞能力"、阿里"回归交易"。国内AI行业进入战略聚焦新阶段。</div>
+      <div class="news-f"><span class="ip pos">利好AI产业链</span><span class="nl"><a href="https://www.huxiu.com/article/4872993.html?f=rss">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+    <div class="news-card pos">
+      <span class="news-tag nt-ind">机器人 · 特斯拉供应链</span>
+      <div class="news-t"><a href="https://www.huxiu.com/article/4872991.html?f=rss">新剑传动——特斯拉Optimus供应商，砸28亿建产线，创业板IPO获受理</a></div>
+      <div class="news-d">浙江新剑传动建设年产100万台（套）人形机器人零部件项目，总投资28.12亿元。公司2025年营收不足4亿但跻身"T链三巨头"（与三花智控、拓普集团并列）。同时马斯克在X平台发布Optimus生产线合影，市场解读为量产前关键信号。</div>
+      <div class="news-f"><span class="ip pos">利好机器人/智驾</span><span class="nl"><a href="https://www.huxiu.com/article/4872991.html?f=rss">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+    <div class="news-card neu">
+      <span class="news-tag nt-tech">存储芯片 · 超级周期</span>
+      <div class="news-t"><a href="https://36kr.com/p/3883706720727303?f=rss">宏芯宇电子4个月净利38.41亿暴涨3020%，存储涨价超级周期来了</a></div>
+      <div class="news-d">深圳存储模组厂宏芯宇向港交所递表。2026年前4月净利38.41亿（上年同期1.23亿），毛利率从13.8%飙至62%。DRAM每GB均价从12.24元涨至34.98元。AI驱动HBM/DDR5产能挤占传统存储，供需错配推高价格。</div>
+      <div class="news-f"><span class="ip neu">中性</span><span class="nl"><a href="https://36kr.com/p/3883706720727303?f=rss">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+    <div class="news-card pos">
+      <span class="news-tag nt-mi">小米 · 持仓相关</span>
+      <div class="news-t"><a href="https://techcrunch.com/2026/07/06/smart-glasses-maker-even-realities-hits-1b-valuation-with-150m-funding-led-by-meituan-tencent/">Even Realities获美团腾讯1.5亿美元投资，智能眼镜独角兽估值10亿美元</a></div>
+      <div class="news-d">前苹果团队创立的Even Realities完成1.5亿美元融资，美团腾讯领投。公司专注无摄像头的简约智能眼镜，定位为AI交互新入口。小米在智能眼镜/AR领域有布局，行业升温间接利好。</div>
+      <div class="news-f"><span class="ip pos">利好AR/智能穿戴</span><span class="nl"><a href="https://techcrunch.com/2026/07/06/smart-glasses-maker-even-realities-hits-1b-valuation-with-150m-funding-led-by-meituan-tencent/">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🌍 宏观 &amp; 政策</div>
+  <div class="news">
+
+    <div class="news-card pos">
+      <span class="news-tag nt-macro">央行 · 政策</span>
+      <div class="news-t"><a href="https://www.huxiu.com/article/4872997.html?f=rss">央行万亿逆回购：连续3月缩量后首次加量，流动性调减周期结束</a></div>
+      <div class="news-d">比2000亿净投放更重要的是政策信号——央行结束持续数月的资金边际收紧，转向主动投放。招联董希淼认为此举精准对冲7月资金到期压力与政府债供给高峰，为银行信贷投放提供适宜的流动性环境。</div>
+      <div class="news-f"><span class="ip pos">利好</span><span class="nl"><a href="https://www.huxiu.com/article/4872997.html?f=rss">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+    <div class="news-card neg">
+      <span class="news-tag nt-macro">地缘 · 俄乌</span>
+      <div class="news-t"><a href="https://www.cnbc.com/2026/07/06/ukraine-russia-kyiv-trump-putin-zelenskyy.html">特朗普与普京、泽连斯基分别通话，乌克兰打击俄目标，莫斯科空袭基辅</a></div>
+      <div class="news-d">据报道特朗普已与普京和泽连斯基通话，同时乌克兰打击俄罗斯境内目标，莫斯科对基辅发动新一轮致命空袭。地缘局势再度升温，市场避险情绪可能抬头。</div>
+      <div class="news-f"><span class="ip neg">利空</span><span class="nl"><a href="https://www.cnbc.com/2026/07/06/ukraine-russia-kyiv-trump-putin-zelenskyy.html">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+    <div class="news-card neu">
+      <span class="news-tag nt-macro">汇率 · 日元</span>
+      <div class="news-t"><a href="https://www.cnbc.com/2026/07/06/yen-slump-dollar-currencies-ai-energy.html">高盛看跌日元：AI+能源"供应过剩"支撑美元，日元或续创历史新低</a></div>
+      <div class="news-d">高盛认为即使日本政府干预，日元仍将进一步走弱。AI产业爆发和能源供应过剩将持续支撑美元强势。对港/A股外资流向可能产生间接影响。</div>
+      <div class="news-f"><span class="ip neu">中性</span><span class="nl"><a href="https://www.cnbc.com/2026/07/06/yen-slump-dollar-currencies-ai-energy.html">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+    <div class="news-card pos">
+      <span class="news-tag nt-policy">社保 · 新就业</span>
+      <div class="news-t"><a href="https://www.huxiu.com/article/4872996.html?f=rss">人社部等九部委：新就业形态职业伤害保障7月1日起全国推开，覆盖8400万人</a></div>
+      <div class="news-d">此前已在17省份试点，累计参保2990万人。此次全面推开意味着外卖、出行、同城货运等新就业形态劳动者将获得制度性保障。长期利好平台经济规范化发展。</div>
+      <div class="news-f"><span class="ip pos">利好</span><span class="nl"><a href="https://www.huxiu.com/article/4872996.html?f=rss">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">🔬 科技 &amp; 行业</div>
+  <div class="news">
+
+    <div class="news-card pos">
+      <span class="news-tag nt-tech">机器人 · IPO</span>
+      <div class="news-t"><a href="https://techcrunch.com/2026/07/05/this-humanoid-robotics-company-is-going-public-but-its-ceo-isnt-promising-a-robot-in-your-home-anytime-soon/">Agility Robotics将通过SPAC上市，CEO称人形机器人进家庭仍需时日</a></div>
+      <div class="news-d">与其他追逐高估值的人形机器人初创不同，Agility Robotics选择SPAC路线，CEO务实表态"短期内不会有家庭机器人"。公司专注于物流仓储场景的Digit机器人。</div>
+      <div class="news-f"><span class="ip pos">利好产业链</span><span class="nl"><a href="https://techcrunch.com/2026/07/05/this-humanoid-robotics-company-is-going-public-but-its-ceo-isnt-promising-a-robot-in-your-home-anytime-soon/">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+    <div class="news-card neu">
+      <span class="news-tag nt-tech">IPO · 机器人</span>
+      <div class="news-t"><a href="https://36kr.com/p/3883708118921480?f=rss">珞石机器人港股IPO招股结束：定价38港元，市值99亿，具身智能两年翻16倍</a></div>
+      <div class="news-d">珞石2025年收入5.22亿（+60.4%），具身智能机器人收入从276万暴增至4701万。五家基石认购31.4%。整体毛利率21.9%，亏损快速收窄。</div>
+      <div class="news-f"><span class="ip neu">中性</span><span class="nl"><a href="https://36kr.com/p/3883708118921480?f=rss">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+    <div class="news-card pos">
+      <span class="news-tag nt-tech">AI · 跨境电商</span>
+      <div class="news-t"><a href="https://36kr.com/p/3883561480876297?f=rss">亚马逊调研：98%中国卖家已用AI工具，16%部署AI工作流或智能体</a></div>
+      <div class="news-d">新生代跨境电商创业者不再拼价格，转向用AI+自研技术建立定价权。哈库拉玛塔达以4人团队做到2500万美元营收，用20+AI智能体7x24运营。AI正从执行工具升级为管理系统。</div>
+      <div class="news-f"><span class="ip pos">利好AI应用</span><span class="nl"><a href="https://36kr.com/p/3883561480876297?f=rss">🔗 阅读原文 →</a></span><span class="ndate">📅 2026-07-06</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🔥 今日热点追踪</div>
+  <div class="hot-grid">
+    <div class="hot-card hot-1">
+      <div class="hot-rank">#1 · 涨幅 +6.41%</div>
+      <div class="hot-name">氨纶Ⅲ <span class="trend">🔴</span></div>
+      <div class="hot-desc">成交11.99亿，领涨股：华峰化学</div>
+      <div class="hot-chips"><span class="hot-chip up">顺周期</span><span class="hot-chip up">化工涨价</span></div>
+    </div>
+    <div class="hot-card hot-2">
+      <div class="hot-rank">#2 · 涨幅 +6.34%</div>
+      <div class="hot-name">燃料电池Ⅲ <span class="trend">🔴</span></div>
+      <div class="hot-desc">成交1.48亿，领涨股：亿华通-U</div>
+      <div class="hot-chips"><span class="hot-chip up">新能源</span><span class="hot-chip up">政策驱动</span></div>
+    </div>
+    <div class="hot-card hot-3">
+      <div class="hot-rank">#3 · 涨幅 +3.89%</div>
+      <div class="hot-name">动力煤Ⅲ <span class="trend">🔴</span></div>
+      <div class="hot-desc">成交105.36亿，领涨股：昊华能源</div>
+      <div class="hot-chips"><span class="hot-chip up">能源</span><span class="hot-chip up">高股息</span></div>
+    </div>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text-tertiary);text-align:center">
+    基于：国投证券 · 板块涨幅 · 成交额 · 领涨股分析
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">⚡ 十五五能源 · 观察池扫描</div>
+
+  <div class="stock-box">
+    <div class="sb-header">
+      <div class="sb-name">龙源电力 <span class="stag p1">001289</span></div>
+      <div class="sb-price">16.11<span class="schg g">+2.16%</span></div>
+    </div>
+    <div class="sb-meta">📊 今日表现 | 数据：国投证券 2026-07-06</div>
+    <table class="sb-table">
+      <tr><td class="lbl">趋势：</td><td class="val"><span class="sig dg"></span> 今日领涨观察池，涨幅+2.16%放量上攻</td></tr>
+      <tr><td class="lbl">相对强弱：</td><td class="val"><span class="sig dg"></span> 强于大盘（上证-0.06%）</td></tr>
+      <tr><td class="lbl">结构：</td><td class="val">能源板块今日强势（煤炭+3.89%），龙源作为新能源运营龙头受益</td></tr>
+    </table>
+    <div class="sb-verdict b"><strong>观察：</strong>今日能源板块整体走强，龙源+2.16%领涨观察池。十五五能源规划落地后资金持续关注，继续观察持续性。若回踩MA20（约15.5附近）不破可关注低吸机会。</div>
+  </div>
+
+  <div class="stock-box">
+    <div class="sb-header">
+      <div class="sb-name">阳光电源 <span class="stag p2">300274</span></div>
+      <div class="sb-price">128.18<span class="schg g">+1.60%</span></div>
+    </div>
+    <div class="sb-meta">📊 今日表现 | 数据：国投证券 2026-07-06</div>
+    <table class="sb-table">
+      <tr><td class="lbl">趋势：</td><td class="val"><span class="sig dg"></span> 连续第二日反弹，+1.60%</td></tr>
+      <tr><td class="lbl">相对强弱：</td><td class="val"><span class="sig dg"></span> 强于大盘和创业板（-1.77%）</td></tr>
+      <tr><td class="lbl">风险：</td><td class="val">前期暴跌13.9%后反弹力度尚可，但需站上MA20确认趋势修复</td></tr>
+    </table>
+    <div class="sb-verdict y"><strong>谨慎观察：</strong>反弹中但未回前期跌幅，需等待趋势确认。若后续放量站上MA20可考虑小仓试探。</div>
+  </div>
+
+  <div class="stock-box">
+    <div class="sb-header">
+      <div class="sb-name">国电南瑞 <span class="stag p2">600406</span></div>
+      <div class="sb-price">23.16<span class="schg g">+1.18%</span></div>
+    </div>
+    <div class="sb-meta">📊 今日表现 | 数据：国投证券 2026-07-06</div>
+    <table class="sb-table">
+      <tr><td class="lbl">趋势：</td><td class="val"><span class="sig dg"></span> +1.18%稳步上行，电网设备龙头</td></tr>
+      <tr><td class="lbl">板块：</td><td class="val">电网设备今日虽有个股跌停但龙头相对抗跌</td></tr>
+      <tr><td class="lbl">结构：</td><td class="val">属于十五五能源规划核心标的，中期逻辑不变</td></tr>
+    </table>
+    <div class="sb-verdict b"><strong>观察：</strong>走势稳健，强于板块内其他个股。适合作为能源池中长线底仓观察标的。</div>
+  </div>
+
+  <div class="stock-box">
+    <div class="sb-header">
+      <div class="sb-name">信义光能 <span class="stag p2">00968.HK</span></div>
+      <div class="sb-price">2.10<span class="schg r">-0.47%</span></div>
+    </div>
+    <div class="sb-meta">📊 今日表现 | 数据：国投证券 2026-07-06</div>
+    <table class="sb-table">
+      <tr><td class="lbl">趋势：</td><td class="val"><span class="sig dr"></span> 微跌-0.47%，港股光伏玻璃龙头</td></tr>
+      <tr><td class="lbl">风险：</td><td class="val">光伏行业产能过剩担忧仍在，港股流动性偏低</td></tr>
+    </table>
+    <div class="sb-verdict y"><strong>观望：</strong>横盘整理中，方向不明确。等待放量突破2.20或回踩2.00支撑确认后再判断。</div>
+  </div>
+
+  <div class="stock-box">
+    <div class="sb-header">
+      <div class="sb-name">宁德时代 <span class="stag p2">300750</span></div>
+      <div class="sb-price">374.51<span class="schg r">-1.44%</span></div>
+    </div>
+    <div class="sb-meta">📊 今日表现 | 数据：国投证券 2026-07-06</div>
+    <table class="sb-table">
+      <tr><td class="lbl">趋势：</td><td class="val"><span class="sig dr"></span> -1.44%跑输大盘，但仍在MA20上方</td></tr>
+      <tr><td class="lbl">板块：</td><td class="val">电池板块今日分化，蔚蓝锂芯涨停但吉和昌跌停-29.99%</td></tr>
+      <tr><td class="lbl">结构：</td><td class="val">新能源电池龙头，十五五能源规划长期受益</td></tr>
+    </table>
+    <div class="sb-verdict b"><strong>观察：</strong>短期回调但趋势未破。若回踩MA20获得支撑，可考虑小仓试探。止损设在MA20下方3%。</div>
+  </div>
+
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">📱 小米集团-W · 盘前分析</div>
+
+  <div class="stock-box">
+    <div class="sb-header">
+      <div class="sb-name">小米集团-W <span class="stag p2">01810.HK</span></div>
+      <div class="sb-price">23.28<span class="schg g">+1.39%</span></div>
+    </div>
+    <div class="sb-meta">📊 今日收盘 2026-07-06 | 数据：国投证券</div>
+    <table class="sb-table">
+      <tr><td class="lbl">持仓成本：</td><td class="val">30.60（浮亏-23.9%）</td></tr>
+      <tr><td class="lbl">趋势结构：</td><td class="val"><span class="sig dg"></span> 今日+1.39%温和上涨，连涨两日。SU7六月交付连续三月超3万台仍为基本面支撑</td></tr>
+      <tr><td class="lbl">技术面：</td><td class="val">仍在MA20下方运行，未形成多头排列。反弹需放量突破24关口才能确认趋势反转</td></tr>
+      <tr><td class="lbl">催化：</td><td class="val">① Even Realities获美团腾讯1.5亿美元投资利好AR/智能穿戴赛道 ② 字节等大厂全力AI可能提振科技板块情绪 ③ SU7持续交付超预期</td></tr>
+      <tr><td class="lbl">风险：</td><td class="val">① 港股总体偏弱 ② 浮亏23.9%较深 ③ 高盛看空日元+美元强势对港股资金面偏空</td></tr>
+    </table>
+    <div class="sb-verdict y"><strong>七不买三不卖判断：</strong>持仓中。底部横盘+缩量（三不卖第1条）成立，短期有止跌企稳迹象。但均线未形成多头排列（七不买第7条未完全消除），MA20仍是关键压力位。维持持有观察，不补仓。若跌破近期低点21.50需止损减仓。</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">₿ 虚拟货币 · CoinGecko</div>
+  <div class="crypto">
+    <div class="c-cell">
+      <div class="c-sym">₿ BTC</div>
+      <div class="c-px">$62,801</div>
+      <div class="c-chg up">+0.29%</div>
+      <div class="c-bar"><div class="f up" style="width:51%"></div></div>
+    </div>
+    <div class="c-cell">
+      <div class="c-sym">⟠ ETH</div>
+      <div class="c-px">$1,765</div>
+      <div class="c-chg up">+0.39%</div>
+      <div class="c-bar"><div class="f up" style="width:52%"></div></div>
+    </div>
+    <div class="c-cell">
+      <div class="c-sym">🔶 BNB</div>
+      <div class="c-px">$578.50</div>
+      <div class="c-chg up">+0.68%</div>
+      <div class="c-bar"><div class="f up" style="width:54%"></div></div>
+    </div>
+    <div class="c-cell">
+      <div class="c-sym">◎ SOL</div>
+      <div class="c-px">$80.19</div>
+      <div class="c-chg up">+0.29%</div>
+      <div class="c-bar"><div class="f up" style="width:51%"></div></div>
+    </div>
+    <div class="c-cell">
+      <div class="c-sym">💧 XRP</div>
+      <div class="c-px">$1.14</div>
+      <div class="c-chg up">+1.04%</div>
+      <div class="c-bar"><div class="f up" style="width:56%"></div></div>
+    </div>
+  </div>
+  <div class="c-src">更新时间：2026-07-06 18:15 CST · CoinGecko API</div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🎯 今日关注 &amp; 综合判断</div>
+  <div class="focus">
+    <div class="f-item"><span class="f-n">1</span><span class="f-t"><strong>央行万亿逆回购信号：</strong>结束连续3月缩量，转向主动投放。流动性边际改善对A股整体偏利好，但今日市场反应平淡（深证-1.16%），说明市场信心修复需要时间。</span></div>
+    <div class="f-item"><span class="f-n">2</span><span class="f-t"><strong>字节"全力AI"信号：</strong>梁汝波一周两次喊话，字节、腾讯、阿里集体回归基因。国内AI产业竞争升级，利好AI算力/应用产业链。关注智能驾驶ETF（516520）是否受益。</span></div>
+    <div class="f-item"><span class="f-n">3</span><span class="f-t"><strong>Optimus量产临近：</strong>马斯克发布Optimus产线合影+新剑传动IPO+Agility Robotics SPAC上市，人形机器人产业链催化密集。智能驾驶ETF（516520）间接关联。</span></div>
+    <div class="f-item"><span class="f-n">4</span><span class="f-t"><strong>本周关注：</strong>FOMC会议纪要公布（周三/四）+ SpaceX加入纳斯达克100指数。美股独立日后首日交易需关注补涨/补跌风险。</span></div>
+    <div class="f-item"><span class="f-n">5</span><span class="f-t"><strong>持仓策略：</strong>整体持仓浮亏较深（多数-15%至-34%），不宜新增仓位。当前策略以持仓管理和观察为主。科创50今日+1.04%为唯一亮点，关注持续性。</span></div>
+  </div>
+  <div class="verdict">
+    <div class="v-label">💬 综合判断</div>
+    <div class="v-text">
+      <strong>市场环境：谨慎偏空。</strong>深证-1.16%、创业板-1.77%，下跌面较大。科创50独涨+1.04%显示资金向科技集中。央行万亿逆回购释放宽松信号但市场反应滞后。<br><br>
+      <strong>操作建议：维持不动。</strong>持仓浮亏较深，不宜割肉也不宜补仓。小米+1.39%连涨两日有企稳迹象，继续持有观察。能源池标的今日表现整体偏强（龙源+2.16%、阳光+1.60%），可作为后续调仓储备。<br><br>
+      <strong>明日关注：</strong>① 美股独立日后首日开盘表现 ② A股能否在央行宽松信号下企稳 ③ 科创50能否延续上涨。
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  数据源：RSS 19源 · CoinGecko API · 国投证券 · Yahoo Finance · CNBC<br>
+  数据时间：2026-07-06 18:15 CST · 非高峰时段运行 · 每日自动生成<br>
+  <a href="https://github.com/eason-byte/daily-briefing">GitHub</a> · 
+  <a href="https://19930808.xyz">19930808.xyz</a><br>
+  ⚠️ 本报告由AI自动生成，仅供参考，不构成投资建议
+</div>
+</div>
+</body>
+</html>

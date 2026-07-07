@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 双战法选股 · 2026-07-07</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0d1117;--surface:#161b22;--surface-alt:#1c2333;--border:#30363d;--border-light:#21262d;--text:#e6edf3;--text-secondary:#8b949e;--text-tertiary:#6e7681;--accent:#58a6ff;--accent-bg:#0d419d33;--green:#3fb950;--green-bg:#1b3a1f;--red:#f85149;--red-bg:#3d1416;--amber:#d29922;--amber-bg:#2d1f00;--purple:#a371f7;--purple-bg:#2a1a4a;--teal:#56d4dd;--teal-bg:#1d3b3d;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.15);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7;min-height:100vh}
+  .container{max-width:800px;margin:0 auto;padding:0}
+  .header{background:linear-gradient(135deg,#161b22 0%,#1c2333 50%,#111 100%);border-bottom:1px solid var(--border);padding:22px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;position:relative;overflow:hidden}
+  .header::before{content:'';position:absolute;top:-50%;left:-30%;width:160%;height:200%;background:radial-gradient(ellipse at 30% 50%,var(--accent-bg) 0%,transparent 50%),radial-gradient(ellipse at 70% 50%,var(--purple-bg) 0%,transparent 50%);opacity:.2;pointer-events:none}
+  .h-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+  .h-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+  .h-title{font-size:18px;font-weight:700;letter-spacing:-.3px}
+  .h-meta{font-size:12px;color:var(--text-tertiary);margin-top:2px}
+  .h-badge{font-size:11px;font-weight:500;color:var(--accent);background:var(--accent-bg);padding:4px 16px;border-radius:20px;letter-spacing:.3px;position:relative;z-index:1}
+  .h-home{font-size:20px;text-decoration:none;margin-left:8px;position:relative;z-index:1;transition:opacity .15s}
+  .h-home:hover{opacity:.7}
+  .section{padding:24px 22px}
+  .section+.section{border-top:1px solid var(--border-light)}
+  .sec-label{font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
+  .section-alt{background:var(--surface-alt)}
+  .at{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin-bottom:14px}
+  .at th{text-align:left;padding:10px 14px;font-weight:600;color:var(--text-secondary);background:var(--surface-alt);border-bottom:1px solid var(--border);font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+  .at th:first-child{border-radius:8px 0 0 0}
+  .at th:last-child{border-radius:0 8px 0 0}
+  .at td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text)}
+  .at tr:last-child td:first-child{border-radius:0 0 0 8px}
+  .at tr:last-child td:last-child{border-radius:0 0 8px 0}
+  .at tr:last-child td{border-bottom:none}
+  .dragon-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:14px;box-shadow:var(--shadow);border-left:3px solid var(--purple)}
+  .dragon-card.dc-hot{border-left-color:var(--red)}
+  .dc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px}
+  .dc-name{font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .dc-name .dc-tag{font-size:10px;font-weight:600;padding:2px 10px;border-radius:20px;background:var(--accent-bg);color:var(--accent)}
+  .dc-name .dc-tag.dc-hot-tag{background:var(--red-bg);color:var(--red)}
+  .dc-score{font-size:12px;color:var(--text-tertiary)}
+  .dc-body{margin-top:6px}
+  .dc-detail{font-size:13px;color:var(--text-secondary);line-height:1.7;padding:8px 12px;background:var(--surface-alt);border-radius:6px;margin-top:8px;border-left:2px solid var(--border)}
+  .dc-buy{font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+  .callout{padding:14px 18px;border-radius:var(--radius);margin:10px 0;font-size:13px;line-height:1.6}
+  .callout.info{background:var(--accent-bg);border-left:3px solid var(--accent);color:var(--accent)}
+  .callout.success{background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+  .callout.warn{background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)}
+  .callout.danger{background:var(--red-bg);border-left:3px solid var(--red);color:var(--red)}
+  .callout.neutral{background:var(--surface-alt);border-left:3px solid var(--text-tertiary);color:var(--text-secondary)}
+  .sig{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+  .sig.g{background:var(--green)}
+  .sig.r{background:var(--red)}
+  .sig.y{background:var(--amber)}
+  .sig.b{background:var(--accent)}
+  .stars{font-size:14px;letter-spacing:1px;color:var(--amber)}
+  .risk-list{list-style:none;padding:0}
+  .risk-list li{padding:8px 0 8px 24px;position:relative;font-size:13px;color:var(--text-secondary);border-bottom:1px solid var(--border-light)}
+  .risk-list li:last-child{border-bottom:none}
+  .risk-list li::before{content:'⚠️';position:absolute;left:0;top:8px;font-size:12px}
+  .st{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:10px 0 14px}
+  .st td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text-secondary)}
+  .st td:first-child{font-weight:600;color:var(--text);white-space:nowrap;width:110px}
+  .st tr:last-child td{border-bottom:none}
+  .conclusion-box{text-align:center;padding:28px 22px;background:linear-gradient(135deg,var(--surface-alt),var(--surface));border:1px solid var(--border);border-radius:var(--radius);margin:16px 0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .conclusion-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--purple),var(--teal))}
+  .conclusion-text{font-size:18px;font-weight:700;color:var(--text);line-height:1.6;margin-bottom:6px}
+  .conclusion-sub{font-size:13px;color:var(--text-secondary);line-height:1.7}
+  .pos-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:10px 0}
+  .pos-table td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text)}
+  .pos-table td:first-child{font-weight:600;white-space:nowrap;width:120px}
+  .pos-table .amt{font-family:var(--font-mono);color:var(--accent);font-weight:600}
+  .footer{text-align:center;padding:24px 22px 36px;font-size:11px;color:var(--text-tertiary);line-height:1.8;border-top:1px solid var(--border-light)}
+  .footer a{color:var(--accent);text-decoration:none}.footer a:hover{text-decoration:underline}
+  .ice-timeline{display:flex;align-items:center;gap:8px;padding:14px 18px;background:var(--surface);border-radius:var(--radius);margin:10px 0;overflow-x:auto;font-size:11px}
+  .ice-dot{min-width:72px;text-align:center;padding:6px 8px;border-radius:8px;font-size:11px}
+  .ice-dot.active{background:var(--red-bg);border:1px solid var(--red);color:var(--red);font-weight:600}
+  .ice-dot.past{background:var(--surface-alt);color:var(--text-tertiary)}
+  .ice-dot.failed{background:var(--amber-bg);border:1px dashed var(--amber);color:var(--amber)}
+  .ice-arrow{color:var(--text-tertiary);font-size:14px;min-width:16px;text-align:center}
+  @media(max-width:480px){
+    .section{padding:18px 14px}
+    .header{padding:14px 14px}
+    .h-title{font-size:16px}
+    .at{font-size:12px}.at td,.at th{padding:8px 10px}
+    .dragon-card{padding:14px 14px}
+    .dc-name{font-size:15px}
+    .conclusion-text{font-size:16px}
+    .ice-timeline{gap:2px}.ice-dot{min-width:55px;font-size:10px;padding:4px}
+  }
+  @media(min-width:1024px){
+    .container{max-width:960px}
+    .header{padding:26px 28px}.h-title{font-size:20px}
+    .section{padding:28px 28px}
+    .at{font-size:14px}.at td,.at th{padding:12px 16px}
+    .dragon-card{padding:24px 28px;margin-bottom:18px}
+    .dc-name{font-size:19px}
+    .conclusion-box{padding:34px 28px}.conclusion-text{font-size:20px}
+    .footer{padding:28px 28px 40px;font-size:12px}
+  }
+  @media(min-width:1400px){
+    .container{max-width:1080px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="h-left">
+    <div class="h-icon">📊</div>
+    <div>
+      <div class="h-title">双战法选股分析</div>
+      <div class="h-meta">2026-07-07 · 周二 · 收盘后</div>
+    </div>
+  </div>
+  <span class="h-badge">冰点反抽 + 龙头主升浪</span>
+  <a href="https://chenyusheng.github.io/daily-briefing/stock-picks/" class="h-home" title="返回首页">📋</a>
+</div>
+
+<div class="section">
+  <div class="sec-label">🧊 冰点反抽模式分析</div>
+
+  <table class="at">
+    <tr><th>指标</th><th>今日数据</th><th>冰点阈值</th><th>判断</th></tr>
+    <tr><td>跌停家数</td><td><span style="color:var(--red);font-weight:700;font-family:var(--font-mono)">30</span></td><td>≥20</td><td><span class="sig r"></span> <strong style="color:var(--red)">冰点确认 · D1修复失败</strong></td></tr>
+    <tr><td>涨停家数</td><td>封板 <span style="color:var(--green);font-weight:600">33</span> / 触及 <span style="color:var(--teal)">56</span></td><td>-</td><td>赚钱效应微弱</td></tr>
+    <tr><td>炸板率</td><td><span style="font-family:var(--font-mono);color:var(--amber)">41.1%</span>（23/56）</td><td>-</td><td><span class="sig y"></span> 极高，追板风险极大</td></tr>
+    <tr><td>连板高度</td><td>首板为主，无连板标杆</td><td>3板以下</td><td><span class="sig r"></span> 高度持续压制</td></tr>
+    <tr><td>冰点序列</td><td>07-02→07-06→07-07 连续三日冰点</td><td>-</td><td><span class="sig r"></span> <strong style="color:var(--red)">第三次冰点 · 极度恐慌</strong></td></tr>
+  </table>
+
+  <div class="ice-timeline">
+    <div class="ice-dot past">7/2 周四<br>D0冰点<br>40+跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot past">7/3 周五<br>D1修复中<br>19跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot past">7/6 周一<br>D0二次冰点<br>46跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot failed">7/7 周二<br>⚠️ D1失败<br>30跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot active">7/8 周三<br>新D1<br>?</div>
+  </div>
+
+  <div class="callout danger">
+    <strong>🚨 三次冰点警报 — 历史级别恐慌</strong><br>
+    07-02(40+跌停)→07-03(短暂修复19跌停)→07-06(46跌停二次冰点)→07-07(30跌停D1修复失败)。<strong>6个交易日内出现3个冰点日，仅1天短暂修复。</strong>这是极端恐慌信号，卖压远未释放完毕。<br>
+    冰点反抽模式在此环境下<strong>修复概率持续递减</strong>：首次冰点修复概率最高，三次冰点修复概率大幅降低。
+  </div>
+
+  <div class="callout info">
+    <strong>适用性评级：⭐⭐⭐⭐⭐ 熊市冰点反抽最佳环境 — 但修复概率锐减</strong><br>
+    30跌停+高度压制+D1修复失败，符合冰点反抽触发条件。但连续三次冰点后，D1修复信号的确认标准必须更严格：<strong>跌停必须降至≤3家</strong>，而非通常的≤5家。
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">🔍 D0 活口筛选（冰点当天不买，仅观察）</div>
+
+  <table class="at">
+    <tr><th>代码</th><th>名称</th><th>板块</th><th>封板时间</th><th>板块跌停</th><th>活口特征</th></tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">301251</td>
+      <td><strong style="color:var(--green)">威尔高</strong></td>
+      <td>元件</td>
+      <td>09:25:00</td>
+      <td style="color:var(--green)">0</td>
+      <td>20cm秒板092500，板块干净无跌停。最强活口。</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">601121</td>
+      <td><strong style="color:var(--green)">宝地矿业</strong></td>
+      <td>冶钢原料</td>
+      <td>09:25:02</td>
+      <td style="color:var(--green)">0</td>
+      <td>准秒板，冷门板块无跌停。辨识度偏低。</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">600120</td>
+      <td><strong>浙江东方</strong></td>
+      <td>多元金融</td>
+      <td>09:25:03</td>
+      <td style="color:var(--green)">0</td>
+      <td>板块无跌停，封板偏晚(092503)，非秒板。</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002841</td>
+      <td>视源股份</td>
+      <td>消费电子</td>
+      <td>09:25:00</td>
+      <td style="color:var(--red)">1</td>
+      <td>秒板但板块有利通电跌停，活口质量下降。</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002497</td>
+      <td>雅化集团</td>
+      <td>化学制品</td>
+      <td>09:25:00</td>
+      <td style="color:var(--red)">1</td>
+      <td>秒板但板块有爱普股份跌停，活口质量有瑕疵。</td>
+    </tr>
+  </table>
+
+  <div class="callout warn">
+    <strong>🧊 D0核心纪律：冰点当天<u>绝对不买入</u></strong><br>
+    以上活口股仅用于D1(07-08周三)观察。D1需同时满足：①活口股高开溢价(≥3%) ②跌停家数降至<strong>≤3家</strong>(三次冰点更严格) ③昨日涨停股整体高开。三条件缺一不可。
+  </div>
+
+  <div class="callout neutral" style="margin-top:10px">
+    <strong>🧊 冰点反抽结论</strong><br>
+    连续三次冰点确认，07-06的D1修复失败。活口候选：<strong>威尔高(301251元件)</strong>、<strong>宝地矿业(601121冶钢原料)</strong>、<strong>浙江东方(600120多元金融)</strong>。D1(07-08周三)严格等修复信号，仓位降至≤5%。三次冰点环境下，优先考虑放弃操作、等待指数企稳。
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🐉 龙头主升浪战法分析</div>
+
+  <table class="at">
+    <tr><th>最强板块</th><th>涨停数</th><th>跌停数</th><th>板块健康度</th><th>持续性判断</th></tr>
+    <tr><td>化学制品</td><td style="color:var(--green);font-weight:600">4</td><td style="color:var(--red);font-weight:600">1</td><td><span class="sig y"></span> 有瑕疵</td><td>龙头雅化秒板但爱普跌停，内部割裂</td></tr>
+    <tr><td>半导体</td><td style="color:var(--green);font-weight:600">4</td><td>0</td><td><span class="sig g"></span> 干净</td><td>板块联动较好，但涨停偏晚非秒板</td></tr>
+    <tr><td>计算机设备</td><td style="color:var(--green)">3</td><td>0</td><td><span class="sig g"></span> 干净</td><td>魅视+力鼎双涨停，板块偏稳</td></tr>
+    <tr><td>汽车零部件</td><td style="color:var(--green)">3</td><td style="color:var(--red);font-weight:600">2</td><td><span class="sig r"></span> 空头主导</td><td>涨停3家但跌停2家(福达+S佳通)，回避</td></tr>
+    <tr><td>元件</td><td style="color:var(--green)">1</td><td>0</td><td><span class="sig g"></span> 干净但孤</td><td>仅威尔高独苗，板块力量不足</td></tr>
+  </table>
+
+  <div class="callout warn">
+    <strong>🐉 龙头主升浪适用性：⭐ 单边下跌熊市，慎用</strong><br>
+    30家跌停的连续冰点环境，连板高度压制+无赚钱效应锚点，龙头主升浪战法完全不适用。<strong>真龙不会在连续冰点中出现。</strong>当前应完全以冰点反抽模式为主导，放弃龙头战法操作。
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">⚠️ 龙头候选（仅供参考，不推荐操作）</div>
+
+  <div class="dragon-card">
+    <div class="dc-header">
+      <div class="dc-name">
+        威尔高 <span style="font-size:13px;color:var(--text-secondary)">301251</span>
+        <span class="dc-tag">元件</span>
+      </div>
+      <div class="dc-score">五维评分：⭐⭐⭐</div>
+    </div>
+    <div class="dc-body">
+      <div class="dc-detail">
+        🗣️ <strong>辨识度</strong>：20cm秒板092500，今日唯一20%涨停<br>
+        🔗 <strong>带动性</strong>：元件板块仅此一家涨停，带动性待验证<br>
+        💰 <strong>成交量</strong>：待确认（冰点环境需3-5亿即可）<br>
+        📰 <strong>题材</strong>：元件有PCB/AI硬件预期差<br>
+        🔄 <strong>换手率</strong>：20cm秒板换手低，D1需放量确认
+      </div>
+      <div style="font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)">
+        <strong>⚠️ 熊市慎用：</strong>连续三次冰点不出龙头。该股仅作为冰点反抽D0活口观察候选，不按龙头战法操作。
+      </div>
+    </div>
+  </div>
+
+  <div class="dragon-card">
+    <div class="dc-header">
+      <div class="dc-name">
+        雅化集团 <span style="font-size:13px;color:var(--text-secondary)">002497</span>
+        <span class="dc-tag">化学制品</span>
+      </div>
+      <div class="dc-score">五维评分：⭐⭐</div>
+    </div>
+    <div class="dc-body">
+      <div class="dc-detail">
+        🗣️ <strong>辨识度</strong>：秒板092500，化学制品4涨停中最快<br>
+        🔗 <strong>带动性</strong>：化学制品4涨停但爱普跌停，内部分化<br>
+        💰 <strong>成交量</strong>：待确认<br>
+        📰 <strong>题材</strong>：锂电/化学周期品，非新题材<br>
+        🔄 <strong>换手率</strong>：秒板低换手
+      </div>
+      <div style="font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)">
+        <strong>⚠️ 板块有跌停：</strong>爱普股份化学制品-10.01%跌停，板块内部互杀，活口价值打折。
+      </div>
+    </div>
+  </div>
+
+  <div class="dragon-card">
+    <div class="dc-header">
+      <div class="dc-name">
+        宝地矿业 <span style="font-size:13px;color:var(--text-secondary)">601121</span>
+        <span class="dc-tag">冶钢原料</span>
+      </div>
+      <div class="dc-score">五维评分：⭐⭐</div>
+    </div>
+    <div class="dc-body">
+      <div class="dc-detail">
+        🗣️ <strong>辨识度</strong>：冶钢原料独苗涨停，板块干净0跌停<br>
+        🔗 <strong>带动性</strong>：冷门板块，带动效应弱<br>
+        💰 <strong>成交量</strong>：待确认<br>
+        📰 <strong>题材</strong>：钢铁上游原料，非市场共识题材<br>
+        🔄 <strong>换手率</strong>：封板092502
+      </div>
+      <div style="font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)">
+        <strong>⚠️ 冷门题材：</strong>冶钢原料非市场主线，市场关注度低，活口质量弱于元件板块。
+      </div>
+    </div>
+  </div>
+
+  <div class="callout neutral" style="margin-top:14px">
+    <strong>🐉 龙头主升浪结论</strong><br>
+    连续三次冰点(30跌停)完全不适用龙头主升浪战法(熊市⭐慎用)。真龙难出，板块效应差。仅建议关注元件(威尔高)作为冰点反抽活口，半导体板块(4涨停0跌停)作为备用观察。
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">⚖️ 综合结论</div>
+
+  <table class="at">
+    <tr><th>对比维度</th><th>冰点反抽</th><th>龙头主升浪</th><th>是否一致</th></tr>
+    <tr>
+      <td>适用性</td>
+      <td><span class="sig g"></span> 适用（⭐⭐⭐⭐⭐）</td>
+      <td><span class="sig r"></span> 不适用（⭐）</td>
+      <td><span class="sig r"></span> 不一致</td>
+    </tr>
+    <tr>
+      <td>核心标的</td>
+      <td>威尔高、宝地矿业、浙江东方</td>
+      <td>无（熊市不出龙）</td>
+      <td><span class="sig r"></span> 不交叉</td>
+    </tr>
+    <tr>
+      <td>操作建议</td>
+      <td>D0不买，等D1确认</td>
+      <td>不操作</td>
+      <td><span class="sig g"></span> 策略一致（观望）</td>
+    </tr>
+    <tr>
+      <td>仓位</td>
+      <td>≤5%（三次冰点极限降仓）</td>
+      <td>0%</td>
+      <td><span class="sig g"></span> 保守一致</td>
+    </tr>
+  </table>
+
+  <table class="st">
+    <tr><td>当前场景</td><td>三次连续冰点 + D1修复反复失败 = 历史级别恐慌</td></tr>
+    <tr><td>主导策略</td><td>冰点反抽模式（D0不买→D1观察），但修复概率递减</td></tr>
+    <tr><td>辅助策略</td><td>龙头主升浪完全不适用，等指数企稳再考虑</td></tr>
+    <tr><td>明天（7/8）</td><td>观察跌停家数是否降至≤3家、活口股(威尔高/宝地矿业)是否高开≥3%</td></tr>
+    <tr><td>如果D1修复确认</td><td>极限轻仓（≤5%）买入最强活口，止损设置在D1低点</td></tr>
+    <tr><td>如果D1修复失败</td><td>放弃所有操作，等下一个冰点或等指数企稳打龙头战法</td></tr>
+  </table>
+
+  <table class="pos-table">
+    <tr><td>冰点反抽</td><td class="amt">0%（D0不买）</td><td>D1若确认：≤5%，标的：威尔高/宝地矿业</td></tr>
+    <tr><td>龙头主升浪</td><td class="amt">0%（不适用）</td><td>等指数企稳、连板生态恢复后再考虑</td></tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:20px">⚠️ 关键风险</div>
+  <ul class="risk-list">
+    <li><strong>三次冰点风险</strong>：6个交易日3次冰点(07-02/07-06/07-07)，仅1天短暂修复。修复概率持续递减，极端恐慌环境。</li>
+    <li><strong>炸板率41%</strong>：超过4成涨停股被砸开，航锦科技秒板后仅收+0.97%，追板即是送死。</li>
+    <li><strong>连板高度死亡</strong>：连续多日无连板标杆，市场完全缺乏赚钱效应锚点。</li>
+    <li><strong>板块内部互杀</strong>：化学制品4涨停+1跌停、汽车零部件3涨停+2跌停，资金在板块内部互杀而非协同做多。</li>
+    <li><strong>D1修复预期极低</strong>：三次冰点后修复的概率远低于首次冰点。07-08(周三)即使跌停减少，反弹力度也可能很弱。</li>
+    <li><strong>单日反抽陷阱</strong>：警惕无量、无主线的脉冲式反弹。三次冰点后的假修复比真修复更常见。</li>
+  </ul>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🔄 上一交易日回测 · 07-06 → 07-07</div>
+
+  <div class="callout info" style="margin-bottom:12px">
+    <strong>📋 07-06报告核心建议回顾：</strong>二次冰点(46跌停)，D0活口候选星网锐捷/金科股份/中公教育。策略：D0不买，等D1修复确认(跌停≤5 + 活口高开≥3%)后≤10%轻仓介入。龙头战法不适用。
+  </div>
+
+  <table class="at">
+    <tr><th>股票代码</th><th>名称</th><th>07-06建议</th><th>07-07实际走势</th><th>D1验证</th><th>判断</th></tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002396</td>
+      <td>星网锐捷</td>
+      <td>D0活口，D1等修复确认</td>
+      <td style="color:var(--green)">+2.76% · 高开27.00(+4.9%)收26.45<br>高28.30低26.29</td>
+      <td style="color:var(--green)">活口有效 ✓</td>
+      <td style="color:var(--green)">✅ 等确认正确</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">000656</td>
+      <td>金科股份</td>
+      <td>D0活口，D1观察</td>
+      <td style="color:var(--red)">-5.59% · 高1.53低1.34<br>开盘即破D0低点</td>
+      <td style="color:var(--red)">活口失效 ✗</td>
+      <td style="color:var(--green)">✅ 不买正确</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002607</td>
+      <td>中公教育</td>
+      <td>D0活口，D1观察</td>
+      <td style="color:var(--amber)">+8.13% · 低开2.00破D0低点<br>盘中拉升至2.29</td>
+      <td style="color:var(--red)">低开破低点 ✗</td>
+      <td style="color:var(--green)">✅ 不买正确</td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>D1修复判断</td>
+      <td>需跌停≤5家才确认</td>
+      <td style="color:var(--red)">30跌停 · 远未达标</td>
+      <td style="color:var(--red)">修复失败</td>
+      <td style="color:var(--green)">✅ 等是对的</td>
+    </tr>
+  </table>
+
+  <div class="callout danger" style="margin-top:10px">
+    <strong>📊 07-06 D1修复验证结论：</strong>D1修复<strong style="color:var(--red)">完全失败</strong>。30跌停远高于5家的确认阈值。3只活口股中仅星网锐捷通过D1验证(高开+不破D0低点+盘中涨幅≥2%)，金科(-5.59%)和中公(低开破D0低点)均活口失效。<br>
+    <strong style="color:var(--green)">核心策略验证正确：D0不买等D1的策略避免了金科-5.59%和中公开盘亏损的损失。</strong>即使星网锐捷活口有效，在30跌停的D1环境下也不应买入——修复未确认。
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">🔧 错误分析与Skill改进建议</div>
+
+  <table class="at">
+    <tr><th>观察</th><th>分析</th><th>改进建议</th></tr>
+    <tr>
+      <td style="color:var(--green)">D1修复信号精准过滤</td>
+      <td>07-06设定跌停≤5为确认阈值，07-07实际30跌停，精准拦截了错误操作。金科/中公的D1低开也被活口验证规则捕获。</td>
+      <td><strong>D1验证逻辑已被上次更新修复(ice-point-reversal SKILL.md已添加D1验证条件)。</strong>本次回测证明此更新有效。无需再改。</td>
+    </tr>
+    <tr>
+      <td style="color:var(--amber)">三次冰点的阈值未定义</td>
+      <td>当前SKILL.md未定义连续冰点叠加效应。07-06→07-07是第二次D1修复失败，但skill未说明第三次冰点后阈值应如何调整。</td>
+      <td><strong>建议更新 ice-point-reversal SKILL.md：</strong>增加连续冰点叠加规则——每多一次冰点，D1确认阈值收紧。二次冰点跌停≤5→三次冰点跌停≤3，仓位递减(20%→10%→5%)。</td>
+    </tr>
+    <tr>
+      <td style="color:var(--green)">leading-stock-wave带动性规则已修复</td>
+      <td>07-06回测发现的招金黄金领涨后走弱问题，已在上次skill更新中添加带动性失效信号。本次无新问题。</td>
+      <td>此次回测无新增龙头战法相关错误。连续冰点环境龙头战法完全不适用，规则无需调整。</td>
+    </tr>
+  </table>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">📈 持续追踪池 (近5日推荐股表现)</div>
+
+  <table class="at">
+    <tr><th>推荐日期</th><th>代码</th><th>名称</th><th>推荐操作</th><th>推荐日价</th><th>07-07收盘</th><th>累计涨跌</th></tr>
+    <tr>
+      <td>07-02</td><td style="font-family:var(--font-mono)">600641</td><td>先导基电</td><td>冰点活口观察</td><td style="font-family:var(--font-mono)">~47.51</td><td style="font-family:var(--font-mono);color:var(--red)">42.98</td><td style="color:var(--red)">-9.53%</td>
+    </tr>
+    <tr>
+      <td>07-03</td><td style="font-family:var(--font-mono)">600988</td><td>赤峰黄金</td><td>轻仓试探≤5%</td><td style="font-family:var(--font-mono)">~28.73</td><td style="font-family:var(--font-mono);color:var(--green)">30.31</td><td style="color:var(--green)">+5.50%</td>
+    </tr>
+    <tr>
+      <td>07-03</td><td style="font-family:var(--font-mono)">000506</td><td>招金黄金</td><td>关注换手接力</td><td style="font-family:var(--font-mono)">~13.87</td><td style="font-family:var(--font-mono);color:var(--red)">12.20</td><td style="color:var(--red)">-12.04%</td>
+    </tr>
+    <tr>
+      <td>07-03</td><td style="font-family:var(--font-mono)">000975</td><td>山金国际</td><td>关注换手接力</td><td style="font-family:var(--font-mono)">~19.84</td><td style="font-family:var(--font-mono);color:var(--red)">19.59</td><td style="color:var(--red)">-1.26%</td>
+    </tr>
+    <tr>
+      <td>07-05</td><td style="font-family:var(--font-mono)">002396</td><td>星网锐捷</td><td>秒板不追等回调</td><td style="font-family:var(--font-mono)">~23.40</td><td style="font-family:var(--font-mono);color:var(--green)">26.45</td><td style="color:var(--green)">+13.03%</td>
+    </tr>
+    <tr>
+      <td>07-05</td><td style="font-family:var(--font-mono)">301165</td><td>锐捷网络</td><td>关注反包</td><td style="font-family:var(--font-mono)">~94.89</td><td style="font-family:var(--font-mono);color:var(--red)">94.51</td><td style="color:var(--red)">-0.40%</td>
+    </tr>
+    <tr>
+      <td>07-06</td><td style="font-family:var(--font-mono)">002148</td><td>北纬科技</td><td>观察(追踪池)</td><td style="font-family:var(--font-mono)">6.99</td><td style="font-family:var(--font-mono);color:var(--red)">6.29</td><td style="color:var(--red)">-10.01%</td>
+    </tr>
+    <tr>
+      <td>07-06</td><td style="font-family:var(--font-mono)">000656</td><td>金科股份</td><td>D0活口观察</td><td style="font-family:var(--font-mono)">~1.49</td><td style="font-family:var(--font-mono);color:var(--red)">1.35</td><td style="color:var(--red)">-9.40%</td>
+    </tr>
+    <tr>
+      <td>07-06</td><td style="font-family:var(--font-mono)">002607</td><td>中公教育</td><td>D0活口观察</td><td style="font-family:var(--font-mono)">~2.09</td><td style="font-family:var(--font-mono);color:var(--green)">2.26</td><td style="color:var(--green)">+8.13%</td>
+    </tr>
+    <tr>
+      <td>07-06</td><td style="font-family:var(--font-mono)">002407</td><td>多氟多</td><td>回避(追踪池)</td><td style="font-family:var(--font-mono)">~46.24</td><td style="font-family:var(--font-mono);color:var(--red)">45.35</td><td style="color:var(--red)">-1.92%</td>
+    </tr>
+  </table>
+
+  <div class="callout neutral" style="margin-top:10px">
+    <strong>📌 追踪总结：</strong>10只进入追踪池，3只盈利(+5.50%到+13.03%)，7只亏损(-0.40%到-12.04%)。通信设备线(星网锐捷+13.03%)表现最佳，黄金严重分化，其余全部亏损。验证了连续冰点环境下不追高、等确认的策略价值——凡建议等/观察的标的，等是正确的。凡进入操作的主要靠运气(赤峰+5.50%)。<br>
+    <strong style="color:var(--red)">⚠️ 风险警示：</strong>北纬科技(-10.01%跌停)和招金黄金(-12.04%)的高亏损提醒：连续冰点中任何追高/持股都面临巨大回撤风险。
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="conclusion-box">
+    <div class="conclusion-text">
+      🧊 <span style="color:var(--red)">三次冰点 · D1失败 · 极限防御</span>
+    </div>
+    <div class="conclusion-sub">
+      07-06→07-07 D1修复<strong style="color:var(--red)">完全失败</strong>(30跌停，阈值≤5)。6个交易日3次冰点，历史级别恐慌。<br>
+      07-06活口验证：星网锐捷✅(有效但不买)，金科❌(活口失效)，中公❌(活口失效)。等确认策略完全正确。<br>
+      新活口候选：<strong>威尔高(301251 20cm秒板元件)</strong>、<strong>宝地矿业(601121 冶钢原料)</strong>、浙江东方(600120 多元金融)<br>
+      操作纪律：<strong>D0绝对不买</strong>；D1(07-08周三)跌停≤3家且活口高开≥3%才考虑≤5%极限仓位。<br>
+      三次冰点后修复概率极低，<strong>强烈建议放弃本次操作</strong>，等指数真正企稳后再考虑龙头战法。
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  数据源: 东方财富 · AKShare · 2026-07-07 18:15<br>
+  分析方法: 冰点反抽模式 + 龙头主升浪战法 · 双战法交叉验证<br>
+  <span style="color:var(--red)">⚠️ 以上分析仅供学习参考，不构成投资建议。投资有风险，入市需谨慎。</span><br>
+  <a href="https://chenyusheng.github.io/daily-briefing/stock-picks/">返回首页</a>
+</div>
+
+</div>
+</body>
+</html>

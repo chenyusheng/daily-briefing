@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TK东南亚跨境电商·新手学习资源大全</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d1117;--surface:#161b22;--surface-alt:#1c2333;--border:#30363d;--border-light:#21262d;--text:#e6edf3;--text-secondary:#8b949e;--text-tertiary:#6e7681;--accent:#58a6ff;--accent-bg:#0d419d33;--green:#3fb950;--green-bg:#1b3a1f;--red:#f85149;--red-bg:#3d1416;--amber:#d29922;--amber-bg:#2d1f00;--purple:#a371f7;--purple-bg:#2a1a4a;--teal:#56d4dd;--teal-bg:#1d3b3d;--pink:#f778ba;--pink-bg:#3d1a2e;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.15);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7}
+.container{max-width:820px;margin:0 auto;padding:24px 20px}
+.header{background:linear-gradient(135deg,#161b22 0%,#1c2333 50%,#111 100%);border-bottom:1px solid var(--border);padding:28px 22px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-50%;left:-30%;width:160%;height:200%;background:radial-gradient(ellipse at 30% 50%,var(--accent-bg) 0%,transparent 50%),radial-gradient(ellipse at 70% 50%,var(--pink-bg) 0%,transparent 50%);opacity:.2;pointer-events:none}
+.h-title{font-size:26px;font-weight:800;letter-spacing:-.5px;position:relative;z-index:1}
+.h-sub{font-size:14px;color:var(--text-secondary);margin-top:6px;position:relative;z-index:1}
+.h-meta{font-size:13px;color:var(--text-tertiary);margin-top:6px;position:relative;z-index:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;position:relative;z-index:1}
+.tag{font-size:11px;font-weight:500;padding:3px 12px;border-radius:20px;background:var(--accent-bg);color:var(--accent)}
+.tag.green{background:var(--green-bg);color:var(--green)}
+.tag.amber{background:var(--amber-bg);color:var(--amber)}
+.tag.pink{background:var(--pink-bg);color:var(--pink)}
+.tag.purple{background:var(--purple-bg);color:var(--purple)}
+.tag.teal{background:var(--teal-bg);color:var(--teal)}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--text-tertiary);text-decoration:none;margin-bottom:6px;transition:color .15s}
+.back:hover{color:var(--accent)}
+h2{font-size:20px;font-weight:700;margin:36px 0 16px;color:var(--text);display:flex;align-items:center;gap:10px}
+h2::after{content:'';flex:1;height:1px;background:var(--border)}
+h3{font-size:16px;font-weight:600;margin:24px 0 12px;color:var(--accent)}
+h4{font-size:14px;font-weight:600;margin:18px 0 8px;color:var(--text)}
+p{font-size:14px;color:var(--text-secondary);margin:12px 0;line-height:1.8}
+.p-highlight{font-size:14px;color:var(--text);margin:12px 0;line-height:1.8}
+.callout{padding:14px 18px;border-radius:var(--radius);margin:16px 0;font-size:13px;line-height:1.6}
+.callout.info{background:var(--accent-bg);border-left:3px solid var(--accent);color:var(--accent)}
+.callout.success{background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+.callout.warn{background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)}
+.callout.danger{background:var(--red-bg);border-left:3px solid var(--red);color:var(--red)}
+.callout.neutral{background:var(--surface-alt);border-left:3px solid var(--text-tertiary);color:var(--text-secondary)}
+.callout.pink{background:var(--pink-bg);border-left:3px solid var(--pink);color:var(--pink)}
+
+/* Card grid */
+.card-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0}
+@media(min-width:600px){.card-grid.two{grid-template-columns:1fr 1fr}}
+.card{background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.card-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.card-meta{font-size:12px;color:var(--text-tertiary);margin-bottom:2px}
+.card-desc{font-size:12px;color:var(--text-secondary);line-height:1.6}
+.card-badge{display:inline-block;font-size:10px;padding:1px 10px;border-radius:12px;font-weight:500;margin-top:6px}
+.card-badge.blue{color:var(--accent);background:var(--accent-bg)}
+.card-badge.green{color:var(--green);background:var(--green-bg)}
+.card-badge.amber{color:var(--amber);background:var(--amber-bg)}
+.card-badge.purple{color:var(--purple);background:var(--purple-bg)}
+.card-badge.teal{color:var(--teal);background:var(--teal-bg)}
+.card-badge.pink{color:var(--pink);background:var(--pink-bg)}
+
+/* Table */
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+thead th{text-align:left;padding:10px 12px;background:var(--surface-alt);color:var(--text-tertiary);font-weight:500;border-bottom:2px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+tbody td{padding:10px 12px;border-bottom:1px solid var(--border-light);color:var(--text-secondary);vertical-align:top}
+tbody tr:hover{background:var(--surface-alt)}
+tbody td:first-child{font-weight:600;color:var(--text)}
+
+/* Roadmap */
+.roadmap{display:flex;flex-direction:column;gap:0;margin:18px 0;position:relative;padding-left:28px}
+.roadmap::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--border)}
+.r-item{position:relative;padding:12px 14px;border-left:2px solid var(--border-light);margin-left:-1px}
+.r-item::before{content:'';position:absolute;left:-25px;top:16px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+.r-item:first-child::before{background:var(--accent)}
+.r-item .r-week{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px}
+.r-item .r-title{font-size:14px;font-weight:600;color:var(--text);margin:2px 0}
+.r-item .r-desc{font-size:12px;color:var(--text-secondary);line-height:1.6}
+
+ul,ol{padding-left:20px;margin:10px 0}
+li{font-size:14px;color:var(--text-secondary);margin:6px 0;line-height:1.7}
+strong{color:var(--text)}
+a{color:var(--accent)}
+code{font-family:var(--font-mono);font-size:12px;background:var(--surface-alt);padding:1px 6px;border-radius:4px;color:var(--pink)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="back" href="../">← 返回首页</a>
+  <div class="h-title">📚 TK东南亚跨境电商·新手学习资源大全</div>
+  <div class="h-sub">B站UP主 · 公众号 · 书籍 · 学习路线，从0到1一站配齐</div>
+  <div class="h-meta">2026-07-07</div>
+  <div class="tags">
+    <span class="tag">TikTok</span>
+    <span class="tag pink">新手入门</span>
+    <span class="tag green">学习资源</span>
+    <span class="tag purple">B站</span>
+    <span class="tag teal">公众号</span>
+    <span class="tag amber">书籍推荐</span>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="callout info">
+  <strong>💡 给IT人的建议：</strong>你本身懂技术，环境搭建/指纹浏览器/AI工具对你来说是送分题。<br>
+  建议重点攻克：选品思路、短视频内容、达人建联、广告投流 —— 这四个才是TK电商的核心壁垒，不是技术问题。
+</div>
+
+<!-- ==================== 一、B站UP主 ==================== -->
+<h2>🎬 一、B站UP主（免费视频教程）</h2>
+
+<h3>🥇 必看完整课程</h3>
+<p>以下几套课程覆盖了从注册开店→选品→运营→投流的全流程，建议按顺序刷一遍。</p>
+
+<table>
+<thead><tr><th>UP主</th><th>内容</th><th>时长</th><th>播放</th></tr></thead>
+<tbody>
+<tr>
+  <td>统一的奸商之路</td>
+  <td>《新版TikTok从0-1新手入门》6种TK搞钱方式实操，耗时5个月制作</td>
+  <td>128分钟</td>
+  <td>57.5万🔥</td>
+</tr>
+<tr>
+  <td>黑马程序员</td>
+  <td>2026最新版TikTok跨境电商全流程实战，超适合学生/宝妈/创业者</td>
+  <td>7h50min</td>
+  <td>29.6万🔥</td>
+</tr>
+<tr>
+  <td>小强跨境vlog日常</td>
+  <td>《5000块闯荡TikTok东南亚》系列，30+小时持续更新，真实记录</td>
+  <td>30h+</td>
+  <td>5.6万</td>
+</tr>
+</tbody>
+</table>
+
+<div class="callout success">
+  <strong>👉 推荐顺序：</strong>先刷「统一的奸商之路」128分钟快速建立全局认知 → 再刷「黑马程序员」7小时系统学习 → 边实操边追「小强跨境」的实战案例。
+</div>
+
+<h3>🎯 专题实战类</h3>
+
+<div class="card-grid two">
+
+<div class="card">
+  <div class="card-title">老白跨境-10年跨境</div>
+  <div class="card-meta">TK Shop东南亚跨境店注册运营全流程</div>
+  <div class="card-desc">从注册到出单的完整SOP，每一步都讲得很细。还出了TK本土店+货盘运营教程。</div>
+  <span class="card-badge teal">实操向</span>
+</div>
+
+<div class="card">
+  <div class="card-title">肥仔跨境研究院</div>
+  <div class="card-meta">TikTok从0-1小店搭建实操（10课时）</div>
+  <div class="card-desc">分课时讲开店全流程，适合按步骤跟着做。</div>
+  <span class="card-badge green">系统课</span>
+</div>
+
+<div class="card">
+  <div class="card-title">怒学TikTok跨境电商</div>
+  <div class="card-meta">2026全新系列教程</div>
+  <div class="card-desc">持续更新中的系列教程，昨天（7月6日）刚发新视频，时效性最好。</div>
+  <span class="card-badge pink">持续更新中</span>
+</div>
+
+<div class="card">
+  <div class="card-title">海苏苏-消除模糊</div>
+  <div class="card-meta">东南亚TK本土店铺运营教程</div>
+  <div class="card-desc">侧重东南亚本土店运营，适合打算做本土模式的人。</div>
+  <span class="card-badge purple">本土店</span>
+</div>
+
+</div>
+
+<h3>📊 选品与市场分析类</h3>
+
+<table>
+<thead><tr><th>UP主</th><th>内容</th><th>备注</th></tr></thead>
+<tbody>
+<tr><td>阿奴聊tk</td><td>东南亚五国怎么选？各国差异分析</td><td>入门选站点的好参考</td></tr>
+<tr><td>废热跨境日记</td><td>2026年东南亚TikTok全面分析</td><td>新商家还有机会吗？</td></tr>
+<tr><td>白小菌-外贸跨境</td><td>四种跨境电商选品方法，如何找Trending Products</td><td>选品方法论</td></tr>
+<tr><td>熊杰克跨境</td><td>本土店+货盘运营</td><td>适合进阶</td></tr>
+<tr><td>大树跨境</td><td>虾皮/OZON/TikTok三大平台深度对比</td><td>平台选择参考</td></tr>
+<tr><td>阿甘聊跨境</td><td>2025主流跨境电商平台怎么选</td><td>48分钟深度分析</td></tr>
+<tr><td>TK快乐老头</td><td>马来西亚什么中国产品好卖</td><td>东南亚选品参考</td></tr>
+</tbody>
+</table>
+
+<h3>🛠️ 工具与环境类</h3>
+
+<div class="card-grid two">
+<div class="card">
+  <div class="card-title">夏天吖xq</div>
+  <div class="card-meta">搭建TK独享网络专线+指纹浏览器</div>
+  <div class="card-desc">3.1万播放，教你用指纹浏览器配置网络环境，小白也能上手。</div>
+  <span class="card-badge amber">网络环境</span>
+</div>
+<div class="card">
+  <div class="card-title">KeanD-Tiktok</div>
+  <div class="card-meta">VPS服务器/原生IP/静态住宅IP选择</div>
+  <div class="card-desc">阿里云等VPS配置教程，讲清了原生IP、双ISP的区别。</div>
+  <span class="card-badge amber">VPS配置</span>
+</div>
+</div>
+
+<!-- ==================== 二、公众号 ==================== -->
+<h2>📱 二、公众号（行业资讯+干货）</h2>
+
+<p>公众号适合日常刷，获取平台政策变化、行业趋势、实操案例。以下按关注优先级排列：</p>
+
+<table>
+<thead><tr><th>公众号</th><th>领域</th><th>特点</th><th>推荐度</th></tr></thead>
+<tbody>
+<tr><td><strong>TK增长会</strong></td><td>TK垂直</td><td>专注TikTok跨境，干货最密，政策解读最快</td><td>⭐必关注</td></tr>
+<tr><td><strong>雨果网</strong></td><td>综合跨境</td><td>老牌跨境媒体，每日早报+深度案例，覆盖面最广</td><td>⭐必关注</td></tr>
+<tr><td><strong>亿邦动力</strong></td><td>电商综合</td><td>出海板块经常有TK分析，行业风向标</td><td>⭐必关注</td></tr>
+<tr><td><strong>跨境知道</strong></td><td>实操向</td><td>选品/物流/运营/广告都有，偏实操干货</td><td>推荐</td></tr>
+<tr><td><strong>出海笔记</strong></td><td>运营向</td><td>偏方法论和深度分析，适合系统学习运营思维</td><td>推荐</td></tr>
+<tr><td><strong>TikTok for Business</strong></td><td>官方号</td><td>官方政策变化、新功能上线，第一手信息来源</td><td>推荐</td></tr>
+<tr><td><strong>跨境小故事</strong></td><td>案例向</td><td>真实卖家的踩坑和成功故事，最有代入感</td><td>可选</td></tr>
+</tbody>
+</table>
+
+<div class="callout neutral">
+  <strong>📌 阅读策略：</strong>每天早上花10分钟刷雨果网+TK增长会，看当天有什么政策变化或新玩法；<br>
+  遇到不懂的术语或工具，再去B站搜视频教程。这样信息摄入效率最高。
+</div>
+
+<!-- ==================== 三、书籍 ==================== -->
+<h2>📖 三、推荐书籍</h2>
+
+<p>新手先刷B站课程建立实操认知，等有一定基础后，再用书籍补系统化知识体系。以下按阅读顺序推荐：</p>
+
+<table>
+<thead><tr><th>书名</th><th>作者/出版</th><th>适合阶段</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><strong>《TikTok运营实战》</strong></td><td>郭亮</td><td>入门（第1本）</td><td>2025年新版，TK全流程运营手册，覆盖面全</td></tr>
+<tr><td><strong>《跨境电商运营从入门到精通》</strong></td><td>李军</td><td>入门（第2本）</td><td>系统化教材，跨境底层逻辑讲得清楚</td></tr>
+<tr><td><strong>《跨境电商3.0时代》</strong></td><td>温良</td><td>进阶</td><td>偏行业认知和大局观，帮你理解跨境电商产业</td></tr>
+<tr><td><strong>《TikTok爆品攻略》</strong></td><td>多个作者</td><td>选品专项</td><td>选品方法论+案例，适合出单后进阶</td></tr>
+</tbody>
+</table>
+
+<div class="callout warn">
+  <strong>⚠️ 看书提醒：</strong>跨境电商行业变化极快，书中数据（平台费率、配送时效、政策要求）可能已过时。<br>
+  把书当作「理解底层逻辑」的工具，具体的实操数据以官方最新公告为准。
+</div>
+
+<!-- ==================== 四、信息源补充 ==================== -->
+<h2>🌐 四、其他信息源</h2>
+
+<div class="card-grid two">
+
+<div class="card">
+  <div class="card-title">TikTok Shop官方卖家大学</div>
+  <div class="card-meta">seller.tiktok.com → 帮助中心</div>
+  <div class="card-desc">官方出品的新手教程+政策文档，是最权威的信息源。开店前建议通读一遍合规要求。</div>
+  <span class="card-badge green">必看</span>
+</div>
+
+<div class="card">
+  <div class="card-title">雨果网App</div>
+  <div class="card-meta">每日早报+问答社区</div>
+  <div class="card-desc">每天早报10分钟了解行业动态，问答社区可以搜到很多卖家的真实经验。</div>
+  <span class="card-badge blue">推荐</span>
+</div>
+
+<div class="card">
+  <div class="card-title">站长之家/跨境知道</div>
+  <div class="card-meta">工具测评+教程合集</div>
+  <div class="card-desc">各种跨境工具测评、选品工具对比、物流方案对比，适合做决策参考。</div>
+  <span class="card-badge purple">决策参考</span>
+</div>
+
+<div class="card">
+  <div class="card-title">YouTube英文频道</div>
+  <div class="card-meta">如 EcommOps, My Wife Quit Her Job</div>
+  <div class="card-desc">进阶后可看英文TK电商频道，视野更广，信息更新更快（但需要梯子）。</div>
+  <span class="card-badge amber">进阶</span>
+</div>
+
+</div>
+
+<!-- ==================== 五、学习路线图 ==================== -->
+<h2>🗺️ 五、四周学习路线图</h2>
+
+<p>新手最容易犯的错误是「收藏了就当学过了」。以下路线按<strong>先看→再练→再优化</strong>的节奏设计：</p>
+
+<div class="roadmap">
+
+<div class="r-item">
+  <div class="r-week">第1周 · 建立认知</div>
+  <div class="r-title">刷「统一的奸商之路」128分钟完整课</div>
+  <div class="r-desc">
+    了解TK电商的全貌：6种搞钱方式、各模式优劣势、启动成本、回款周期。<br>
+    <strong>目标：</strong>知道自己要做什么模式（跨境店vs本土店、商品卡vs视频带货）
+  </div>
+</div>
+
+<div class="r-item">
+  <div class="r-week">第2周 · 系统学习</div>
+  <div class="r-title">刷「黑马程序员」7小时实战课 + 注册店铺</div>
+  <div class="r-desc">
+    边看边操作：注册TK Shop、选品调研、上架商品、设置物流模板。<br>
+    <strong>目标：</strong>店铺开好，上架5-10个商品，理解后台各功能模块
+  </div>
+</div>
+
+<div class="r-item">
+  <div class="r-week">第3周 · 日常输入</div>
+  <div class="r-title">关注公众号 + 刷视频补短板</div>
+  <div class="r-desc">
+    关注<strong>TK增长会/雨果网/出海笔记</strong>三个号，每天10分钟刷行业动态。<br>
+    同时根据自己短板搜索B站专题课程（选品/投流/达人建联）。<br>
+    <strong>目标：</strong>每天保持信息输入，找到1-2个可以试水的品
+  </div>
+</div>
+
+<div class="r-item">
+  <div class="r-week">第4周 · 实战出单</div>
+  <div class="r-title">边看「小强跨境」系列边实操 + 持续关注亿邦动力/跨境知道</div>
+  <div class="r-desc">
+    选定1-2款产品上架测试，用商品卡模式低风险试水。<br>
+    关注行业风向变化、平台政策更新。<br>
+    <strong>目标：</strong>跑通从选品→上架→出单→回款的完整闭环
+  </div>
+</div>
+
+</div>
+
+<div class="callout success">
+  <strong>✅ 一个月后回头看：</strong>你已经有店铺、有上架商品、有出单经验、有日常信息输入的习惯。下一步就是放大 —— 测更多品、投流测试、找达人建联。
+</div>
+
+<!-- ==================== 六、避坑提醒 ==================== -->
+<h2>⚠️ 六、新手避坑提醒</h2>
+
+<ol>
+  <li><strong>别一上来就买高价课程。</strong>B站上免费课程质量已经很高，先蹭免费资源起步。</li>
+  <li><strong>别过度纠结工具。</strong>选品工具（卖家精灵/知虾）等月销量大几千再说，前期用免费版+手动调研就够了。</li>
+  <li><strong>别盲目铺货。</strong>SKU少而精 > 铺几百个垃圾品。用商品卡模式先试水1-2款产品。</li>
+  <li><strong>别只看不练。</strong>收藏100个教程不如实操1周。开店免费，不上架永远不知道问题在哪。</li>
+  <li><strong>别忽视合规。</strong>各国的进口认证（泰国TISI/印尼SNI/马来SIRIM）、知识产权问题，出单前就要搞清楚。</li>
+  <li><strong>别信"月入十万"的广告。</strong>跨境电商是正经生意，有周期有风险，需要持续投入时间和精力。</li>
+</ol>
+
+<div class="callout danger">
+  <strong>🚨 最重要的一个字：<em>做</em>。</strong><br>
+  B站视频、公众号文章、书籍都是辅助。TK电商是一个实操型的生意，你上架一个商品、发一条视频、联系一个达人，学到的东西比刷10小时教程都多。
+</div>
+
+<hr style="border:none;border-top:1px solid var(--border);margin:32px 0">
+
+<p style="text-align:center;font-size:12px;color:var(--text-tertiary)">
+  信息采集于 2026-07-07 · 平台政策变化快，具体数据以官方最新公告为准
+</p>
+
+</div>
+
+</body>
+</html>

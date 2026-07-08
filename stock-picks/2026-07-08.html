@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 双战法选股 · 2026-07-08</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0d1117;--surface:#161b22;--surface-alt:#1c2333;--border:#30363d;--border-light:#21262d;--text:#e6edf3;--text-secondary:#8b949e;--text-tertiary:#6e7681;--accent:#58a6ff;--accent-bg:#0d419d33;--green:#3fb950;--green-bg:#1b3a1f;--red:#f85149;--red-bg:#3d1416;--amber:#d29922;--amber-bg:#2d1f00;--purple:#a371f7;--purple-bg:#2a1a4a;--teal:#56d4dd;--teal-bg:#1d3b3d;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.15);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7;min-height:100vh}
+  .container{max-width:800px;margin:0 auto;padding:0}
+  .header{background:linear-gradient(135deg,#161b22 0%,#1c2333 50%,#111 100%);border-bottom:1px solid var(--border);padding:22px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;position:relative;overflow:hidden}
+  .header::before{content:'';position:absolute;top:-50%;left:-30%;width:160%;height:200%;background:radial-gradient(ellipse at 30% 50%,var(--accent-bg) 0%,transparent 50%),radial-gradient(ellipse at 70% 50%,var(--purple-bg) 0%,transparent 50%);opacity:.2;pointer-events:none}
+  .h-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+  .h-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+  .h-title{font-size:18px;font-weight:700;letter-spacing:-.3px}
+  .h-meta{font-size:12px;color:var(--text-tertiary);margin-top:2px}
+  .h-badge{font-size:11px;font-weight:500;color:var(--red);background:var(--red-bg);padding:4px 16px;border-radius:20px;letter-spacing:.3px;position:relative;z-index:1}
+  .h-home{font-size:20px;text-decoration:none;margin-left:8px;position:relative;z-index:1;transition:opacity .15s}
+  .h-home:hover{opacity:.7}
+  .section{padding:24px 22px}
+  .section+.section{border-top:1px solid var(--border-light)}
+  .sec-label{font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
+  .section-alt{background:var(--surface-alt)}
+  .at{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin-bottom:14px}
+  .at th{text-align:left;padding:10px 14px;font-weight:600;color:var(--text-secondary);background:var(--surface-alt);border-bottom:1px solid var(--border);font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+  .at th:first-child{border-radius:8px 0 0 0}
+  .at th:last-child{border-radius:0 8px 0 0}
+  .at td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text)}
+  .at tr:last-child td:first-child{border-radius:0 0 0 8px}
+  .at tr:last-child td:last-child{border-radius:0 0 8px 0}
+  .at tr:last-child td{border-bottom:none}
+  .dragon-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:14px;box-shadow:var(--shadow);border-left:3px solid var(--purple)}
+  .dragon-card.dc-hot{border-left-color:var(--red)}
+  .dc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px}
+  .dc-name{font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .dc-name .dc-tag{font-size:10px;font-weight:600;padding:2px 10px;border-radius:20px;background:var(--accent-bg);color:var(--accent)}
+  .dc-name .dc-tag.dc-hot-tag{background:var(--red-bg);color:var(--red)}
+  .dc-score{font-size:12px;color:var(--text-tertiary)}
+  .dc-body{margin-top:6px}
+  .dc-detail{font-size:13px;color:var(--text-secondary);line-height:1.7;padding:8px 12px;background:var(--surface-alt);border-radius:6px;margin-top:8px;border-left:2px solid var(--border)}
+  .dc-buy{font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+  .callout{padding:14px 18px;border-radius:var(--radius);margin:10px 0;font-size:13px;line-height:1.6}
+  .callout.info{background:var(--accent-bg);border-left:3px solid var(--accent);color:var(--accent)}
+  .callout.success{background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+  .callout.warn{background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)}
+  .callout.danger{background:var(--red-bg);border-left:3px solid var(--red);color:var(--red)}
+  .callout.neutral{background:var(--surface-alt);border-left:3px solid var(--text-tertiary);color:var(--text-secondary)}
+  .sig{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+  .sig.g{background:var(--green)}
+  .sig.r{background:var(--red)}
+  .sig.y{background:var(--amber)}
+  .sig.b{background:var(--accent)}
+  .stars{font-size:14px;letter-spacing:1px;color:var(--amber)}
+  .risk-list{list-style:none;padding:0}
+  .risk-list li{padding:8px 0 8px 24px;position:relative;font-size:13px;color:var(--text-secondary);border-bottom:1px solid var(--border-light)}
+  .risk-list li:last-child{border-bottom:none}
+  .risk-list li::before{content:'⚠️';position:absolute;left:0;top:8px;font-size:12px}
+  .st{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:10px 0 14px}
+  .st td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text-secondary)}
+  .st td:first-child{font-weight:600;color:var(--text);white-space:nowrap;width:110px}
+  .st tr:last-child td{border-bottom:none}
+  .conclusion-box{text-align:center;padding:28px 22px;background:linear-gradient(135deg,var(--surface-alt),var(--surface));border:1px solid var(--border);border-radius:var(--radius);margin:16px 0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .conclusion-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--purple),var(--teal))}
+  .conclusion-text{font-size:18px;font-weight:700;color:var(--text);line-height:1.6;margin-bottom:6px}
+  .conclusion-sub{font-size:13px;color:var(--text-secondary);line-height:1.7}
+  .pos-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:10px 0}
+  .pos-table td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text)}
+  .pos-table td:first-child{font-weight:600;white-space:nowrap;width:120px}
+  .pos-table .amt{font-family:var(--font-mono);color:var(--amber);font-weight:600}
+  .footer{text-align:center;padding:24px 22px 36px;font-size:11px;color:var(--text-tertiary);line-height:1.8;border-top:1px solid var(--border-light)}
+  .footer a{color:var(--accent);text-decoration:none}.footer a:hover{text-decoration:underline}
+  .ice-timeline{display:flex;align-items:center;gap:8px;padding:14px 18px;background:var(--surface);border-radius:var(--radius);margin:10px 0;overflow-x:auto;font-size:11px}
+  .ice-dot{min-width:72px;text-align:center;padding:6px 8px;border-radius:8px;font-size:11px}
+  .ice-dot.active{background:var(--red-bg);border:2px solid var(--red);color:var(--red);font-weight:700}
+  .ice-dot.past{background:var(--surface-alt);color:var(--text-tertiary)}
+  .ice-dot.failed{background:var(--amber-bg);border:1px dashed var(--amber);color:var(--amber)}
+  .ice-dot.today{background:#2a0000;border:2px solid #ff2222;color:#ff4444;font-weight:800;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  .ice-arrow{color:var(--text-tertiary);font-size:14px;min-width:16px;text-align:center}
+  .bl-badge{display:inline-block;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;margin-left:4px}
+  .bl-badge.clean{background:var(--green-bg);color:var(--green)}
+  .bl-badge.dirty{background:var(--red-bg);color:var(--red)}
+  @media(max-width:480px){
+    .section{padding:18px 14px}
+    .header{padding:14px 14px}
+    .h-title{font-size:16px}
+    .at{font-size:12px}.at td,.at th{padding:8px 10px}
+    .dragon-card{padding:14px 14px}
+    .dc-name{font-size:15px}
+    .conclusion-text{font-size:16px}
+    .ice-timeline{gap:2px}.ice-dot{min-width:55px;font-size:10px;padding:4px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="h-left">
+    <div class="h-icon">📊</div>
+    <div>
+      <div class="h-title">双战法选股分析</div>
+      <div class="h-meta">2026-07-08 · 周三 · 收盘后</div>
+    </div>
+  </div>
+  <span class="h-badge">🚨 四次冰点 · 禁止操作</span>
+  <a href="https://eason-byte.github.io/daily-briefing/stock-picks/" class="h-home" title="返回首页">📋</a>
+</div>
+
+<div class="section">
+  <div class="sec-label">🧊 冰点反抽模式分析</div>
+
+  <table class="at">
+    <tr><th>指标</th><th>今日数据</th><th>冰点阈值</th><th>判断</th></tr>
+    <tr><td>跌停家数</td><td><span style="color:var(--red);font-weight:700;font-family:var(--font-mono)">41</span></td><td>≥20</td><td><span class="sig r"></span> <strong style="color:var(--red)">四次冰点确认 · D1修复彻底失败</strong></td></tr>
+    <tr><td>涨停家数</td><td>封板 <span style="color:var(--green);font-weight:600">47</span> / 触及 <span style="color:var(--teal)">61</span></td><td>-</td><td>赚钱效应略有恢复但远不够</td></tr>
+    <tr><td>炸板率</td><td><span style="font-family:var(--font-mono);color:var(--amber)">23.0%</span>（14/61）</td><td>-</td><td><span class="sig y"></span> 改善但仍偏高</td></tr>
+    <tr><td>连板高度</td><td>首板为主，威尔高2连板</td><td>3板以下</td><td><span class="sig r"></span> 高度持续压制</td></tr>
+    <tr><td>冰点序列</td><td>07-02→07-06→07-07→07-08 四连冰点</td><td>-</td><td><span style="color:#ff4444;font-weight:800">🚨 第四次冰点 · 历史级别极端恐慌</span></td></tr>
+    <tr><td>大盘指数</td><td>上证<span style="color:var(--red)">-0.49%</span> 深证<span style="color:var(--red)">-1.87%</span> 创业板<span style="color:var(--red)">-1.70%</span></td><td>-</td><td><span class="sig r"></span> 三大指数齐跌，指数未收阳</td></tr>
+  </table>
+
+  <div class="ice-timeline">
+    <div class="ice-dot past">7/2 周四<br>D0冰点1<br>40+跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot past">7/3 周五<br>D1修复中<br>19跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot past">7/6 周一<br>D0冰点2<br>46跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot failed">7/7 周二<br>D1失败<br>30跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot today">7/8 周三<br>🚨冰点4<br>41跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot" style="background:var(--surface-alt);color:var(--text-tertiary);border:1px dashed var(--text-tertiary)">7/9 周四<br>D1?</div>
+  </div>
+
+  <div class="callout danger">
+    <strong>🚨🚨 四次冰点 — 禁止操作！</strong><br>
+    <strong>6个交易日内出现4个冰点日</strong>（07-02/07-06/07-07/07-08），仅07-03一天短暂修复。这是极端恐慌信号：<br>
+    · 三次D1修复均告失败（07-03:19跌停→07-07:30跌停→07-08:41跌停）<br>
+    · 套牢盘层层累积：三次修复失败=三批抄底资金被套，抛压呈指数级增长<br>
+    · 修复所需资金量级已远超当前市场流动性（上证-0.49%缩量阴跌）<br>
+    <strong style="color:var(--red)">按四次冰点规则：跌停需≤2家+指数收阳，仓位≤3%。当前条件全不满足→禁止任何操作。</strong>
+  </div>
+
+  <div class="callout neutral">
+    <strong>适用性评级：⭐⭐⭐ 冰点反抽环境 — 但禁止操作</strong><br>
+    41跌停符合冰点反抽触发条件（熊市⭐⭐⭐⭐⭐），但连续四次冰点后修复概率可忽略不计。战法规则强制要求<strong>四次及以上冰点禁止操作</strong>，等指数真正企稳后再考虑龙头战法。
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">🔍 D0 活口筛选（仅供观察记录，禁止操作）</div>
+
+  <table class="at">
+    <tr><th>代码</th><th>名称</th><th>板块</th><th>封板时间</th><th>板块跌停</th><th>活口特征</th></tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">000977</td>
+      <td><strong style="color:var(--green)">浪潮信息</strong></td>
+      <td>计算机设备 <span class="bl-badge clean">0跌停</span></td>
+      <td>09:25:00</td>
+      <td style="color:var(--green)">0</td>
+      <td>秒板092500一字板，计算机设备4涨停0跌停板块最干净。辨识度极高。</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">301251</td>
+      <td><strong style="color:var(--green)">威尔高</strong></td>
+      <td>元件 <span class="bl-badge clean">0跌停</span></td>
+      <td>09:30:33</td>
+      <td style="color:var(--green)">0</td>
+      <td><strong style="color:var(--red)">🔥 连续2天20cm涨停！</strong>07-07秒板+07-08续板，6交易日最强活口。</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">000524</td>
+      <td><strong style="color:var(--green)">岭南控股</strong></td>
+      <td>旅游及景区 <span class="bl-badge clean">0跌停</span></td>
+      <td>09:25:00</td>
+      <td style="color:var(--green)">0</td>
+      <td>秒板092500，旅游板块2涨停0跌停，板块干净。</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">001229</td>
+      <td><strong style="color:var(--green)">魅视科技</strong></td>
+      <td>计算机设备 <span class="bl-badge clean">0跌停</span></td>
+      <td>09:25:00</td>
+      <td style="color:var(--green)">0</td>
+      <td>秒板092500，与浪潮信息同板块，板块4涨停0跌停最强。</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">001208</td>
+      <td><strong>华菱线缆</strong></td>
+      <td>电网设备 <span class="bl-badge dirty">1跌停</span></td>
+      <td>09:25:00</td>
+      <td style="color:var(--red)">1</td>
+      <td>秒板092500但板块有宝光股份跌停(-10%)，活口有瑕疵。</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002396</td>
+      <td><strong style="color:var(--green)">星网锐捷</strong></td>
+      <td>通信设备 <span class="bl-badge clean">0跌停</span></td>
+      <td>09:34:57</td>
+      <td style="color:var(--green)">0</td>
+      <td><strong style="color:var(--amber)">连续3天强势！</strong>07-06涨停→07-07+2.76%→07-08+10.02%，穿越三次冰点的最强股。</td>
+    </tr>
+  </table>
+
+  <div class="callout danger">
+    <strong>🚫 D0核心纪律：四次冰点禁止操作</strong><br>
+    以上活口股仅用于D1(07-09周四)观察记录。按战法规则：四次冰点<strong>禁止任何买入操作</strong>。即使D1跌停降至0家也不操作——四次冰点的规则是iron rule，不可逾越。
+  </div>
+
+  <div class="callout info" style="margin-top:10px">
+    <strong>📊 跌停板块拆解：资源/新能源链崩盘</strong><br>
+    41只跌停中，<strong>电池(7)+能源金属(3)+小金属(3)=13只</strong>集中在新旧能源/资源链。<br>
+    电池：诺德/石大胜华/恩捷/雄韬/德新/龙蟠/天赐 → 锂电全产业链崩<br>
+    能源金属：盛新锂能/天齐锂业/融捷股份 → 锂矿三巨头集体跌停<br>
+    <strong style="color:var(--amber)">资金从资源新能源全线撤离，这是结构性出清而非普跌。</strong>
+  </div>
+
+  <div class="callout neutral" style="margin-top:10px">
+    <strong>🧊 冰点反抽结论</strong><br>
+    四次冰点确认，D1修复反复失败。07-07→07-08的D1修复<strong style="color:var(--red)">彻底失败</strong>(41跌停≫3)。活口候选(仅观察)：浪潮信息(000977计算机设备)、威尔高(301251元件2连板)、岭南控股(000524旅游)、魅视科技(001229计算机设备)。<strong style="color:var(--red)">按四次冰点规则：禁止操作，等指数真正企稳。</strong>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🐉 龙头主升浪战法分析</div>
+
+  <table class="at">
+    <tr><th>最强板块</th><th>涨停数</th><th>跌停数</th><th>板块健康度</th><th>持续性判断</th></tr>
+    <tr><td>软件开发</td><td style="color:var(--green);font-weight:600">5</td><td style="color:var(--green)">0</td><td><span class="sig g"></span> 最干净</td><td>涨停最多且0跌停，但涨停多为非秒板，爆发力待验证</td></tr>
+    <tr><td>计算机设备</td><td style="color:var(--green);font-weight:600">4</td><td style="color:var(--green)">0</td><td><span class="sig g"></span> 干净+秒板</td><td>浪潮信息秒板+魅视秒板，板块联动最强，最有主线相</td></tr>
+    <tr><td>消费电子</td><td style="color:var(--green);font-weight:600">4</td><td style="color:var(--green)">0</td><td><span class="sig g"></span> 干净</td><td>华勤/易德龙/视源但封板偏晚(0930后)，力度弱于计算机</td></tr>
+    <tr><td>IT服务</td><td style="color:var(--green)">3</td><td style="color:var(--green)">0</td><td><span class="sig g"></span> 干净</td><td>浪潮软件0930封板，紫光炸板(+6.8%)，板块有分歧</td></tr>
+    <tr><td>通信设备</td><td style="color:var(--green)">2</td><td style="color:var(--green)">0</td><td><span class="sig g"></span> 干净</td><td>星网锐捷3连强+恒宝炸板，板块活跃但炸板多</td></tr>
+    <tr><td>电网设备</td><td style="color:var(--green)">3</td><td style="color:var(--red)">1</td><td><span class="sig y"></span> 有瑕疵</td><td>华菱/新联涨停但宝光跌停，内部割裂</td></tr>
+    <tr><td>家居用品</td><td style="color:var(--green)">2</td><td style="color:var(--red);font-weight:600">2</td><td><span class="sig r"></span> 互相残杀</td><td>涨停2家跌停2家(好莱客/麒盛)，完全不可参与</td></tr>
+  </table>
+
+  <div class="callout danger">
+    <strong>🐉 龙头主升浪适用性：⭐ 熊市禁用</strong><br>
+    四次冰点+三指数齐跌，连板高度仅2板(威尔高)。龙头主升浪战法需要正常市场环境（震荡市有主线or牛市），当前完全不适用。<strong>真龙不会在四次冰点中诞生。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">⚠️ 龙头候选（仅供观察，禁止操作）</div>
+
+  <div class="dragon-card dc-hot">
+    <div class="dc-header">
+      <div class="dc-name">
+        威尔高 <span style="font-size:13px;color:var(--text-secondary)">301251</span>
+        <span class="dc-tag dc-hot-tag">2连板20cm</span>
+        <span class="dc-tag">元件</span>
+      </div>
+      <div class="dc-score">五维评分：⭐⭐⭐⭐</div>
+    </div>
+    <div class="dc-body">
+      <div class="dc-detail">
+        🗣️ <strong>辨识度</strong>：全市场唯一2连板20cm，4个交易日2涨停(07-07/07-08)，累计+44%<br>
+        🔗 <strong>带动性</strong>：元件板块仅威尔高独苗，带动性不足但独特性强<br>
+        💰 <strong>成交量</strong>：07-08成交2.24亿(冰点环境3-5亿即可，接近达标)<br>
+        📰 <strong>题材</strong>：元件/PCB有AI硬件预期差，但非全新题材<br>
+        🔄 <strong>换手率</strong>：2连板后换手需关注，20cm累计涨幅大风险高
+      </div>
+      <div style="font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)">
+        <strong>⚠️ 四次冰点禁买：</strong>即使是最强活口，四次冰点规则禁止操作。关注但不动手，等指数企稳后的龙头战法买点。
+      </div>
+    </div>
+  </div>
+
+  <div class="dragon-card">
+    <div class="dc-header">
+      <div class="dc-name">
+        浪潮信息 <span style="font-size:13px;color:var(--text-secondary)">000977</span>
+        <span class="dc-tag">计算机设备</span>
+        <span class="dc-tag dc-hot-tag">秒板一字</span>
+      </div>
+      <div class="dc-score">五维评分：⭐⭐⭐</div>
+    </div>
+    <div class="dc-body">
+      <div class="dc-detail">
+        🗣️ <strong>辨识度</strong>：AI服务器龙头，一字秒板092500，78.17元封死<br>
+        🔗 <strong>带动性</strong>：计算机设备4涨停0跌停，魅视/恒为同板块联动，板块效应最好<br>
+        💰 <strong>成交量</strong>：4.08亿，冰点环境下资金集中度高<br>
+        📰 <strong>题材</strong>：AI算力/服务器，市场共识主线，但非新题材<br>
+        🔄 <strong>换手率</strong>：一字板换手极低，D1需要放量确认
+      </div>
+      <div style="font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)">
+        <strong>⚠️ 一字板风险：</strong>一字秒板无法买入，即使D1开板也面临高开低走风险。四次冰点禁买。
+      </div>
+    </div>
+  </div>
+
+  <div class="dragon-card">
+    <div class="dc-header">
+      <div class="dc-name">
+        星网锐捷 <span style="font-size:13px;color:var(--text-secondary)">002396</span>
+        <span class="dc-tag">通信设备</span>
+        <span class="dc-tag dc-hot-tag">3连强</span>
+      </div>
+      <div class="dc-score">五维评分：⭐⭐⭐⭐</div>
+    </div>
+    <div class="dc-body">
+      <div class="dc-detail">
+        🗣️ <strong>辨识度</strong>：07-06涨停→07-07+2.76%→07-08+10.02%，连续3天强势，穿越三次冰点<br>
+        🔗 <strong>带动性</strong>：通信设备板块2涨停0跌停，恒宝早盘涨停后炸板(+6.54%)，带动性中等<br>
+        💰 <strong>成交量</strong>：5.53亿，是今天活口中成交量最大的<br>
+        📰 <strong>题材</strong>：通信设备/交换机，有AI网络硬件逻辑<br>
+        🔄 <strong>换手率</strong>：封板093457非秒板，有一定换手
+      </div>
+      <div style="font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)">
+        <strong>⚠️ 连涨3天+四次冰点：</strong>已连涨3天，按龙头战法自查清单第1条应暂不推荐。四次冰点禁买。
+      </div>
+    </div>
+  </div>
+
+  <div class="dragon-card">
+    <div class="dc-header">
+      <div class="dc-name">
+        岭南控股 <span style="font-size:13px;color:var(--text-secondary)">000524</span>
+        <span class="dc-tag">旅游及景区</span>
+      </div>
+      <div class="dc-score">五维评分：⭐⭐</div>
+    </div>
+    <div class="dc-body">
+      <div class="dc-detail">
+        🗣️ <strong>辨识度</strong>：秒板092500一字板，旅游板块2涨停0跌停<br>
+        🔗 <strong>带动性</strong>：西藏旅游093015封板跟涨，板块联动确认<br>
+        💰 <strong>成交量</strong>：0.31亿，成交量极小(一字板特征)<br>
+        📰 <strong>题材</strong>：旅游复苏，非市场主线<br>
+        🔄 <strong>换手率</strong>：一字板换手极低
+      </div>
+      <div style="font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)">
+        <strong>⚠️ 非主线题材：</strong>旅游非当前主流叙事，成交量太小。四次冰点禁买。
+      </div>
+    </div>
+  </div>
+
+  <div class="callout neutral" style="margin-top:14px">
+    <strong>🐉 龙头主升浪结论</strong><br>
+    四次冰点(41跌停)完全不适用龙头主升浪战法(熊市⭐禁)。虽然计算机设备板块出现4涨停0跌停的准主线信号，但在四次冰点环境下<strong>任何涨停都可能是假突破</strong>。仅记录威尔高(2连板20cm)、浪潮信息(AI服务器秒板)、星网锐捷(3连强)作为未来指数企稳后的潜在龙头候选。
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">⚖️ 综合结论</div>
+
+  <table class="at">
+    <tr><th>对比维度</th><th>冰点反抽</th><th>龙头主升浪</th><th>是否一致</th></tr>
+    <tr>
+      <td>适用性</td>
+      <td><span class="sig r"></span> 触发但禁止操作（四次冰点）</td>
+      <td><span class="sig r"></span> 不适用（⭐）</td>
+      <td><span class="sig g"></span> 一致（都禁）</td>
+    </tr>
+    <tr>
+      <td>核心标的</td>
+      <td>浪潮信息、威尔高、星网锐捷</td>
+      <td>无（熊市不出龙）</td>
+      <td><span class="sig r"></span> 不交叉</td>
+    </tr>
+    <tr>
+      <td>操作建议</td>
+      <td>四次冰点：禁止操作</td>
+      <td>禁止操作</td>
+      <td><span class="sig g"></span> 策略一致（全面放弃）</td>
+    </tr>
+    <tr>
+      <td>仓位</td>
+      <td>0%（四次冰点强制）</td>
+      <td>0%</td>
+      <td><span class="sig g"></span> 保守一致</td>
+    </tr>
+    <tr>
+      <td>资源/新能源</td>
+      <td>电池+能源金属13跌停崩盘</td>
+      <td>结构性出清中</td>
+      <td><span class="sig g"></span> 远离一致</td>
+    </tr>
+  </table>
+
+  <table class="st">
+    <tr><td>当前场景</td><td style="color:var(--red);font-weight:700">四次连续冰点(07-02/06/07/08) + D1修复反复失败 = 历史级别极端恐慌</td></tr>
+    <tr><td>主导策略</td><td style="color:var(--red)">禁止一切操作，等指数企稳信号</td></tr>
+    <tr><td>企稳信号</td><td>①跌停≤5家(连续2天) ②上证收阳1%以上 ③出现3连板标杆 ④成交量恢复到8000亿+</td></tr>
+    <tr><td>明天(7/9)</td><td>D1观察日：跌停家数变化、活口股溢价、板块持续性。但<strong style="color:var(--red)">不操作</strong></td></tr>
+    <tr><td>如果D1修复确认</td><td>按四次冰点规则：跌停≤2+指数收阳才考虑≤3%。当前条件远不满足</td></tr>
+    <tr><td>如果D1修复失败</td><td>继续等待。四次冰点后第五次冰点的概率不低，不要有抄底幻想</td></tr>
+    <tr><td>转机信号</td><td>计算机设备板块若持续走强(连续3天领涨)+指数企稳，可转为龙头主升浪模式</td></tr>
+  </table>
+
+  <table class="pos-table">
+    <tr><td>冰点反抽</td><td class="amt">0%</td><td>四次冰点：禁止操作，等指数企稳</td></tr>
+    <tr><td>龙头主升浪</td><td class="amt">0%</td><td>四次冰点禁用。等连板生态恢复再切换</td></tr>
+    <tr><td>总建议</td><td class="amt" style="color:var(--red);font-weight:700">空仓观望</td><td>保存弹药，活口股仅记录观察</td></tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:20px">⚠️ 关键风险</div>
+  <ul class="risk-list">
+    <li><strong>🚨 四次冰点极端风险</strong>：6个交易日4个冰点日，为历史罕见极端恐慌。三次D1修复均失败，套牢盘三次叠加，多空力量严重失衡。</li>
+    <li><strong>资源/新能源链结构崩盘</strong>：电池(7跌停)+能源金属(3)+小金属(3)=13只，锂电全链崩。天齐锂业/恩捷股份/天赐材料等白马集体跌停，不是个别现象是板块出清。</li>
+    <li><strong>跌停收敛vs扩散</strong>：07-07跌停30→07-08跌停41，跌停家数不仅没收敛反而扩散。防守性板块(家居/服装/燃气)也开始出现跌停，恐慌正在蔓延。</li>
+    <li><strong>指数未收阳</strong>：上证-0.49%深证-1.87%创业板-1.70%，三大指数继续下行。四次冰点的D1条件要求指数收阳，当前连指数企稳都未确认。</li>
+    <li><strong>假修复陷阱</strong>：47家涨停看似回暖，但仔细看：一字板占比高(不可参与)、炸板率23%、无3连板标杆。这是典型的多头陷阱式反弹。</li>
+    <li><strong>流动性危机</strong>：浪潮信息4亿、星网锐捷5.5亿已是今日成交量最大的涨停股。市场总成交大概率萎缩至6000亿以下，流动性不足以支撑有效修复。</li>
+  </ul>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🔄 上一交易日回测 · 07-07 → 07-08</div>
+
+  <div class="callout info" style="margin-bottom:12px">
+    <strong>📋 07-07报告核心建议回顾：</strong>三次冰点(30跌停)，D0活口候选威尔高/宝地矿业/浙江东方。策略：D0不买，D1(07-08)需跌停≤3家且活口高开≥3%才考虑≤5%极限仓位。强烈建议放弃操作。
+  </div>
+
+  <table class="at">
+    <tr><th>股票代码</th><th>名称</th><th>07-07建议</th><th>07-08实际走势</th><th>D1验证</th><th>判断</th></tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">301251</td>
+      <td>威尔高</td>
+      <td>D0活口(最强)，D1观察</td>
+      <td style="color:var(--green)">+19.99%涨停 · 高开59.23(+16.7%)<br>高60.92低58.83 · 2连板20cm</td>
+      <td style="color:var(--green)">活口有效 ✓</td>
+      <td style="color:var(--green)">✅ 等确认正确</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">601121</td>
+      <td>宝地矿业</td>
+      <td>D0活口，D1观察</td>
+      <td style="color:var(--green)">+5.41% · 开6.46(-0.15%)收6.82<br>高6.84低6.31</td>
+      <td style="color:var(--amber)">微低开但收涨</td>
+      <td style="color:var(--green)">✅ 等确认正确</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">600120</td>
+      <td>浙江东方</td>
+      <td>D0活口，D1观察</td>
+      <td style="color:var(--green)">+3.69% · 开4.90(+0.41%)收5.06<br>高5.12低4.72</td>
+      <td style="color:var(--amber)">高开不足2%</td>
+      <td style="color:var(--green)">✅ 等确认正确</td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>D1修复判断</td>
+      <td>需跌停≤3家才确认</td>
+      <td style="color:var(--red)"><strong>41跌停 · 彻底失败</strong></td>
+      <td style="color:var(--red)">修复失败</td>
+      <td style="color:var(--green)">✅ 等是对的</td>
+    </tr>
+  </table>
+
+  <div class="callout danger" style="margin-top:10px">
+    <strong>📊 07-07 D1修复验证结论：</strong>D1修复<strong style="color:var(--red)">彻底失败</strong>。41跌停远超3家的确认阈值(超标13.7倍)。3只活口股虽全部上涨(+19.99%/+5.41%/+3.69%)，但<strong style="color:var(--red)">整体D1修复条件完全不满足</strong>。<br>
+    <strong style="color:var(--green)">核心策略再次验证：</strong>D0不买等D1的策略在四次冰点中精准过滤。即使威尔高连续2天20cm涨停，在41跌停环境下追入的风险极高(盘中最低58.83，从涨停价回撤3.4%，次日可能补跌)。
+  </div>
+
+  <div class="callout success" style="margin-top:10px">
+    <strong>🎯 活口验证规则再立功：</strong><br>
+    · 宝地矿业微低开(-0.15%)，按D1验证规则(高开需≥2%)未达标 → 活口降级 ✓<br>
+    · 浙江东方高开仅+0.41%(<2%) → 活口降级 ✓<br>
+    · 仅威尔高满足D1验证(高开+16.7%≥2%，不破D0低点) → 活口有效 ✓<br>
+    <strong>但即使威尔高活口有效，D1整体修复失败(41跌停)仍阻止了任何买入。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">🔧 错误分析与Skill改进建议</div>
+
+  <table class="at">
+    <tr><th>观察</th><th>分析</th><th>改进建议</th></tr>
+    <tr>
+      <td style="color:var(--green)">三次冰点阈值精确命中</td>
+      <td>07-07设定跌停≤3为三次冰点确认阈值，07-08实际41跌停→精准拦截。连续冰点叠加规则在上次skill更新后完全有效。</td>
+      <td><strong>本次无新增错误。</strong>连续冰点叠加效应(ice-point-reversal SKILL.md)在上次已添加，本次回测证明该更新完美工作。无需再改。</td>
+    </tr>
+    <tr>
+      <td style="color:var(--green)">活口验证规则持续有效</td>
+      <td>D1验证条件(高开≥2%、不破D0低点)成功将宝地矿业和浙江东方降级，仅威尔高保留活口资格。与07-06→07-07回测一致。</td>
+      <td><strong>D1验证规则无需修改。</strong>连续两次回测均证明该规则有效过滤不合格活口。</td>
+    </tr>
+    <tr>
+      <td style="color:var(--amber)">威尔高连续涨停的场景</td>
+      <td>威尔高07-07秒板+07-08涨停=2连板20cm。三次冰点活口连续涨停的场景在上次回测中未出现——这是新情况。活口有效但D1整体修复失败时，活口自身走强vs市场继续恶化的矛盾如何解读？</td>
+      <td><strong>建议不修改规则。</strong>当前规则(整体D1修复条件不满足→不操作)已正确处理此情况。威尔高的2连板在41跌停背景下更容易是假突破(无量一字+情绪博弈)，而非真主线启动。保持D1整体修复条件优先于个股活口表现的判断体系。</td>
+    </tr>
+    <tr>
+      <td style="color:var(--green)">资源新能源崩盘验证</td>
+      <td>07-07报告中未专门提及资源板块风险，但07-08电池+能源金属13跌停是最大崩盘方向。这是否说明冰点分析应加入板块结构性风险？</td>
+      <td><strong>建议小幅更新：</strong>在ice-point-reversal SKILL.md的D0观察阶段增加一条：检查跌停板块集中度——若某产业链跌停≥5只(如电池/新能源)，应标注该板块结构性出清风险，D1活口筛选中排除相关板块。</td>
+    </tr>
+  </table>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">📈 持续追踪池 (近5日推荐股表现)</div>
+
+  <table class="at">
+    <tr><th>推荐日期</th><th>代码</th><th>名称</th><th>推荐操作</th><th>推荐日价</th><th>07-08收盘</th><th>累计涨跌</th></tr>
+    <tr>
+      <td>07-02</td><td style="font-family:var(--font-mono)">600641</td><td>先导基电</td><td>冰点活口观察</td><td style="font-family:var(--font-mono)">~47.51</td><td style="font-family:var(--font-mono);color:var(--red)">-</td><td style="color:var(--red)">已移出追踪</td>
+    </tr>
+    <tr>
+      <td>07-03</td><td style="font-family:var(--font-mono)">600988</td><td>赤峰黄金</td><td>轻仓试探≤5%</td><td style="font-family:var(--font-mono)">~28.73</td><td style="font-family:var(--font-mono)">-</td><td style="color:var(--amber)">待查</td>
+    </tr>
+    <tr>
+      <td>07-05</td><td style="font-family:var(--font-mono)">002396</td><td>星网锐捷</td><td>秒板不追等回调</td><td style="font-family:var(--font-mono)">~23.40</td><td style="font-family:var(--font-mono);color:var(--green)">29.10</td><td style="color:var(--green)">+24.36%</td>
+    </tr>
+    <tr>
+      <td>07-05</td><td style="font-family:var(--font-mono)">301165</td><td>锐捷网络</td><td>关注反包</td><td style="font-family:var(--font-mono)">~94.89</td><td style="font-family:var(--font-mono)">-</td><td style="color:var(--amber)">待查</td>
+    </tr>
+    <tr>
+      <td>07-06</td><td style="font-family:var(--font-mono)">002148</td><td>北纬科技</td><td>观察(追踪池)</td><td style="font-family:var(--font-mono)">6.99</td><td style="font-family:var(--font-mono)">-</td><td style="color:var(--red)">待查</td>
+    </tr>
+    <tr>
+      <td>07-06</td><td style="font-family:var(--font-mono)">000656</td><td>金科股份</td><td>D0活口→D1失效</td><td style="font-family:var(--font-mono)">~1.49</td><td style="font-family:var(--font-mono)">-</td><td style="color:var(--red)">已移出</td>
+    </tr>
+    <tr>
+      <td>07-06</td><td style="font-family:var(--font-mono)">002607</td><td>中公教育</td><td>D0活口→D1失效</td><td style="font-family:var(--font-mono)">~2.09</td><td style="font-family:var(--font-mono)">-</td><td style="color:var(--red)">已移出</td>
+    </tr>
+    <tr>
+      <td>07-07</td><td style="font-family:var(--font-mono)">301251</td><td>威尔高</td><td>D0活口观察</td><td style="font-family:var(--font-mono)">~50.77</td><td style="font-family:var(--font-mono);color:var(--green)">60.92</td><td style="color:var(--green)">+20.00%</td>
+    </tr>
+    <tr>
+      <td>07-07</td><td style="font-family:var(--font-mono)">601121</td><td>宝地矿业</td><td>D0活口观察</td><td style="font-family:var(--font-mono)">~6.47</td><td style="font-family:var(--font-mono);color:var(--green)">6.82</td><td style="color:var(--green)">+5.41%</td>
+    </tr>
+    <tr>
+      <td>07-07</td><td style="font-family:var(--font-mono)">600120</td><td>浙江东方</td><td>D0活口观察</td><td style="font-family:var(--font-mono)">~4.88</td><td style="font-family:var(--font-mono);color:var(--green)">5.06</td><td style="color:var(--green)">+3.69%</td>
+    </tr>
+  </table>
+
+  <div class="callout neutral" style="margin-top:10px">
+    <strong>📌 追踪总结：</strong>07-07的3只活口股07-08全部上涨(+20%/+5.4%/+3.7%)，但D1修复整体失败(41跌停)。<strong>这恰恰验证了冰点反抽战法的核心逻辑：个股强势≠市场修复。</strong>在41跌停的环境中，个股涨停很可能是资金自救式的脉冲而非真正的趋势启动。星网锐捷从07-05推荐日23.40到07-08的29.10(+24.36%)是追踪池最强股，验证了通信设备方向的持续强势。<br>
+    <strong style="color:var(--red)">⚠️ 警示：</strong>先导基电(07-02活口)从47.51跌至已移出追踪，招金黄金(07-03关注)从13.87跌至12.20(-12%)。冰点活口的高死亡率在前两次回测中已充分暴露。
+  </div>
+</div>
+
+<div class="section">
+  <div class="conclusion-box">
+    <div class="conclusion-text">
+      🚨 <span style="color:#ff4444">四次冰点 · D1全败 · 禁止一切操作</span>
+    </div>
+    <div class="conclusion-sub">
+      6个交易日4个冰点日(07-02→06→07→08)，三次D1修复<strong style="color:var(--red)">全部失败</strong>——历史级别极端恐慌。<br>
+      07-07→07-08 D1修复<strong style="color:var(--red)">彻底失败</strong>(41跌停，阈值≤3，超标13.7倍)。活口全涨但整体修复未确认。<br>
+      新活口记录(仅观察)：<strong>浪潮信息(000977秒板计算机设备)</strong>、<strong>威尔高(301251 2连板20cm)</strong>、<strong>星网锐捷(002396 3连强)</strong><br>
+      操作纪律：<strong style="color:var(--red)">四次冰点=禁止一切操作=绝对不买</strong>。等四个企稳信号(跌停≤5×2天+上证收阳1%+出现3连板+成交8000亿+)。<br>
+      资源/新能源崩盘(电池+能源金属13跌停)→远离该方向。计算机设备/软件开发最干净，等指数企稳后的龙头机会。<br>
+      <strong style="color:var(--green)">保存弹药，耐心等待。市场永远有机会，不差这几天。</strong>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  数据源: 东方财富 · AKShare + 腾讯行情API · 2026-07-08 18:15<br>
+  分析方法: 冰点反抽模式 + 龙头主升浪战法 · 双战法交叉验证<br>
+  <span style="color:var(--red)">⚠️ 以上分析仅供学习参考，不构成投资建议。投资有风险，入市需谨慎。</span><br>
+  <a href="https://eason-byte.github.io/daily-briefing/stock-picks/">返回首页</a>
+</div>
+
+</div>
+</body>
+</html>

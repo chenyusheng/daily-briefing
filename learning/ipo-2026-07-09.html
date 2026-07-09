@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>港股打新 · 2026年7月9日 每日IPO分析</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --card: #1a1a24;
+    --card-hover: #222233;
+    --accent: #6c5ce7;
+    --accent2: #00cec9;
+    --gold: #fdcb6e;
+    --red: #e17055;
+    --green: #00b894;
+    --orange: #f39c12;
+    --text: #e0e0e8;
+    --text-muted: #888899;
+    --border: #2a2a3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 60px 24px 50px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 50%, rgba(108,92,231,0.08) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(0,206,201,0.06) 0%, transparent 50%); }
+  .hero-content { position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); color: #fff; font-weight: 700; margin-bottom: 6px; }
+  .hero h1 span { color: var(--accent2); }
+  .hero .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
+  .hero .alert-box { margin-top: 14px; display: inline-block; background: rgba(225,112,85,0.12); border: 1px solid rgba(225,112,85,0.3); padding: 8px 20px; border-radius: 20px; font-size: 0.85rem; color: var(--red); }
+  .hero .green-box { margin-top: 14px; display: inline-block; background: rgba(0,184,148,0.12); border: 1px solid rgba(0,184,148,0.3); padding: 8px 20px; border-radius: 20px; font-size: 0.85rem; color: var(--green); }
+  .container { max-width: 960px; margin: 0 auto; padding: 32px 20px 60px; }
+  .section-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 36px 0 16px; display: flex; align-items: center; gap: 8px; }
+  .section-title .line { flex: 1; height: 1px; background: var(--border); }
+  .summary-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .summary-chip { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; }
+  .summary-chip .num { font-size: 1.3rem; font-weight: 700; }
+  .num.green { color: var(--green); } .num.orange { color: var(--orange); } .num.red { color: var(--red); } .num.purple { color: var(--accent); } .num.gold { color: var(--gold); } .num.teal { color: var(--accent2); }
+  .score { display: inline-flex; align-items: center; gap: 4px; padding: 3px 12px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; }
+  .score.s5 { background: rgba(0,184,148,0.15); color: var(--green); }
+  .score.s4 { background: rgba(0,206,201,0.12); color: var(--accent2); }
+  .score.s3 { background: rgba(253,203,110,0.12); color: var(--gold); }
+  .score.s2 { background: rgba(225,112,85,0.12); color: var(--red); }
+  .score.s1 { background: rgba(225,112,85,0.18); color: var(--red); font-weight: 700; }
+  .ipo-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px 28px; margin-bottom: 16px; transition: all 0.2s; }
+  .ipo-card:hover { border-color: rgba(108,92,231,0.3); }
+  .ipo-card.debut-win { border-left: 3px solid var(--green); }
+  .ipo-card.debut-flat { border-left: 3px solid var(--gold); }
+  .ipo-card.debut-loss { border-left: 3px solid var(--red); }
+  .ipo-card.debut-boom { border-left: 3px solid var(--accent); }
+  .ipo-card .header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .ipo-card .header h2 { font-size: 1.05rem; color: #fff; font-weight: 600; }
+  .ipo-card .header .code { color: var(--text-muted); font-size: 0.78rem; font-weight: 400; }
+  .reason { font-size: 0.84rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.65; }
+  .reason strong { color: var(--text); }
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; margin-bottom: 12px; }
+  .info-item { background: rgba(255,255,255,0.03); border-radius: 8px; padding: 6px 10px; }
+  .info-item .label { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .info-item .value { font-size: 0.85rem; color: var(--text); font-weight: 500; }
+  .info-item .value.green { color: var(--green); } .info-item .value.gold { color: var(--gold); } .info-item .value.red { color: var(--red); } .info-item .value.teal { color: var(--accent2); }
+  .debut-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.8rem; }
+  .debut-table th { text-align: left; color: var(--text-muted); font-weight: 500; font-size: 0.7rem; padding: 6px 8px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02); }
+  .debut-table td { padding: 6px 8px; border-bottom: 1px solid rgba(42,42,58,0.4); font-size: 0.82rem; }
+  .debut-table .debut-pnl { font-weight: 700; font-size: 0.9rem; }
+  .verdict-box { margin-top: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; }
+  .verdict-box.buy { background: rgba(0,184,148,0.08); border: 1px solid rgba(0,184,148,0.2); color: var(--green); }
+  .verdict-box.skip { background: rgba(225,112,85,0.08); border: 1px solid rgba(225,112,85,0.2); color: var(--red); }
+  .verdict-box.info { background: rgba(108,92,231,0.06); border: 1px solid rgba(108,92,231,0.15); color: var(--accent); }
+  .verdict-box.warn { background: rgba(243,156,18,0.08); border: 1px solid rgba(243,156,18,0.2); color: var(--orange); }
+  .insight-box { background: rgba(108,92,231,0.04); border: 1px solid rgba(108,92,231,0.15); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 0.82rem; }
+  .insight-box strong { color: var(--accent); }
+  .insight-box.danger { background: rgba(225,112,85,0.04); border: 1px solid rgba(225,112,85,0.2); }
+  .insight-box.danger strong { color: var(--red); }
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+  .risk-note { margin-top: 28px; padding: 16px 20px; border-radius: 10px; border: 1px solid rgba(225,112,85,0.2); background: rgba(225,112,85,0.04); font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; }
+  .risk-note strong { color: var(--red); }
+  .tag { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 0.68rem; font-weight: 500; margin-right: 4px; margin-bottom: 4px; }
+  .tag.green { background: rgba(0,184,148,0.12); color: var(--green); }
+  .tag.gold { background: rgba(253,203,110,0.12); color: var(--gold); }
+  .tag.red { background: rgba(225,112,85,0.12); color: var(--red); }
+  .tag.teal { background: rgba(0,206,201,0.12); color: var(--accent2); }
+  .tag.purple { background: rgba(108,92,231,0.12); color: var(--accent); }
+  .lesson-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin: 12px 0; }
+  .lesson-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; font-size: 0.8rem; }
+  .lesson-card .lesson-num { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
+  .lesson-card .lesson-title { font-weight: 600; color: #fff; margin-bottom: 6px; }
+  .lesson-card .lesson-body { color: var(--text-muted); line-height: 1.6; }
+  .method-patch { background: rgba(108,92,231,0.06); border: 1px dashed rgba(108,92,231,0.3); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 0.82rem; }
+  .method-patch h4 { color: var(--accent); margin-bottom: 8px; }
+  .method-patch ul { margin-left: 16px; }
+  .method-patch li { margin-bottom: 4px; color: var(--text-muted); }
+  .ticker-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 8px; margin: 12px 0; }
+  .ticker-item { background: rgba(255,255,255,0.03); border-radius: 8px; padding: 8px 10px; text-align: center; }
+  .ticker-item .t-name { font-size: 0.72rem; color: var(--text-muted); }
+  .ticker-item .t-change { font-size: 1.1rem; font-weight: 700; }
+  .footer { text-align: center; padding: 24px 0; font-size: 0.72rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 24px; }
+  @media (max-width: 600px) { .ipo-card { padding: 16px; } .info-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>港股打新 · <span>每日IPO分析</span></h1>
+    <p class="subtitle">2026年7月9日（周四）· 🔥超级上市日 · 7只新股同日首秀</p>
+    <div class="green-box">✅ 珞石机器人 +9.4% 领涨 | 🚀 齐云山食品暴涨+187%</div>
+    <div class="alert-box" style="margin-left:8px;">💀 普源精电暴跌-34% | 📉 立讯精密-5.2%破发</div>
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="summary-bar">
+    <div class="summary-chip"><span class="num red">0</span> 仍在申购</div>
+    <div class="summary-chip"><span class="num purple">7</span> 今日上市</div>
+    <div class="summary-chip"><span class="num teal">2</span> 明日上市</div>
+    <div class="summary-chip"><span class="num gold">1</span> 周日上市</div>
+  </div>
+
+  <!-- ============ KEY HEADLINE ============ -->
+  <div class="insight-box danger">
+    <strong>⚠️ 超级上市日暴雷：7只齐发，3破发，1暴涨，模型大面积失灵。</strong><br>
+    今日最大教训：<strong>"超级上市日"效应远超预期。</strong>6只原定+1只延迟的东方科脉，合计7只新股同日首秀，流动性被严重稀释。即便全明星基石（立讯精密26家基石含ADIA主权基金）也无法防止破发。2只⭐⭐⭐⭐⭐评级仅1只微涨，1只大跌。唯一暴涨的是模型判定"强烈跳过"的无基石小盘食品股。这是该IPO评估体系上线以来<strong>最大的方法论危机</strong>。
+  </div>
+
+  <!-- ============ TODAY'S DEBUT RESULTS ============ -->
+  <div class="section-title">📊 今日上市首日表现 <span class="line"></span></div>
+
+  <table class="debut-table">
+    <tr><th>代码</th><th>名称</th><th>事前<br>评分</th><th>IPO价<br>(HKD)</th><th>开盘</th><th>最高</th><th>最低</th><th>午盘价</th><th>涨跌幅</th><th>预判</th><th>偏差</th></tr>
+    <!-- 珞石机器人 - WIN -->
+    <tr>
+      <td>03752</td><td>珞石机器人</td><td style="color:var(--accent2);">⭐⭐⭐⭐ 27</td>
+      <td>38.00</td><td>38.02</td><td style="color:var(--green);">44.56</td><td>38.02</td><td>41.56</td>
+      <td class="debut-pnl" style="color:var(--green);">+9.37%</td><td>+3%~+8%</td><td style="color:var(--green);">✅ 超预期</td>
+    </tr>
+    <!-- 三环集团 - FLAT -->
+    <tr>
+      <td>06951</td><td>三环集团</td><td style="color:var(--green);">⭐⭐⭐⭐⭐ 33</td>
+      <td>100.30</td><td>100.30</td><td style="color:var(--green);">109.00</td><td>100.30</td><td>100.40</td>
+      <td class="debut-pnl" style="color:var(--gold);">+0.10%</td><td>+5%~+12%</td><td style="color:var(--orange);">⚠️ 低于预期<br>（盘中+8.7%未守）</td>
+    </tr>
+    <!-- 东方科脉 - FLAT -->
+    <tr>
+      <td>01770</td><td>东方科脉</td><td style="color:var(--gold);">⭐⭐⭐</td>
+      <td>78.64</td><td>77.15</td><td style="color:var(--green);">86.80</td><td>77.00</td><td>78.80</td>
+      <td class="debut-pnl" style="color:var(--gold);">+0.20%</td><td>--</td><td style="color:var(--gold);">⚠️ 延时上市<br>平收</td>
+    </tr>
+    <!-- 鼎泰高科 - SLIGHT LOSS -->
+    <tr>
+      <td>01377</td><td>鼎泰高科</td><td style="color:var(--green);">⭐⭐⭐⭐⭐ 30</td>
+      <td>380.00</td><td style="color:var(--red);">330.00</td><td>380.00</td><td style="color:var(--red);">330.00</td><td>376.40</td>
+      <td class="debut-pnl" style="color:var(--red);">-0.95%</td><td>+5%~+10%</td><td style="color:var(--red);">❌ 大幅低于<br>（开跌-13%后反弹）</td>
+    </tr>
+    <!-- 立讯精密 - LOSS -->
+    <tr>
+      <td>02475</td><td>立讯精密</td><td style="color:var(--green);">⭐⭐⭐⭐⭐ 31</td>
+      <td>63.28</td><td style="color:var(--red);">63.25</td><td>63.25</td><td style="color:var(--red);">57.20</td><td>60.00</td>
+      <td class="debut-pnl" style="color:var(--red);">-5.18%</td><td>+3%~+8%</td><td style="color:var(--red);">❌ 严重低于</td>
+    </tr>
+    <!-- 普源精电 - CRASH -->
+    <tr>
+      <td>00537</td><td>普源精电</td><td style="color:var(--gold);">⭐⭐⭐ 22</td>
+      <td>45.98</td><td style="color:var(--red);">37.36</td><td>38.00</td><td style="color:var(--red);">28.74</td><td>30.34</td>
+      <td class="debut-pnl" style="color:var(--red);">-34.01%</td><td>-3%~+5%</td><td style="color:var(--red);">💀 严重暴跌</td>
+    </tr>
+    <!-- 齐云山食品 - EXPLODE -->
+    <tr>
+      <td>02797</td><td>齐云山食品</td><td style="color:var(--red);">⭐ 14</td>
+      <td>8.00</td><td style="color:var(--green);">16.00</td><td style="color:var(--green);">26.00</td><td>16.00</td><td>23.00</td>
+      <td class="debut-pnl" style="color:var(--accent);">+187.50%</td><td>-10%~0%</td><td style="color:var(--accent);">🤯 完全相反</td>
+    </tr>
+  </table>
+
+  <!-- ============ INDIVIDUAL ANALYSIS ============ -->
+  <div class="section-title">🔍 逐只深度解读 <span class="line"></span></div>
+
+  <!-- 珞石机器人 -->
+  <div class="ipo-card debut-win">
+    <div class="header"><span class="score s4">⭐⭐⭐⭐ 27分</span><h2>珞石机器人</h2><span class="code">03752.HK</span></div>
+    <div class="reason">
+      <strong>🏆 今日最佳表现！开盘38.02(+0.05%)迅速拉升，最高44.56(+17.2%)，午盘41.56(+9.4%)。</strong>成交量315万股，成交额1.24亿HKD。<br><br>
+      <strong>成功因素：</strong>协作机器人赛道纯正（市场唯一纯协作机器人标的），35倍适度超购无抛压负担，38HKD低价+3838HKD入场费吸引散户，机器人概念受到A股主题共振。事前预测+3%~+8%，实际+9.4%超预期——这是模型今天唯一准确预测的案例。
+    </div>
+    <div class="verdict-box buy">✅ 建议持有 · 协作机器人唯一标的稀缺性强 · A股机器人概念持续火爆 · 止盈目标上调至+15%~+20%</div>
+  </div>
+
+  <!-- 齐云山食品 -->
+  <div class="ipo-card debut-boom">
+    <div class="header"><span class="score s1">⭐ 14分</span><h2>齐云山食品</h2><span class="code">02797.HK</span></div>
+    <div class="reason">
+      <strong>🤯 今日最大黑马！开盘翻倍16.00(+100%)，最高26.00(+225%)，午盘23.00(+187.5%)。</strong>成交量921万股，成交额1.53亿HKD。<br><br>
+      <strong>暴涨原因分析：</strong>①极低IPO价8HKD+低入场费4040HKD创造"散户友好"效应；②小市值（募资仅约2亿），流通盘极小，少量资金即可拉升；③"齐云山"食品品牌在华南有知名度，散户跟风效应强；④市场在7只扎堆中只能聚焦1-2只，齐云山因低价+品牌成为散户首选"博彩标的"。<br><br>
+      <strong style="color:var(--red);">模型为何完全失败：</strong>无基石+无绿鞋的预警在"散户驱动"的小盘消费股上完全失效。这套维度的设计假设是机构定价市场，但8HKD的食品股本质上是散户博弈品种。需要引入"散户驱动因子"来识别这类标的。
+    </div>
+    <div class="verdict-box info">🔧 方法论漏洞：缺乏对"低价小盘+品牌消费+散户追捧"的特殊识别模块。此类IPO不应仅按基石/估值评分，需引入散户情绪维度。</div>
+  </div>
+
+  <!-- 三环集团 -->
+  <div class="ipo-card debut-flat">
+    <div class="header"><span class="score s5">⭐⭐⭐⭐⭐ 33分</span><h2>三环集团</h2><span class="code">06951.HK</span></div>
+    <div class="reason">
+      <strong>盘中冲高+8.7%后回落至平收，全明星基石未能守住涨幅。</strong>开盘100.30(IPO价)，最高109.00(+8.67%)，午盘100.40(+0.10%)。成交量1199万股，成交额12.1亿HKD（最大成交）。<br><br>
+      <strong>偏差分析：</strong>淡马锡+腾讯+阿里+高盛+大摩17家全明星基石，61倍超购热度OK，A/H折价~49%看似安全垫充足。但A股三环集团今日续跌3.8%至125.49元，两天累计跌近10%，A股拖累下H股难以独善其身。盘中+8.7%的冲高说明质地没问题，是<strong>A股暴跌+7只扎堆分流</strong>双重压制了首日表现。
+    </div>
+    <div class="verdict-box buy">✅ 可持有观望 · A/H折价仍达26%有安全垫 · A股若企稳H股有望补涨 · 17家基石锁定期提供中长期支撑</div>
+  </div>
+
+  <!-- 立讯精密 -->
+  <div class="ipo-card debut-loss">
+    <div class="header"><span class="score s5">⭐⭐⭐⭐⭐ 31分</span><h2>立讯精密</h2><span class="code">02475.HK</span></div>
+    <div class="reason">
+      <strong>❌ 今日最大滑铁卢：26家基石含ADIA主权基金，仍然破发-5.2%。</strong>开盘63.25(几乎IPO价)，随即一路下滑，最低57.20(-9.6%)，午盘60.00(-5.2%)。成交量4480万股，成交额27.4亿HKD（超大成交）。<br><br>
+      <strong>失败原因深度剖析：</strong>①A/H折价仅~6%是根本问题——安全垫太薄，A股立讯今日-1.5%至61.54，H/A溢价仅10%，套利空间几乎不存在；②31亿美元巨型IPO，流通盘巨大，首日卖压远超承接力；③Apple供应链概念股在贸易摩擦背景下承压；④7只扎堆日，资金严重分散。26家基石只能保证中长期不崩，无法防止首日破发——<strong>ADIA主权基金也不是稳价人</strong>。
+    </div>
+    <div class="verdict-box warn">⚠️ 关注止损 · A/H溢价仅10%无套利空间 · Apple概念短期承压 · 但31亿美元大票长期有机构护盘 · 如未中签不建议追入</div>
+  </div>
+
+  <!-- 鼎泰高科 -->
+  <div class="ipo-card debut-loss">
+    <div class="header"><span class="score s5">⭐⭐⭐⭐⭐ 30分</span><h2>鼎泰高科</h2><span class="code">01377.HK</span></div>
+    <div class="reason">
+      <strong>开盘暴跌-13%至330，随后强势反弹至376.4(-0.95%)，完成深V。</strong>成交量156万股，成交额5.65亿HKD。入场费38,383HKD极高，散户参与少，机构博弈为主。<br><br>
+      <strong>偏差分析：</strong>17家基石2.54亿美元承诺，50倍超购，但极高入场费导致散户几乎无法参与，首日流动性全靠机构。开盘-13%很可能是某个基石/锚定投资者集中出货，随后其他机构抄底反弹。类似瑞为技术的"深蹲起跳"但幅度更大。最终-0.95%虽不理想，但从-13%反弹至近平收说明机构认可价值。
+    </div>
+    <div class="verdict-box info">⚠️ 观察 · 深V反弹显示机构承接力 · 入场费极高散户勿追 · 如持有可在反弹至IPO价附近减仓</div>
+  </div>
+
+  <!-- 普源精电 -->
+  <div class="ipo-card debut-loss">
+    <div class="header"><span class="score s3">⭐⭐⭐ 22分</span><h2>普源精电</h2><span class="code">00537.HK</span></div>
+    <div class="reason">
+      <strong>💀 今日最惨：暴跌-34%，开盘即崩盘。</strong>开盘37.36(-18.8%)，最低28.74(-37.5%)，午盘30.34(-34.0%)。成交量549万股，成交额1.87亿HKD。<br><br>
+      <strong>失败原因：</strong>①高瓴+CPE基石背书失效（继同仁堂后第二次高瓴基石破发）；②78倍超购意味着大量短期打新资金需要出逃，而超级上市日没有足够承接；③电测仪器赛道窄，可比标的少，市场定价困难导致开盘踩踏；④A股普源精电（688337）本身走势也不佳。<br><br>
+      <strong style="color:var(--red);">关键教训：高瓴基石光环正式破裂。</strong>连续两次（同仁堂-6.9%、普源-34%）高瓴基石IPO首日均破发。此后分析中高瓴不再享受+1分加成，降为普通机构待遇。
+    </div>
+    <div class="verdict-box skip">💀 建议止损 · 开盘即崩无反弹迹象 · 高瓴基石信号已失效两次 · 如中签应果断放弃幻想</div>
+  </div>
+
+  <!-- 东方科脉 -->
+  <div class="ipo-card debut-flat">
+    <div class="header"><span class="score s3">⭐⭐⭐</span><h2>东方科脉</h2><span class="code">01770.HK</span></div>
+    <div class="reason">
+      <strong>延时至今日上市，平收+0.2%。</strong>开盘77.15(-1.9%)，最高86.80(+10.4%)，午盘78.80(+0.2%)。成交量82万股，成交额6928万HKD。盘中冲高+10%但未能守住，回落至平收，与MOMENTA和三环的走势如出一辙——高开或盘中冲高后获利盘涌出。
+    </div>
+    <div class="verdict-box info">⚠️ 表现平庸 · 盘中+10%未守 · 建议有赚即走</div>
+  </div>
+
+  <!-- ============ DAY 2/3 TRACKING ============ -->
+  <div class="section-title">📈 前几日上市IPO追踪 <span class="line"></span></div>
+
+  <table class="debut-table">
+    <tr><th>代码</th><th>名称</th><th>上市日</th><th>IPO价</th><th>昨收</th><th>今收</th><th>累计涨跌</th><th>趋势</th></tr>
+    <tr>
+      <td>06880</td><td>MOMENTA</td><td>7/8</td><td>295.60</td><td>295.60</td><td>297.00</td><td style="color:var(--gold);">+0.47%</td><td style="color:var(--text-muted);">横盘</td>
+    </tr>
+    <tr>
+      <td>07687</td><td>易控智驾</td><td>7/8</td><td>87.92</td><td>96.70</td><td style="color:var(--red);">91.45</td><td style="color:var(--green);">+4.01%</td><td style="color:var(--orange);">获利回吐</td>
+    </tr>
+    <tr>
+      <td>07656</td><td>瑞为技术</td><td>7/8</td><td>21.66</td><td>21.00</td><td style="color:var(--green);">22.86</td><td style="color:var(--green);">+5.54%</td><td style="color:var(--green);">持续反弹</td>
+    </tr>
+    <tr>
+      <td>02667</td><td>同仁堂医养</td><td>7/7</td><td>3.35</td><td>3.12</td><td style="color:var(--red);">2.89</td><td style="color:var(--red);">-13.73%</td><td style="color:var(--red);">持续下跌</td>
+    </tr>
+  </table>
+
+  <div class="insight-box">
+    <strong>📊 D2/D3 关键观察：</strong><br>
+    • <strong>易控智驾回吐-5.4%：</strong>首日+10%后获利盘出逃，但累计仍涨+4%。验证了"适度超购(17倍)+产业资本基石"模式的可持续性优于极热认购。<br>
+    • <strong>瑞为技术反弹+8.9%：</strong>D2继续从首日最低-28%反弹，累计已+5.5%。"深蹲起跳"框架连续两日验证。无基石的恐慌性抛售=机会。<br>
+    • <strong>同仁堂继续失血-7.4%：</strong>D3累计跌-13.7%，毫无反弹迹象。老字号高倍数超购的泡沫正在破裂。确认25分评级过高。
+  </div>
+
+  <!-- ============ A-SHARE REFERENCE ============ -->
+  <div class="section-title">🇨🇳 A股对标行情（7月9日） <span class="line"></span></div>
+  <table class="debut-table">
+    <tr><th>A股代码</th><th>名称</th><th>A股价格</th><th>日涨跌</th><th>对应H股</th><th>H股价格</th><th>A/H溢价</th></tr>
+    <tr>
+      <td>300408</td><td>三环集团</td><td>125.49</td><td style="color:var(--red);">-3.79%</td><td>06951</td><td>100.40 HKD</td><td style="color:var(--gold);">+34%</td>
+    </tr>
+    <tr>
+      <td>002475</td><td>立讯精密</td><td>61.54</td><td style="color:var(--red);">-1.49%</td><td>02475</td><td>60.00 HKD</td><td style="color:var(--gold);">+10%</td>
+    </tr>
+    <tr>
+      <td>688249</td><td>晶合集成</td><td>62.33</td><td style="color:var(--green);">+6.53%</td><td>02249</td><td>明日上市</td><td>--</td>
+    </tr>
+    <tr>
+      <td>601678</td><td>滨化股份</td><td>5.53</td><td style="color:var(--red);">-3.66%</td><td>06745</td><td>明日上市</td><td>--</td>
+    </tr>
+  </table>
+
+  <!-- ============ TOMORROW PREVIEW ============ -->
+  <div class="section-title">🔮 明日上市预览（7月10日 · 2只） <span class="line"></span></div>
+
+  <div class="insight-box">
+    <strong>⚠️ 警惕：</strong>经历今日超级上市日的惨烈分流后，明天再有2只上市。但市场资金已严重消耗，晶合集成+滨化股份首日表现大概率打折。加之今日多只破发严重打击打新情绪。<br><br>
+    <strong>A股参考：</strong>晶合集成A股今日+6.5%报62.33，A/H折价参考54%有安全垫但需下调预期。滨化股份A股-3.7%报5.53，化工周期股，无绿鞋，风险偏高。
+  </div>
+
+  <table class="debut-table">
+    <tr><th>代码</th><th>名称</th><th>事前评分</th><th>IPO价/入场费</th><th>A股参考</th><th>A/H折价</th><th>关键看点</th><th>首日预判<br>（下调版）</th></tr>
+    <tr>
+      <td>02249</td><td>晶合集成</td><td style="color:var(--accent2);">⭐⭐⭐⭐ 28分</td><td>~5,858 HKD</td><td>62.33</td><td style="color:var(--green);">~54%</td><td>20家基石含高瓴+高毅<br>Q1净利降63%</td>
+      <td style="color:var(--gold);">+2%~+8%<br><small>（超级上市日后下调）</small></td>
+    </tr>
+    <tr>
+      <td>06745</td><td>滨化股份</td><td style="color:var(--gold);">⭐⭐⭐ 19分</td><td>~2,500 HKD</td><td>5.53</td><td style="color:var(--gold);">中等</td><td style="color:var(--red);">❌ 无绿鞋</td>
+      <td style="color:var(--red);">-5%~+3%<br><small>无绿鞋+化工周期</small></td>
+    </tr>
+  </table>
+
+  <!-- ============ METHODOLOGY LESSONS ============ -->
+  <div class="divider"></div>
+  <div class="section-title">🧠 方法论紧急修正 · 超级上市日教训 <span class="line"></span></div>
+
+  <div class="insight-box danger">
+    <strong>🔴 严重警告：</strong>这是该IPO评估体系上线以来的最大方法论危机。今日7只齐发，模型预测准确率不到30%（仅珞石机器人1只准确）。必须进行紧急修正。
+  </div>
+
+  <div class="lesson-grid">
+    <div class="lesson-card">
+      <div class="lesson-num">01</div>
+      <div class="lesson-title">超级上市日自动降级</div>
+      <div class="lesson-body">同日≥5只IPO上市 → 所有评分自动降<strong>1星</strong>。流动性稀释效应是首日表现的最大敌人，超越任何基石/估值的保护。立讯精密26家基石照样破发-5%。<br><br><strong>修正：</strong>在评分体系中新增"同日上市数量"惩罚因子。</div>
+    </div>
+    <div class="lesson-card">
+      <div class="lesson-num">02</div>
+      <div class="lesson-title">基石质量≠首日保障</div>
+      <div class="lesson-body">ADIA主权基金也没能在首日稳住立讯精密。基石的长线锁仓只能保证<strong>中长期下限</strong>，无法防止短期抛售。尤其是巨型IPO（>20亿美元），首日卖压远超任何基石的承接力。<br><br><strong>修正：</strong>基石维度增加"IPO规模"子因子，巨型IPO仅靠基石不足以护盘。</div>
+    </div>
+    <div class="lesson-card">
+      <div class="lesson-num">03</div>
+      <div class="lesson-title">高瓴基石光环正式破裂</div>
+      <div class="lesson-body">连续两次：同仁堂医养（高瓴基石→首日-6.9%→D3累计-13.7%），普源精电（高瓴+CPE基石→首日-34%）。高瓴不再是"买了就稳"的信号。<br><br><strong>修正：</strong>高瓴内核从"+1分"降为"+0.5分"，并附注"近期连续破发需警惕"。</div>
+    </div>
+    <div class="lesson-card">
+      <div class="lesson-num">04</div>
+      <div class="lesson-title">散户驱动小盘股需新维度</div>
+      <div class="lesson-body">齐云山食品：无基石+无绿鞋=⭐14分跳过，结果+187%。模型的基石/估值/保荐人均为机构维度，但<strong>低价+品牌消费+小市值</strong>的IPO本质上由散户情绪驱动。<br><br><strong>修正：</strong>新增"散户驱动因子"——IPO价<10HKD + 消费品牌 + 募资<5亿HKD → 单独提示散户博弈属性。</div>
+    </div>
+  </div>
+
+  <!-- METHODOLOGY PATCH -->
+  <div class="method-patch">
+    <h4>🔧 待执行的 Skill Patch（方法论修正）</h4>
+    <ul>
+      <li><strong>新增规则：超级上市日惩罚因子</strong> — 同日≥5只上市，总评自动降1星。分值计算中热度维度增加-1调整。</li>
+      <li><strong>调整基石评分：区分"巨型IPO"</strong> — 募资>20亿美元时，基石维度最高得分降为4分（而非5分），因首日抛压远大于基石承接力。</li>
+      <li><strong>高瓴基石降级：</strong>从+1分降为+0.5分，增加注记"近期同仁堂/普源连续破发"。</li>
+      <li><strong>新增散户驱动因子：</strong>IPO价<10HKD且品牌消费且募资<5亿HKD时，标注"散户博弈型"，不适用常规基石/估值分析框架。</li>
+      <li><strong>超购倍数上限效应：</strong>超购>70倍且在超级上市日 → 热度维度额外-1分，因获利盘抛压集中释放。</li>
+    </ul>
+  </div>
+
+  <!-- ============ TIMELINE ============ -->
+  <div class="divider"></div>
+  <div class="section-title">📅 本周IPO时间线 <span class="line"></span></div>
+  <table class="debut-table">
+    <tr><th>日期</th><th>事件</th><th>影响</th></tr>
+    <tr><td>7/8（三）✅</td><td>MOMENTA/易控/瑞为/东方科脉上市 · 永康截止</td><td style="color:var(--accent2);">完成</td></tr>
+    <tr><td>7/9（四）🔥 今天</td><td>三环/立讯/鼎泰/珞石/普源/齐云山+东方科脉 7只齐发</td><td style="color:var(--red);">超级上市日</td></tr>
+    <tr><td>7/10（五）</td><td>晶合集成+滨化股份上市</td><td style="color:var(--orange);">2只，降预期</td></tr>
+    <tr><td>7/13（日）</td><td>永康控股上市</td><td style="color:var(--text-muted);">尾单，跳过</td></tr>
+  </table>
+
+  <!-- ============ MODEL SCORECARD ============ -->
+  <div class="divider"></div>
+  <div class="section-title">📊 模型表现记分卡（本轮13只IPO） <span class="line"></span></div>
+
+  <table class="debut-table">
+    <tr><th>IPO</th><th>事前评分</th><th>建议</th><th>首日表现</th><th>模型准确？</th></tr>
+    <tr><td style="color:var(--accent2);">易控智驾</td><td>26分 ⭐⭐⭐⭐</td><td style="color:var(--green);">申购</td><td style="color:var(--green);">+10.0%</td><td style="color:var(--green);">✅</td></tr>
+    <tr><td style="color:var(--accent2);">珞石机器人</td><td>27分 ⭐⭐⭐⭐</td><td style="color:var(--green);">申购</td><td style="color:var(--green);">+9.4%</td><td style="color:var(--green);">✅</td></tr>
+    <tr><td style="color:var(--green);">三环集团</td><td>33分 ⭐⭐⭐⭐⭐</td><td style="color:var(--green);">强烈申购</td><td style="color:var(--gold);">+0.1%</td><td style="color:var(--orange);">⚠️偏乐观</td></tr>
+    <tr><td style="color:var(--green);">鼎泰高科</td><td>30分 ⭐⭐⭐⭐⭐</td><td style="color:var(--green);">强烈申购</td><td style="color:var(--red);">-1.0%</td><td style="color:var(--red);">❌</td></tr>
+    <tr><td>MOMENTA</td><td>28分 ⭐⭐⭐⭐</td><td style="color:var(--green);">申购</td><td style="color:var(--gold);">0.0%</td><td style="color:var(--orange);">⚠️偏乐观</td></tr>
+    <tr><td style="color:var(--gold);">东方科脉</td><td>~22分 ⭐⭐⭐</td><td style="color:var(--gold);">可申可不申</td><td style="color:var(--gold);">+0.2%</td><td style="color:var(--green);">✅</td></tr>
+    <tr><td style="color:var(--green);">立讯精密</td><td>31分 ⭐⭐⭐⭐⭐</td><td style="color:var(--green);">强烈申购</td><td style="color:var(--red);">-5.2%</td><td style="color:var(--red);">❌❌</td></tr>
+    <tr><td>同仁堂医养</td><td>25分 ⭐⭐⭐⭐</td><td style="color:var(--green);">申购</td><td style="color:var(--red);">-6.9%*</td><td style="color:var(--red);">❌</td></tr>
+    <tr><td style="color:var(--red);">瑞为技术</td><td>23分 ⭐⭐⭐</td><td style="color:var(--red);">跳过</td><td style="color:var(--red);">-3.1%</td><td style="color:var(--green);">✅</td></tr>
+    <tr><td style="color:var(--gold);">普源精电</td><td>22分 ⭐⭐⭐</td><td style="color:var(--gold);">可申可不申</td><td style="color:var(--red);">-34.0%</td><td style="color:var(--red);">❌❌</td></tr>
+    <tr><td style="color:var(--red);">齐云山食品</td><td>14分 ⭐</td><td style="color:var(--red);">跳过</td><td style="color:var(--accent);">+187.5%</td><td style="color:var(--red);">❌❌❌</td></tr>
+  </table>
+
+  <div class="insight-box danger">
+    <strong>📊 模型准确率统计（已上市11只）：</strong><br>
+    ✅ 准确预测：4只（易控+珞石+东方科脉+瑞为）= 36%<br>
+    ⚠️ 偏乐观但未破发：2只（三环+MOMENTA）= 18%<br>
+    ❌ 明显错误：5只（立讯-5%+鼎泰-1%+同仁堂-7%+普源-34%+齐云山+188%）= 45%<br><br>
+    <strong>结论：模型在正常市场环境（单日1-3只上市）准确率可接受。但在"超级上市日"极端分流环境下，准确率断崖式下降。</strong>这是方法论的结构性缺陷——未将"IPO供给端压力"纳入核心模型。必须增加短期供需维度。
+  </div>
+
+  <!-- ============ RISK NOTE ============ -->
+  <div class="risk-note">
+    <strong>⚠️ 风险提示：</strong>本分析仅供参考，不构成投资建议。港股打新有破发风险，过往表现不代表未来收益。<br><br>
+    <strong>今日特别提醒：</strong><br>
+    • 申购窗口已完全关闭，无新股可申购<br>
+    • 今日7只齐发，破发率43%（3/7），是模型上线以来最惨烈的一天<br>
+    • 立讯精密-5.2%（26家基石+ADIA主权基金），证明基石质量在超级上市日无保护力<br>
+    • 齐云山食品+188%（无基石无绿鞋），证明低价小盘消费股不受常规框架约束<br>
+    • 普源精电-34%（高领基石），高瓴光环连续两次破发已失效<br>
+    • 明日晶合集成+滨化股份上市，因今日惨烈教训，大幅下调首日预期<br>
+    • 方法论已识别4项紧急修正，将在下次skill更新中执行<br>
+    • 核心教训：<strong>IPO供给量（同日上市数）应该是评分体系的独立维度，权重≥15%</strong>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>📊 港股打新 · 七维度量化评分模型 · 2026年7月9日更新</p>
+  <p style="margin-top:4px;">免责声明：本分析基于公开信息和量化模型，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+</body>
+</html>

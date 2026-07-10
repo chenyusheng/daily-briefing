@@ -244,28 +244,53 @@
   /* ===== RESPONSIVE ===== */
   @media(max-width:820px){
     .container{padding:0 14px}
-    .hero{padding:28px 0 16px}
-    .hero-title{font-size:22px}
-    .stats-bar{gap:8px}
-    .stat-card{padding:8px 12px;min-width:60px}
-    .stat-card .num{font-size:16px}
+    .hero{padding:24px 0 14px}
+    .hero-title{font-size:20px}
+    .stats-bar{gap:6px;margin:8px auto 16px}
+    .stat-card{padding:6px 10px;min-width:50px}
+    .stat-card .num{font-size:14px}
+    .stat-card .lbl{font-size:8px}
+    .legend-wrap{display:none}
   }
+
+  /* Mobile: stacked cards, no timeline line */
   @media(max-width:700px){
-    .tl-date{width:70px;text-align:right;padding:12px 8px 12px 0;flex-shrink:0}
-    .tl-date .day{font-size:16px}
-    .tl-date .day.sm{font-size:13px}
-    .tl-date .mon{font-size:9px}
-    .tl-date .range{display:none}
-    .tl-card{width:calc(100% - 110px);padding:0 0 0 10px}
-    .tl-line{left:90px}
-    .tl-dot{position:absolute;left:81px;margin-top:14px}
-    .tl-item{position:relative;padding-left:0}
-    .tl-today-inner{font-size:10px;padding:4px 14px 4px 10px}
-    .tl-card-top{flex-wrap:wrap}
+    .tl-line,.tl-dot,.tl-progress,.tl-date{display:none}
+    .tl-today{margin-bottom:16px}
+    .tl-today-inner{font-size:10px;padding:4px 12px 4px 10px}
+    .tl-item{display:block;margin-bottom:8px;padding:0}
+    .tl-card{width:100%;padding:0}
+    .tl-card-inner{padding:10px 12px}
+    .tl-card-inner::before{width:3px}
+    .tl-card-top{gap:6px;flex-wrap:wrap}
+    .tl-card-stock{font-size:9px;padding:1px 8px 1px 6px}
+    .tl-card-stock .sc-dot{width:5px;height:5px}
     .tl-card-title{font-size:12px}
-    .tl-card-type{font-size:8px}
-    .filter-scroll{justify-content:flex-start}
-    .urgent-item{flex-wrap:wrap}
+    .tl-card-type{font-size:8px;padding:1px 6px}
+    .tl-card-imp{margin:2px 0}
+    .tl-card-imp .stars{font-size:9px}
+    .tl-card-imp .lbl{font-size:8px}
+    .tl-card-desc{font-size:10px;margin-top:3px}
+    .tl-card-detail{margin-top:4px;padding:4px 8px;font-size:9px}
+    .tl-card-tags{margin-top:4px;gap:3px}
+    .tl-tag{font-size:7px;padding:1px 6px}
+    .tl-status{position:static;display:inline-block;margin-left:auto}
+
+    /* Urgent bar */
+    .urgent-bar{margin-bottom:16px}
+    .urgent-h{font-size:10px;padding:6px 10px}
+    .urgent-b{padding:6px 10px}
+    .urgent-item{font-size:10px;padding:4px 0;gap:6px}
+    .urgent-item .us{font-size:9px}
+    .urgent-item .ur{font-size:8px}
+
+    /* Filters: compact */
+    .filter-wrap{margin-bottom:16px}
+    .filter-scroll{gap:4px}
+    .filter-btn{padding:4px 10px;font-size:10px}
+    .filter-stock-btn{width:22px;height:22px;font-size:8px}
+    .filter-sep{height:18px;margin:0 2px}
+    .hero-links{font-size:10px}
   }
   @media(min-width:1400px){
     .container{max-width:1200px}.hero{padding:48px 0 24px}.hero-title{font-size:30px}

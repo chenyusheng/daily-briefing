@@ -364,7 +364,7 @@ function pwCheck() {
   crypto.subtle.digest('SHA-256', enc.encode(val)).then(function(buf) {
     var hash = Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
     if (hash === PW_HASH) {
-      sessionStorage.setItem('daily_briefing_auth', '1');
+      localStorage.setItem('daily_briefing_auth', '1');
       document.getElementById('pwOverlay').classList.add('hidden');
       document.getElementById('mainContent').style.display = '';
     } else {
@@ -381,7 +381,7 @@ function pwCheck() {
   });
 }
 
-if (sessionStorage.getItem('daily_briefing_auth') === '1') {
+if (localStorage.getItem('daily_briefing_auth') === '1') {
   document.getElementById('pwOverlay').classList.add('hidden');
   document.getElementById('mainContent').style.display = '';
 }

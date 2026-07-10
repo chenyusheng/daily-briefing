@@ -6,703 +6,558 @@
 <title>📌 全持仓事件时间轴</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{--bg:#f4f5f8;--surface:#fff;--surface-alt:#f0f1f4;--border:#e4e6ec;--border-l:#eef0f3;--text:#191c24;--text2:#56606e;--text3:#8e96a6;--text4:#b0b8c8;--blue:#1a5cc8;--blue-l:#e5edf8;--purple:#6d28d9;--purple-l:#ede9fe;--green:#059669;--green-l:#ecfdf5;--orange:#d97706;--orange-l:#fef3c7;--red:#dc2626;--red-l:#fef2f2;--teal:#0d9488;--teal-l:#ccfbf1;--amber:#b45309;--amber-l:#fffbeb;--indigo:#4338ca;--indigo-l:#e0e7ff;--emerald:#047857;--emerald-l:#d1fae5;--slate:#475569;--slate-l:#f1f5f9;--gray:#6b7280;--gray-l:#f3f4f6;--radius:14px;--radius-sm:10px;--shadow:0 1px 3px rgba(0,0,0,.04),0 4px 14px rgba(0,0,0,.03);--shadow-lg:0 4px 24px rgba(0,0,0,.07);--font:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
-  body{font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.5;min-height:100vh}
-  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f6fa;--surface:#fff;--border:#e4e6ec;--text:#191c24;--text2:#56606e;--text3:#8e96a6;
+  --blue:#1a5cc8;--blue-l:#e8eeff;--purple:#6d28d9;--purple-l:#f0e8ff;
+  --green:#059669;--green-l:#e8faf0;--orange:#d97706;--orange-l:#fff3e0;
+  --red:#dc2626;--red-l:#ffe8e8;--teal:#0d9488;--teal-l:#e0faf5;
+  --amber:#b45309;--amber-l:#fff8e1;--indigo:#4338ca;--indigo-l:#e8ecff;
+  --emerald:#047857;--emerald-l:#e0f5ec;--slate:#475569;--slate-l:#f0f2f5;
+  --gray:#6b7280;--gray-l:#f3f4f6;--pink:#db2777;--pink-l:#ffe0ec;
+  --radius:12px;--shadow:0 1px 3px rgba(0,0,0,.05),0 2px 8px rgba(0,0,0,.04);
+  --font:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.5;min-height:100vh}
+.container{max-width:820px;margin:0 auto;padding:0 20px}
 
-  /* ===== PASSWORD OVERLAY ===== */
-  .pw-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .4s}
-  .pw-overlay.hidden{opacity:0;pointer-events:none}
-  .pw-box{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:48px 40px 40px;max-width:380px;width:90%;text-align:center;box-shadow:var(--shadow-lg)}
-  .pw-icon{font-size:36px;margin-bottom:8px}
-  .pw-title{font-size:18px;font-weight:700;margin-bottom:4px}
-  .pw-sub{font-size:11px;color:var(--text3);margin-bottom:24px}
-  .pw-input{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:12px;font-size:15px;font-family:var(--font);background:var(--surface);color:var(--text);outline:none;transition:border-color .15s}
-  .pw-input:focus{border-color:var(--blue)}
-  .pw-input::placeholder{color:var(--text3)}
-  .pw-btn{width:100%;margin-top:12px;padding:12px;border:none;border-radius:12px;background:var(--blue);color:#fff;font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;transition:opacity .15s}
-  .pw-btn:hover{opacity:.85}
-  .pw-btn:disabled{opacity:.4;cursor:not-allowed}
-  .pw-err{font-size:11px;color:var(--red);margin-top:10px;min-height:18px}
-  .pw-hint{font-size:10px;color:var(--text3);margin-top:14px}
+/* ===== PASSWORD ===== */
+.pw-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .4s}
+.pw-overlay.hidden{opacity:0;pointer-events:none}
+.pw-box{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:48px 40px 40px;max-width:380px;width:90%;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.pw-icon{font-size:36px;margin-bottom:8px}
+.pw-title{font-size:18px;font-weight:700;margin-bottom:4px}
+.pw-sub{font-size:11px;color:var(--text3);margin-bottom:24px}
+.pw-input{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:12px;font-size:15px;font-family:var(--font);background:var(--surface);color:var(--text);outline:none;transition:border-color .15s}
+.pw-input:focus{border-color:var(--blue)}
+.pw-input::placeholder{color:var(--text3)}
+.pw-btn{width:100%;margin-top:12px;padding:12px;border:none;border-radius:12px;background:var(--blue);color:#fff;font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;transition:opacity .15s}
+.pw-btn:hover{opacity:.85}
+.pw-btn:disabled{opacity:.4;cursor:not-allowed}
+.pw-err{font-size:11px;color:var(--red);margin-top:10px;min-height:18px}
 
-  /* ===== HERO ===== */
-  .hero{padding:40px 0 20px;text-align:center}
-  .hero-icon{font-size:34px;margin-bottom:2px}
-  .hero-title{font-size:26px;font-weight:700;letter-spacing:-.5px}
-  .hero-title span{display:inline-block;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .hero-sub{font-size:12px;color:var(--text2);margin-top:4px}
-  .hero-links{margin-top:8px;font-size:11px;color:var(--text3)}
-  .hero-links a{color:var(--blue);text-decoration:none}
-  .hero-links a:hover{text-decoration:underline}
+/* ===== HEADER ===== */
+.header{text-align:center;padding:32px 0 8px}
+.header h1{font-size:24px;font-weight:700;letter-spacing:-.5px}
+.header h1 span{background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header .sub{font-size:11px;color:var(--text3);margin-top:2px}
+.header .links{font-size:10px;color:var(--text3);margin-top:6px}
+.header .links a{color:var(--blue);text-decoration:none}
 
-  /* ===== STATS BAR ===== */
-  .stats-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:12px auto 20px;max-width:700px}
-  .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 18px;text-align:center;min-width:80px;box-shadow:var(--shadow)}
-  .stat-card .num{font-size:20px;font-weight:700;line-height:1.2}
-  .stat-card .lbl{font-size:9px;color:var(--text3);margin-top:2px}
-  .stat-card.red .num{color:var(--red)}
-  .stat-card.orange .num{color:var(--orange)}
-  .stat-card.blue .num{color:var(--blue)}
-  .stat-card.green .num{color:var(--green)}
-  .stat-card.purple .num{color:var(--purple)}
-  .stat-card .num .s{font-size:11px;font-weight:400;color:var(--text3)}
+/* ===== STATS ===== */
+.stats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px auto 16px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:7px 14px;text-align:center;min-width:48px;box-shadow:var(--shadow)}
+.stat .n{font-size:18px;font-weight:700;line-height:1.2}
+.stat .l{font-size:8px;color:var(--text3);margin-top:1px}
+.stat.s-red .n{color:var(--red)}
+.stat.s-orange .n{color:var(--orange)}
+.stat.s-blue .n{color:var(--blue)}
+.stat.s-green .n{color:var(--green)}
 
-  /* ===== FILTERS ===== */
-  .filter-wrap{margin:0 auto 24px;text-align:center}
-  .filter-scroll{display:flex;gap:6px;overflow-x:auto;padding:4px 0;justify-content:center;flex-wrap:wrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .filter-scroll::-webkit-scrollbar{display:none}
-  .filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:var(--surface);font-size:11px;font-weight:500;cursor:pointer;font-family:var(--font);color:var(--text2);white-space:nowrap;transition:all .15s;box-shadow:var(--shadow)}
-  .filter-btn:hover{border-color:var(--text3);color:var(--text)}
-  .filter-btn.active{border-color:transparent;color:#fff;background:var(--text)}
-  .filter-btn.active[data-f="today"]{background:var(--red);color:#fff}
-  .filter-btn.active[data-f="upcoming"]{background:var(--orange);color:#fff}
-  .filter-btn.active[data-f="monitoring"]{background:var(--gray);color:#fff}
-  .filter-btn.active[data-f="all"]{background:var(--text);color:#fff}
-  .filter-stock-btn{width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:all .15s;font-size:0;padding:0;flex-shrink:0}
-  .filter-stock-btn.active{border-color:var(--text);transform:scale(1.15);box-shadow:0 0 0 2px #fff,0 0 0 4px currentColor}
-  .filter-stock-btn:hover{opacity:.8;transform:scale(1.1)}
-  .filter-sep{width:1px;height:24px;background:var(--border);margin:0 4px}
+/* ===== LEGEND ===== */
+.legend{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:0 auto 16px}
+.legend-item{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:var(--text3);padding:3px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border)}
 
-  /* ===== TIMELINE ===== */
-  .tl-wrap{position:relative;padding-bottom:40px}
-  .tl-line{position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--border);transform:translateX(-50%);z-index:0;overflow:hidden}
-  .tl-line .tl-progress{position:absolute;top:0;left:0;width:100%;background:linear-gradient(180deg,var(--red),var(--orange),var(--blue));border-radius:1px}
+/* ===== MONTH BAR ===== */
+.month-bar{display:flex;gap:0;margin:0 0 20px;padding:0;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow)}
+.month-item{flex:1;text-align:center;padding:8px 4px;font-size:11px;font-weight:600;color:var(--text3);cursor:pointer;border-right:1px solid var(--border);transition:all .15s;position:relative}
+.month-item:last-child{border-right:none}
+.month-item:hover{background:var(--gray-l)}
+.month-item.active{color:#fff}
+.month-item.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:3px;border-radius:2px 2px 0 0}
+.month-item .mc{display:block;font-size:8px;font-weight:400;opacity:.7;margin-top:1px}
 
-  /* Today marker */
-  .tl-today{position:relative;margin-bottom:24px;text-align:center}
-  .tl-today-inner{display:inline-flex;align-items:center;gap:8px;background:var(--red-l);border:1px solid var(--red);border-radius:20px;padding:6px 18px 6px 14px;font-size:12px;font-weight:600;color:var(--red)}
-  .tl-today-inner .dot{width:10px;height:10px;border-radius:50%;background:var(--red);animation:pulse 2s ease-in-out infinite}
+/* Month colors (gradient of active state) */
+.month-item.m7.active{background:var(--pink)}.month-item.m7.active::after{background:var(--pink)}
+.month-item.m8.active{background:var(--orange)}.month-item.m8.active::after{background:var(--orange)}
+.month-item.m9.active{background:var(--blue)}.month-item.m9.active::after{background:var(--blue)}
+.month-item.m10.active{background:var(--purple)}.month-item.m10.active::after{background:var(--purple)}
+.month-item.m11.active{background:var(--indigo)}.month-item.m11.active::after{background:var(--indigo)}
+.month-item.m12.active{background:var(--gray)}.month-item.m12.active::after{background:var(--gray)}
 
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+/* ===== FILTERS ===== */
+.filters{display:flex;gap:4px;margin:0 auto 16px;flex-wrap:wrap;justify-content:center}
+.filter-btn{padding:5px 12px;border-radius:16px;border:1px solid var(--border);background:var(--surface);font-size:10px;font-weight:500;cursor:pointer;font-family:var(--font);color:var(--text2);transition:all .15s;box-shadow:var(--shadow)}
+.filter-btn:hover{border-color:var(--text3)}
+.filter-btn.active{border-color:transparent;color:#fff}
+.filter-btn.f-all.active{background:var(--text)}
+.filter-btn.f-urgent.active{background:var(--red)}
+.filter-btn.f-upcoming.active{background:var(--orange)}
+.filter-btn.f-monitoring.active{background:var(--gray)}
+.filter-btn.f-done.active{background:var(--green)}
+.filter-sep{width:1px;height:20px;background:var(--border);margin:0 2px}
 
-  /* Event items */
-  .tl-item{position:relative;z-index:1;margin-bottom:8px;display:flex;align-items:flex-start}
-  .tl-item.hidden{display:none}
-  .tl-item.done{opacity:.55}
-  .tl-item.done:hover{opacity:.8}
+/* Stock filter dots */
+.stock-dots{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:0 auto 12px}
+.sdot{width:24px;height:24px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:all .15s;font-size:0;padding:0;flex-shrink:0}
+.sdot:hover{opacity:.8;transform:scale(1.12)}
+.sdot.active{border-color:var(--text);transform:scale(1.15);box-shadow:0 0 0 2px #fff,0 0 0 4px currentColor}
 
-  /* Left side: date */
-  .tl-date{width:calc(50% - 40px);text-align:right;padding:12px 20px 12px 0;flex-shrink:0}
-  .tl-date .mon{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
-  .tl-date .day{font-size:22px;font-weight:800;color:var(--text);line-height:1.1;letter-spacing:-.5px}
-  .tl-date .day.sm{font-size:16px}
-  .tl-date .range{font-size:10px;color:var(--text3);margin-top:1px}
-  .tl-item.done .tl-date .day,
-  .tl-item.done .tl-date .mon{color:var(--text4)}
-  .tl-item.done .tl-date .mon{color:var(--text4)}
+/* ===== URGENT BAR ===== */
+.urgent{background:var(--red-l);border:1px solid var(--red);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.urgent-h{display:flex;align-items:center;gap:6px;padding:8px 14px;font-size:11px;font-weight:600;color:var(--red)}
+.urgent-b{padding:4px 14px 8px}
+.urgent-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:11px;border-bottom:1px solid var(--red-l)}
+.urgent-item:last-child{border-bottom:none}
+.urgent-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.urgent-date{font-size:9px;color:var(--text3);flex-shrink:0;min-width:50px}
+.urgent-title{flex:1;min-width:0}
+.urgent-title .ut{font-weight:600}
+.urgent-title .us{font-size:9px;color:var(--text3)}
+.urgent-badge{font-size:8px;padding:1px 8px;border-radius:8px;font-weight:600;flex-shrink:0}
+.urgent-badge.ub-red{color:var(--red);background:var(--red-l)}
+.urgent-badge.ub-orange{color:var(--orange);background:var(--orange-l)}
 
-  /* Center: dot */
-  .tl-dot{position:relative;z-index:2;width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:16px;border:3px solid;transition:transform .2s;display:flex;align-items:center;justify-content:center}
-  .tl-dot-inner{width:6px;height:6px;border-radius:50%;background:#fff;opacity:0;transition:opacity .2s}
-  .tl-item:hover .tl-dot{transform:scale(1.35)}
-  .tl-item:hover .tl-dot-inner{opacity:1}
-  .tl-dot.today-dot{width:24px;height:24px;margin-top:14px;border-color:var(--red);background:var(--red);box-shadow:0 0 0 4px var(--red-l);animation:today-pulse 2.5s ease-in-out infinite}
-  @keyframes today-pulse{0%,100%{box-shadow:0 0 0 4px var(--red-l)}50%{box-shadow:0 0 0 8px var(--red-l)}}
-  .tl-dot.today-dot::after{content:'✦';color:#fff;font-size:11px;line-height:1}
-  .tl-dot.today-dot .tl-dot-inner{display:none}
+/* ===== TIMELINE ===== */
+.tl{position:relative;padding:0 0 20px 24px}
+.tl::before{content:'';position:absolute;left:7px;top:12px;bottom:12px;width:2px;background:var(--border);z-index:0}
 
-  /* Right side: card */
-  .tl-card{width:calc(50% - 40px);padding:0 0 0 20px;flex-shrink:0}
-  .tl-card-inner{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;box-shadow:var(--shadow);transition:all .15s;position:relative;overflow:hidden}
-  .tl-card-inner::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
-  .tl-card-inner:hover{border-color:var(--text3);box-shadow:var(--shadow-lg);transform:translateY(-1px)}
-  .tl-item.done .tl-card-inner{opacity:.7}
+/* Today marker */
+.tl-today{position:relative;margin-bottom:16px;padding-left:24px;text-align:center}
+.tl-today-inner{display:inline-flex;align-items:center;gap:6px;background:var(--red-l);border:1px solid var(--red);border-radius:20px;padding:4px 14px 4px 12px;font-size:11px;font-weight:600;color:var(--red)}
+.tl-today-dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
 
-  /* Card content */
-  .tl-card-top{display:flex;align-items:center;gap:8px;margin-bottom:4px}
-  .tl-card-stock{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:2px 10px 2px 8px;border-radius:12px;line-height:1.4}
-  .tl-card-stock .sc-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-  .tl-card-title{font-size:13px;font-weight:600;line-height:1.4}
-  .tl-card-type{font-size:9px;padding:1px 8px;border-radius:8px;font-weight:500;margin-left:auto;flex-shrink:0}
+/* Event card */
+.event{position:relative;z-index:1;margin-bottom:10px;display:none}
+.event.visible{display:block}
+.event.done{opacity:.5}.event.done:hover{opacity:.8}
+.event.hidden,.event.hidden-by-stock{display:none}
 
-  /* Importance stars */
-  .tl-card-imp{display:flex;align-items:center;gap:2px;margin:4px 0}
-  .tl-card-imp .stars{font-size:10px;letter-spacing:-1px}
-  .tl-card-imp .lbl{font-size:9px;color:var(--text3);margin-left:4px}
+/* Timeline dot on the left */
+.event-dot{position:absolute;left:-20px;top:16px;width:14px;height:14px;border-radius:50%;border:3px solid;background:var(--surface);z-index:2;transition:transform .2s}
 
-  /* Impact badge */
-  .tl-card-impact{margin:4px 0}
-  .impact-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;padding:2px 10px;border-radius:8px}
-  .impact-up{color:var(--green);background:var(--green-l)}
-  .impact-down{color:var(--red);background:var(--red-l)}
-  .impact-neutral{color:var(--text3);background:var(--gray-l)}
-  .impact-both{color:var(--purple);background:var(--purple-l)}
-  .impact-all{color:var(--indigo);background:var(--indigo-l)}
-  .impact-direct{color:var(--amber);background:var(--amber-l)}
+/* Importance-based card background colors */
+.event-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;box-shadow:var(--shadow);transition:all .15s;position:relative;overflow:hidden}
+.event-card:hover{border-color:var(--text3);box-shadow:0 4px 16px rgba(0,0,0,.07);transform:translateY(-1px)}
 
-  .tl-card-desc{font-size:11px;color:var(--text2);line-height:1.5;margin-top:4px}
-  .tl-card-detail{margin-top:6px;padding:6px 10px;background:var(--surface-alt);border-radius:8px;font-size:10px;color:var(--text2);line-height:1.5;border-left:2px solid var(--border)}
+/* Urgency colors */
+.event-card.imp-5{background:var(--red-l);border-color:#f5c6c6}
+.event-card.imp-4{background:var(--orange-l);border-color:#f5ddc6}
+.event-card.imp-3{background:var(--blue-l);border-color:#c6d4f5}
+.event-card.imp-2{background:var(--gray-l);border-color:#ddd}
+.event-card.imp-5.done,.event-card.imp-4.done,.event-card.imp-3.done{background:var(--green-l);border-color:#b8e6c8}
+.event-card.monitoring{background:var(--surface);border-color:var(--border)}
 
-  /* Tags */
-  .tl-card-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
-  .tl-tag{font-size:8px;padding:1px 8px;border-radius:10px;color:var(--text3);background:var(--gray-l);font-weight:500}
+/* Card accent bar */
+.event-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
 
-  /* Status badge */
-  .tl-status{position:absolute;top:8px;right:8px;font-size:8px;padding:2px 8px;border-radius:8px;font-weight:600}
-  .tl-status.today-status{color:var(--red);background:var(--red-l)}
-  .tl-status.upcoming-status{color:var(--orange);background:var(--orange-l)}
-  .tl-status.monitoring-status{color:var(--text3);background:var(--gray-l)}
-  .tl-status.done-status{color:var(--green);background:var(--green-l)}
+/* Card top row */
+.card-top{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.card-stock{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:600;padding:2px 8px 2px 6px;border-radius:10px;line-height:1.3;flex-shrink:0}
+.card-stock .sd{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.card-date{font-size:9px;color:var(--text3);font-weight:500;flex-shrink:0}
+.card-type{font-size:8px;padding:1px 6px;border-radius:6px;font-weight:500;margin-left:auto;flex-shrink:0;color:var(--text3);background:var(--gray-l)}
+.card-title{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:3px}
+.card-imp{margin-bottom:3px}
+.card-imp .stars{font-size:9px;letter-spacing:-1px}
+.card-imp .il{font-size:8px;color:var(--text3);margin-left:3px}
+.card-impact{margin-bottom:3px}
+.impact-b{display:inline-flex;align-items:center;gap:2px;font-size:9px;font-weight:600;padding:1px 8px;border-radius:6px}
+.imp-up{color:var(--green);background:var(--green-l)}
+.imp-down{color:var(--red);background:var(--red-l)}
+.imp-both{color:var(--purple);background:var(--purple-l)}
+.imp-neutral{color:var(--text3);background:var(--gray-l)}
+.card-desc{font-size:10px;color:var(--text2);line-height:1.5}
+.card-detail{margin-top:4px;padding:4px 8px;background:rgba(255,255,255,.6);border-radius:6px;font-size:9px;color:var(--text2);line-height:1.5}
+.card-tags{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px}
+.card-tag{font-size:7px;padding:1px 6px;border-radius:6px;color:var(--text3);background:rgba(255,255,255,.5);font-weight:500}
 
-  /* Stock color variants — card accent bar */
-  .tl-card-inner.color-blue::before{background:var(--blue)}
-  .tl-card-inner.color-purple::before{background:var(--purple)}
-  .tl-card-inner.color-green::before{background:var(--green)}
-  .tl-card-inner.color-orange::before{background:var(--orange)}
-  .tl-card-inner.color-red::before{background:var(--red)}
-  .tl-card-inner.color-amber::before{background:var(--amber)}
-  .tl-card-inner.color-indigo::before{background:var(--indigo)}
-  .tl-card-inner.color-emerald::before{background:var(--emerald)}
-  .tl-card-inner.color-slate::before{background:var(--slate)}
-  .tl-card-inner.color-teal::before{background:var(--teal)}
-  .tl-card-inner.color-gray::before{background:var(--gray)}
+/* Urgency indicator on card (right edge) */
+.card-urgency{position:absolute;top:0;right:0;padding:2px 8px;font-size:8px;font-weight:600;border-radius:0 10px 0 8px}
+.card-urgency.u-critical{color:var(--red);background:rgba(220,38,38,.12)}
+.card-urgency.u-high{color:var(--orange);background:rgba(217,119,6,.12)}
+.card-urgency.u-normal{color:var(--blue);background:rgba(26,92,200,.08)}
+.card-urgency.u-done{color:var(--green);background:rgba(5,150,101,.1)}
+.card-urgency.u-monitor{color:var(--gray);background:rgba(107,114,128,.08)}
 
-  .tl-card-stock.color-blue{color:var(--blue);background:var(--blue-l)}
-  .tl-card-stock.color-purple{color:var(--purple);background:var(--purple-l)}
-  .tl-card-stock.color-green{color:var(--green);background:var(--green-l)}
-  .tl-card-stock.color-orange{color:var(--orange);background:var(--orange-l)}
-  .tl-card-stock.color-red{color:var(--red);background:var(--red-l)}
-  .tl-card-stock.color-amber{color:var(--amber);background:var(--amber-l)}
-  .tl-card-stock.color-indigo{color:var(--indigo);background:var(--indigo-l)}
-  .tl-card-stock.color-emerald{color:var(--emerald);background:var(--emerald-l)}
-  .tl-card-stock.color-slate{color:var(--slate);background:var(--slate-l)}
-  .tl-card-stock.color-teal{color:var(--teal);background:var(--teal-l)}
-  .tl-card-stock.color-gray{color:var(--gray);background:var(--gray-l)}
+/* ===== EMPTY / FOOTER ===== */
+.empty{padding:40px 16px;text-align:center;color:var(--text3);font-size:12px}
+.empty .ic{font-size:28px;margin-bottom:6px}
+.loading{text-align:center;padding:40px;color:var(--text3);font-size:12px}
+.spinner{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:s .7s linear infinite;margin:0 auto 6px}
+@keyframes s{to{transform:rotate(360deg)}}
 
-  .sc-dot.color-blue{background:var(--blue)}
-  .sc-dot.color-purple{background:var(--purple)}
-  .sc-dot.color-green{background:var(--green)}
-  .sc-dot.color-orange{background:var(--orange)}
-  .sc-dot.color-red{background:var(--red)}
-  .sc-dot.color-amber{background:var(--amber)}
-  .sc-dot.color-indigo{background:var(--indigo)}
-  .sc-dot.color-emerald{background:var(--emerald)}
-  .sc-dot.color-slate{background:var(--slate)}
-  .sc-dot.color-teal{background:var(--teal)}
-  .sc-dot.color-gray{background:var(--gray)}
+.footer{text-align:center;padding:20px 0 28px;font-size:9px;color:var(--text3);line-height:1.8;border-top:1px solid var(--border);margin-top:20px}
+.footer a{color:var(--blue);text-decoration:none}
 
-  .tl-tag.color-blue{color:var(--blue);background:var(--blue-l)}
-  .tl-tag.color-purple{color:var(--purple);background:var(--purple-l)}
-  .tl-tag.color-green{color:var(--green);background:var(--green-l)}
-  .tl-tag.color-orange{color:var(--orange);background:var(--orange-l)}
-  .tl-tag.color-red{color:var(--red);background:var(--red-l)}
-  .tl-tag.color-amber{color:var(--amber);background:var(--amber-l)}
-  .tl-tag.color-indigo{color:var(--indigo);background:var(--indigo-l)}
-  .tl-tag.color-emerald{color:var(--emerald);background:var(--emerald-l)}
-  .tl-tag.color-slate{color:var(--slate);background:var(--slate-l)}
-  .tl-tag.color-teal{color:var(--teal);background:var(--teal-l)}
+/* ===== STOCK COLOR CLASSES ===== */
+/* Accent bar */
+.event-card::before{background:var(--gray)}
+.event-card.c-blue::before{background:var(--blue)}
+.event-card.c-purple::before{background:var(--purple)}
+.event-card.c-green::before{background:var(--green)}
+.event-card.c-orange::before{background:var(--orange)}
+.event-card.c-red::before{background:var(--red)}
+.event-card.c-amber::before{background:var(--amber)}
+.event-card.c-indigo::before{background:var(--indigo)}
+.event-card.c-emerald::before{background:var(--emerald)}
+.event-card.c-slate::before{background:var(--slate)}
+.event-card.c-teal::before{background:var(--teal)}
+.event-card.c-gray::before{background:var(--gray)}
 
-  .filter-stock-btn.color-blue{background:var(--blue);color:#fff}
-  .filter-stock-btn.color-purple{background:var(--purple);color:#fff}
-  .filter-stock-btn.color-green{background:var(--green);color:#fff}
-  .filter-stock-btn.color-orange{background:var(--orange);color:#fff}
-  .filter-stock-btn.color-red{background:var(--red);color:#fff}
-  .filter-stock-btn.color-amber{background:var(--amber);color:#fff}
-  .filter-stock-btn.color-indigo{background:var(--indigo);color:#fff}
-  .filter-stock-btn.color-emerald{background:var(--emerald);color:#fff}
-  .filter-stock-btn.color-slate{background:var(--slate);color:#fff}
-  .filter-stock-btn.color-teal{background:var(--teal);color:#fff}
-  .filter-stock-btn.color-gray{background:var(--gray);color:#fff}
+/* Stock badge */
+.card-stock.c-blue{color:var(--blue);background:var(--blue-l)}
+.card-stock.c-purple{color:var(--purple);background:var(--purple-l)}
+.card-stock.c-green{color:var(--green);background:var(--green-l)}
+.card-stock.c-orange{color:var(--orange);background:var(--orange-l)}
+.card-stock.c-red{color:var(--red);background:var(--red-l)}
+.card-stock.c-amber{color:var(--amber);background:var(--amber-l)}
+.card-stock.c-indigo{color:var(--indigo);background:var(--indigo-l)}
+.card-stock.c-emerald{color:var(--emerald);background:var(--emerald-l)}
+.card-stock.c-slate{color:var(--slate);background:var(--slate-l)}
+.card-stock.c-teal{color:var(--teal);background:var(--teal-l)}
+.card-stock.c-gray{color:var(--gray);background:var(--gray-l)}
+.card-stock .sd.c-blue{background:var(--blue)}
+.card-stock .sd.c-purple{background:var(--purple)}
+.card-stock .sd.c-green{background:var(--green)}
+.card-stock .sd.c-orange{background:var(--orange)}
+.card-stock .sd.c-red{background:var(--red)}
+.card-stock .sd.c-amber{background:var(--amber)}
+.card-stock .sd.c-indigo{background:var(--indigo)}
+.card-stock .sd.c-emerald{background:var(--emerald)}
+.card-stock .sd.c-slate{background:var(--slate)}
+.card-stock .sd.c-teal{background:var(--teal)}
+.card-stock .sd.c-gray{background:var(--gray)}
 
-  /* Loading */
-  .loading{text-align:center;padding:60px 16px;color:var(--text3);font-size:12px}
-  .spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:s .7s linear infinite;margin:0 auto 8px}
-  @keyframes s{to{transform:rotate(360deg)}}
-  .empty-state{padding:60px 16px;text-align:center;color:var(--text3);font-size:13px}
-  .empty-state .eic{font-size:32px;margin-bottom:8px}
-  .empty-state .esub{font-size:11px;color:var(--text4);margin-top:4px}
+/* Event dot */
+.event-dot.c-blue{border-color:var(--blue)}
+.event-dot.c-purple{border-color:var(--purple)}
+.event-dot.c-green{border-color:var(--green)}
+.event-dot.c-orange{border-color:var(--orange)}
+.event-dot.c-red{border-color:var(--red)}
+.event-dot.c-amber{border-color:var(--amber)}
+.event-dot.c-indigo{border-color:var(--indigo)}
+.event-dot.c-emerald{border-color:var(--emerald)}
+.event-dot.c-slate{border-color:var(--slate)}
+.event-dot.c-teal{border-color:var(--teal)}
+.event-dot.c-gray{border-color:var(--gray)}
 
-  /* ===== LEGEND ===== */
-  .legend-wrap{margin:4px auto 16px;text-align:center}
-  .legend-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-  .legend-item{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:var(--text3);padding:2px 8px;border-radius:8px;background:var(--surface);border:1px solid var(--border-l)}
-  .legend-item .ld{width:7px;height:7px;border-radius:50%}
+/* SDot colors */
+.sdot.c-blue{background:var(--blue)}
+.sdot.c-purple{background:var(--purple)}
+.sdot.c-green{background:var(--green)}
+.sdot.c-orange{background:var(--orange)}
+.sdot.c-red{background:var(--red)}
+.sdot.c-amber{background:var(--amber)}
+.sdot.c-indigo{background:var(--indigo)}
+.sdot.c-emerald{background:var(--emerald)}
+.sdot.c-slate{background:var(--slate)}
+.sdot.c-teal{background:var(--teal)}
+.sdot.c-gray{background:var(--gray)}
 
-  /* ===== URGENT NEXT ===== */
-  .urgent-bar{max-width:700px;margin:0 auto 24px;background:var(--surface);border:1px solid var(--red);border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow)}
-  .urgent-h{display:flex;align-items:center;gap:6px;padding:8px 14px;background:var(--red-l);font-size:11px;font-weight:600;color:var(--red)}
-  .urgent-b{padding:8px 14px}
-  .urgent-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border-l);font-size:11px}
-  .urgent-item:last-child{border-bottom:none}
-  .urgent-item .ud{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-  .urgent-item .ud.ud-red{background:var(--red)}
-  .urgent-item .ud.ud-orange{background:var(--orange)}
-  .urgent-item .ud.ud-blue{background:var(--blue)}
-  .urgent-item .us{font-weight:600;color:var(--text2);flex-shrink:0;font-size:10px}
-  .urgent-item .ut{flex:1;min-width:0}
-  .urgent-item .ut .ut-title{font-weight:600;color:var(--text)}
-  .urgent-item .ut .ut-sub{font-size:9px;color:var(--text3)}
-  .urgent-item .ur{font-size:9px;padding:1px 8px;border-radius:8px;font-weight:600;flex-shrink:0}
+/* ===== RESPONSIVE ===== */
+@media(max-width:700px){
+  .container{padding:0 14px}
+  .header{padding:24px 0 4px}
+  .header h1{font-size:20px}
+  .stats{gap:6px}
+  .stat{padding:5px 10px;min-width:42px}
+  .stat .n{font-size:15px}
+  .month-bar{border-radius:8px}
+  .month-item{padding:6px 2px;font-size:10px}
+  .month-item .mc{font-size:7px}
+  .tl{padding:0 0 16px 18px}
+  .tl::before{left:5px}
+  .event-dot{left:-15px;width:12px;height:12px;border-width:2px;top:14px}
+  .event-card{padding:10px 12px}
+  .card-title{font-size:12px}
+  .stock-dots{gap:3px}
+  .sdot{width:20px;height:20px}
+  .filter-btn{padding:4px 10px;font-size:9px}
+  .legend-item{font-size:8px;padding:2px 8px}
+  .urgent-item{font-size:10px}
+  .event-card.imp-5{background:var(--red-l)}
+}
 
-  /* Footer */
-  .footer{text-align:center;padding:24px 0 32px;font-size:10px;color:var(--text3);line-height:1.8;border-top:1px solid var(--border-l);margin-top:28px}
-  .footer a{color:var(--blue);text-decoration:none}
-  .footer a:hover{text-decoration:underline}
-
-  /* ===== RESPONSIVE ===== */
-  @media(max-width:820px){
-    .container{padding:0 14px}
-    .hero{padding:24px 0 14px}
-    .hero-title{font-size:20px}
-    .stats-bar{gap:6px;margin:8px auto 16px}
-    .stat-card{padding:6px 10px;min-width:50px}
-    .stat-card .num{font-size:14px}
-    .stat-card .lbl{font-size:8px}
-    .legend-wrap{display:none}
-  }
-
-  /* Mobile: stacked cards, no timeline line */
-  @media(max-width:700px){
-    .tl-line,.tl-dot,.tl-progress,.tl-date{display:none}
-    .tl-today{margin-bottom:16px}
-    .tl-today-inner{font-size:10px;padding:4px 12px 4px 10px}
-    .tl-item{display:block;margin-bottom:8px;padding:0}
-    .tl-card{width:100%;padding:0}
-    .tl-card-inner{padding:10px 12px}
-    .tl-card-inner::before{width:3px}
-    .tl-card-top{gap:6px;flex-wrap:wrap}
-    .tl-card-stock{font-size:9px;padding:1px 8px 1px 6px}
-    .tl-card-stock .sc-dot{width:5px;height:5px}
-    .tl-card-title{font-size:12px}
-    .tl-card-type{font-size:8px;padding:1px 6px}
-    .tl-card-imp{margin:2px 0}
-    .tl-card-imp .stars{font-size:9px}
-    .tl-card-imp .lbl{font-size:8px}
-    .tl-card-desc{font-size:10px;margin-top:3px}
-    .tl-card-detail{margin-top:4px;padding:4px 8px;font-size:9px}
-    .tl-card-tags{margin-top:4px;gap:3px}
-    .tl-tag{font-size:7px;padding:1px 6px}
-    .tl-status{position:static;display:inline-block;margin-left:auto}
-
-    /* Urgent bar */
-    .urgent-bar{margin-bottom:16px}
-    .urgent-h{font-size:10px;padding:6px 10px}
-    .urgent-b{padding:6px 10px}
-    .urgent-item{font-size:10px;padding:4px 0;gap:6px}
-    .urgent-item .us{font-size:9px}
-    .urgent-item .ur{font-size:8px}
-
-    /* Filters: compact */
-    .filter-wrap{margin-bottom:16px}
-    .filter-scroll{gap:4px}
-    .filter-btn{padding:4px 10px;font-size:10px}
-    .filter-stock-btn{width:22px;height:22px;font-size:8px}
-    .filter-sep{height:18px;margin:0 2px}
-    .hero-links{font-size:10px}
-  }
-  @media(min-width:1400px){
-    .container{max-width:1200px}.hero{padding:48px 0 24px}.hero-title{font-size:30px}
-  }
-
-  /* Smooth scroll */
-  html{scroll-behavior:smooth}
-
-  /* Tooltip for stock filter dots */
-  .filter-stock-btn{position:relative}
-  .filter-stock-btn::after{content:attr(data-tip);position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:8px;color:var(--text3);white-space:nowrap;opacity:0;transition:opacity .15s;pointer-events:none}
-  .filter-stock-btn:hover::after{opacity:1}
-
-  /* Transition for timeline items */
-  .tl-item{transition:opacity .3s, transform .3s, max-height .3s}
+@media(min-width:820px){
+  .container{max-width:860px}
+  .header{padding:40px 0 10px}
+  .header h1{font-size:28px}
+}
 </style>
 </head>
 <body>
 
-<!-- ===== PASSWORD OVERLAY ===== -->
+<!-- ===== PASSWORD ===== -->
 <div class="pw-overlay" id="pwOverlay">
   <div class="pw-box">
     <div class="pw-icon">🔒</div>
-    <div class="pw-title">事件时间轴</div>
-    <div class="pw-sub">请输入密码查看全持仓事件日历</div>
+    <div class="pw-title">全持仓事件时间轴</div>
+    <div class="pw-sub">请输入密码查看</div>
     <input class="pw-input" id="pwInput" type="password" placeholder="输入密码…" autocomplete="off" onkeydown="if(event.key==='Enter')pwCheck()">
     <button class="pw-btn" id="pwBtn" onclick="pwCheck()">解锁</button>
     <div class="pw-err" id="pwErr"></div>
-    <div class="pw-hint">仅限个人使用</div>
   </div>
 </div>
 
-<div class="container" id="mainContent" style="display:none">
+<div class="container" id="main" style="display:none">
 
-  <!-- ===== HERO ===== -->
-  <div class="hero">
-    <div class="hero-icon">📌</div>
-    <div class="hero-title">全持仓事件<span>时间轴</span></div>
-    <div class="hero-sub">从今天到年底，所有重要事件一目了然</div>
-    <div class="hero-links"><a href="https://chenyusheng.github.io/daily-briefing/">← 返回主页</a> · <span id="updatedAt">加载中</span></div>
+  <div class="header">
+    <h1>全持仓事件<span>时间轴</span></h1>
+    <div class="sub" id="updateInfo">加载中...</div>
+    <div class="links"><a href="https://chenyusheng.github.io/daily-briefing/">← 返回主页</a></div>
   </div>
 
-  <!-- ===== STATS ===== -->
-  <div class="stats-bar" id="statsBar"></div>
+  <!-- Stats -->
+  <div class="stats" id="statsBar"></div>
 
-  <!-- ===== URGENT NEXT ===== -->
-  <div class="urgent-bar" id="urgentBar">
-    <div class="urgent-h">🚨 即将来临的关键事件</div>
-    <div class="urgent-b" id="urgentList"><div class="loading" style="padding:12px"><div class="spinner"></div></div></div>
+  <!-- Urgent -->
+  <div class="urgent" id="urgentBar" style="display:none">
+    <div class="urgent-h">🚨 近期关键事件</div>
+    <div class="urgent-b" id="urgentList"></div>
   </div>
 
-  <!-- ===== FILTER ===== -->
-  <div class="filter-wrap">
-    <div class="filter-scroll" id="filterBar">
-      <button class="filter-btn active" data-f="all" onclick="setFilter('all')">📋 全部</button>
-      <button class="filter-btn" data-f="upcoming" onclick="setFilter('upcoming')">🔥 即将到来</button>
-      <button class="filter-btn" data-f="today" onclick="setFilter('today')">🔴 今日</button>
-      <button class="filter-btn" data-f="monitoring" onclick="setFilter('monitoring')">👁 持续监控</button>
-      <div class="filter-sep"></div>
-    </div>
-    <div class="legend-wrap" id="legendWrap"></div>
+  <!-- Month bar -->
+  <div class="month-bar" id="monthBar"></div>
+
+  <!-- Filters -->
+  <div class="filters" id="filterBar">
+    <button class="filter-btn f-all active" onclick="setFilter('all')">📋 全部</button>
+    <button class="filter-btn f-urgent" onclick="setFilter('urgent')">🔴 关键</button>
+    <button class="filter-btn f-upcoming" onclick="setFilter('upcoming')">🟡 即将</button>
+    <button class="filter-btn f-monitoring" onclick="setFilter('monitoring')">👁 持续</button>
+    <button class="filter-btn f-done" onclick="setFilter('done')">✅ 已完成</button>
+    <span class="filter-sep"></span>
   </div>
 
-  <!-- ===== TIMELINE ===== -->
-  <div class="tl-wrap">
-    <div class="tl-line" id="tlLine"><div class="tl-progress" id="tlProgress"></div></div>
+  <!-- Stock dots -->
+  <div class="stock-dots" id="stockDots"></div>
+
+  <!-- Timeline -->
+  <div class="tl" id="tlWrap">
     <div class="tl-today" id="tlToday" style="display:none">
-      <div class="tl-today-inner">
-        <span class="dot"></span>
-        <span>今天 · <span id="todayDate"></span></span>
-      </div>
+      <div class="tl-today-inner"><span class="tl-today-dot"></span> 今天 · <span id="todayDate"></span></div>
     </div>
     <div id="tlContent"><div class="loading"><div class="spinner"></div>加载中...</div></div>
   </div>
 
   <div class="footer">
-    数据来源：全持仓事件监控系统 · 每日8:30自动扫描更新<br>
-    <a href="https://chenyusheng.github.io/daily-briefing/">https://chenyusheng.github.io/daily-briefing/</a>
+    每日8:30自动更新 · <a href="https://chenyusheng.github.io/daily-briefing/">返回主页</a>
   </div>
 
 </div>
 
 <script>
-// ===== PASSWORD =====
 var PW_HASH = 'd9b5f58f0b38198293971865a14074f59eba3e82595becbe86ae51f1d9f1f65e';
 
 function pwCheck() {
-  var inp = document.getElementById('pwInput');
-  var btn = document.getElementById('pwBtn');
-  var err = document.getElementById('pwErr');
+  var inp = document.getElementById('pwInput'), btn = document.getElementById('pwBtn'), err = document.getElementById('pwErr');
   var val = inp.value.trim();
   if (!val) { err.textContent = '请输入密码'; return; }
-  btn.disabled = true;
-  btn.textContent = '验证中…';
-  var enc = new TextEncoder();
-  crypto.subtle.digest('SHA-256', enc.encode(val)).then(function(buf) {
-    var hash = Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
-    if (hash === PW_HASH) {
+  btn.disabled = true; btn.textContent = '验证中…';
+  crypto.subtle.digest('SHA-256', new TextEncoder().encode(val)).then(function(buf) {
+    var h = Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
+    if (h === PW_HASH) {
       localStorage.setItem('daily_briefing_auth', '1');
       document.getElementById('pwOverlay').classList.add('hidden');
-      document.getElementById('mainContent').style.display = '';
-    } else {
-      err.textContent = '密码错误，请重试';
-      btn.disabled = false;
-      btn.textContent = '解锁';
-      inp.value = '';
-      inp.focus();
-    }
-  }).catch(function() {
-    err.textContent = '验证失败，请重试';
-    btn.disabled = false;
-    btn.textContent = '解锁';
+      document.getElementById('main').style.display = '';
+    } else { err.textContent = '密码错误'; btn.disabled = false; btn.textContent = '解锁'; inp.value=''; inp.focus(); }
   });
 }
-
 if (localStorage.getItem('daily_briefing_auth') === '1') {
   document.getElementById('pwOverlay').classList.add('hidden');
-  document.getElementById('mainContent').style.display = '';
+  document.getElementById('main').style.display = '';
 }
 
-// ===== DEBUG / STATE =====
-var allEvents = [];
-var currentFilter = 'all';
-var currentStockFilter = null;
+// ===== DATA =====
+var allEvents = [], allStocks = [];
+var curFilter = 'all', curStock = null, curMonth = null;
 
-// ===== STOCK COLOR MAP =====
-var COLOR_MAP = {
-  blue: '#1a5cc8', purple: '#6d28d9', green: '#059669',
-  orange: '#d97706', red: '#dc2626', amber: '#b45309',
-  indigo: '#4338ca', emerald: '#047857', slate: '#475569',
-  teal: '#0d9488', gray: '#6b7280'
-};
+function todayStr() { var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 
-var COLOR_NAMES = {
-  blue: 'blue', purple: 'purple', green: 'green', orange: 'orange',
-  red: 'red', amber: 'amber', indigo: 'indigo', emerald: 'emerald',
-  slate: 'slate', teal: 'teal', gray: 'gray'
-};
+function daysDiff(a, b) { return Math.round((new Date(a)-new Date(b))/86400000); }
 
-// ===== DATE HELPERS =====
-function todayStr() {
-  var d = new Date();
-  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+function getImportanceBg(ev) {
+  if (ev.status === 'monitoring') return 'monitoring';
+  if (ev.status === 'done') return 'done';
+  return 'imp-' + (ev.importance || 3);
 }
 
-function parseDate(s) {
-  // Handle YYYY-MM-DD, YYYY-MM, or other formats
-  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return new Date(s);
-  return null;
+function getUrgencyLabel(ev) {
+  if (ev.status === 'done') return {text:'✅ 已完成', cls:'u-done'};
+  if (ev.importance === 5) return {text:'🔴 关键', cls:'u-critical'};
+  if (ev.importance === 4) return {text:'🟠 重要', cls:'u-high'};
+  if (ev.status === 'monitoring') return {text:'👁 持续', cls:'u-monitor'};
+  return {text:'🔵 普通', cls:'u-normal'};
 }
 
-function daysDiff(a, b) {
-  return Math.round((a - b) / 86400000);
-}
+// ===== RENDER =====
+function render() {
+  var data = allEvents;
+  var today = todayStr();
 
-// ===== RENDER STATS =====
-function renderStats(data) {
-  var s = data.stats || {};
-  var html = '';
-  html += '<div class="stat-card red"><div class="num">'+(s.critical_events||0)+'</div><div class="lbl">⏰ 关键事件</div></div>';
-  html += '<div class="stat-card orange"><div class="num">'+(s.upcoming_7d||0)+'</div><div class="lbl">📅 7天内</div></div>';
-  html += '<div class="stat-card blue"><div class="num">'+(s.upcoming_30d||0)+'</div><div class="lbl">📆 30天内</div></div>';
-  html += '<div class="stat-card green"><div class="num">'+(s.monitoring||0)+'</div><div class="lbl">👁 持续监控</div></div>';
-  html += '<div class="stat-card purple"><div class="num">'+s.total_events+'</div><div class="lbl">📌 总事件</div></div>';
-  document.getElementById('statsBar').innerHTML = html;
-}
-
-// ===== RENDER URGENT =====
-function renderUrgent(events, today) {
-  var urgent = events.filter(function(e) {
-    return e.status === 'upcoming' && e.date && /^\d{4}-\d{2}-\d{2}$/.test(e.date);
-  }).sort(function(a,b) { return a.date.localeCompare(b.date); }).slice(0,6);
-
-  if (!urgent.length) {
-    document.getElementById('urgentList').innerHTML = '<div style="padding:8px 0;font-size:11px;color:var(--text3)">✅ 近期暂无紧急事件</div>';
-    return;
-  }
-
-  var html = '';
-  urgent.forEach(function(e) {
-    var d = parseDate(e.date);
-    var label = '';
-    if (d) {
-      var diff = daysDiff(d, new Date(today));
-      if (diff <= 0) label = '<span class="ur" style="color:var(--red);background:var(--red-l)">今天</span>';
-      else if (diff <= 3) label = '<span class="ur" style="color:var(--red);background:var(--red-l)">'+diff+'天后</span>';
-      else if (diff <= 7) label = '<span class="ur" style="color:var(--orange);background:var(--orange-l)">'+diff+'天后</span>';
-      else label = '<span class="ur" style="color:var(--text3);background:var(--gray-l)">'+diff+'天后</span>';
-    }
-    var udClass = 'ud-' + e.color;
-    html += '<div class="urgent-item">'
-      + '<span class="ud ' + udClass + '"></span>'
-      + '<span class="us">' + e.date_label + '</span>'
-      + '<span class="ut"><span class="ut-title">' + e.title + '</span> <span class="ut-sub">· ' + e.stock_name + '</span></span>'
-      + label
-      + '</div>';
+  // Filter
+  var filtered = data.filter(function(e) {
+    if (curFilter === 'urgent' && e.importance < 4) return false;
+    if (curFilter === 'upcoming' && e.status !== 'upcoming') return false;
+    if (curFilter === 'monitoring' && e.status !== 'monitoring') return false;
+    if (curFilter === 'done' && e.status !== 'done') return false;
+    if (curStock && e.stock !== curStock) return false;
+    return true;
   });
-  document.getElementById('urgentList').innerHTML = html;
-}
 
-// ===== RENDER TIMELINE =====
-function renderTimeline(events, today) {
-  var todayEl = document.getElementById('tlToday');
-  var todayDateEl = document.getElementById('todayDate');
-  todayDateEl.textContent = today;
-
-  // Sort by date: exact dates first, then month-only, then ongoing
-  var sorted = events.slice().sort(function(a, b) {
-    // Exacts first (with YYYY-MM-DD)
-    var aEx = /^\d{4}-\d{2}-\d{2}$/.test(a.date);
-    var bEx = /^\d{4}-\d{2}-\d{2}$/.test(b.date);
-    if (aEx && bEx) return a.date.localeCompare(b.date);
-    if (aEx && !bEx) return -1;
-    if (!aEx && bEx) return 1;
-    // Month-only compare
-    if (/^\d{4}-\d{2}$/.test(a.date) && /^\d{4}-\d{2}$/.test(b.date)) {
-      return a.date.localeCompare(b.date);
-    }
-    // For ongoing (date = far future or Dec 31)
+  // Sort: exact dates first, then by date string
+  filtered.sort(function(a,b) {
+    var aE = /^\d{4}-\d{2}-\d{2}$/.test(a.date);
+    var bE = /^\d{4}-\d{2}-\d{2}$/.test(b.date);
+    if (aE && bE) return a.date.localeCompare(b.date);
+    if (aE && !bE) return -1;
+    if (!aE && bE) return 1;
     if (a.date === '2026-12-31' && b.date !== '2026-12-31') return 1;
     if (b.date === '2026-12-31' && a.date !== '2026-12-31') return -1;
     return a.date.localeCompare(b.date);
   });
 
-  // Check if today is in the events
-  var hasToday = sorted.some(function(e) { return e.date === today; });
-  todayEl.style.display = hasToday ? 'block' : 'none';
+  // Today marker
+  var hasToday = filtered.some(function(e){return e.date===today;});
+  document.getElementById('tlToday').style.display = hasToday ? '' : 'none';
+  document.getElementById('todayDate').textContent = today;
 
-  var html = '';
-  var hasPastPassed = false;
-
-  sorted.forEach(function(e, idx) {
-    var isToday = e.date === today;
-    var isDone = e.status === 'done';
-    var isMonitoring = e.status === 'monitoring';
-
-    // Simple date display: just show the date_label directly
-    var rangeHtml = '';
-    var dayDisplay = e.date_label;
-    if (e.date_label.match(/月/) && e.date_label.match(/日/)) {
-      var m = e.date_label.match(/(\d+)月/);
-      var d = e.date_label.match(/(\d+)日/);
-      if (m && d) {
-        rangeHtml = '<div class="range">' + e.date_label + '</div>';
-        dayDisplay = d[1];
-      }
+  // Update month bar
+  var months = {};
+  filtered.forEach(function(e) {
+    if (e.date && e.date.length >= 7) {
+      var m = e.date.substring(0,7);
+      months[m] = (months[m]||0) + 1;
     }
-    var dayClass = e.date_label.length > 6 ? 'sm' : '';
-    var monthDisplay = '';
-    if (e.date_label.match(/月/)) {
-      var m = e.date_label.match(/(\d+)月/);
-      if (m) monthDisplay = m[1] + '月';
-    } else if (e.date_label === '持续进行' || e.date_label === '持续关注' || e.date_label === '每月') {
-      // Show nothing, it's ongoing
-    } else {
-      monthDisplay = e.date_label;
-    }
-
-    // Impact badge
-    var impactHtml = '';
-    var impMap = {up:'⬆️ 利好', down:'⬇️ 利空', both:'🔀 双向', neutral:'➖ 中性', all:'🌐 全持仓', direct:'📊 直接'};
-    var impCls = {up:'impact-up', down:'impact-down', both:'impact-both', neutral:'impact-neutral', all:'impact-all', direct:'impact-direct'};
-    if (e.impact_dir && impMap[e.impact_dir]) {
-      impactHtml = '<div class="tl-card-impact"><span class="impact-badge ' + (impCls[e.impact_dir]||'') + '">' + impMap[e.impact_dir] + '</span></div>';
-    }
-
-    // Importance stars
-    var starsHtml = '';
-    if (e.importance) {
-      var stars = '';
-      for (var i = 0; i < e.importance; i++) stars += '⭐';
-      starsHtml = '<div class="tl-card-imp"><span class="stars">' + stars + '</span><span class="lbl">' + e.importance + '/5</span></div>';
-    }
-
-    // Status badge
-    var statusBadge = '';
-    if (isToday) statusBadge = '<span class="tl-status today-status">🔴 今日</span>';
-    else if (e.status === 'upcoming') statusBadge = '<span class="tl-status upcoming-status">🟡 即将</span>';
-    else if (e.status === 'monitoring') statusBadge = '<span class="tl-status monitoring-status">👁 监控</span>';
-    else if (isDone) statusBadge = '<span class="tl-status done-status">✅ 已完成</span>';
-
-    // Detail section
-    var detailHtml = '';
-    if (e.detail) {
-      detailHtml = '<div class="tl-card-detail">💡 ' + e.detail + '</div>';
-    }
-
-    // Tags
-    var tagsHtml = '';
-    if (e.tags && e.tags.length) {
-      tagsHtml = '<div class="tl-card-tags">' + e.tags.map(function(t) {
-        return '<span class="tl-tag">#' + t + '</span>';
-      }).join('') + '</div>';
-    }
-
-    // Type badge
-    var typeHtml = e.type ? '<span class="tl-card-type" style="color:var(--text3);background:var(--gray-l)">' + e.type + '</span>' : '';
-
-    // Dot class
-    var dotClass = isToday ? 'today-dot' : '';
-    var itemHidden = '';
-
-    // Important: apply filter
-    var show = true;
-    if (currentFilter === 'today' && !isToday) show = false;
-    if (currentFilter === 'upcoming' && e.status !== 'upcoming' && !isToday) show = false;
-    if (currentFilter === 'monitoring' && e.status !== 'monitoring') show = false;
-    if (currentStockFilter && e.stock !== currentStockFilter) show = false;
-    if (!show) itemHidden = 'hidden';
-
-    html += '<div class="tl-item ' + (isDone ? 'done' : '') + ' ' + itemHidden + '" data-date="' + e.date + '" data-status="' + e.status + '" data-stock="' + e.stock + '">'
-      + '<div class="tl-date">'
-      + '<div class="mon">' + monthDisplay + '</div>'
-      + '<div class="day ' + dayClass + '">' + dayDisplay + '</div>'
-      + rangeHtml + '</div>'
-      + '<div class="tl-dot ' + dotClass + '" style="border-color:var(--' + e.color + ')"><div class="tl-dot-inner"></div></div>'
-      + '<div class="tl-card">'
-      + '<div class="tl-card-inner color-' + e.color + '">'
-      + statusBadge
-      + '<div class="tl-card-top">'
-      + '<span class="tl-card-stock color-' + e.color + '"><span class="sc-dot color-' + e.color + '"></span> ' + e.stock_name + '</span>'
-      + '<span class="tl-card-title">' + e.title + '</span>'
-      + typeHtml
-      + '</div>'
-      + starsHtml
-      + impactHtml
-      + '<div class="tl-card-desc">' + e.description + '</div>'
-      + detailHtml
-      + tagsHtml
-      + '</div></div></div>';
+  });
+  var mBar = document.getElementById('monthBar');
+  mBar.innerHTML = '';
+  var monthNames = {'2026-07':'7月','2026-08':'8月','2026-09':'9月','2026-10':'10月','2026-11':'11月','2026-12':'12月'};
+  Object.keys(monthNames).sort().forEach(function(m) {
+    var cnt = months[m]||0;
+    var num = m.split('-')[1];
+    var el = document.createElement('div');
+    el.className = 'month-item m' + num + (curMonth===m?' active':'');
+    el.innerHTML = monthNames[m] + '<span class="mc">' + cnt + '个事件</span>';
+    el.onclick = function() {
+      curMonth = (curMonth===m) ? null : m;
+      render();
+    };
+    mBar.appendChild(el);
   });
 
-  document.getElementById('tlContent').innerHTML = html;
+  // Apply month filter
+  if (curMonth) {
+    filtered = filtered.filter(function(e) {
+      return e.date && e.date.substring(0,7) === curMonth;
+    });
+  }
 
-  // Count visible items
-  var visible = document.querySelectorAll('.tl-item:not(.hidden)').length;
-  if (visible === 0) {
-    document.getElementById('tlContent').innerHTML = '<div class="empty-state"><div class="eic">🔍</div>没有匹配的事件<div class="esub">试试切换筛选条件</div></div>';
+  // Render timeline
+  var html = '';
+  filtered.forEach(function(e, idx) {
+    var isToday = e.date === today;
+    var impCls = getImportanceBg(e);
+    var urg = getUrgencyLabel(e);
+    var stars = '';
+    for (var i=0;i<e.importance;i++) stars += '⭐';
+
+    var impactHtml = '';
+    var impMap = {up:'⬆️ 利好',down:'⬇️ 利空',both:'🔀 双向',neutral:'➖ 中性'};
+    var impClsMap = {up:'imp-up',down:'imp-down',both:'imp-both',neutral:'imp-neutral'};
+    if (e.impact_dir && impMap[e.impact_dir]) {
+      impactHtml = '<span class="impact-b ' + (impClsMap[e.impact_dir]||'') + '">' + impMap[e.impact_dir] + '</span>';
+    }
+
+    var detailHtml = e.detail ? '<div class="card-detail">💡 '+e.detail+'</div>' : '';
+    var tagsHtml = e.tags ? '<div class="card-tags">'+e.tags.map(function(t){return '<span class="card-tag">#'+t+'</span>';}).join('')+'</div>' : '';
+
+    var dotCls = isToday ? ' today-dot' : '';
+    html += '<div class="event visible" data-date="'+e.date+'" data-status="'+e.status+'" data-stock="'+e.stock+'">'
+      + '<div class="event-dot c-'+e.color+dotCls+'"></div>'
+      + '<div class="event-card '+impCls+' c-'+e.color+'">'
+      + '<div class="card-urgency ' + urg.cls + '">' + urg.text + '</div>'
+      + '<div class="card-top">'
+      + '<span class="card-stock c-'+e.color+'"><span class="sd c-'+e.color+'"></span> '+e.stock_name+'</span>'
+      + '<span class="card-date">' + e.date_label + '</span>'
+      + (e.type ? '<span class="card-type">'+e.type+'</span>' : '')
+      + '</div>'
+      + '<div class="card-title">' + e.title + '</div>'
+      + (e.importance ? '<div class="card-imp"><span class="stars">'+stars+'</span><span class="il">'+e.importance+'/5</span></div>' : '')
+      + (impactHtml ? '<div class="card-impact">'+impactHtml+'</div>' : '')
+      + '<div class="card-desc">' + e.description + '</div>'
+      + detailHtml
+      + tagsHtml
+      + '</div></div>';
+  });
+
+  var tl = document.getElementById('tlContent');
+  if (!filtered.length) {
+    tl.innerHTML = '<div class="empty"><div class="ic">🔍</div>没有匹配的事件</div>';
+  } else {
+    tl.innerHTML = html;
   }
 }
 
-// ===== FILTER STOCK BUTTONS =====
-function renderStockFilters(stocks) {
-  var bar = document.getElementById('filterBar');
-  // Add stock dots after the separator
-  var sep = bar.querySelector('.filter-sep');
-  stocks.forEach(function(s) {
-    var btn = document.createElement('button');
-    btn.className = 'filter-stock-btn color-' + s.color;
-    btn.setAttribute('data-stock', s.id);
-    btn.setAttribute('data-tip', s.name);
-    btn.style.cssText = 'color:' + (COLOR_MAP[s.color]||'#666');
-    btn.textContent = s.name.charAt(0);
-    btn.onclick = function() {
-      if (currentStockFilter === s.id) {
-        // Deselect
-        currentStockFilter = null;
-        document.querySelectorAll('.filter-stock-btn').forEach(function(b) { b.classList.remove('active'); });
-      } else {
-        currentStockFilter = s.id;
-        document.querySelectorAll('.filter-stock-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-      }
-      renderTimeline(allEvents, todayStr());
-      updateActiveCount();
-    };
-    bar.appendChild(btn);
-  });
-}
-
-// ===== FILTER =====
+// ===== FILTERS =====
 function setFilter(f) {
-  currentFilter = f;
+  curFilter = f;
   document.querySelectorAll('.filter-btn').forEach(function(b) {
-    b.classList.toggle('active', b.getAttribute('data-f') === f);
+    b.classList.toggle('active', b.className.indexOf('f-'+f) >= 0);
   });
-  renderTimeline(allEvents, todayStr());
-  updateActiveCount();
+  render();
 }
 
-function updateActiveCount() {
-  var visible = document.querySelectorAll('.tl-item:not(.hidden)').length;
-  var total = allEvents.length;
-  var info = document.getElementById('updatedAt');
-  // Only update the count, keep the date
+// ===== STOCK FILTERS =====
+function renderStockDots(stocks) {
+  var wrap = document.getElementById('stockDots');
+  wrap.innerHTML = '';
+  stocks.forEach(function(s) {
+    var dot = document.createElement('button');
+    dot.className = 'sdot c-' + s.color;
+    dot.title = s.name;
+    dot.textContent = s.name.charAt(0);
+    dot.onclick = function() {
+      curStock = (curStock === s.id) ? null : s.id;
+      document.querySelectorAll('.sdot').forEach(function(d){d.classList.toggle('active', d===dot && curStock);});
+      render();
+    };
+    wrap.appendChild(dot);
+  });
 }
 
 // ===== INIT =====
-fetch('../data/events.json').then(function(r) { if (!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(data) {
+fetch('../data/events.json').then(function(r) { if (!r.ok) throw Error('HTTP '+r.status); return r.json(); }).then(function(data) {
   allEvents = data.events || [];
-  var today = data.today || todayStr();
+  allStocks = data.stocks || [];
 
-  document.getElementById('updatedAt').textContent = '更新于 ' + (data.updated || '未知');
-  renderStats(data);
-  renderUrgent(data.events, today);
-  renderTimeline(data.events, today);
-  renderStockFilters(data.stocks || []);
+  document.getElementById('updateInfo').textContent = '更新于 ' + (data.updated||'');
+  renderStockDots(allStocks);
 
-  // Progress line: past events / total
-  var total = data.events.length;
-  var past = data.events.filter(function(e) {
-    if (e.status === 'done') return true;
-    if (e.date && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.date < today) return true;
-    return false;
-  }).length;
-  var pct = total > 0 ? Math.round(past / total * 100) : 0;
-  document.getElementById('tlProgress').style.height = pct + '%';
+  // Stats
+  var s = data.stats || {};
+  document.getElementById('statsBar').innerHTML = ''
+    + '<div class="stat s-red"><div class="n">'+(s.critical_events||0)+'</div><div class="l">⏰ 关键</div></div>'
+    + '<div class="stat s-orange"><div class="n">'+(s.upcoming_7d||0)+'</div><div class="l">📅 7天</div></div>'
+    + '<div class="stat s-blue"><div class="n">'+(s.upcoming_30d||0)+'</div><div class="l">📆 30天</div></div>'
+    + '<div class="stat s-green"><div class="n">'+(s.monitoring||0)+'</div><div class="l">👁 持续</div></div>'
+    + '<div class="stat s-blue"><div class="n">'+s.total_events+'</div><div class="l">📌 总计</div></div>';
 
+  // Urgent
+  var urgent = allEvents.filter(function(e) {
+    return e.status === 'upcoming' && e.date && /^\d{4}-\d{2}-\d{2}$/.test(e.date);
+  }).sort(function(a,b){return a.date.localeCompare(b.date);}).slice(0,5);
+
+  if (urgent.length) {
+    document.getElementById('urgentBar').style.display = '';
+    document.getElementById('urgentList').innerHTML = urgent.map(function(e) {
+      var diff = daysDiff(e.date, todayStr());
+      var badge = diff <= 3 ? '<span class="urgent-badge ub-red">'+diff+'天后</span>'
+        : diff <= 7 ? '<span class="urgent-badge ub-orange">'+diff+'天后</span>'
+        : '';
+      return '<div class="urgent-item"><span class="urgent-date">'+e.date_label+'</span>'
+        + '<span class="urgent-title"><span class="ut">'+e.title+'</span> <span class="us">· '+e.stock_name+'</span></span>'
+        + badge + '</div>';
+    }).join('');
+  }
+
+  render();
 }).catch(function(err) {
-  document.getElementById('tlContent').innerHTML = '<div class="empty-state"><div class="eic">⚠️</div>加载失败<div class="esub">' + (err.message || '请检查 data/events.json 是否存在') + '</div></div>';
+  document.getElementById('tlContent').innerHTML = '<div class="empty"><div class="ic">⚠️</div>加载失败<div class="esub">'+err.message+'</div></div>';
 });
-
 </script>
 </body>
 </html>

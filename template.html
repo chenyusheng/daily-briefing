@@ -12,7 +12,7 @@
   .container{max-width:720px;margin:0 auto;padding:0}
 
   /* ===== Header ===== */
-  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:20px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:20px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(255,255,255,.92)}
   .h-left{display:flex;align-items:center;gap:12px}
   .h-icon{width:38px;height:38px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
   .h-title{font-size:18px;font-weight:600;letter-spacing:-.3px}
@@ -136,18 +136,23 @@
   .footer a{color:var(--blue);text-decoration:none}.footer a:hover{text-decoration:underline}
 
   /* ===== Mobile ===== */
-  @media(max-width:480px){
-    .section{padding:18px 14px}
-    .header{padding:14px 14px}
-    .h-title{font-size:16px}
-    .insight-bar{padding:12px 14px;font-size:13px}
-    .mkt-grid{gap:6px}.mkt-cell{padding:10px 11px;border-radius:8px}.mkt-val{font-size:15px}
-    .news-card{padding:14px 14px;border-radius:8px}.news-t{font-size:15px}.news-d{font-size:13px}
-    .crypto{gap:4px}.c-cell{padding:10px 4px;border-radius:8px}.c-px{font-size:13px}
-    .f-item{padding:12px 14px;font-size:13px}
-    .stock-box{padding:14px 14px}
-    .sb-price{font-size:16px}
-    .hot-grid{gap:6px}.hot-card{padding:12px 14px}
+  @media(max-width:700px){
+    .section{padding:16px 14px}
+    .header{padding:12px 14px}
+    .h-title{font-size:15px}
+    .h-icon{width:32px;height:32px;font-size:15px}
+    .h-badge{font-size:10px;padding:3px 10px}
+    .insight-bar{padding:10px 14px;font-size:12px}
+    .mkt-grid{gap:6px}.mkt-cell{padding:10px 11px;border-radius:8px}.mkt-val{font-size:14px}
+    .mkt-label{font-size:10px}
+    .news-card{padding:12px 14px;border-radius:8px}.news-t{font-size:14px}.news-d{font-size:12px}
+    .ticker{padding:8px 12px;font-size:13px;-webkit-tap-highlight-color:transparent}
+    .crypto{gap:4px}.c-cell{padding:8px 4px;border-radius:8px}.c-px{font-size:12px}
+    .f-item{padding:10px 12px;font-size:12px}
+    .stock-box{padding:12px 14px}
+    .sb-price{font-size:15px}
+    .hot-grid{gap:6px}.hot-card{padding:10px 12px}.hot-name{font-size:14px}
+    .footer{padding:18px 14px 28px;font-size:11px}
   }
   @media print{body{background:#fff}.container{max-width:none}.header{position:static}.mkt-cell,.news-card,.ticker-list,.c-cell,.f-item,.verdict,.stock-box{box-shadow:none;border-color:#ddd;break-inside:avoid}}
 </style>

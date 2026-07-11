@@ -1,0 +1,20 @@
+{
+  "events": [
+    {
+      "id": "xiaomi-pengcheng-n70-n90-miit",
+      "date": "2026-07-10",
+      "date_label": "7月10日",
+      "title": "小米澎程N70/N90工信部第409批新车公示",
+      "stock": "01810",
+      "stock_name": "小米集团",
+      "color": "blue",
+      "importance": 4,
+      "impact": "利好",
+      "impact_dir": "up",
+      "status": "done",
+      "type": "发布会",
+      "description": "小米第二款车系「澎程SKYNOMAD」旗下N70/N90进入工信部第409批新车目录。定位「智能可变大空间SUV」，中大型新能源SUV。7月8日官宣命名，7月10日工信部公示，预计下半年正式发布。扩大产品矩阵，切入增程/混动SUV最大细分市场。"
+    }
+  ],
+  "stocks": []
+}

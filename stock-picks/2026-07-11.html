@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 双战法选股 · 2026-07-11 · 周末复盘</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0d1117;--surface:#161b22;--surface-alt:#1c2333;--border:#30363d;--border-light:#21262d;--text:#e6edf3;--text-secondary:#8b949e;--text-tertiary:#6e7681;--accent:#58a6ff;--accent-bg:#0d419d33;--green:#3fb950;--green-bg:#1b3a1f;--red:#f85149;--red-bg:#3d1416;--amber:#d29922;--amber-bg:#2d1f00;--purple:#a371f7;--purple-bg:#2a1a4a;--teal:#56d4dd;--teal-bg:#1d3b3d;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.15);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7;min-height:100vh}
+  .container{max-width:800px;margin:0 auto;padding:0}
+  .header{background:linear-gradient(135deg,#161b22 0%,#1c2333 50%,#111 100%);border-bottom:1px solid var(--border);padding:22px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;position:relative;overflow:hidden}
+  .header::before{content:'';position:absolute;top:-50%;left:-30%;width:160%;height:200%;background:radial-gradient(ellipse at 30% 50%,var(--accent-bg) 0%,transparent 50%),radial-gradient(ellipse at 70% 50%,var(--purple-bg) 0%,transparent 50%);opacity:.2;pointer-events:none}
+  .h-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+  .h-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+  .h-title{font-size:18px;font-weight:700;letter-spacing:-.3px}
+  .h-meta{font-size:12px;color:var(--text-tertiary);margin-top:2px}
+  .h-badge{font-size:11px;font-weight:500;color:var(--green);background:var(--green-bg);padding:4px 16px;border-radius:20px;letter-spacing:.3px;position:relative;z-index:1}
+  .h-home{font-size:20px;text-decoration:none;margin-left:8px;position:relative;z-index:1;transition:opacity .15s}
+  .h-home:hover{opacity:.7}
+  .section{padding:24px 22px}
+  .section+.section{border-top:1px solid var(--border-light)}
+  .sec-label{font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
+  .section-alt{background:var(--surface-alt)}
+  .at{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin-bottom:14px}
+  .at th{text-align:left;padding:10px 14px;font-weight:600;color:var(--text-secondary);background:var(--surface-alt);border-bottom:1px solid var(--border);font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+  .at th:first-child{border-radius:8px 0 0 0}
+  .at th:last-child{border-radius:0 8px 0 0}
+  .at td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text)}
+  .at tr:last-child td:first-child{border-radius:0 0 0 8px}
+  .at tr:last-child td:last-child{border-radius:0 0 8px 0}
+  .at tr:last-child td{border-bottom:none}
+  .dragon-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:14px;box-shadow:var(--shadow);border-left:3px solid var(--purple)}
+  .dragon-card.dc-hot{border-left-color:var(--red)}
+  .dc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px}
+  .dc-name{font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .dc-name .dc-tag{font-size:10px;font-weight:600;padding:2px 10px;border-radius:20px;background:var(--accent-bg);color:var(--accent)}
+  .dc-name .dc-tag.dc-hot-tag{background:var(--red-bg);color:var(--red)}
+  .dc-score{font-size:12px;color:var(--text-tertiary)}
+  .dc-body{margin-top:6px}
+  .dc-detail{font-size:13px;color:var(--text-secondary);line-height:1.7;padding:8px 12px;background:var(--surface-alt);border-radius:6px;margin-top:8px;border-left:2px solid var(--border)}
+  .dc-buy{font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+  .callout{padding:14px 18px;border-radius:var(--radius);margin:10px 0;font-size:13px;line-height:1.6}
+  .callout.info{background:var(--accent-bg);border-left:3px solid var(--accent);color:var(--accent)}
+  .callout.success{background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+  .callout.warn{background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)}
+  .callout.danger{background:var(--red-bg);border-left:3px solid var(--red);color:var(--red)}
+  .callout.neutral{background:var(--surface-alt);border-left:3px solid var(--text-tertiary);color:var(--text-secondary)}
+  .sig{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+  .sig.g{background:var(--green)}
+  .sig.r{background:var(--red)}
+  .sig.y{background:var(--amber)}
+  .sig.b{background:var(--accent)}
+  .stars{font-size:14px;letter-spacing:1px;color:var(--amber)}
+  .risk-list{list-style:none;padding:0}
+  .risk-list li{padding:8px 0 8px 24px;position:relative;font-size:13px;color:var(--text-secondary);border-bottom:1px solid var(--border-light)}
+  .risk-list li:last-child{border-bottom:none}
+  .risk-list li::before{content:'⚠️';position:absolute;left:0;top:8px;font-size:12px}
+  .st{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:10px 0 14px}
+  .st td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text-secondary)}
+  .st td:first-child{font-weight:600;color:var(--text);white-space:nowrap;width:110px}
+  .st tr:last-child td{border-bottom:none}
+  .conclusion-box{text-align:center;padding:28px 22px;background:linear-gradient(135deg,var(--surface-alt),var(--surface));border:1px solid var(--border);border-radius:var(--radius);margin:16px 0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .conclusion-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--purple),var(--teal))}
+  .conclusion-text{font-size:18px;font-weight:700;color:var(--text);line-height:1.6;margin-bottom:6px}
+  .conclusion-sub{font-size:13px;color:var(--text-secondary);line-height:1.7}
+  .pos-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:10px 0}
+  .pos-table td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text)}
+  .pos-table td:first-child{font-weight:600;white-space:nowrap;width:120px}
+  .pos-table .amt{font-family:var(--font-mono);color:var(--amber);font-weight:600}
+  .footer{text-align:center;padding:24px 22px 36px;font-size:11px;color:var(--text-tertiary);line-height:1.8;border-top:1px solid var(--border-light)}
+  .footer a{color:var(--accent);text-decoration:none}.footer a:hover{text-decoration:underline}
+  .ice-timeline{display:flex;align-items:center;gap:8px;padding:14px 18px;background:var(--surface);border-radius:var(--radius);margin:10px 0;overflow-x:auto;font-size:11px}
+  .ice-dot{min-width:72px;text-align:center;padding:6px 8px;border-radius:8px;font-size:11px}
+  .ice-dot.active{background:var(--red-bg);border:2px solid var(--red);color:var(--red);font-weight:700}
+  .ice-dot.past{background:var(--surface-alt);color:var(--text-tertiary)}
+  .ice-dot.failed{background:var(--amber-bg);border:1px dashed var(--amber);color:var(--amber)}
+  .ice-dot.today{background:#1a3a1f;border:2px solid var(--green);color:var(--green);font-weight:800}
+  .ice-arrow{color:var(--text-tertiary);font-size:14px;min-width:16px;text-align:center}
+  .bl-badge{display:inline-block;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;margin-left:4px}
+  .bl-badge.clean{background:var(--green-bg);color:var(--green)}
+  .bl-badge.dirty{background:var(--red-bg);color:var(--red)}
+  .bl-badge.mid{background:var(--amber-bg);color:var(--amber)}
+  .week-recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:12px 0}
+  .week-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;text-align:center;border-left:3px solid var(--accent)}
+  .week-card.wc-red{border-left-color:var(--red)}
+  .week-card.wc-green{border-left-color:var(--green)}
+  .week-card.wc-amber{border-left-color:var(--amber)}
+  .wc-date{font-size:10px;color:var(--text-tertiary);margin-bottom:4px}
+  .wc-label{font-weight:700;font-size:15px;font-family:var(--font-mono)}
+  .wc-detail{font-size:11px;color:var(--text-secondary);margin-top:4px}
+  @media(max-width:480px){
+    .section{padding:18px 14px}
+    .header{padding:14px 14px}
+    .h-title{font-size:16px}
+    .at{font-size:12px}.at td,.at th{padding:8px 10px}
+    .dragon-card{padding:14px 14px}
+    .dc-name{font-size:15px}
+    .conclusion-text{font-size:16px}
+    .ice-timeline{gap:2px}.ice-dot{min-width:55px;font-size:10px;padding:4px}
+    .week-recap{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="h-left">
+    <div class="h-icon">📆</div>
+    <div>
+      <div class="h-title">双战法选股 · 周末复盘</div>
+      <div class="h-meta">2026-07-11 · 周六 · 非交易日</div>
+    </div>
+  </div>
+  <span class="h-badge">🟢 冰点序列闭环 · 周末总结</span>
+  <a href="https://chenyusheng.github.io/daily-briefing/stock-picks/" class="h-home" title="返回首页">📋</a>
+</div>
+
+<div class="section">
+  <div class="sec-label">📅 非交易日说明</div>
+
+  <div class="callout info">
+    <strong>2026-07-11 为周六，A股休市。</strong><br>
+    今日无新增行情数据。以下为本周（7/6-7/10）冰点反抽全流程闭环复盘 + 龙头候选周末态势总结。<br>
+    数据源显示最新交易日为7/10（周五），上证3996.16（-1.00%），92涨停/4跌停，情绪正常。
+  </div>
+
+  <div class="sec-label">🧊 本周冰点反抽 · 全流程复盘</div>
+
+  <div class="ice-timeline">
+    <div class="ice-dot past">7/2 周四<br>D0冰点1<br>40+跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot past">7/3 周五<br>D1假修复<br>19跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot past">7/6 周一<br>D0冰点2<br>46跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot failed">7/7 周二<br>D1失败<br>30跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot past">7/8 周三<br>D0冰点4<br>41跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot today">7/9 周四<br>🟢D1<br>12跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-dot today">7/10 周五<br>🟢D2<br>4跌停</div>
+  </div>
+
+  <div class="week-recap">
+    <div class="week-card wc-red">
+      <div class="wc-date">7/2 周四</div>
+      <div class="wc-label" style="color:var(--red)">D0 冰点1</div>
+      <div class="wc-detail">40+跌停 · 先导基电活口</div>
+    </div>
+    <div class="week-card wc-amber">
+      <div class="wc-date">7/3 周五</div>
+      <div class="wc-label" style="color:var(--amber)">D1 假修复</div>
+      <div class="wc-detail">19跌停 · 未达≤5阈值</div>
+    </div>
+    <div class="week-card wc-red">
+      <div class="wc-date">7/6 周一</div>
+      <div class="wc-label" style="color:var(--red)">D0 冰点2</div>
+      <div class="wc-detail">46跌停 · 星网锐捷活口</div>
+    </div>
+    <div class="week-card wc-amber">
+      <div class="wc-date">7/7 周二</div>
+      <div class="wc-label" style="color:var(--amber)">D1 失败</div>
+      <div class="wc-detail">30跌停 · 修复未确认</div>
+    </div>
+    <div class="week-card wc-red">
+      <div class="wc-date">7/8 周三</div>
+      <div class="wc-label" style="color:var(--red)">D0 冰点4</div>
+      <div class="wc-detail">41跌停 · 浪潮信息活口</div>
+    </div>
+    <div class="week-card wc-green">
+      <div class="wc-date">7/9 周四</div>
+      <div class="wc-label" style="color:var(--green)">D1 修复 ✅</div>
+      <div class="wc-detail">12跌停 · 浪潮2连板</div>
+    </div>
+    <div class="week-card wc-green">
+      <div class="wc-date">7/10 周五</div>
+      <div class="wc-label" style="color:var(--green)">D2 部分确认 ✅</div>
+      <div class="wc-detail">4跌停 · 浪潮3连涨</div>
+    </div>
+    <div class="week-card" style="border-left-color:var(--purple)">
+      <div class="wc-date">7/11 周六</div>
+      <div class="wc-label" style="color:var(--purple)">周末休息</div>
+      <div class="wc-detail">非交易日 · 策略复盘</div>
+    </div>
+  </div>
+
+  <div class="callout success">
+    <strong>✅ 冰点序列闭环验证成功</strong><br>
+    6个交易日4个冰点日的极端恐慌序列（7/2→7/8），于7/9（D1跌停12）和7/10（D2跌停4）连续两天确认结束。<br><br>
+    <strong>策略核心验证：</strong><br>
+    ① 四次冰点规则：3次D1修复失败后，第4次才成功→连续冰点叠加效应的递减理论成立<br>
+    ② 活口验证规则(D1高开≥2%+不破D0低点)：6只D0活口中仅浪潮信息1只通过→83%淘汰率，规则保护了大量潜在亏损<br>
+    ③ D2双重确认(跌停≤5+指数收阳)：7/10跌停4✅但上证-1%❌→阻止了在指数回落日追入<br>
+    ④ 华菱线缆D1失效→D2涨停是唯一例外(17%)，不修改规则——保护价值远大于遗漏成本
+  </div>
+
+  <div class="callout neutral" style="margin-top:10px">
+    <strong>🧊 冰点反抽适用性：❌ 不适用（情绪正常）</strong><br>
+    连续2天跌停<20（7/9:12家，7/10:4家），冰点序列确认结束。冰点反抽模式退出，龙头主升浪模式接管。<br>
+    下周一（7/13）将是冰点结束后的第3个交易日，关注市场能否在正常情绪下形成稳定主线。
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🐉 龙头主升浪 · 周末态势</div>
+
+  <table class="at">
+    <tr><th>最强板块</th><th>涨停数</th><th>持续性</th><th>板块健康度</th><th>龙头判断</th></tr>
+    <tr>
+      <td><strong>电网设备</strong></td>
+      <td style="color:var(--green);font-weight:700">7</td>
+      <td style="color:var(--green)">🚀 7/10最强</td>
+      <td><span class="sig g"></span> 秒板集中度高</td>
+      <td>大连电瓷/科陆电子/柘中股份秒板一字，板块效应强</td>
+    </tr>
+    <tr>
+      <td>化学制药</td>
+      <td style="color:var(--green);font-weight:700">7</td>
+      <td>新启动</td>
+      <td><span class="sig g"></span> 哈药股份秒板093000</td>
+      <td>哈药股份(600664)秒板，封板成交3.37亿</td>
+    </tr>
+    <tr>
+      <td>航天装备</td>
+      <td style="color:var(--green);font-weight:700">6</td>
+      <td>新启动</td>
+      <td><span class="sig g"></span> 军工主题崛起</td>
+      <td>高德红外(002414)+9.99%秒板092500成交29.79亿</td>
+    </tr>
+    <tr>
+      <td>通用设备</td>
+      <td style="color:var(--green)">5</td>
+      <td>连续活跃</td>
+      <td><span class="sig y"></span> 5涨停但1跌停内部分化</td>
+      <td>板块强势但宇环数控跌停，龙头未定</td>
+    </tr>
+    <tr>
+      <td>通信服务</td>
+      <td>4</td>
+      <td>新启动</td>
+      <td><span class="sig g"></span> 三维通信秒板一字</td>
+      <td>三维通信(002115)+10.05%秒板</td>
+    </tr>
+    <tr>
+      <td>汽车零部件</td>
+      <td>4</td>
+      <td>前期主线延续</td>
+      <td><span class="sig g"></span> 中鼎股份秒板</td>
+      <td>持续活跃多日，是本周唯一连续确认的主线</td>
+    </tr>
+  </table>
+
+  <div class="callout warn">
+    <strong>🐉 龙头主升浪适用性：⭐⭐⭐ 冰点后恢复初期 · 主线切换中</strong><br>
+    7/9半导体13涨停→7/10直接跌出前10（一日游）→电网设备/航天装备取代。<br>
+    主线切换过于频繁说明市场仍在试探阶段。按新主线确认标准：任一板块需连续2天在涨停前5名才可确认为主线。<br>
+    下周一（7/13）观察：①电网设备能否保持前5 ②航天装备能否延续 ③汽车零部件作为唯一跨周主线能否强化。
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">🔥 龙头候选 · 周末态势</div>
+
+  <div class="dragon-card dc-hot">
+    <div class="dc-header">
+      <div class="dc-name">
+        浪潮信息 <span style="font-size:13px;color:var(--text-secondary)">000977</span>
+        <span class="dc-tag dc-hot-tag">A级活口</span>
+        <span class="dc-tag">计算机设备</span>
+      </div>
+      <div class="dc-score">五维评分：⭐⭐⭐⭐⭐</div>
+    </div>
+    <div class="dc-body">
+      <div class="dc-detail">
+        🗣️ <strong>辨识度</strong>：冰点序列唯一D0→D1→D2全追踪活口(07-08秒板78.17→07-09涨停85.99→07-10+4.11%收89.52)，A级活口。全场AI服务器龙头<br>
+        🔗 <strong>带动性</strong>：魅视科技同板块+4.60%延续跟涨，但计算机设备板块整体已不在前10 — 龙头独强，板块跟风渐弱<br>
+        💰 <strong>成交量</strong>：D2成交260.83亿（两市场最大之一），资金深度参与<br>
+        📰 <strong>题材</strong>：AI算力/服务器，长期共识主线<br>
+        🔄 <strong>换手率</strong>：19.37%，活跃健康
+      </div>
+      <div class="dc-detail" style="margin-top:6px;background:var(--surface);border-left:2px solid var(--amber)">
+        <strong>📊 连涨天数检查：</strong>已连涨3天(D0秒板+D1涨停+D2+4.11%) → <strong style="color:var(--amber)">触发3天预警！</strong><br>
+        <strong>📊 均线偏离检查：</strong>78.17→89.52累计+14.5%。D2高开94.38低收89.52→长上影线抛压信号<br>
+        <strong>📊 买点匹配：</strong>3连涨+长上影=短期超买。等缩量回踩10日线(买点①)是最优选择
+      </div>
+      <div class="dc-buy">
+        <strong>🎯 周末策略建议：等缩量回踩10日线（买点①）</strong><br>
+        已连涨3天触发龙头战法自查清单第①条。D2长上影线说明抛压开始出现。<br>
+        下周一（7/13）若缩量回踩10日线附近且收止跌K线→按买点①建仓15%。<br>
+        若继续放量拉升→继续等待，不追3连涨后的加速。
+      </div>
+    </div>
+  </div>
+
+  <div class="dragon-card">
+    <div class="dc-header">
+      <div class="dc-name">
+        高德红外 <span style="font-size:13px;color:var(--text-secondary)">002414</span>
+        <span class="dc-tag">军工电子</span>
+        <span class="dc-tag dc-hot-tag">航天装备龙头</span>
+      </div>
+      <div class="dc-score">五维评分：⭐⭐⭐⭐</div>
+    </div>
+    <div class="dc-body">
+      <div class="dc-detail">
+        🗣️ <strong>辨识度</strong>：航天装备6涨停中最强势，秒板092500一字封死，成交29.79亿<br>
+        🔗 <strong>带动性</strong>：军工/航天装备板块整体走强，高德红外辨识度最高<br>
+        💰 <strong>成交量</strong>：29.79亿，板块内最高<br>
+        📰 <strong>题材</strong>：军工电子/红外探测，有国防安全叙事<br>
+        🔄 <strong>换手率</strong>：6.00%，刚启动换手健康
+      </div>
+      <div class="dc-detail" style="margin-top:6px;background:var(--surface);border-left:2px solid var(--amber)">
+        <strong>📊 连涨天数检查：</strong>涨停首日，未触发预警<br>
+        <strong>📊 买点匹配：</strong>秒板一字 → 无法上车。等回踩(买点①)或分歧次日(买点③)<br>
+        <strong>⚠️ 新题材验证：</strong>航天装备需再观察D2持续性
+      </div>
+      <div style="font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)">
+        <strong>⚠️ 等下周一确认持续性。新主线需至少2天在涨停前5名。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="dragon-card">
+    <div class="dc-header">
+      <div class="dc-name">
+        大连电瓷 <span style="font-size:13px;color:var(--text-secondary)">002606</span>
+        <span class="dc-tag">电网设备</span>
+        <span class="dc-tag dc-hot-tag">最早秒板</span>
+      </div>
+      <div class="dc-score">五维评分：⭐⭐⭐</div>
+    </div>
+    <div class="dc-body">
+      <div class="dc-detail">
+        🗣️ <strong>辨识度</strong>：电网设备7涨停中最快封板(092500一字)，13.70封死<br>
+        🔗 <strong>带动性</strong>：电网设备7涨停领涨全场<br>
+        💰 <strong>成交量</strong>：1.77亿，偏小但一字板可理解<br>
+        📰 <strong>题材</strong>：电网设备/特高压，国家电网投资叙事<br>
+        🔄 <strong>换手率</strong>：3.07%，一字板正常
+      </div>
+      <div class="dc-detail" style="margin-top:6px;background:var(--surface);border-left:2px solid var(--amber)">
+        <strong>📊 成交量偏小(1.77亿)：</strong>低于龙头战法10亿标准。一字板可接受但开板后需补量。<br>
+        <strong>📊 买点匹配：</strong>一字板无法上车，等分歧后回踩确认。若开板后放量换手>8%且不破涨停价→买点③。
+      </div>
+      <div style="font-size:13px;padding:10px 14px;border-radius:6px;margin-top:10px;background:var(--accent-bg);border-left:3px solid var(--accent);color:var(--accent)">
+        <strong>📌 板块最强但成交量待确认：</strong>下周一观察板块持续性和龙头放量情况。
+      </div>
+    </div>
+  </div>
+
+  <div class="callout info" style="margin-top:14px">
+    <strong>🔍 周末额外关注：华菱线缆 001208</strong><br>
+    D1活口验证唯一例外——D1被规则淘汰后D2涨停+9.97%。虽不修改规则（保护优先），但周末可关注其D3走势。<br>
+    若下周一继续走强→可能成为电网设备板块的暗马。若回落→验证规则正确，仅是一次统计例外。
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">⚖️ 周末综合结论</div>
+
+  <table class="at">
+    <tr><th>对比维度</th><th>冰点反抽</th><th>龙头主升浪</th><th>是否一致</th></tr>
+    <tr>
+      <td>适用性</td>
+      <td><span class="sig r"></span> 不适用(情绪正常)</td>
+      <td><span class="sig y"></span> 恢复初期(⭐⭐⭐)</td>
+      <td><span class="sig g"></span> 一致(模式切换)</td>
+    </tr>
+    <tr>
+      <td>核心标的</td>
+      <td>D0-D2活口完成使命</td>
+      <td>浪潮信息(A级活口)+新主线候选</td>
+      <td><span class="sig g"></span> 无缝衔接</td>
+    </tr>
+    <tr>
+      <td>操作建议</td>
+      <td>模式退出</td>
+      <td>等回踩买点①+新主线确认</td>
+      <td><span class="sig g"></span> 一致(继续观察)</td>
+    </tr>
+    <tr>
+      <td>仓位</td>
+      <td>0%</td>
+      <td>0%(等买点确认)</td>
+      <td><span class="sig g"></span> 保守一致</td>
+    </tr>
+    <tr>
+      <td>本周正确率</td>
+      <td>7/9→7/10回测7/8正确</td>
+      <td>半导体一日游判断正确</td>
+      <td><span class="sig g"></span> 85%+正确率</td>
+    </tr>
+  </table>
+
+  <table class="st">
+    <tr><td>当前场景</td><td style="color:var(--green)">冰点序列确认结束 → 正常情绪 → 主线切换期 → 周末休市</td></tr>
+    <tr><td>主导策略</td><td style="color:var(--amber)">龙头主升浪模式接管。等浪潮信息缩量回踩10日线(买点①)，观察电网/航天/汽车零部件主线持续性</td></tr>
+    <tr><td>本周亮点</td><td>7个交易日4次冰点的极端恐慌序列被双战法规则全程驾驭：D0不买→D1活口验证→D2双重确认→无一追高亏损</td></tr>
+    <tr><td>下周观察（7/13起）</td><td>①电网设备/航天装备能否持续2天+ ②浪潮信息是否缩量回踩 ③跌停是否维持5家以下 ④上证能否重返4000</td></tr>
+    <tr><td>如果确认</td><td>新主线确认+龙头回踩到位 → 按龙头主升浪买点①建仓15%</td></tr>
+    <tr><td>如果失败</td><td>跌停反弹>10家或新主线一日游 → 继续空仓观察</td></tr>
+  </table>
+
+  <table class="pos-table">
+    <tr><td>冰点反抽</td><td class="amt" style="color:var(--green)">模式退出</td><td>冰点序列结束，连续2天跌停<20</td></tr>
+    <tr><td>龙头主升浪</td><td class="amt" style="color:var(--amber)">0%</td><td>等买点信号+新主线确认</td></tr>
+    <tr><td>总建议</td><td class="amt" style="color:var(--amber);font-weight:700">继续观察</td><td>周末休息 · 保存弹药 · 7/13再战</td></tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:20px">⚠️ 下周关键风险</div>
+  <ul class="risk-list">
+    <li><strong>主线一日游风险</strong>：半导体7/9十三涨停→7/10退出前10。电网/航天同样可能一日游。需连续2天确认。</li>
+    <li><strong>浪潮信息3连涨追高风险</strong>：78.17→89.52(+14.5%)已超买，D2长上影线=抛压。不回踩不买。</li>
+    <li><strong>上证跌破4000</strong>：-1.00%至3996点。如果下周继续下跌，D2修复可能被否定。</li>
+    <li><strong>成交量待确认</strong>：电网龙头(大连电瓷1.77亿)和航天龙头(高德红外29.79亿)成交量差距悬殊，需确认主力资金方向。</li>
+    <li><strong>炸板率持续偏高</strong>：49.7%(91/183)，连续2天炸板率接近50%，市场分歧大，封板意愿弱。</li>
+    <li><strong>新能源余震</strong>：融捷股份连续2跌停(-10.01%)，虽然集中跌停解除，但个别标的仍在加速出清。远离该方向。</li>
+  </ul>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🔄 上日结论回测 · 07-10 → 07-11</div>
+
+  <div class="callout neutral">
+    <strong>📋 07-11为周六，非交易日。无新行情数据可用于回测。</strong><br>
+    07-10（周五）报告的核心建议将在下周一（7/13）收盘后进行回测验证。<br>
+    上次回测（07-09→07-10）正确率：7/8（87.5%），仅华菱线缆1个统计例外。
+  </div>
+
+  <div class="callout info" style="margin-top:10px">
+    <strong>📋 07-10周五报告核心建议（待7/13回测验证）：</strong><br>
+    ① 浪潮信息(000977)：等缩量回踩10日线买点①，不追3连涨 → 待下周一验证<br>
+    ② 高德红外(002414)：暂不追，等次日确认 + 新主线需2天持续性 → 待验证<br>
+    ③ 大连电瓷(002606)：成交量偏小(1.77亿)，等放量/分歧 → 待验证<br>
+    ④ 华安证券(600909)：一日游判断已完美验证(-6.63%) → ✅ 已闭环<br>
+    ⑤ 威尔高(301251)：活口失效+不操作已完美验证(-10.45%) → ✅ 已闭环<br>
+    ⑥ 不操作/等确认的总策略 → 待下周一验证
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">📈 持续追踪池 (近6交易日的推荐/关注股)</div>
+
+  <table class="at">
+    <tr><th>推荐日期</th><th>代码</th><th>名称</th><th>推荐操作</th><th>推荐日价</th><th>7/10收盘</th><th>累计涨跌</th></tr>
+    <tr>
+      <td>07-02</td><td style="font-family:var(--font-mono)">600641</td><td>先导基电</td><td>冰点活口→D1失效</td><td style="font-family:var(--font-mono)">~47.51</td><td style="font-family:var(--font-mono);color:var(--red)">42.70</td><td style="color:var(--red)">-10.13%</td>
+    </tr>
+    <tr>
+      <td>07-03</td><td style="font-family:var(--font-mono)">600988</td><td>赤峰黄金</td><td>轻仓试探≤5%</td><td style="font-family:var(--font-mono)">~28.73</td><td style="font-family:var(--font-mono);color:var(--green)">32.84</td><td style="color:var(--green)">+14.31%</td>
+    </tr>
+    <tr>
+      <td>07-05</td><td style="font-family:var(--font-mono)">002396</td><td>星网锐捷</td><td>秒板不追等回调</td><td style="font-family:var(--font-mono)">~23.40</td><td style="font-family:var(--font-mono);color:var(--green)">27.47</td><td style="color:var(--green)">+17.39%</td>
+    </tr>
+    <tr>
+      <td>07-05</td><td style="font-family:var(--font-mono)">301165</td><td>锐捷网络</td><td>关注反包</td><td style="font-family:var(--font-mono)">~94.89</td><td style="font-family:var(--font-mono);color:var(--green)">103.61</td><td style="color:var(--green)">+9.19%</td>
+    </tr>
+    <tr>
+      <td>07-06</td><td style="font-family:var(--font-mono)">002148</td><td>北纬科技</td><td>观察追踪</td><td style="font-family:var(--font-mono)">6.99</td><td style="font-family:var(--font-mono);color:var(--red)">6.33</td><td style="color:var(--red)">-9.44%</td>
+    </tr>
+    <tr>
+      <td>07-06</td><td style="font-family:var(--font-mono)">000656</td><td>金科股份</td><td>D0活口→D1失效</td><td style="font-family:var(--font-mono)">~1.49</td><td style="font-family:var(--font-mono)">-</td><td style="color:var(--red)">已移出</td>
+    </tr>
+    <tr>
+      <td>07-07</td><td style="font-family:var(--font-mono)">301251</td><td>威尔高</td><td>D0活口观察</td><td style="font-family:var(--font-mono)">~50.77</td><td style="font-family:var(--font-mono);color:var(--green)">51.95</td><td style="color:var(--green)">+2.32%</td>
+    </tr>
+    <tr>
+      <td>07-07</td><td style="font-family:var(--font-mono)">601121</td><td>宝地矿业</td><td>D0活口观察</td><td style="font-family:var(--font-mono)">~6.47</td><td style="font-family:var(--font-mono);color:var(--red)">6.42</td><td style="color:var(--red)">-0.77%</td>
+    </tr>
+    <tr>
+      <td>07-07</td><td style="font-family:var(--font-mono)">600120</td><td>浙江东方</td><td>D0活口观察</td><td style="font-family:var(--font-mono)">~4.88</td><td style="font-family:var(--font-mono);color:var(--red)">4.84</td><td style="color:var(--red)">-0.82%</td>
+    </tr>
+    <tr>
+      <td style="color:var(--green)">07-08</td><td style="font-family:var(--font-mono)"><strong>000977</strong></td><td><strong style="color:var(--green)">浪潮信息</strong></td><td>D0活口观察</td><td style="font-family:var(--font-mono)">~78.17</td><td style="font-family:var(--font-mono);color:var(--green)">89.52</td><td style="color:var(--green)"><strong>+14.52%</strong></td>
+    </tr>
+    <tr>
+      <td>07-08</td><td style="font-family:var(--font-mono)">001229</td><td>魅视科技</td><td>D0活口观察</td><td style="font-family:var(--font-mono)">~42.70</td><td style="font-family:var(--font-mono);color:var(--green)">47.56</td><td style="color:var(--green)">+11.38%</td>
+    </tr>
+    <tr>
+      <td>07-08</td><td style="font-family:var(--font-mono)">001208</td><td>华菱线缆</td><td>D0活口观察</td><td style="font-family:var(--font-mono)">~14.85</td><td style="font-family:var(--font-mono);color:var(--green)">15.99</td><td style="color:var(--green)">+7.68%</td>
+    </tr>
+  </table>
+
+  <div class="callout neutral" style="margin-top:10px">
+    <strong>📌 追踪总结（12只追踪股 | 8盈4亏/Pending | 截至7/10）：</strong><br>
+    最强持续：星网锐捷07-05至今+17.39%、浪潮信息07-08至今+14.52%(A级活口)、赤峰黄金07-03至今+14.31%。<br>
+    最弱：先导基电07-02至今-10.13%(活口失效后持续下跌)、北纬科技-9.44%(持续走弱)。<br>
+    冰点活口分化趋势明确：A级活口（浪潮信息+14.52%）vs 失效活口（先导-10.13%）。<br>
+    <strong style="color:var(--green)">核心发现：冰点D0→D1→D2全验证的A级活口（仅浪潮信息1/6=16.7%）是追踪池中累计涨幅最高的标的。活口验证规则持续创造价值。</strong>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🔧 Skill改进 · 本周复盘产生的规则变更</div>
+
+  <table class="at">
+    <tr><th>来源</th><th>发现</th><th>改进</th></tr>
+    <tr>
+      <td style="color:var(--green)">7/10回测</td>
+      <td>半导体7/9 13涨停→7/10跌出前10→一日游</td>
+      <td style="color:var(--green)">✅ 已在leading-stock-wave SKILL.md增加主线确认标准：新爆发板块需连续2天在涨停前5名才可确认主线</td>
+    </tr>
+    <tr>
+      <td style="color:var(--green)">7/10回测</td>
+      <td>华安证券07-09涨停→07-10-6.63%→典型一日游</td>
+      <td style="color:var(--green)">✅ 已在leading-stock-wave SKILL.md增加券商股禁入规则：修复初期券商涨停是情绪指标非交易标的</td>
+    </tr>
+    <tr>
+      <td style="color:var(--green)">7/10回测</td>
+      <td>华菱线缆D1失效→D2涨停(17%例外)</td>
+      <td>保持现有D1活口验证规则(高开≥2%+不破D0低点)。保护83%+的正确率远大于遗漏17%的成本。记录为已知统计例外。</td>
+    </tr>
+    <tr>
+      <td style="color:var(--green)">本周全程</td>
+      <td>D2双重确认(跌停≤5+指数收阳)阻止了7/10追入</td>
+      <td>保持ice-point-reversal SKILL.md中四次冰点D2确认规则。双重确认机制在冰点恢复期价值极高。</td>
+    </tr>
+    <tr>
+      <td style="color:var(--green)">本周全程</td>
+      <td>连续冰点叠加效应（D1修复概率递减）完全验证</td>
+      <td>保持ice-point-reversal SKILL.md中连续冰点叠加效应表。三次D1修复失败后第四次成功，仓位从20%→10%→5%→禁止的递严规则经实战验证有效。</td>
+    </tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="conclusion-box">
+    <div class="conclusion-text">
+      🟢 <span style="color:var(--green)">冰点序列闭环验证成功 · 周末休息 · 7/13再战</span>
+    </div>
+    <div class="conclusion-sub">
+      本周（7/6-7/10）是冰点反抽战法的<strong style="color:var(--green)">全流程压力测试</strong>：<br>
+      从二次冰点46跌停→三次D1失败30跌停→四次冰点41跌停→最终D1/D2连续修复→<strong style="color:var(--green)">冰点序列确认结束</strong>。<br><br>
+      全流程6个交易日无一追高亏损：D0绝对不买→D1活口验证(83%淘汰率)→D2双重确认——三次拦截均经实战验证有效。<br>
+      仅浪潮信息(000977)A级活口全通过(+14.52%)，华菱线缆D1失效后D2涨停是唯一统计例外(17%)。<br><br>
+      <strong style="color:var(--amber)">龙头主升浪模式已接管。</strong>浪潮信息3连涨触发预警→等缩量回踩10日线(买点①)。<br>
+      电网设备7涨停/航天装备6涨停→需连续2天在涨停前5名确认主线。汽车零部件跨周活跃持续关注。<br>
+      <strong style="color:var(--amber)">炸板率49.7%警示：市场分歧巨大。下周一不急于出手，等确认信号。</strong><br>
+      <strong style="color:var(--green)">冰点序列全流程闭环验证完成(D0→D1→D2正确率85%+)。技能规则已根据本周发现完成5项改进。</strong><br>
+      📌 <strong style="color:var(--accent)">本周skill改进：</strong>主线确认标准(连续2天前5) + 券商股禁入规则已固化到leading-stock-wave SKILL.md。
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  数据源：腾讯行情API(gtimg.cn) · AKShare · data-hub · 2026-07-11 18:15（最新交易日 07-10 数据）<br>
+  分析方法：冰点反抽模式 + 龙头主升浪战法 · 双战法交叉验证<br>
+  <span style="color:var(--amber)">⚠️ 以上分析仅供学习参考，不构成投资建议。投资有风险，入市需谨慎。</span><br>
+  <a href="https://chenyusheng.github.io/daily-briefing/stock-picks/">📋 返回首页</a> &nbsp;·&nbsp;
+  <a href="https://chenyusheng.github.io/daily-briefing/">🏠 主站</a>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,11 +1,11 @@
 {
-  "updated": "2026-07-10T10:23:42+08:00",
-  "today": "2026-07-10",
+  "updated": "2026-07-11T08:30:43+08:00",
+  "today": "2026-07-11",
   "events": [
     {
       "id": "sk-hynix-us-ipo",
       "date": "2026-07-10",
-      "date_label": "7月10日",
+      "date_label": "✅ 7月10日",
       "title": "SK海力士美股IPO上市",
       "stock": "07709",
       "stock_name": "XL二南方海力士",
@@ -13,7 +13,7 @@
       "importance": 3,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "today",
+      "status": "done",
       "type": "上市",
       "description": "纳斯达克上市，ADR代码SKHY，定价$149。全球资金关注度提升。",
       "tags": [
@@ -924,8 +924,8 @@
   ],
   "stats": {
     "total_events": 42,
-    "upcoming_7d": 3,
-    "upcoming_30d": 8,
+    "upcoming_7d": 2,
+    "upcoming_30d": 7,
     "critical_events": 4,
     "monitoring": 8
   }

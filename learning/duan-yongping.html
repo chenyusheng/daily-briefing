@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>段永平 — 大道无形的价值投资教父</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --card: #1a1a24;
+    --card-hover: #222233;
+    --accent: #6c5ce7;
+    --accent2: #00cec9;
+    --accent3: #fd79a8;
+    --gold: #fdcb6e;
+    --red: #e17055;
+    --green: #00b894;
+    --text: #e0e0e8;
+    --text-muted: #888899;
+    --border: #2a2a3a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0d2137 50%, #16213e 100%);
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(108,92,231,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(0,206,201,0.06) 0%, transparent 50%);
+    animation: heroGlow 8s ease-in-out infinite alternate;
+  }
+  @keyframes heroGlow {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-20px, -20px) rotate(3deg); }
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+    color: #fff;
+  }
+  .hero h1 .highlight { color: var(--accent2); }
+  .hero .subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .hero .subtitle .gold { color: var(--gold); font-weight: 600; }
+  .hero .stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .hero .stats span {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 16px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  .hero .stats span strong { color: #fff; }
+  .hero .nav-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--accent2);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .hero .nav-link:hover { opacity: 1; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 48px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  h2 .emoji-badge {
+    display: inline-block;
+    margin-right: 8px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent2);
+    margin: 28px 0 12px;
+  }
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin: 20px 0 10px;
+  }
+  p { font-size: 0.9rem; color: var(--text); margin-bottom: 14px; line-height: 1.8; }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+  }
+  .card:hover {
+    background: var(--card-hover);
+    transform: translateX(4px);
+  }
+
+  /* Pillar Boxes */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .pillar-card {
+    background: linear-gradient(135deg, rgba(108,92,231,0.06), rgba(0,206,201,0.06));
+    border: 1px solid rgba(108,92,231,0.2);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .pillar-card .icon { font-size: 2rem; margin-bottom: 8px; display: block; }
+  .pillar-card .title { font-size: 0.9rem; font-weight: 600; color: var(--accent2); margin-bottom: 6px; }
+  .pillar-card .desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* Quote Box */
+  .quote-box {
+    background: linear-gradient(135deg, rgba(253,203,110,0.08), rgba(108,92,231,0.08));
+    border: 1px solid rgba(253,203,110,0.2);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+  .quote-box .quote-text {
+    font-size: 1.05rem;
+    color: var(--gold);
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 6px;
+  }
+  .quote-box .quote-source {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: right;
+  }
+
+  /* Case Box */
+  .case-box {
+    background: linear-gradient(135deg, rgba(0,206,201,0.05), rgba(108,92,231,0.05));
+    border: 1px solid rgba(0,206,201,0.15);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+  .case-box h4 { color: var(--accent2); margin-top: 0; }
+  .case-box .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+  .case-box .return-badge {
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  /* Tag */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    margin-right: 4px;
+    margin-bottom: 4px;
+  }
+  .tag-purple { background: rgba(108,92,231,0.15); color: var(--accent); }
+  .tag-teal { background: rgba(0,206,201,0.15); color: var(--accent2); }
+  .tag-pink { background: rgba(253,121,168,0.15); color: var(--accent3); }
+  .tag-gold { background: rgba(253,203,110,0.15); color: var(--gold); }
+
+  /* List */
+  ul { padding-left: 20px; margin-bottom: 14px; }
+  ul li { font-size: 0.88rem; color: var(--text); margin-bottom: 6px; line-height: 1.6; }
+  ul li::marker { color: var(--accent2); }
+
+  /* Principle list */
+  .principle-item {
+    background: var(--card);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .principle-item h4 { color: #fff; margin: 0 0 6px; }
+  .principle-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+  /* Timeline for life journey */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), var(--gold));
+    opacity: 0.3;
+  }
+  .timeline-node { position: relative; margin-bottom: 24px; }
+  .timeline-dot {
+    position: absolute;
+    left: -23px;
+    top: 3px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--accent2);
+    background: var(--bg);
+    z-index: 1;
+  }
+  .timeline-node .year { font-size: 0.82rem; color: var(--accent2); font-weight: 600; }
+  .timeline-node .desc { font-size: 0.85rem; color: var(--text); margin-top: 2px; }
+
+  /* Recommendation box */
+  .rec-box {
+    background: rgba(253,203,110,0.04);
+    border: 1px solid rgba(253,203,110,0.12);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 10px;
+  }
+  .rec-box .title { font-size: 0.9rem; font-weight: 600; color: var(--gold); margin-bottom: 4px; }
+  .rec-box .desc { font-size: 0.82rem; color: var(--text-muted); }
+
+  @media (max-width: 600px) {
+    .pillar-grid { grid-template-columns: 1fr; }
+    .hero { padding: 60px 16px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>段永平 — <span class="highlight">大道无形</span></h1>
+    <p class="subtitle">
+      从实业巨擘到投资教父<br>
+      <span class="gold">"做对的事情，把事情做对"</span>
+    </p>
+    <div class="stats">
+      <span>🏢 <strong>步步高/OPPO</strong> 创始人</span>
+      <span>📈 <strong>网易×100</strong> 经典回报</span>
+      <span>🧑‍🏫 <strong>巴菲特午餐</strong> 2006/2008</span>
+      <span>❄️ <strong>雪球ID</strong> 大道无形</span>
+    </div>
+    <a class="nav-link" href="https://eason-byte.github.io/daily-briefing/">← 返回首页</a>
+  </div>
+</section>
+
+<div class="container">
+
+<!-- ============ 人物简介 ============ -->
+<h2><span class="emoji-badge">🧑‍💼</span> 人物背景</h2>
+
+<div class="card">
+  <p><strong>段永平</strong>（1961年3月10日—），江西南昌人，美籍华人企业家、价值投资者。他是中国实业界和投资界最具传奇色彩的人物之一——既成功创办了两个百亿级企业（小霸王、步步高），又在投资领域创造了网易百倍回报、茅台二十倍长持的经典战绩。因其低调风格和极致简洁的投资哲学，被业界称为"中国巴菲特"。</p>
+</div>
+
+<div class="timeline">
+  <div class="timeline-node">
+    <div class="timeline-dot"></div>
+    <div class="year">1978</div>
+    <div class="desc">考入浙江大学无线电系，后就读中国人民大学计量经济学</div>
+  </div>
+  <div class="timeline-node">
+    <div class="timeline-dot"></div>
+    <div class="year">1989</div>
+    <div class="desc">接手濒临破产的日华电子厂，创立小霸王品牌，6年做到年产值超10亿</div>
+  </div>
+  <div class="timeline-node">
+    <div class="timeline-dot"></div>
+    <div class="year">1995</div>
+    <div class="desc">因股份制改革分歧离开小霸王，创办步步高电子（后孵化OPPO、vivo、OnePlus）</div>
+  </div>
+  <div class="timeline-node">
+    <div class="timeline-dot"></div>
+    <div class="year">2001</div>
+    <div class="desc">事业巅峰选择退居幕后，移民美国转型专职投资人</div>
+  </div>
+  <div class="timeline-node">
+    <div class="timeline-dot"></div>
+    <div class="year">2003</div>
+    <div class="desc">以约$1/股抄底网易，最终获超100倍回报，一战成名</div>
+  </div>
+  <div class="timeline-node">
+    <div class="timeline-dot"></div>
+    <div class="year">2006/2008</div>
+    <div class="desc">两度拍下巴菲特慈善午餐（$62万/次），与巴菲特深度交流价值投资</div>
+  </div>
+  <div class="timeline-node">
+    <div class="timeline-dot"></div>
+    <div class="year">2011</div>
+    <div class="desc">开始重仓苹果，持有至今见证苹果从$3000亿到全球第一</div>
+  </div>
+  <div class="timeline-node">
+    <div class="timeline-dot"></div>
+    <div class="year">2025</div>
+    <div class="desc">退休二十余年后罕见接受雪球《方略》专访，系统阐述投资哲学</div>
+  </div>
+</div>
+
+<!-- ============ 核心投资理念 ============ -->
+<h2><span class="emoji-badge">🧠</span> 核心投资理念</h2>
+
+<div class="pillar-grid">
+  <div class="pillar-card">
+    <span class="icon">🏢</span>
+    <div class="title">买股票就是买公司</div>
+    <div class="desc">投资的本质是成为公司的部分所有者，而非交易价格波动的凭证</div>
+  </div>
+  <div class="pillar-card">
+    <span class="icon">🎯</span>
+    <div class="title">做对的事情</div>
+    <div class="desc">方向正确，符合长期逻辑和价值观，拒绝短期利益诱惑</div>
+  </div>
+  <div class="pillar-card">
+    <span class="icon">🔄</span>
+    <div class="title">把事情做对</div>
+    <div class="desc">在正确方向上持续努力，注重细节和执行力</div>
+  </div>
+</div>
+
+<h3>理念一：买股票就是买公司</h3>
+<div class="principle-item">
+  <h4>🎯 核心理念</h4>
+  <p>段永平认为，投资中最重要的一句话就是"买股票就是买公司"。这不是一句口号，而是对自己投资行为的根本定义——你买的是一份生意，而不是一张每天报价的纸。能真正理解这句话的人，可能不到1%。</p>
+</div>
+
+<div class="principle-item">
+  <h4>🔍 看懂公司的三个问题</h4>
+  <p><strong>1. 公司靠什么赚钱？</strong>（商业模式）<br>
+     <strong>2. 为什么能持续赚钱？</strong>（护城河）<br>
+     <strong>3. 未来能赚多少钱？</strong>（现金流折现）</p>
+</div>
+
+<h3>理念二：好生意 · 好团队 · 好价格</h3>
+<div class="principle-item">
+  <h4>好生意（商业模式优先）</h4>
+  <p>能长期产生大量自由现金流的商业模式。四个判断标准：盈利来源清晰可持续、具备长期差异化护城河、现金流质量优异（利润能转化为自由现金流）、增长逻辑内生可控。</p>
+</div>
+<div class="principle-item">
+  <h4>好团队（企业文化为王）</h4>
+  <p>比管理层个人能力更重要的是企业是否具备"本分、诚信、用户导向"的文化。优秀的企业文化是企业能穿越周期、不犯致命错误的"北斗星"。</p>
+</div>
+<div class="principle-item">
+  <h4>好价格（安全边际来自理解深度）</h4>
+  <p>真正的安全边际不是价格便宜（"便宜的东西可以更便宜"），而是你对公司理解的深度和确定性。理解越深刻，风险越低。</p>
+</div>
+
+<h3>理念三：不为清单 — 不做什么更重要</h3>
+<p>段永平反复强调一句极为深刻的话：<strong>"我之所以是我，大多是因为我不做什么。"</strong> 这是他与绝大多数投资者最本质的区别。他的"不为清单"包括：</p>
+<ul>
+  <li><strong>不做代工</strong> — 缺乏差异化，无法形成长期竞争力</li>
+  <li><strong>不碰没有差异化的产品</strong> — 避免陷入价格战红海</li>
+  <li><strong>不预测市场</strong> — 从不关注股价短期涨跌，专注于企业本身</li>
+  <li><strong>不做不懂的投资</strong> — 超出能力圈的标的再热门也坚决回避</li>
+  <li><strong>不追求短期利益</strong> — 拒绝为了短期利润牺牲长期价值</li>
+  <li><strong>不融资（不加杠杆）</strong> — 保持平常心，不让心态被杠杆扭曲</li>
+</ul>
+
+<div class="quote-box">
+  <div class="quote-text">"我之所以是我，大多是因为我不做什么。"</div>
+  <div class="quote-source">— 段永平，2025年雪球《方略》专访</div>
+</div>
+
+<!-- ============ 交易系统 ============ -->
+<h2><span class="emoji-badge">⚙️</span> 投资体系</h2>
+
+<div class="card">
+  <h3>选股：只做真懂的事</h3>
+  <p>段永平的选股标准极为严格——<strong>能力圈原则</strong>。只投资那些商业模式清晰、自己能透彻理解的公司。他坦言，真正重仓投资的公司不过十家左右，核心持仓就是苹果、茅台、腾讯三只标的。</p>
+  <p><strong>核心筛选框架：</strong></p>
+  <ul>
+    <li>商业模式是否简单、可预测？</li>
+    <li>是否有持续的自由现金流？</li>
+    <li>企业文化是否"本分、诚信、用户导向"？</li>
+    <li>是否有宽广的护城河（品牌/技术/生态）？</li>
+    <li>自己是否真正理解这家公司的生意？</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>买入：逆向思维 + 安全边际</h3>
+  <p>段永平的买入策略体现了典型的逆向价值投资：</p>
+  <ul>
+    <li><strong>市场恐慌时买入</strong> — 网易在$1时市场极度恐慌，他看到了净现金+游戏业务的价值</li>
+    <li><strong>越跌越买</strong> — 茅台从2600跌到1200时，他公开表示增持</li>
+    <li><strong>不追热点</strong> — 泡泡玛特产品有意思，但看不懂10年后会怎样，所以不投</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>卖出：几乎不卖</h3>
+  <p>段永平的持仓周期通常以十年为单位：</p>
+  <ul>
+    <li>持有茅台已超17年（2008年至今）</li>
+    <li>持有苹果超14年（2011年至今）</li>
+    <li>卖出条件只有两个：公司基本面永久恶化，或者有更好的投资机会（机会成本）</li>
+    <li>在茅台2600-2700元时曾想卖，但"卖了找不到更合适的标的"，于是不卖</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>仓位管理：极致的集中</h3>
+  <p>段永平是巴菲特"打孔机原则"的践行者——一生只有20个打孔位，代表最多重仓20家公司：</p>
+  <ul>
+    <li>目前核心持仓只有苹果、茅台、腾讯三只</li>
+    <li>"好容易找到一个好价格的好股票，不集中是不明白的表现"</li>
+    <li>分散投资反而降低组合质量，增加犯错概率</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>风控：不做错的事</h3>
+  <p>段永平的风控体系非常独特——不是靠止损线，而是靠"不做不该做的事"：</p>
+  <ul>
+    <li>用"不为清单"从源头排除绝大多数风险</li>
+    <li>用"看懂"代替"止损"——真正看懂了，就不会在恐慌中卖出</li>
+    <li>不加杠杆——"那些钱对我来讲它并不多"是他在网易上能拿住的根本原因</li>
+    <li>不融资——保持理性，不能让心态被债务扭曲</li>
+  </ul>
+</div>
+
+<!-- ============ 经典语录 ============ -->
+<h2><span class="emoji-badge">💬</span> 经典心法 / 语录</h2>
+
+<div class="quote-box">
+  <div class="quote-text">"投资很简单，但绝不容易。简单在于原则清晰，就是看公司、看生意、看未来现金流；难在于真正看懂一家公司需要深厚的商业洞察力。"</div>
+  <div class="quote-source">— 段永平，2025年雪球专访</div>
+</div>
+
+<div class="quote-box">
+  <div class="quote-text">"市盈率只是参考指标，真正决定投资价值的是未来现金流的折现。"</div>
+  <div class="quote-source">— 段永平，谈茅台估值</div>
+</div>
+
+<div class="quote-box">
+  <div class="quote-text">"真正懂投资的人不会关注市场短期波动。市场情绪导致的股价波动，恰恰是价值投资者的机会。"</div>
+  <div class="quote-source">— 段永平</div>
+</div>
+
+<div class="quote-box">
+  <div class="quote-text">"如果你不懂投资，买标普500指数长期持有，最后总是赚钱的。这其实也是一种懂投资的表现——知道自己不懂，所以选择最稳妥的方式。"</div>
+  <div class="quote-source">— 段永平，给普通投资者的建议</div>
+</div>
+
+<div class="quote-box">
+  <div class="quote-text">"市值只是暂时的，真正的财富是认知和价值观的积累。"</div>
+  <div class="quote-source">— 段永平</div>
+</div>
+
+<div class="quote-box">
+  <div class="quote-text">"我不喜欢搞那些复杂的估值模型，我喜欢简单的逻辑，越简单越好。"</div>
+  <div class="quote-source">— 段永平</div>
+</div>
+
+<!-- ============ 经典案例 ============ -->
+<h2><span class="emoji-badge">📈</span> 经典案例</h2>
+
+<div class="case-box">
+  <h4>🇨🇳 网易 — 百倍回报的成名之战</h4>
+  <span class="return-badge">+10000%+ 回报</span>
+  <p><strong>时间：</strong>2003年买入，持有至2004年后逐步退出</p>
+  <p><strong>背景：</strong>网易因互联网泡沫破裂和财务造假质疑，股价跌至约$1美元，处于濒临退市困境。</p>
+  <p><strong>投资逻辑：</strong></p>
+  <ul>
+    <li>网易的股价已低于其持有的净现金（每股净现金>$1），具备极高安全边际</li>
+    <li>段永平凭借做小霸王时积累的游戏行业经验，与网易游戏团队交流后认可其能力</li>
+    <li>判断游戏业务的盈利潜力尚未被市场挖掘</li>
+  </ul>
+  <p><strong>结果：</strong>网易股价从$1涨至$100+，段永平斩获超100倍回报，一战奠定"中国巴菲特"地位。</p>
+  <div class="tag-row">
+    <span class="tag tag-purple">逆向投资</span>
+    <span class="tag tag-teal">安全边际</span>
+    <span class="tag tag-gold">能力圈</span>
+    <span class="tag tag-pink">困境反转</span>
+  </div>
+</div>
+
+<div class="case-box">
+  <h4>🥃 贵州茅台 — 品牌护城河的长期复利</h4>
+  <span class="return-badge">+2400%+ 回报</span>
+  <p><strong>时间：</strong>2008年金融危机期间以约¥80/股建仓，持有至今超17年</p>
+  <p><strong>背景：</strong>金融危机席卷全球，市场恐慌，茅台也在大幅下跌。</p>
+  <p><strong>投资逻辑：</strong></p>
+  <ul>
+    <li>茅台的品牌稀缺性与社交属性构成不可复制的护城河</li>
+    <li>无需复杂研发和高强度资本投入，产品供不应求，现金流质量极优</li>
+    <li>在股价从2600跌至1200时反而增持，"越跌越买"</li>
+  </ul>
+  <p><strong>结果：</strong>截至2025年底茅台股价约¥1458，期间涨幅超24倍（不含分红）。</p>
+  <div class="tag-row">
+    <span class="tag tag-purple">品牌护城河</span>
+    <span class="tag tag-teal">消费龙头</span>
+    <span class="tag tag-gold">长期持有</span>
+  </div>
+</div>
+
+<div class="case-box">
+  <h4>🍎 苹果 — 生态闭环的价值重估</h4>
+  <span class="return-badge">+500%+ 回报</span>
+  <p><strong>时间：</strong>2011年开始买入，持仓超14年</p>
+  <p><strong>投资逻辑：</strong></p>
+  <ul>
+    <li>苹果从硬件公司向软硬一体平台的转型趋势明显</li>
+    <li>用户导向文化使其能抵御短期市场诱惑（推迟大屏手机、放弃造车项目）</li>
+    <li>生态闭环（硬件+App Store+iCloud）形成强大的用户锁定效应</li>
+    <li>持续的自由现金流，稳定的分红和回购能力</li>
+  </ul>
+  <div class="tag-row">
+    <span class="tag tag-purple">科技龙头</span>
+    <span class="tag tag-teal">生态系统</span>
+    <span class="tag tag-gold">企业文化</span>
+  </div>
+</div>
+
+<!-- ============ 投资启示 ============ -->
+<h2><span class="emoji-badge">💡</span> 对普通投资者的启示</h2>
+
+<div class="principle-item">
+  <h4>1️⃣ 建立自己的"不为清单"</h4>
+  <p>段永平最值得普通投资者学习的一点：不是知道该做什么，而是明确不做什么。列一个属于你自己的"不做清单"——不追高、不买不懂的公司、不加杠杆、不频繁交易——把这些写下来贴在墙上，比任何战法都管用。</p>
+</div>
+
+<div class="principle-item">
+  <h4>2️⃣ 承认"不懂"是一种能力</h4>
+  <p>段永平说"如果你不懂投资，买标普500指数长期持有"。普通投资者最大的误区是觉得自己必须打败市场。承认自己不懂，然后选择最稳妥的方式（指数基金），本身就是一种智慧。</p>
+</div>
+
+<div class="principle-item">
+  <h4>3️⃣ 做减法比做加法更重要</h4>
+  <p>段永平的核心持仓只有三只股票：苹果、茅台、腾讯。他的"一生20个打孔位"理念告诉我们：真正好的机会很少，不必为了交易而交易。少即是多，聚焦比分散更有力量。</p>
+</div>
+
+<div class="principle-item">
+  <h4>4️⃣ 用实业思维做投资</h4>
+  <p>"买股票就是买公司"——在买入之前，问自己：如果这是你的私人企业，你愿意买下它吗？你了解它的生意怎么赚钱吗？它的竞争对手为什么打不过它？这种视角能帮你筛掉90%的垃圾标的。</p>
+</div>
+
+<div class="principle-item">
+  <h4>5️⃣ 培养平常心</h4>
+  <p>段永平自称"胸无大志"，追求过好小日子、做自己喜欢的事。这种"平常心"让他能在市场恐慌时保持理性（不卖），在市场狂热时保持克制（不追）。投资的终点，比拼的是心态。</p>
+</div>
+
+<!-- ============ 延伸阅读 ============ -->
+<h2><span class="emoji-badge">📚</span> 延伸阅读推荐</h2>
+
+<div class="rec-box">
+  <div class="title">《段永平投资问答录（雪球投资系列）》</div>
+  <div class="desc">段永平在雪球上以"大道无形"账号发布的投资问答精选，是他最完整的投资思想记录</div>
+</div>
+
+<div class="rec-box">
+  <div class="title">《段永平2025年雪球《方略》深度访谈》</div>
+  <div class="desc">退休二十余年后首次正式专访，近27000字详实内容，系统阐述投资哲学、持仓逻辑、AI产业判断</div>
+</div>
+
+<div class="rec-box">
+  <div class="title">《巴菲特致股东的信》</div>
+  <div class="desc">段永平的价值投资体系深受巴菲特影响，这本书是理解其思想源头的最佳读物</div>
+</div>
+
+<div class="rec-box">
+  <div class="title">段永平雪球主页 — "大道无形"</div>
+  <div class="desc">段永平的雪球账号，不定期分享投资观点和生活感悟。雪球ID：@大道无形</div>
+</div>
+
+<div class="rec-box">
+  <div class="title">《穷查理宝典》— 查理·芒格</div>
+  <div class="desc">段永平与芒格的理念高度一致（多元思维模型、逆向思维、不做不懂的事），推荐结合阅读</div>
+</div>
+
+<!-- ============ 文章脚注 ============ -->
+<div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center;">
+  <p style="font-size: 0.75rem; color: var(--text-muted);">
+    本文基于段永平雪球《方略》专访、公开投资问答及媒体报道整理，内容仅供学习参考。<br>
+    文章日期：2026年7月12日 | 学习系列：每周一位投资大师
+  </p>
+</div>
+
+</div>
+
+</body>
+</html>

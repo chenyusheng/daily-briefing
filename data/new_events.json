@@ -1,19 +1,34 @@
 {
   "events": [
     {
-      "id": "xiaomi-pengcheng-n70-n90-miit",
-      "date": "2026-07-10",
-      "date_label": "7月10日",
-      "title": "小米澎程N70/N90工信部第409批新车公示",
-      "stock": "01810",
-      "stock_name": "小米集团",
-      "color": "blue",
+      "id": "strait-of-hormuz-closure-jul12",
+      "date": "2026-07-12",
+      "date_label": "7月12日",
+      "title": "伊朗关闭霍尔木兹海峡+美军发动新打击",
+      "stock": "宏观",
+      "stock_name": "宏观事件",
+      "color": "gray",
+      "importance": 5,
+      "impact": "重大利空",
+      "impact_dir": "down",
+      "status": "upcoming",
+      "type": "地缘冲突",
+      "description": "伊朗革命卫队7月12日凌晨警告射击违规船只后宣布关闭霍尔木兹海峡直至另行通知。美军随即发动新一轮打击回应。全球~20%石油经此海峡运输，油价面临飙升风险。影响全持仓：港股/科技(小米恒生ETF)受通胀+降息推迟双重打压，海力士07709受全球风险偏好下降冲击，油价飙升利好能源板块但利空航空旅游(海南/宋城)。需密切关注周一(7/13)亚洲市场开盘反应。"
+    },
+    {
+      "id": "us-iran-ceasefire-ended-jul12",
+      "date": "2026-07-12",
+      "date_label": "7月12日",
+      "title": "美国宣布美伊停火结束但谈判继续",
+      "stock": "宏观",
+      "stock_name": "宏观事件",
+      "color": "gray",
       "importance": 4,
-      "impact": "利好",
-      "impact_dir": "up",
-      "status": "done",
-      "type": "发布会",
-      "description": "小米第二款车系「澎程SKYNOMAD」旗下N70/N90进入工信部第409批新车目录。定位「智能可变大空间SUV」，中大型新能源SUV。7月8日官宣命名，7月10日工信部公示，预计下半年正式发布。扩大产品矩阵，切入增程/混动SUV最大细分市场。"
+      "impact": "利空",
+      "impact_dir": "down",
+      "status": "upcoming",
+      "type": "地缘冲突",
+      "description": "美国总统确认已通知伊朗停火已结束，但双方同意继续谈判。备忘录签署仅22天即破裂。中东不确定性大幅上升，叠加海峡关闭事件，全球风险资产短期承压。FOMC 7/29若因地缘推高通胀而推迟降息甚至加息，将进一步打压港股/科技估值。"
     }
   ],
   "stocks": []

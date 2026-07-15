@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-14T08:30:28+08:00",
-  "today": "2026-07-14",
+  "updated": "2026-07-15T08:30:13+08:00",
+  "today": "2026-07-15",
   "events": [
     {
       "id": "sk-hynix-us-ipo",
@@ -198,7 +198,7 @@
       "importance": 3,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "upcoming",
+      "status": "today",
       "type": "行业催化",
       "description": "离岛免税+机场客流高峰。同时利好宋城演艺（景区客流量高峰）。",
       "tags": [
@@ -218,7 +218,7 @@
       "importance": 3,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "upcoming",
+      "status": "today",
       "type": "行业催化",
       "description": "景区客流量高峰，暑期盈利旺季。",
       "tags": [

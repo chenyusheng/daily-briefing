@@ -140,6 +140,14 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font
 .event-card.imp-5.done,.event-card.imp-4.done,.event-card.imp-3.done{background:var(--green-l);border-color:#b8e6c8}
 .event-card.monitoring{background:var(--surface);border-color:var(--border)}
 
+/* ===== TABS ===== */
+.tabs{display:flex;gap:0;margin:0 auto 16px;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow);max-width:320px}
+.tab-btn{flex:1;padding:8px 16px;border:none;font-size:12px;font-weight:600;font-family:var(--font);cursor:pointer;color:var(--text3);background:transparent;transition:all .15s;position:relative}
+.tab-btn:hover{color:var(--text);background:var(--gray-l)}
+.tab-btn.active{color:#fff;cursor:default}
+.tab-btn.tab-active.active{background:var(--blue)}
+.tab-btn.tab-archived.active{background:var(--slate)}
+
 /* Card accent bar */
 .event-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
 
@@ -303,6 +311,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font
   <!-- Stats -->
   <div class="stats" id="statsBar"></div>
 
+  <!-- Tabs: Active / Archived -->
+  <div class="tabs" id="tabBar">
+    <button class="tab-btn tab-active active" onclick="setTab('active')">📋 进行中</button>
+    <button class="tab-btn tab-archived" onclick="setTab('archived')">📦 已归档</button>
+  </div>
+
   <!-- Urgent -->
   <div class="urgent" id="urgentBar" style="display:none">
     <div class="urgent-h">🚨 近期关键事件</div>
@@ -363,7 +377,7 @@ if (localStorage.getItem('daily_briefing_auth') === '1') {
 
 // ===== DATA =====
 var allEvents = [], allStocks = [];
-var curFilter = 'all', curStock = null, curMonth = null;
+var curFilter = 'all', curStock = null, curMonth = null, curTab = 'active';
 
 function todayStr() { var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 
@@ -395,6 +409,19 @@ function render() {
     if (curFilter === 'monitoring' && e.status !== 'monitoring') return false;
     if (curFilter === 'done' && e.status !== 'done') return false;
     if (curStock && e.stock !== curStock) return false;
+    return true;
+  });
+
+  // Tab filter: active (进行中) vs archived (已归档)
+  filtered = filtered.filter(function(e) {
+    var oneDayAgo = new Date();
+    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+    var oneDayAgoStr = oneDayAgo.toISOString().substring(0, 10);
+    var isExpired = e.date && e.date < oneDayAgoStr && /^\d{4}-\d{2}-\d{2}$/.test(e.date);
+    // Also treat 'done' status events as archived
+    var isDone = e.status === 'done';
+    if (curTab === 'active') return !isExpired && !isDone;
+    if (curTab === 'archived') return isExpired || isDone;
     return true;
   });
 
@@ -497,6 +524,14 @@ function setFilter(f) {
   curFilter = f;
   document.querySelectorAll('.filter-btn').forEach(function(b) {
     b.classList.toggle('active', b.className.indexOf('f-'+f) >= 0);
+  });
+  render();
+}
+
+function setTab(t) {
+  curTab = t;
+  document.querySelectorAll('.tab-btn').forEach(function(b) {
+    b.classList.toggle('active', b.className.indexOf('tab-'+t) >= 0);
   });
   render();
 }

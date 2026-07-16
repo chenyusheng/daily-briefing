@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-15T08:30:13+08:00",
-  "today": "2026-07-15",
+  "updated": "2026-07-16T08:30:39+08:00",
+  "today": "2026-07-16",
   "events": [
     {
       "id": "sk-hynix-us-ipo",
@@ -190,7 +190,7 @@
     {
       "id": "summer-tourism",
       "date": "2026-07-15",
-      "date_label": "7-8月",
+      "date_label": "✅ 7-8月",
       "title": "暑期旅游旺季",
       "stock": "600515",
       "stock_name": "海南机场",
@@ -198,7 +198,7 @@
       "importance": 3,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "today",
+      "status": "done",
       "type": "行业催化",
       "description": "离岛免税+机场客流高峰。同时利好宋城演艺（景区客流量高峰）。",
       "tags": [
@@ -210,7 +210,7 @@
     {
       "id": "summer-tourism-songcheng",
       "date": "2026-07-15",
-      "date_label": "7-8月",
+      "date_label": "✅ 7-8月",
       "title": "暑期旅游旺季",
       "stock": "300144",
       "stock_name": "宋城演艺",
@@ -218,7 +218,7 @@
       "importance": 3,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "today",
+      "status": "done",
       "type": "行业催化",
       "description": "景区客流量高峰，暑期盈利旺季。",
       "tags": [
@@ -924,8 +924,8 @@
   ],
   "stats": {
     "total_events": 42,
-    "upcoming_7d": 2,
-    "upcoming_30d": 7,
+    "upcoming_7d": 0,
+    "upcoming_30d": 6,
     "critical_events": 4,
     "monitoring": 8
   }

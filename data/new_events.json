@@ -1,49 +1,28 @@
 {
   "events": [
     {
-      "id": "expand-consumption-plan-jul",
-      "date": "2026-07-14",
-      "date_label": "7月14日发布",
-      "title": "国务院《扩大消费十五五规划》发布",
-      "stock": "600197",
-      "stock_name": "伊力特",
-      "color": "orange",
-      "importance": 4,
-      "impact": "利好",
-      "impact_dir": "up",
+      "id": "us-iran-escalation-jul-2026",
+      "date": "2026-07-13",
+      "date_label": "7月12-15日（持续）",
+      "title": "美对伊朗新军事打击 + 特朗普威胁 + 霍尔木兹通行费",
+      "stock": "宏观",
+      "stock_name": "宏观事件",
+      "color": "gray",
+      "importance": 5,
+      "impact": "全持仓利空",
+      "impact_dir": "down",
       "status": "upcoming",
-      "type": "政策催化",
-      "description": "国务院7月13日批复《扩大消费十五五规划》，发改委商务部统筹。目标：2030年社会消费品零售总额达60万亿。房子定位为大宗耐用消费品，服务消费排六大任务首位。利好全消费板块：伊力特(白酒)、宋城演艺(服务消费)、海南机场(免税+旅游消费)。中长期利好，非短线催化剂。"
-    },
-    {
-      "id": "expand-consumption-plan-songcheng",
-      "date": "2026-07-14",
-      "date_label": "7月14日发布",
-      "title": "国务院《扩大消费十五五规划》发布",
-      "stock": "300144",
-      "stock_name": "宋城演艺",
-      "color": "amber",
-      "importance": 4,
-      "impact": "利好",
-      "impact_dir": "up",
-      "status": "upcoming",
-      "type": "政策催化",
-      "description": "服务消费排六大任务首位，文旅消费是重点方向。利好宋城演艺暑期旺季经营+中长期政策支持。"
-    },
-    {
-      "id": "expand-consumption-plan-hainan",
-      "date": "2026-07-14",
-      "date_label": "7月14日发布",
-      "title": "国务院《扩大消费十五五规划》发布",
-      "stock": "600515",
-      "stock_name": "海南机场",
-      "color": "red",
-      "importance": 4,
-      "impact": "利好",
-      "impact_dir": "up",
-      "status": "upcoming",
-      "type": "政策催化",
-      "description": "消费规划+离岛免税政策协同利好。海南自贸港封关后首个暑期旺季，政策加持客流预期。"
+      "type": "地缘冲突",
+      "description": "7月12-13日美国对伊朗发动新一轮军事打击，特朗普宣布霍尔木兹海峡通行费。布伦特原油一周涨超13%至86美元。二次冲击有免疫记忆，关注7/29 FOMC。",
+      "detail": "港股(小米/07709)→risk-off；科技成长股→高估值承压；SPCX→最脆弱；A股内需消费→影响最小。",
+      "tags": [
+        "伊朗",
+        "美国",
+        "霍尔木兹",
+        "油价",
+        "地缘冲突",
+        "全持仓"
+      ]
     }
   ],
   "stocks": []

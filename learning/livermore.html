@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>利弗莫尔：关键点交易法与金字塔加仓体系 | 投资大师学习</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-secondary: #8b949e;
+    --red: #f85149;
+    --green: #3fb950;
+    --blue: #58a6ff;
+    --orange: #d29922;
+    --gold: #ffd700;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 20px;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+  .header {
+    text-align: center;
+    padding: 40px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+  }
+  .header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .header .subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+  .header .tags {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: rgba(88, 166, 255, 0.1);
+    color: var(--blue);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+  }
+  .tag.sentiment { background: rgba(63, 185, 80, 0.1); color: var(--green); border-color: rgba(63, 185, 80, 0.2); }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .section h2 {
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section h3 {
+    font-size: 16px;
+    color: var(--blue);
+    margin: 20px 0 12px;
+  }
+  .section h4 {
+    font-size: 14px;
+    color: var(--orange);
+    margin: 16px 0 8px;
+  }
+  .section p { margin-bottom: 12px; color: var(--text-secondary); }
+  .section ul, .section ol { margin-bottom: 12px; padding-left: 20px; }
+  .section li { margin-bottom: 6px; color: var(--text-secondary); }
+  .quote {
+    border-left: 3px solid var(--gold);
+    padding: 12px 16px;
+    margin: 16px 0;
+    background: rgba(210, 153, 34, 0.05);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--text);
+  }
+  .rule-box {
+    background: rgba(63, 185, 80, 0.05);
+    border: 1px solid rgba(63, 185, 80, 0.2);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+  .rule-box h4 { color: var(--green); }
+  .warn-box {
+    background: rgba(248, 81, 73, 0.05);
+    border: 1px solid rgba(248, 81, 73, 0.2);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+  .warn-box h4 { color: var(--red); }
+  .code-block {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre;
+    margin: 12px 0;
+  }
+  .table-wrap {
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: rgba(88, 166, 255, 0.1);
+    color: var(--blue);
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid var(--border);
+    font-weight: 500;
+  }
+  td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+  .highlight-num {
+    display: inline-block;
+    width: 24px; height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 50%;
+    background: rgba(210, 153, 34, 0.15);
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 12px;
+    margin-right: 8px;
+  }
+  .discipline-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+  }
+  @media (max-width: 640px) {
+    .header h1 { font-size: 22px; }
+    .section { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📈 利弗莫尔：关键点交易法与金字塔加仓体系</h1>
+    <div class="subtitle">Jesse Livermore — 趋势交易鼻祖 · 股票大作手 · 华尔街传奇</div>
+    <div class="tags">
+      <span class="tag">#趋势交易</span>
+      <span class="tag sentiment">#关键点</span>
+      <span class="tag">#金字塔加仓</span>
+      <span class="tag sentiment">#截断亏损</span>
+      <span class="tag">#仓位管理</span>
+    </div>
+  </div>
+
+  <!-- 大师介绍 -->
+  <div class="section">
+    <h2>🧑‍💼 大师简介</h2>
+    <p><strong>杰西·利弗莫尔（Jesse Lauriston Livermore，1877-1940）</strong>，被誉为"华尔街投机之王"。15岁开始交易，30岁前身价百万。正确预见了1907年市场暴跌，一天赚300万美元。1929年做空股市赚1亿美元（相当于今天的150亿美元）。</p>
+    <p>他是《股票大作手回忆录》（Reminiscences of a Stock Operator）的原型，这本书被无数交易员奉为圣经——从海龟交易法则的创始人丹尼斯，到无数趋势跟踪交易员，都从中汲取智慧。</p>
+    <p>利弗莫尔是 <strong>趋势交易的真正鼻祖</strong>——他的关键点交易法（Pivotal Point）、金字塔加仓（Pyramiding）、截断亏损让利润奔跑（Cut Losses Let Profits Run），至今仍是所有趋势跟踪系统的本源。</p>
+  </div>
+
+  <!-- 核心体系 -->
+  <div class="section">
+    <h2>🎯 核心体系：关键点交易法</h2>
+    <p>利弗莫尔交易体系的基石是<strong>「关键点」（Pivotal Point）</strong>——它不是精确的价格数字，而是趋势启动、加速或反转的<strong>心理临界点</strong>。他认为，市场在关键点处的反应揭示了趋势的真正意图。</p>
+
+    <h3>三类关键点</h3>
+
+    <div class="rule-box">
+      <h4>A. 结构关键点（结构突破型）</h4>
+      <ul>
+        <li>前期顶/底被突破的位置</li>
+        <li>盘整区上沿/下沿被越过</li>
+        <li><strong>盘整时间越久，突破力度越强</strong>——这是利弗莫尔最重要的发现之一</li>
+        <li>在关键点被突破后入场，<strong>不是在关键点处预判</strong></li>
+      </ul>
+    </div>
+
+    <div class="rule-box">
+      <h4>B. 心理关键点（整数关口型）</h4>
+      <ul>
+        <li>50、100、200等整数关口</li>
+        <li>历史重要价格水平</li>
+        <li>这些价格常集聚大量止损单，突破后加速</li>
+      </ul>
+    </div>
+
+    <div class="rule-box">
+      <h4>C. 趋势延续关键点（加仓型）</h4>
+      <ul>
+        <li>趋势中每次回调结束后的新高突破</li>
+        <li>每次突破前高 = 新的关键点</li>
+        <li>用于判断金字塔加仓时机</li>
+      </ul>
+    </div>
+
+    <h3>关键点应用四规则</h3>
+    <ol>
+      <li><strong>等待突破确认</strong>：价格必须越过关键点才能入场，不提前预判</li>
+      <li><strong>3点验证</strong>：突破关键点后，价格应继续前进至少3个点（或3%）确认有效</li>
+      <li><strong>假突破识别</strong>：突破后立即跌回关键点以下 = 假突破，放弃交易</li>
+      <li><strong>失效即离场</strong>：价格跌回关键点下方，说明趋势判断错误，退出头寸</li>
+    </ol>
+  </div>
+
+  <!-- 金字塔加仓 -->
+  <div class="section">
+    <h2>🏗️ 金字塔加仓法（利弗莫尔量化版）</h2>
+    <p>这是利弗莫尔最被低估的贡献——他用量化的仓位管理解决了"看对了却赚不多"的核心难题。</p>
+
+    <h3>试仓阶段：先试探，不赌</h3>
+    <ul>
+      <li><strong>初始仓位</strong>：总资金的20%</li>
+      <li><strong>买入条件</strong>：价格突破关键点后入场</li>
+      <li><strong>止损规则</strong>：买入后下跌10%，<strong>机械执行清仓</strong></li>
+    </ul>
+
+    <h3>加仓阶段：确认后才加，递减递加</h3>
+    <ul>
+      <li><strong>第一次加仓</strong>：股价从入场点上涨10%后，加第二笔（金额等于或略小于第一笔）</li>
+      <li><strong>第二次加仓</strong>：再涨10%后，加第三笔（金额递减）</li>
+      <li><strong>末次加仓</strong>：以此类推，加仓金额逐次递减</li>
+      <li><strong>关键时机</strong>：每次加仓都在新关键点突破时执行（如回调后的新高）</li>
+    </ul>
+
+    <h4>📊 加仓金额示例</h4>
+    <div class="code-block">总资金：100,000
+第一笔（试仓）：20,000 / 20%
+  ↓ 股价上涨10%，确认趋势
+第二笔（第一次加仓）：15,000 / 15%
+  ↓ 股价再涨10%
+第三笔（第二次加仓）：10,000 / 10%
+  ↓ 股价再涨10%
+第四笔（末次加仓）：5,000 / 5%
+------------------------------
+累计建仓：50,000 / 50%（剩50%备用）</div>
+
+    <div class="warn-box">
+      <h4>⚠️ 核心纪律：绝不对亏损头寸加仓</h4>
+      <p>如果第一笔买入后下跌，不是加仓降低成本——是止损离场。这是散户和职业交易员最本质的区别。</p>
+      <p><strong>金字塔 vs 倒金字塔：</strong></p>
+      <p>✅ 利弗莫尔：底仓最大→加仓递减→风险递增时仓位反而递减</p>
+      <p>❌ 散户常犯：试探小仓→涨了认为"看对了"→重仓追进→回调一网打尽</p>
+    </div>
+  </div>
+
+  <!-- 十大纪律 -->
+  <div class="section">
+    <h2>🔟 利弗莫尔十大核心纪律</h2>
+    <ol class="discipline-list">
+      <li><span class="highlight-num">1</span> <strong>不要和市场争辩</strong> — 市场永远是对的，亏损=自己的判断错了</li>
+      <li><span class="highlight-num">2</span> <strong>不要预测</strong> — 只跟随趋势，不预判顶底</li>
+      <li><span class="highlight-num">3</span> <strong>不要平均亏损</strong> — 绝不对亏损头寸加仓</li>
+      <li><span class="highlight-num">4</span> <strong>不要买在最低点</strong> — 等关键点确认后再入场</li>
+      <li><span class="highlight-num">5</span> <strong>不要摊平成本</strong> — 亏损头寸的唯一正确操作是止损</li>
+      <li><span class="highlight-num">6</span> <strong>不要让盈利变亏损</strong> — 学会分批止盈，把利润锁住</li>
+      <li><span class="highlight-num">7</span> <strong>不要频繁交易</strong> — 等待关键点，一年只做几笔大行情</li>
+      <li><span class="highlight-num">8</span> <strong>不要听消息</strong> — 只相信价格信号和成交量</li>
+      <li><span class="highlight-num">9</span> <strong>不要满仓</strong> — 永远保留流动资金</li>
+      <li><span class="highlight-num">10</span> <strong>不要试图抓住所有波动</strong> — 只做大趋势的主升段</li>
+    </ol>
+  </div>
+
+  <!-- 经典语录 -->
+  <div class="section">
+    <h2>💬 利弗莫尔语录精要</h2>
+    <div class="quote">"我从不与市场争吵，因为市场永远是正确的。"</div>
+    <div class="quote">"利润总会自己照顾自己，但亏损不会。"</div>
+    <div class="quote">"投机者最大的敌人往往是他自己。"</div>
+    <div class="quote">"永远不要因为价格看起来便宜而买入，也不要因为价格看起来贵而卖出。"</div>
+    <div class="quote">"当我看到危险信号时，我不与它争辩——我离场。几天后，如果一切正常，我随时可以回来。"</div>
+    <div class="quote">"在窄幅波动中，预测下一个大波动是徒劳的。正确的做法是：观察、等待，寻找关键点。"</div>
+  </div>
+
+  <!-- 整合到趋势分歧 -->
+  <div class="section">
+    <h2>🔗 与趋势分歧交易法的整合</h2>
+    <p>利弗莫尔的方法与趋势分歧交易法高度一致，都是<strong>追随趋势、不预判、分批建仓、严格风控</strong>。以下是已吸收的关键补充点：</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>利弗莫尔贡献</th><th>吸收位置</th><th>作用</th></tr>
+        <tr><td>关键点识别体系（三类+四规则）</td><td>trend-disagreement-trading §利弗莫尔启示</td><td>让买点判断更精确</td></tr>
+        <tr><td>金字塔递减加仓模型</td><td>trend-disagreement-trading §利弗莫尔启示</td><td>让仓位管理从"两档拆分"升级为"量化递减"</td></tr>
+        <tr><td>20%试仓+10%止损量化对应</td><td>trend-disagreement-trading §利弗莫尔启示</td><td>替换模糊描述为具体公式</td></tr>
+        <tr><td>盘整时间→突破力度正相关</td><td>trend-disagreement-trading §关键点</td><td>增强箱体突破判断依据</td></tr>
+        <tr><td>十大核心纪律</td><td>trend-disagreement-trading §利弗莫尔启示</td><td>可嵌入任何交易系统</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    🌐 投资大师学习计划 · 2026-07-17 · 学习内容已吸收到 trend-disagreement-trading skill
+  </div>
+</div>
+</body>
+</html>

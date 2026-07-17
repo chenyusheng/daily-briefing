@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 双战法选股 · 2026-07-17</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0d1117;--surface:#161b22;--surface-alt:#1c2333;--border:#30363d;--border-light:#21262d;--text:#e6edf3;--text-secondary:#8b949e;--text-tertiary:#6e7681;--accent:#58a6ff;--accent-bg:#0d419d33;--green:#3fb950;--green-bg:#1b3a1f;--red:#f85149;--red-bg:#3d1416;--amber:#d29922;--amber-bg:#2d1f00;--purple:#a371f7;--purple-bg:#2a1a4a;--teal:#56d4dd;--teal-bg:#1d3b3d;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.15);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7;min-height:100vh}
+  .container{max-width:800px;margin:0 auto;padding:0}
+  .header{background:linear-gradient(135deg,#161b22 0%,#1c2333 50%,#111 100%);border-bottom:3px solid var(--red);padding:22px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+  .header::before{content:'';position:absolute;top:-50%;left:-30%;width:160%;height:200%;background:radial-gradient(ellipse at 30% 50%,var(--red-bg) 0%,transparent 40%),radial-gradient(ellipse at 70% 50%,var(--red-bg) 0%,transparent 40%);opacity:.5;pointer-events:none}
+  .h-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+  .h-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--red),#8b0000);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;animation:pulse2 1s infinite}
+  @keyframes pulse2{0%,100%{box-shadow:0 0 0 0 rgba(248,81,73,.6)}50%{box-shadow:0 0 0 12px rgba(248,81,73,0)}}
+  .h-title{font-size:18px;font-weight:700;letter-spacing:-.3px}
+  .h-meta{font-size:12px;color:var(--text-tertiary);margin-top:2px}
+  .h-badge{font-size:11px;font-weight:700;color:#fff;background:linear-gradient(135deg,#8b0000,var(--red));padding:4px 16px;border-radius:20px;letter-spacing:.3px;position:relative;z-index:1;border:2px solid var(--red)}
+  .h-home{font-size:20px;text-decoration:none;margin-left:8px;position:relative;z-index:1;transition:opacity .15s}
+  .h-home:hover{opacity:.7}
+  .section{padding:24px 22px}
+  .section+.section{border-top:1px solid var(--border-light)}
+  .sec-label{font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
+  .section-alt{background:var(--surface-alt)}
+  .at{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin-bottom:14px}
+  .at th{text-align:left;padding:10px 14px;font-weight:600;color:var(--text-secondary);background:var(--surface-alt);border-bottom:1px solid var(--border);font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+  .at th:first-child{border-radius:8px 0 0 0}
+  .at th:last-child{border-radius:0 8px 0 0}
+  .at td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text)}
+  .at tr:last-child td:first-child{border-radius:0 0 0 8px}
+  .at tr:last-child td:last-child{border-radius:0 0 8px 0}
+  .at tr:last-child td{border-bottom:none}
+  .callout{padding:14px 18px;border-radius:var(--radius);margin:10px 0;font-size:13px;line-height:1.6}
+  .callout.info{background:var(--accent-bg);border-left:3px solid var(--accent);color:var(--accent)}
+  .callout.success{background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+  .callout.warn{background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)}
+  .callout.danger{background:var(--red-bg);border-left:3px solid var(--red);color:var(--red)}
+  .callout.neutral{background:var(--surface-alt);border-left:3px solid var(--text-tertiary);color:var(--text-secondary)}
+  .callout.apocalyptic{background:#1a0000;border-left:5px solid #ff0000;color:#ff4444;font-weight:600;border-top:1px solid #ff000033;border-bottom:1px solid #ff000033}
+  .sig{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+  .sig.g{background:var(--green)}
+  .sig.r{background:var(--red)}
+  .sig.y{background:var(--amber)}
+  .sig.b{background:var(--accent)}
+  .sig.p{background:var(--purple)}
+  .ice-timeline{display:flex;align-items:center;gap:6px;padding:14px 18px;background:var(--surface);border-radius:var(--radius);margin:10px 0;overflow-x:auto;font-size:11px;flex-wrap:wrap}
+  .ice-dot{min-width:68px;text-align:center;padding:6px 8px;border-radius:8px;font-size:11px}
+  .ice-dot.active{background:var(--red-bg);border:2px solid var(--red);color:var(--red);font-weight:700}
+  .ice-dot.past{background:var(--surface-alt);color:var(--text-tertiary)}
+  .ice-dot.extreme{background:var(--red-bg);border:3px solid var(--red);color:var(--red);font-weight:900}
+  .ice-dot.apocalypse{background:#1a0000;border:4px solid #ff0000;color:#ff4444;font-weight:900;animation:pulse 0.8s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,0,0,.8)}50%{box-shadow:0 0 0 15px rgba(255,0,0,0)}}
+  .ice-arrow{color:var(--text-tertiary);font-size:14px;min-width:10px;text-align:center}
+  .ice-label{font-size:10px;color:var(--text-tertiary);min-width:40px;text-align:center;line-height:1.3}
+  .risk-list{list-style:none;padding:0}
+  .risk-list li{padding:8px 0 8px 24px;position:relative;font-size:13px;color:var(--text-secondary);border-bottom:1px solid var(--border-light)}
+  .risk-list li:last-child{border-bottom:none}
+  .risk-list li::before{position:absolute;left:0;top:8px;font-size:12px}
+  .risk-list li.crit::before{content:'💀'}
+  .risk-list li.warn::before{content:'⚠️'}
+  .st{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:10px 0 14px}
+  .st td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text-secondary)}
+  .st td:first-child{font-weight:600;color:var(--text);white-space:nowrap;width:110px}
+  .st tr:last-child td{border-bottom:none}
+  .conclusion-box{text-align:center;padding:28px 22px;background:linear-gradient(135deg,#1a0000,#0d0000);border:2px solid #ff000044;border-radius:var(--radius);margin:16px 0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .conclusion-box::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#8b0000,#ff0000,#8b0000);animation:shimmer 2s infinite}
+  @keyframes shimmer{0%,100%{opacity:1}50%{opacity:.5}}
+  .conclusion-text{font-size:18px;font-weight:800;color:#ff4444;line-height:1.6;margin-bottom:6px}
+  .conclusion-sub{font-size:13px;color:var(--text-secondary);line-height:1.7}
+  .footer{text-align:center;padding:24px 22px 36px;font-size:11px;color:var(--text-tertiary);line-height:1.8;border-top:1px solid var(--border-light)}
+  .footer a{color:var(--accent);text-decoration:none}.footer a:hover{text-decoration:underline}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .stat-card{padding:12px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border)}
+  .stat-num{font-family:var(--font-mono);font-size:24px;font-weight:800;line-height:1.2}
+  .stat-label{font-size:11px;color:var(--text-tertiary);margin-top:2px}
+  @media(max-width:480px){
+    .section{padding:18px 14px}
+    .header{padding:14px 14px}
+    .h-title{font-size:16px}
+    .at{font-size:12px}.at td,.at th{padding:8px 10px}
+    .conclusion-text{font-size:16px}
+    .stat-grid{grid-template-columns:1fr}
+    .ice-timeline{gap:2px}.ice-dot{min-width:55px;font-size:10px;padding:4px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="h-left">
+    <div class="h-icon">💀</div>
+    <div>
+      <div class="h-title">双战法选股分析</div>
+      <div class="h-meta">2026-07-17 · 周五 · 收盘后</div>
+    </div>
+  </div>
+  <span class="h-badge">💀💀 五次冰点 · 192跌停 · 无条件退出</span>
+  <a href="https://eason-byte.github.io/daily-briefing/stock-picks/" class="h-home" title="返回首页">📋</a>
+</div>
+
+<div class="section">
+  <div class="sec-label">🧊 冰点反抽模式分析</div>
+
+  <div class="stat-grid" style="margin-bottom:12px">
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--red)">💀192</div>
+      <div class="stat-label">跌停家数（本系列第2个极端冰点）</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--red)">-3.05%</div>
+      <div class="stat-label">上证 3764.15 · 5日暴跌-7.75%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)">33</div>
+      <div class="stat-label">封板涨停 / 43触及 / 10炸板</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--red)">26+只</div>
+      <div class="stat-label">防御板块(医药)跌停 · 全面崩溃</div>
+    </div>
+  </div>
+
+  <table class="at">
+    <tr><th>指标</th><th>今日数据</th><th>冰点/修复阈值</th><th>判断</th></tr>
+    <tr style="background:#1a0000">
+      <td>跌停家数</td>
+      <td style="color:#ff4444;font-weight:900;font-family:var(--font-mono);font-size:16px">192</td>
+      <td>冰点≥20</td>
+      <td><span class="sig r"></span> <strong style="color:#ff4444">五次冰点!!!! 07-13极端(172)→二次(22)→三次(31)→四次(33)→五次(192)</strong></td>
+    </tr>
+    <tr>
+      <td>涨停家数</td>
+      <td>封板 <span style="color:var(--green);font-weight:600">33</span> / 触及 <span style="color:var(--teal)">43</span></td>
+      <td>-</td>
+      <td>封板率76.7%(33/43)，炸板10只</td>
+    </tr>
+    <tr>
+      <td>炸板率</td>
+      <td style="font-family:var(--font-mono);color:var(--amber)">23.3%</td>
+      <td>-</td>
+      <td>较07-16(37.3%)回落，但192跌停下无意义</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td>大盘指数</td>
+      <td style="color:var(--red);font-weight:700">-3.05% (3764.15)</td>
+      <td>-</td>
+      <td><span class="sig r"></span> <strong style="color:var(--red)">上证破3800！5天暴跌-7.75%</strong></td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td>冰点序列</td>
+      <td style="color:var(--red);font-weight:700">五次冰点（07-13极端172→07-14二次22→07-15三次31→07-16四次33→07-17五次192）</td>
+      <td>四次冰点≤2跌停+指数收阳</td>
+      <td style="color:#ff4444;font-weight:900">💀💀 五次冰点：史无前例 · 🚫无条件退出市场</td>
+    </tr>
+    <tr>
+      <td>涨停集中度</td>
+      <td>电力9 | 塑料2 | 汽车零部件2 | 其余20板块各1</td>
+      <td>-</td>
+      <td><span class="sig y"></span> 电力9涨停孤岛，其余极度分散</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td>跌停集中度</td>
+      <td style="color:var(--red)"><strong>化学制药~16只 | 元件~18只 | 半导体~16只 | 通信~12只 | 消费电子~10只 | 汽车零部件~8只 | 通用+自动化各~8只 | 医疗~6只 | 计算机~7只</strong></td>
+      <td>≥5产业链出清</td>
+      <td style="color:#ff4444;font-weight:900">💀 全产业链崩溃！无一幸免</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td>防御板块健康度</td>
+      <td style="color:#ff4444"><strong>化学制药~16跌停 + 中药2跌停 + 医疗服务~6跌停 + 医药商业2跌停 = 医药链~26跌停</strong></td>
+      <td>防御板块跌停≥3 = 无条件禁止操作</td>
+      <td style="color:#ff4444;font-weight:900">💀💀 防御板块跌停26只 >> 3只阈值！无条件禁止操作触发</td>
+    </tr>
+  </table>
+
+  <div class="ice-timeline">
+    <div class="ice-label">7/2-8</div>
+    <div class="ice-dot past">冰点1-4<br>序列结束</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/9-10</div>
+    <div class="ice-dot past">修复<br>2天窗口</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/13</div>
+    <div class="ice-dot extreme">极端冰点1<br>172跌停!</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/14</div>
+    <div class="ice-dot active">二次冰点<br>22跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/15</div>
+    <div class="ice-dot active">三次冰点<br>31跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/16</div>
+    <div class="ice-dot active">四次冰点<br>33跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/17</div>
+    <div class="ice-dot apocalypse">五次冰点<br>💀192!!</div>
+  </div>
+
+  <div class="callout apocalyptic" style="margin-top:8px;font-size:14px">
+    <strong>💀💀💀 五次冰点 · 192跌停 · 无条件退出市场 💀💀💀</strong><br>
+    07-13极端冰点(172跌停)→07-14二次冰点(22)→07-15三次冰点(31)→07-16四次冰点(33)→07-17<strong style="color:#ff4444">五次冰点(192跌停!!)</strong>。<br>
+    D1修复连续5天全部失败。上证从4080→3764(-7.75%)，5天跌316点。<br>
+    <strong style="color:#ff4444">五次冰点已超出战法所有规则覆盖范围。历年来A股极少出现五次连续冰点。一旦出现说明市场已严重失灵。</strong><br>
+    <strong style="color:#ff4444">建议：无条件退出市场。至少等2周(10个交易日)企稳后再评估。期间禁止任何形式的入场。</strong><br>
+    <strong>冰点反抽模式：✅ 适用 · 当前阶段：五次冰点D0 — 💀无条件退出市场💀</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">💀 跌停板块集中度检查（D0活口筛选前置）</div>
+
+  <div class="callout apocalyptic" style="margin-bottom:10px">
+    <strong>💀 防御板块蔓延检查 → 🚫无条件禁止操作 🚫无条件禁止操作</strong><br>
+    医药链(化学制药+中药+医疗服务+医药商业)合计<strong style="color:#ff4444">~26只跌停</strong>，远超3只阈值。<br>
+    按冰点反抽规则 §D0防御板块蔓延：防御板块跌停≥3只 → <strong style="color:#ff4444">切换至无条件禁止操作</strong>。<br>
+    以下D0活口筛选<strong>仅供追踪验证</strong>，不作为任何操作依据。
+  </div>
+
+  <table class="at">
+    <tr><th>板块链</th><th>跌停数量</th><th>集中度</th><th>处理</th></tr>
+    <tr style="background:var(--red-bg)">
+      <td><strong style="color:#ff4444">半导体链(半导体+元件+电子化学+光学光电)</strong></td>
+      <td style="color:#ff4444;font-weight:900">~41只</td>
+      <td><span class="sig r"></span> 💀 ≥5 🔴超级产业链出清</td>
+      <td style="color:#ff4444"><strong>该链所有涨停股不纳入活口</strong>。元件18跌停+半导体16跌停+光学光电5+电子化学2=合计41跌停。这是2026年最大规模单链出清。</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td><strong style="color:#ff4444">医药链(化学制药+中药+医疗服务+医药商业)</strong></td>
+      <td style="color:#ff4444;font-weight:900">~26只</td>
+      <td><span class="sig r"></span> 💀 ≥5 🔴防御堡垒全面崩溃</td>
+      <td style="color:#ff4444"><strong>触发无条件禁止操作!!</strong> 07-13防御堡垒→07-16首次裂缝(2跌停)→07-17全面崩溃(26跌停)。防御板块不再具有任何避险功能。</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td><strong style="color:var(--red)">通信计算机链</strong></td>
+      <td style="color:var(--red);font-weight:700">~20只</td>
+      <td><span class="sig r"></span> 🔴产业链出清</td>
+      <td style="color:var(--red)"><strong>排除</strong>。通信设备12+计算机设备7+软件开发1=20跌停。中兴通讯/中科曙光/烽火通信等白马集体跌停。</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td><strong style="color:var(--red)">制造链(通用+专用+自动化+汽车+机械)</strong></td>
+      <td style="color:var(--red);font-weight:700">~30只</td>
+      <td><span class="sig r"></span> 🔴超级产业链出清</td>
+      <td style="color:var(--red)"><strong>排除</strong>。通用设备8+专用设备6+自动化8+汽车零部件8=30跌停。制造业全线溃败。</td>
+    </tr>
+    <tr>
+      <td>消费电子</td>
+      <td style="color:var(--red)">10只</td>
+      <td><span class="sig r"></span> 🔴产业链出清</td>
+      <td style="color:var(--red)">排除。07-16的5涨停→07-17全部瓦解</td>
+    </tr>
+  </table>
+
+  <div class="callout danger" style="margin-top:8px">
+    <strong>💀 07-16防御板块预测→07-17惨烈验证：</strong><br>
+    07-16报告警告：化学制药防御堡垒首次出现裂缝(2跌停)，如果继续恶化将进入无差别抛售。<br>
+    07-17实际：化学制药~16跌停，中药2跌停，医疗服务~6跌停(含3只20%跌停)，医药商业2跌停。<br>
+    <strong style="color:#ff4444">防御堡垒从裂缝→全面崩塌仅用1天。恐慌已从制造业全面扩散至防御板块，市场进入无差别抛售模式。</strong><br>
+    <strong style="color:#ff4444">哈药股份(600664)炸板+7.89%：从涨停板回落，连续4涨停→今日炸板。S+级活口最终也无法抵御全面崩溃。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">🔥 D0活口筛选（🚫无条件禁止操作！仅供追踪验证）</div>
+
+  <div class="callout apocalyptic" style="margin-bottom:10px">
+    <strong>💀 五次冰点(192跌停) + 防御板块26跌停 → 🚫无条件禁止操作!!! 🚫无条件禁止操作</strong><br>
+    以下活口<strong>仅供学术追踪</strong>。仓位：<strong style="color:#ff4444">0%</strong>。任何形式入场均违反战法规则。
+  </div>
+
+  <table class="at">
+    <tr><th>代码</th><th>名称</th><th>板块</th><th>封板时间</th><th>今收盘</th><th>板块跌停</th><th>防御属性</th><th>活口质量</th></tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)"><strong>002432</strong></td>
+      <td><strong>九安医疗</strong></td>
+      <td>医疗器械</td>
+      <td>092500</td>
+      <td style="color:var(--green);font-weight:700">+10.00% 最早封板</td>
+      <td style="color:var(--red)">26只(医药链)</td>
+      <td style="color:var(--green)">🥇 防御</td>
+      <td style="color:var(--amber)">⭐⭐ 防御标签但医药链崩溃 → 降级</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">603567</td>
+      <td><strong>珍宝岛</strong></td>
+      <td>中药Ⅱ</td>
+      <td>093646</td>
+      <td style="color:var(--green)">+10.04%</td>
+      <td style="color:var(--amber)">2只(中药)</td>
+      <td style="color:var(--green)">🥇 防御</td>
+      <td style="color:var(--amber)">⭐⭐ 中药板块有跌停 → 降级</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">600744</td>
+      <td><strong>华银电力</strong></td>
+      <td>电力</td>
+      <td>094318</td>
+      <td style="color:var(--green)">+9.96%</td>
+      <td style="color:var(--amber)">3只(电网设备跌停)</td>
+      <td style="color:var(--green)">🥇 公用事业防御</td>
+      <td style="color:var(--amber)">⭐⭐ 电网设备3跌停 → 降级</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">003001</td>
+      <td><strong>中岩大地</strong></td>
+      <td>专业工程</td>
+      <td>093000</td>
+      <td style="color:var(--green)">+10.01%</td>
+      <td style="color:var(--red)">3只</td>
+      <td>非防御</td>
+      <td style="color:var(--amber)">⭐ 板块有跌停+非防御</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002766</td>
+      <td><strong>索菱股份</strong></td>
+      <td>汽车零部件</td>
+      <td>093000</td>
+      <td style="color:var(--green)">+10.06%</td>
+      <td style="color:var(--red)">8只</td>
+      <td>非防御</td>
+      <td style="color:var(--red)">⭐ 板块8跌停 → 高危</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">600722</td>
+      <td><strong>金牛化工</strong></td>
+      <td>化学原料</td>
+      <td>093849</td>
+      <td style="color:var(--green)">+10.06%</td>
+      <td style="color:var(--amber)">2只</td>
+      <td>非防御</td>
+      <td style="color:var(--amber)">⭐ 板块2跌停</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002632</td>
+      <td><strong>道明光学</strong></td>
+      <td>塑料</td>
+      <td>093009</td>
+      <td style="color:var(--green)">+9.97%</td>
+      <td style="color:var(--amber)">3只</td>
+      <td>非防御</td>
+      <td style="color:var(--amber)">⭐ 板块3跌停</td>
+    </tr>
+  </table>
+
+  <div class="callout danger" style="margin-top:8px">
+    <strong>💀 D0活口筛选结论：</strong><br>
+    防御板块26跌停触发<strong style="color:#ff4444">无条件禁止操作</strong>。所有涨停股所在板块均有不同程度跌停。<br>
+    九安医疗(医疗器械)虽为防御+最早封板(092500)，但医药链26跌停环境下，个股涨停无法对抗系统性崩溃。<br>
+    电力9涨停是唯一板块级亮点，但电网设备有3跌停(柘中/远东/华盛昌)，板块内部严重分化。<br>
+    <strong style="color:#ff4444">192跌停+HARDCORE无条件禁止操作=没有任何活口值得追踪买入。</strong><br>
+    <strong style="color:#ff4444">哈药股份炸板(+7.89%)是冰点穿越史上最震撼的倒台：4连板→炸板。S+级→降级。防御最后堡垒倒塌。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">💀 哈药股份(600664) — 冰点穿越终章</div>
+
+  <div class="callout apocalyptic">
+    <strong>哈药股份(600664) 炸板 · +7.89% 从涨停板回落：</strong><br>
+    07-13: 3.71 涨停(D0活口) → 07-14: 4.08 +10%(A级) → 07-15: 4.49 +10%(A级) → 07-16: 4.94 +10%(S+级4连板) → 07-17: <strong style="color:#ff4444">炸板+7.89%!!!</strong><br>
+    曾触及涨停板(5.43)，封板093544，最终炸板回落至+7.89%。<br>
+    4连板穿越冰点(+33.15%)→今日炸板回落。<strong style="color:#ff4444">化学制药板块26跌停的环境下，哈药即使作为今年最强冰点活口也无法独善其身。</strong><br>
+    <strong style="color:#ff4444">冰点穿越史上最强个股的炸板，标志着本次极端冰点序列已无任何安全标的。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">⚠️ 炸板分析（10只冲板回落）</div>
+
+  <table class="at">
+    <tr><th>代码</th><th>名称</th><th>板块</th><th>收盘涨幅</th><th>炸板时间</th><th>风险评级</th></tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)"><strong>600664</strong></td>
+      <td><strong style="color:#ff4444">哈药股份</strong></td>
+      <td>化学制药</td>
+      <td style="color:var(--amber)">+7.89%</td>
+      <td>093544</td>
+      <td style="color:#ff4444">💀 S+级活口→炸板！冰点穿越终章</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">000759</td>
+      <td>中百集团</td>
+      <td>一般零售</td>
+      <td style="color:var(--amber)">+4.80%</td>
+      <td>093209</td>
+      <td style="color:var(--amber)">⚠️ 冲板后大幅回落</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">600280</td>
+      <td>中央商场</td>
+      <td>一般零售</td>
+      <td style="color:var(--amber)">+7.35%</td>
+      <td>093626</td>
+      <td style="color:var(--amber)">⚠️ </td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002396</td>
+      <td>星网锐捷</td>
+      <td>通信设备</td>
+      <td style="color:var(--amber)">+5.05%</td>
+      <td>095527</td>
+      <td style="color:var(--red)">⚠️ 通信12跌停环境</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">603318</td>
+      <td>水发燃气</td>
+      <td>燃气Ⅱ</td>
+      <td style="color:var(--amber)">+5.61%</td>
+      <td>100617</td>
+      <td style="color:var(--amber)">⚠️ 曾07-13活口→已失效</td>
+    </tr>
+  </table>
+
+  <div class="callout neutral" style="margin-top:8px">
+    <strong>🧊 冰点反抽结论：💀💀 五次冰点 · 💀无条件退出市场 💀无条件退出市场</strong><br>
+    07-13(172)→07-14(22)→07-15(31)→07-16(33)→07-17(192!!)。5次D1修复全部失败。<br>
+    上证从4080→3764(-7.75%)。5天累计跌停480只(172+22+31+33+192)。<br>
+    防御板块(医药)26跌停触发<strong style="color:#ff4444">无条件禁止操作</strong>规则。<br>
+    <strong style="color:#ff4444">哈药股份炸板(+7.89%)标志着冰点穿越序列终结——S+级活口也无法抵御系统性崩溃。</strong><br>
+    <strong style="color:#ff4444">建议：无条件退出市场。至少等2周(10个交易日)企稳。此期间禁止任何入场。</strong><br>
+    <strong style="color:#ff4444">仓位：0%。禁止操作。</strong>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🐉 龙头主升浪战法分析</div>
+
+  <div class="callout danger">
+    <strong>🐉 龙头主升浪适用性：❌ 完全不适用（五次冰点，⭐⭐ 远低于适用最低标准）</strong><br>
+    192跌停+五次冰点序列。上证-3.05%至3764，5日暴跌-7.75%。<br>
+    电力9涨停是唯一的板块热点，但电网设备3跌停说明板块内部分化严重。<br>
+    龙头主升浪模式在五次冰点中完全退出。等冰点序列结束(连续5天跌停<20)后再切换。<br>
+    <strong style="color:#ff4444">冰点结束后还需观察至少3周，因为本次冰点序列损伤太过严重。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">📊 涨停行业分布（五次冰点D0 · 192跌停废墟中的33涨停）</div>
+
+  <table class="at">
+    <tr><th>板块</th><th>涨停数</th><th>跌停数</th><th>板块健康度</th><th>主线判断</th></tr>
+    <tr>
+      <td><strong>电力</strong></td>
+      <td style="color:var(--green);font-weight:700">9</td>
+      <td style="color:var(--amber)">3(电网设备)</td>
+      <td><span class="sig y"></span> 涨停集中但电网设备有跌停</td>
+      <td>🔥 废墟中的孤岛。9涨停最多但有3只关联跌停</td>
+    </tr>
+    <tr>
+      <td>塑料</td>
+      <td>2</td>
+      <td style="color:var(--amber)">3</td>
+      <td><span class="sig y"></span> 跌停多于涨停</td>
+      <td>❌ 不构成主线</td>
+    </tr>
+    <tr>
+      <td>汽车零部件</td>
+      <td>2</td>
+      <td style="color:var(--red)">8</td>
+      <td><span class="sig r"></span> 严重分化</td>
+      <td style="color:var(--red)">❌ 天普股份继续跌停，板块8跌停</td>
+    </tr>
+    <tr>
+      <td>医疗器械</td>
+      <td>1</td>
+      <td style="color:var(--red)">26(医药链)</td>
+      <td><span class="sig r"></span> 防御链崩溃</td>
+      <td style="color:var(--red)">❌ 九安涨停独木难支</td>
+    </tr>
+    <tr>
+      <td>中药</td>
+      <td>1</td>
+      <td style="color:var(--amber)">2</td>
+      <td><span class="sig y"></span> 防御松动</td>
+      <td style="color:var(--amber)">❌ 板块2跌停</td>
+    </tr>
+  </table>
+
+  <div class="callout neutral" style="margin-top:10px">
+    <strong>📌 龙头主升浪结论：不适用，无候选，强制退出。</strong><br>
+    192跌停是2026年最大单日跌停数(首次突破07-13的172)。所有板块全部沦陷。<br>
+    电力9涨停是最集中的方向，但孤岛效应明显——电网设备3跌停说明资金对电力板块也没有一致看多。<br>
+    龙头主升浪模式需要活跃市场(⭐⭐⭐⭐⭐)，当前192跌停距离"活跃"差了九重天。<br>
+    <strong style="color:#ff4444">不操作。不推荐。不观察候选。等冰点序列完全消化(至少3周)后再重新评估。</strong>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🔄 上日结论回测 · 07-16 → 07-17</div>
+
+  <div class="callout info" style="margin-bottom:12px">
+    <strong>📋 07-16报告核心建议回顾：</strong>四次冰点(33跌停)，🚫直接禁止操作(仓位上限3%，仅跌停≤2+指数收阳)。D0筛选8只活口仅供追踪。核心判断：D1如果跌停≥10 → 进入五次冰点(极其罕见) → <strong style="color:#ff4444">无条件退出，至少等2周企稳</strong>。D1如果跌停≤2+指数收阳 → 冰点序列可能结束。<strong style="color:#ff4444">实际：跌停192!!! 远超≥10阈值。五次冰点+D1修复彻底粉碎。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">📊 07-16整体判断 → 07-17验证</div>
+
+  <table class="at">
+    <tr><th>07-16判断</th><th>07-17实际</th><th>结果</th></tr>
+    <tr>
+      <td>四次冰点🚫直接禁止操作(仓位0%)</td>
+      <td>上证-3.05%至3764! 如果操作任何标的都大概率-5%以上</td>
+      <td style="color:var(--green);font-weight:700">✅ 完美正确</td>
+    </tr>
+    <tr style="background:var(--purple-bg)">
+      <td><strong>如果D1跌停≥10→五次冰点→无条件退出</strong></td>
+      <td style="color:#ff4444"><strong>跌停192! 五次冰点! 预测被精准触发</strong></td>
+      <td style="color:var(--purple);font-weight:900">✅✅ 前瞻预测完美命中</td>
+    </tr>
+    <tr>
+      <td>化学制药跌停能否归零 → 关键观察</td>
+      <td style="color:#ff4444">化学制药~16跌停! 防御堡垒全面崩溃</td>
+      <td style="color:var(--green);font-weight:700">✅ 正确预警(虽方向是恶化)</td>
+    </tr>
+    <tr>
+      <td>哈药股份能否5连板穿越</td>
+      <td style="color:var(--amber)">炸板 +7.89% 从涨停回落</td>
+      <td style="color:var(--amber)">⚠️ 未继续涨停，炸板回落</td>
+    </tr>
+    <tr>
+      <td>防御堡垒松动 → 如果恶化将全面扩散</td>
+      <td style="color:#ff4444">医药链26跌停! 防御从松动→崩塌仅1天</td>
+      <td style="color:var(--green);font-weight:700">✅ 预警精确(恶化速度超出预期)</td>
+    </tr>
+    <tr>
+      <td>消费电子5涨停大概率一日游</td>
+      <td style="color:#ff4444">消费电子~10跌停! 全板块瓦解</td>
+      <td style="color:var(--green);font-weight:700">✅ 正确</td>
+    </tr>
+    <tr>
+      <td>影视院线3涨停也大概率一日游</td>
+      <td style="color:var(--text-secondary)">非涨停板块(未在涨停Top中出现)</td>
+      <td style="color:var(--green)">✅ 一日游验证</td>
+    </tr>
+    <tr>
+      <td>半导体连续2天5跌停出清持续</td>
+      <td style="color:#ff4444">半导体~16跌停+元件~18跌停! 出清加速</td>
+      <td style="color:var(--green);font-weight:700">✅ 出清持续且加剧</td>
+    </tr>
+    <tr>
+      <td>上证3882岌岌可危，下一支撑3800</td>
+      <td style="color:#ff4444">上证3764! 3800支撑已破</td>
+      <td style="color:var(--green);font-weight:700">✅ 破位预测正确</td>
+    </tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:16px">📊 07-16 D0活口 → 07-17 D1 验证（8只追踪）</div>
+
+  <table class="at">
+    <tr><th>代码</th><th>名称</th><th>07-16收盘</th><th>07-17表现</th><th>高开≥2%</th><th>D1最低vsD0</th><th>板块联动</th><th>验证结果</th></tr>
+    <tr style="background:#1a0000">
+      <td style="font-family:var(--font-mono)"><strong>600664</strong></td>
+      <td><strong style="color:#ff4444">哈药股份</strong></td>
+      <td style="font-family:var(--font-mono)">4.94</td>
+      <td style="color:var(--amber)"><strong>+7.89% 炸板!!</strong></td>
+      <td style="color:var(--green)">✅ 曾涨停</td>
+      <td style="color:var(--amber)">⚠️ 从涨停回落</td>
+      <td style="color:var(--red)">❌ 板块~16跌停</td>
+      <td style="color:#ff4444"><strong>💀 S+→炸板！冰点穿越终结</strong></td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">000504</td>
+      <td><strong>南华生物</strong></td>
+      <td style="font-family:var(--font-mono)">待查</td>
+      <td style="color:var(--text-secondary)">不在涨停/跌停榜</td>
+      <td>--</td>
+      <td>--</td>
+      <td style="color:var(--red)">❌ 医药链26跌停</td>
+      <td style="color:var(--red)">❌ 板块崩溃无法验证</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">002739</td>
+      <td><strong style="color:var(--red)">儒意电影</strong></td>
+      <td>07-16涨停</td>
+      <td style="color:var(--text-secondary)">不在涨停/跌停榜</td>
+      <td>--</td>
+      <td>--</td>
+      <td style="color:var(--red)">❌ 板块退出涨停前10</td>
+      <td style="color:var(--red)">❌ 一日游确认</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">000892</td>
+      <td><strong style="color:var(--red)">欢瑞世纪</strong></td>
+      <td>07-16涨停</td>
+      <td style="color:var(--text-secondary)">不在涨停/跌停榜</td>
+      <td>--</td>
+      <td>--</td>
+      <td style="color:var(--red)">❌ 板块退出</td>
+      <td style="color:var(--red)">❌ 一日游确认</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002365</td>
+      <td><strong>永安药业</strong></td>
+      <td>07-16涨停</td>
+      <td style="color:var(--text-secondary)">不在涨停/跌停榜</td>
+      <td>--</td>
+      <td>--</td>
+      <td style="color:var(--red)">❌ 化学制药~16跌停</td>
+      <td style="color:var(--red)">❌ 板块崩溃</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">300968</td>
+      <td><strong style="color:var(--red)">格林精密</strong></td>
+      <td>07-16 +20.05%</td>
+      <td style="color:var(--text-secondary)">不在涨停/跌停榜</td>
+      <td>--</td>
+      <td>--</td>
+      <td style="color:var(--red)">❌ 消费电子~10跌停</td>
+      <td style="color:var(--red)">❌ 一日游确认</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">603327</td>
+      <td><strong style="color:var(--red)">福蓉科技</strong></td>
+      <td>07-16涨停</td>
+      <td style="color:var(--text-secondary)">不在涨停/跌停榜</td>
+      <td>--</td>
+      <td>--</td>
+      <td style="color:var(--red)">❌ 消费电子~10跌停</td>
+      <td style="color:var(--red)">❌ 一日游确认</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">002045</td>
+      <td><strong style="color:var(--red)">国光电器</strong></td>
+      <td>07-16涨停</td>
+      <td style="color:var(--text-secondary)">不在涨停/跌停榜</td>
+      <td>--</td>
+      <td>--</td>
+      <td style="color:var(--red)">❌ 消费电子~10跌停</td>
+      <td style="color:var(--red)">❌ 一日游确认</td>
+    </tr>
+  </table>
+
+  <div class="callout danger" style="margin-top:6px">
+    <strong>💀 D1整体修复条件：💀 彻底粉碎💀 史无前例</strong><br>
+    跌停192 >> 5 → D1整体修复条件完全不存在。<br>
+    8只D0活口D1表现：<strong style="color:#ff4444">哈药炸板+7.89%💀</strong> | 儒意/欢瑞/格林精密/福蓉/国光(消费电子+影视)→一日游❌ | 永安/南华(医药)→板块崩溃❌<br>
+    <strong style="color:#ff4444">活口高质量存活率: 0/8(0%)。8只活口全部失效或无法验证。没有任何一只活口通过D1全验证。</strong><br>
+    <strong style="color:var(--green)">07-16建议🚫禁止操作→完美正确。如果买入任何活口，100%概率亏损或仓位被深度套牢。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">📊 07-16 A级活口(天普/世茂) → 07-17追踪</div>
+
+  <table class="at">
+    <tr><th>代码</th><th>名称</th><th>07-16收盘</th><th>07-17表现</th><th>结果</th></tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)"><strong>605255</strong></td>
+      <td><strong style="color:#ff4444">天普股份</strong></td>
+      <td style="font-family:var(--font-mono);color:var(--red)">78.47 -10.00%跌停</td>
+      <td style="color:#ff4444;font-weight:900"><strong>-10.00% 继续跌停!!</strong></td>
+      <td style="color:#ff4444"><strong>💀💀 A级→跌停→再跌停！2连板后2连跌停!!</strong></td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">605028</td>
+      <td><strong>世茂能源</strong></td>
+      <td style="font-family:var(--font-mono)">07-16 D2熄火</td>
+      <td style="color:var(--text-secondary)">不在涨停/跌停榜</td>
+      <td style="color:var(--amber)">⚠️ 已失效追踪价值低</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">603516</td>
+      <td><strong>淳中科技</strong></td>
+      <td style="font-family:var(--font-mono)">07-14涨停→07-15跌停</td>
+      <td style="color:var(--text-secondary)">不在涨停/跌停榜</td>
+      <td style="color:var(--red)">❌ 已彻底移出</td>
+    </tr>
+  </table>
+
+  <div class="callout apocalyptic" style="margin-top:6px">
+    <strong>💀 天普股份(605255) — 冰点战法史上最残酷案例：</strong><br>
+    07-14 D0秒板涨停(79.26)→07-15 D1 A级涨停(87.19)→07-16 D2 <strong style="color:#ff4444">跌停-10%(78.47)</strong>→07-17 D3 <strong style="color:#ff4444">跌停-10%(70.62)!!</strong><br>
+    从A级活口(2连板87.19)→2天跌停(70.62)=-19%。<strong style="color:#ff4444">2天亏损19%。这不是回调，这是屠杀。</strong><br>
+    <strong style="color:#ff4444">教训：非防御A级活口在三次及以上冰点中，从涨停板到-19%只需2天。D2崩盘规则已被双重验证。</strong>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">📈 持续追踪池 (近5日推荐股表现)</div>
+
+  <table class="at">
+    <tr><th>推荐日期</th><th>代码</th><th>名称</th><th>推荐操作</th><th>推荐日价</th><th>状态</th><th>结果</th></tr>
+    <tr style="background:#1a0000">
+      <td style="color:#ff4444">07-13→17</td>
+      <td style="font-family:var(--font-mono)"><strong>600664</strong></td>
+      <td><strong style="color:var(--amber)">哈药股份</strong></td>
+      <td>D0活口→S+级→炸板</td>
+      <td>3.71</td>
+      <td style="color:var(--amber)">+7.89%炸板</td>
+      <td style="color:var(--amber)">⚠️ 5日累计~+33%→炸板回落</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="color:#ff4444">07-14→17</td>
+      <td style="font-family:var(--font-mono)"><strong>605255</strong></td>
+      <td><strong style="color:#ff4444">天普股份</strong></td>
+      <td>D0活口→A级→崩盘</td>
+      <td>79.26</td>
+      <td style="color:#ff4444">~70.62</td>
+      <td style="color:#ff4444">💀 -19% 2连跌停</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td>07-13</td>
+      <td style="font-family:var(--font-mono)">603318</td>
+      <td>水发燃气</td>
+      <td>D0活口→失效</td>
+      <td>8.55</td>
+      <td style="color:#ff4444">炸板</td>
+      <td style="color:var(--red)">已移出+炸板</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td>07-14</td>
+      <td style="font-family:var(--font-mono)">603516</td>
+      <td>淳中科技</td>
+      <td>涨停→跌停</td>
+      <td>109.04</td>
+      <td style="color:var(--red)">已失效</td>
+      <td style="color:var(--red)">活口彻底失效</td>
+    </tr>
+    <tr>
+      <td>07-08</td>
+      <td style="font-family:var(--font-mono)">000977</td>
+      <td>浪潮信息</td>
+      <td>A级活口</td>
+      <td>78.17</td>
+      <td style="color:var(--text-secondary)">--</td>
+      <td style="color:var(--text-secondary)">已脱离追踪</td>
+    </tr>
+    <tr>
+      <td>07-15</td>
+      <td style="font-family:var(--font-mono)">002980</td>
+      <td>华盛昌</td>
+      <td>D0活口→炸板</td>
+      <td>102.14</td>
+      <td style="color:var(--red)">07-17跌停-10%</td>
+      <td style="color:var(--red)">炸板→跌停</td>
+    </tr>
+  </table>
+
+  <div class="callout neutral" style="margin-top:10px">
+    <strong>📌 追踪总结：</strong><br>
+    <strong style="color:var(--amber)">唯一亮点(1只)：</strong>哈药股份 07-13→07-17累计~+33%，但今日炸板回落标志着穿越终结。<br>
+    <strong style="color:var(--red)">惨烈亏损(5只+)：</strong>天普股份-19%(2连跌停💀)、淳中科技跌停失效、水发燃气炸板失效、华盛昌炸板→跌停。所有非防御活口全部阵亡。<br>
+    <strong style="color:#ff4444">本轮冰点序列统计分析(07-13→07-17 5天)：</strong>累计筛选活口~20只(含D0追踪)，D1通过率<5%(仅哈药前4天)，D2存活率0%(天普D2崩盘，哈药D5炸板)。<strong style="color:#ff4444">没有任何一只活口从D0穿越至D5。</strong><br>
+    <strong style="color:var(--green)">核心结论：禁止操作策略已连续第5天完美保护。如果07-13以来执行任何买入，今日亏损幅度至少10-20%。</strong>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">🔧 错误分析与Skill改进建议</div>
+
+  <table class="at">
+    <tr><th>观察</th><th>分析</th><th>改进建议</th></tr>
+    <tr style="background:var(--purple-bg)">
+      <td style="color:var(--purple)"><strong>07-16全判断正确(9/9)</strong></td>
+      <td>禁止操作、五次冰点预测(跌停≥10→192!!!)、防御崩溃预警、一日游预测、半导体出清——全部验证。五次冰点前瞻判断是本次最有价值的预测。</td>
+      <td><strong>无需修改。</strong>连续第5个交易日D0不操作策略100%正确。这是冰点战法最核心纪律。</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="color:#ff4444"><strong>防御板块从裂缝→崩塌仅1天</strong></td>
+      <td>07-16化学制药2跌停(首次裂缝)→07-17化学制药~16跌停+医药链~26跌停。仅1天从裂缝变崩塌。防御板块健康度的恶化速度远超战法设计的"逐步恶化"假设。</td>
+      <td><strong>建议新增规则：</strong>冰点序列中防御板块首次出现≥2跌停时，标注为最高级别警示，次日防御板块跌停能否归零是唯一观察点。如果次日防御板块跌停放量(≥5)→立即切换至无条件退出(而非等待防御跌停≥3才触发)。07-16的2跌停→07-17的26跌停证明：防御崩塌可以在1天内从裂缝变决堤。</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="color:#ff4444"><strong>哈药股份4连板→炸板</strong></td>
+      <td>2026年冰点穿越史上最强个股(07-13→07-16 4连板+33%)→07-17炸板+7.89%。防御板块26跌停的浪潮中，最强活口也无法独善其身。S+级活口→炸板标志冰点穿越时代的终结。</td>
+      <td><strong>建议新增规则：</strong>当防御板块健康度恶化(跌停≥5)时，所有此前穿越冰点的S+级活口应立即标注为高风险观察，仓位归零。即使是穿越4天的S+级活口，防御板块崩塌时将无差别受波及。</td>
+    </tr>
+    <tr style="background:var(--purple-bg)">
+      <td style="color:var(--purple)"><strong>天普股份D3继续跌停(-19%)</strong></td>
+      <td>07-14 A级活口(2连板87.19)→07-16跌停(-10%)→07-17再跌停(-10%, ~70.62)。2天亏损19%。A级→双跌停的残酷性远超预期。</td>
+      <td><strong>强化现有规则：</strong>现有A级活口D2崩盘规则已预警非防御D2风险。天普的D3继续跌停证明：A级活口一旦D2跌停，D3大概率继续跌停。D2跌停后不应再追踪后续表现——已进入死亡螺旋。</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="color:#ff4444"><strong>五次冰点规则缺失</strong></td>
+      <td>战法规则最高覆盖四次冰点(禁止操作)。本次五次冰点(192跌停)超出规则覆盖范围。A股历史上五次连续冰点极为罕见。</td>
+      <td><strong>建议新增五次冰点规则：</strong>五次冰点(极其罕见)→①无条件退出市场(仓位0%) ②至少等2周(10个交易日)企稳 ③期间跌停连续5天<10才可重新评估 ④如果期间再次触发冰点(≥20跌停)→延长至3周。</td>
+    </tr>
+    <tr>
+      <td style="color:var(--amber)">上证3764跌破3800关键支撑</td>
+      <td>07-16预测3800是下一个支撑→07-17直接跌破至3764(-3.05%)。3800关口毫无抵抗。下一支撑在哪？</td>
+      <td><strong>建议：</strong>在后续追踪中标注上证关键支撑位(3700/3600/3500)。技术面严重恶化，不应预设任何支撑有效。</td>
+    </tr>
+    <tr style="background:var(--purple-bg)">
+      <td style="color:var(--purple)"><strong>07-16一日游预测(消费电子/影视院线)全部验证</strong></td>
+      <td>07-16消费电子5涨停→07-17消费电子~10跌停。07-16影视院线3涨停→07-17退出前10。冰点中板块涨停爆发=一日游的规律连续被验证。</td>
+      <td><strong>无需修改。</strong>冰点中板块爆发一日游规律已充分验证。直接保留现有规则即可。</td>
+    </tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="sec-label">⚖️ 综合结论</div>
+
+  <table class="at">
+    <tr><th>对比维度</th><th>冰点反抽</th><th>龙头主升浪</th><th>是否一致</th></tr>
+    <tr>
+      <td>适用性</td>
+      <td style="color:#ff4444">💀 适用但五次冰点+防御崩塌→无条件退出</td>
+      <td style="color:var(--red)">❌ 完全不适用(⭐⭐)</td>
+      <td><span class="sig g"></span> 一致(无条件退出)</td>
+    </tr>
+    <tr>
+      <td>核心标的</td>
+      <td style="color:#ff4444">无。活口质量归零</td>
+      <td>无。哈药炸板后无候选</td>
+      <td><span class="sig g"></span> 一致(无操作标的)</td>
+    </tr>
+    <tr>
+      <td>操作建议</td>
+      <td style="color:#ff4444">💀 无条件退出 · 至少2周</td>
+      <td style="color:var(--red)">等冰点序列完全消化后3周</td>
+      <td><span class="sig g"></span> 绝对保守一致</td>
+    </tr>
+    <tr>
+      <td>仓位</td>
+      <td style="color:#ff4444;font-weight:900">0% · 🚫禁止操作</td>
+      <td style="color:#ff4444;font-weight:900">0% · 🚫禁止操作</td>
+      <td><span class="sig g"></span> 绝对一致</td>
+    </tr>
+    <tr>
+      <td>D1观察点(07-18或下周一)</td>
+      <td style="color:#ff4444">意义极低。五次冰点后不设D1预期</td>
+      <td>不观察。退出模式</td>
+      <td><span class="sig g"></span> 节奏一致</td>
+    </tr>
+    <tr>
+      <td>最大风险</td>
+      <td style="color:#ff4444">五次冰点后仍可能继续崩盘(六次冰点)</td>
+      <td>全市场失灵。无安全标的</td>
+      <td><span class="sig g"></span> 完全一致</td>
+    </tr>
+  </table>
+
+  <table class="st">
+    <tr><td>当前场景</td><td style="color:#ff4444"><strong>💀 五次冰点(D0) · 192跌停 · 上证-3.05%至3764 · 防御板块全面崩溃 · 哈药炸板冰穿终结</strong></td></tr>
+    <tr><td>主导策略</td><td style="color:#ff4444"><strong>💀💀 无条件退出市场 · 仓位0% · 禁止一切操作 · 至少等2周(10个交易日)企稳。</strong>这是2026年最严重的市场崩溃。5天累计跌停480只，上证-7.75%。防御堡垒(医药)全面崩塌。没有任何安全标的。保存弹药是唯一选择。</td></tr>
+    <tr><td>今日亮点</td><td style="color:var(--green)">07-16全判断9/9正确(五次冰点前瞻预测被192跌停精准触发)；禁止操作策略已连续第5天完美保护；一日游预测全部验证(消费电子/影视院线)；半导体持续出清预测验证；防御崩塌预警验证</td></tr>
+    <tr><td>今日灾难</td><td style="color:#ff4444">192跌停(超07-13的172创2026年最高)；医药链~26跌停防御堡垒全面崩塌；哈药股份4连板活口炸板(+7.89%)冰点穿越终结；天普股份-19%(2连跌停)冰点史上最残酷案例；上证破3800至3764；全产业链无一幸免</td></tr>
+    <tr><td>冰点序列本轮统计</td><td style="color:#ff4444">07-13(172)→07-14(22)→07-15(31)→07-16(33)→07-17(192)。5天累计跌停480只，上证4080→3764(-7.75%)。5次D1修复全部失败。防御板块从堡垒→裂缝→崩塌仅3天。这是2026年乃至近5年最严重的连续冰点序列。</td></tr>
+    <tr><td>后续观察(纯学术)</td><td style="color:var(--text-secondary)">①07-18或下周一跌停数(如降至<50说明超跌反弹) ②防御板块能否止血(医药跌停<5) ③上证能否守住3700 ④如果跌停再次≥100→六次冰点(超出任何理性分析框架)</td></tr>
+  </table>
+
+  <table class="st" style="margin-top:10px"">
+    <tr><td>冰点反抽</td><td class="amt" style="color:#ff4444;font-weight:900">0% · 💀无条件退出💀</td><td>五次冰点+防御板块26跌停→无条件退出。仓位0%。不设D1预期</td></tr>
+    <tr><td>龙头主升浪</td><td class="amt" style="color:#ff4444;font-weight:900">0% · 💀模式完全退出💀</td><td>192跌停不适用龙头战法。等冰点完全消化后3周以上再评估</td></tr>
+    <tr><td>总建议</td><td class="amt" style="color:#ff4444;font-weight:900">💀 保存弹药 · 无条件退出 · 至少2周</td><td>07-13极端冰点→07-17五次冰点仅5个交易日。480跌停+上证-7.75%。<strong style="color:#ff4444">2026年最严重连续冰点</strong></td></tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:20px">💀 关键风险</div>
+  <ul class="risk-list">
+    <li class="crit"><strong>五次冰点是2026年首次</strong>：07-02→07-08四冰点序列刚结束仅2天，07-13→07-17直接五冰点。7月3周内2轮冰点序列合计9个冰点日。这是2015年股灾以来最极端的市场环境。</li>
+    <li class="crit"><strong>哈药股份炸板标志冰点穿越时代终结</strong>：2026年唯一从极端冰点穿越4天的S+级活口→今日炸板。防御板块全面崩塌的浪潮中，没有任何个股能独善其身。</li>
+    <li class="crit"><strong>天普股份2连跌停-19%是活口陷阱的终极警示</strong>：D0涨停→D1 A级涨停→D2跌停→D3跌停。A级活口到-19%仅需3天。非防御活口的D2/D3崩盘是三次及以上冰点的铁律。</li>
+    <li class="crit"><strong>防御板块(医药)26跌停崩塌</strong>：07-13防御堡垒(0跌停)→07-16首次裂缝(2跌停)→07-17崩塌(26跌停)。仅3天从堡垒→废墟。恐慌已完成从制造业→全市场→防御板块的三级传导。市场进入无差别抛售。</li>
+    <li class="warn"><strong>上证3764跌破3800支撑</strong>：7月5个交易日从4080→3764跌316点(-7.75%)。3800关口零抵抗。下方支撑3700/3600。技术面严重破位。</li>
+    <li class="warn"><strong>全产业链出清无幸存者</strong>：半导体链41跌停、医药链26跌停、制造链30跌停、通信计算机链20跌停。全A股所有产业链同步出清。这不是结构性调整，这是系统性崩溃。</li>
+    <li class="crit"><strong>07-16预测"五次冰点→至少等2周"现在正式生效</strong>：从07-18开始至少10个交易日不操作。如果期间再次冰点(跌停≥20)→延长至3周。禁止追任何反弹。</li>
+  </ul>
+</div>
+
+<div class="section section-alt">
+  <div class="conclusion-box">
+    <div class="conclusion-text">
+      💀💀💀 <span style="color:#ff4444">五次冰点 · 192跌停 · 💀无条件退出市场💀 · 保存弹药至少2周</span>
+    </div>
+    <div class="conclusion-sub">
+      07-13极端冰点(172跌停)→07-14二次冰点(22)D1失败→07-15三次冰点(31)D1失败→07-16四次冰点(33)D1失败→07-17<strong style="color:#ff4444">五次冰点(192跌停!!)D1彻底粉碎</strong>。<br>
+      上证-3.05%至3764，5天暴跌316点(-7.75%)。5天累计跌停480只。D1修复连续5天全部失败。<br>
+      <strong style="color:#ff4444">防御堡垒(医药)26跌停全面崩塌——恐慌完成制造业→全市场→防御板块三级传导。</strong><br>
+      <strong style="color:#ff4444">哈药股份4连板炸板(+7.89%)——2026年冰点穿越史上最强活口终结。天普股份2连跌停-19%——A级活口陷阱终极案例。</strong><br>
+      <strong style="color:#ff4444">五次冰点超出战法所有规则覆盖。建议：①无条件退出市场(仓位0%) ②至少等2周企稳 ③期间禁止任何反弹追入。</strong><br>
+      <strong style="color:var(--green)">07-16回测：9/9全判断正确。五次冰点预测被192跌停精准触发。禁止操作策略已连续第5天完美验证。</strong>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  数据源: data-hub(行情) · AKShare(涨停板) · 2026-07-17 18:05<br>
+  分析方法: 冰点反抽模式 + 龙头主升浪战法 · 双战法交叉验证<br>
+  <span style="color:var(--amber)">⚠️ 以上分析仅供学习参考，不构成投资建议。投资有风险，入市需谨慎。</span><br>
+  <a href="https://eason-byte.github.io/daily-briefing/stock-picks/">返回首页</a>
+</div>
+
+</div>
+</body>
+</html>

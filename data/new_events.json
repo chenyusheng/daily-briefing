@@ -1,29 +1,36 @@
 {
   "events": [
     {
-      "id": "us-iran-escalation-jul-2026",
-      "date": "2026-07-13",
-      "date_label": "7月12-15日（持续）",
-      "title": "美对伊朗新军事打击 + 特朗普威胁 + 霍尔木兹通行费",
+      "id": "korea-etf-suspension-aug-2026",
+      "date": "2026-08-05",
+      "date_label": "8月5日起",
+      "title": "韩国暂停单一股票杠杆ETF新上市+提高最低保证金",
+      "stock": "07709",
+      "stock_name": "XL二南方海力士",
+      "color": "purple",
+      "importance": 5,
+      "impact": "利空",
+      "impact_dir": "down",
+      "status": "upcoming",
+      "type": "政策监管",
+      "description": "韩国金融委员会7/16宣布暂停单一股票杠杆ETF新上市，8月5日起将最低保证金从1000万韩元提至3000万韩元。虽07709为港股产品，但底层追踪韩国股票，监管收紧可能降低杠杆产品整体需求。",
+      "tags": ["海力士", "杠杆ETF", "韩国监管", "政策收紧"]
+    },
+    {
+      "id": "haiti-strait-conflict-jul-2026",
+      "date": "2026-07-16",
+      "date_label": "7月14-17日（进行中）",
+      "title": "美伊霍尔木兹海峡冲突升级（第二轮）",
       "stock": "宏观",
       "stock_name": "宏观事件",
       "color": "gray",
       "importance": 5,
       "impact": "全持仓利空",
       "impact_dir": "down",
-      "status": "upcoming",
+      "status": "ongoing",
       "type": "地缘冲突",
-      "description": "7月12-13日美国对伊朗发动新一轮军事打击，特朗普宣布霍尔木兹海峡通行费。布伦特原油一周涨超13%至86美元。二次冲击有免疫记忆，关注7/29 FOMC。",
-      "detail": "港股(小米/07709)→risk-off；科技成长股→高估值承压；SPCX→最脆弱；A股内需消费→影响最小。",
-      "tags": [
-        "伊朗",
-        "美国",
-        "霍尔木兹",
-        "油价",
-        "地缘冲突",
-        "全持仓"
-      ]
+      "description": "7/14起美伊在霍尔木兹海峡再生冲突，伊朗威胁停止区域能源出口。布伦特原油涨至$84，连涨4日。美股半导体暴跌（SOX-4%）。这是2026年第二次霍尔木兹危机（首次2月），二次冲击有免疫记忆但三重利空共振（利率+油+半导体）。",
+      "tags": ["伊朗", "霍尔木兹", "石油", "地缘", "全球risk-off"]
     }
-  ],
-  "stocks": []
+  ]
 }

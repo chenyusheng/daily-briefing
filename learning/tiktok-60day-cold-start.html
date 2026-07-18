@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok新店60天冷启动实战框架</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d1117;--surface:#161b22;--surface-alt:#1c2333;--border:#30363d;--border-light:#21262d;--text:#e6edf3;--text-secondary:#8b949e;--text-tertiary:#6e7681;--accent:#58a6ff;--accent-bg:#0d419d33;--green:#3fb950;--green-bg:#1b3a1f;--red:#f85149;--red-bg:#3d1416;--amber:#d29922;--amber-bg:#2d1f00;--purple:#a371f7;--purple-bg:#2a1a4a;--teal:#56d4dd;--teal-bg:#1d3b3d;--pink:#f778ba;--pink-bg:#3d1a2e;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.15);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7}
+.container{max-width:820px;margin:0 auto;padding:24px 20px}
+.header{background:linear-gradient(135deg,#161b22 0%,#1c2333 50%,#111 100%);border-bottom:1px solid var(--border);padding:28px 22px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-50%;left:-30%;width:160%;height:200%;background:radial-gradient(ellipse at 30% 50%,var(--accent-bg) 0%,transparent 50%),radial-gradient(ellipse at 70% 50%,var(--pink-bg) 0%,transparent 50%);opacity:.2;pointer-events:none}
+.h-title{font-size:26px;font-weight:800;letter-spacing:-.5px;position:relative;z-index:1}
+.h-sub{font-size:14px;color:var(--text-secondary);margin-top:6px;position:relative;z-index:1}
+.h-meta{font-size:13px;color:var(--text-tertiary);margin-top:6px;position:relative;z-index:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;position:relative;z-index:1}
+.tag{font-size:11px;font-weight:500;padding:3px 12px;border-radius:20px;background:var(--accent-bg);color:var(--accent)}
+.tag.green{background:var(--green-bg);color:var(--green)}
+.tag.amber{background:var(--amber-bg);color:var(--amber)}
+.tag.pink{background:var(--pink-bg);color:var(--pink)}
+.tag.purple{background:var(--purple-bg);color:var(--purple)}
+.tag.teal{background:var(--teal-bg);color:var(--teal)}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--text-tertiary);text-decoration:none;margin-bottom:6px;transition:color .15s}
+.back:hover{color:var(--accent)}
+h2{font-size:20px;font-weight:700;margin:36px 0 16px;color:var(--text);display:flex;align-items:center;gap:10px}
+h2::after{content:'';flex:1;height:1px;background:var(--border)}
+h3{font-size:16px;font-weight:600;margin:24px 0 12px;color:var(--accent)}
+h4{font-size:14px;font-weight:600;margin:18px 0 8px;color:var(--text)}
+p{font-size:14px;color:var(--text-secondary);margin:12px 0;line-height:1.8}
+.callout{padding:14px 18px;border-radius:var(--radius);margin:16px 0;font-size:13px;line-height:1.6}
+.callout.info{background:var(--accent-bg);border-left:3px solid var(--accent);color:var(--accent)}
+.callout.success{background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+.callout.warn{background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)}
+.callout.danger{background:var(--red-bg);border-left:3px solid var(--red);color:var(--red)}
+.callout.neutral{background:var(--surface-alt);border-left:3px solid var(--text-tertiary);color:var(--text-secondary)}
+.callout.pink{background:var(--pink-bg);border-left:3px solid var(--pink);color:var(--pink)}
+.card-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0}
+@media(min-width:600px){.card-grid.two{grid-template-columns:1fr 1fr}.card-grid.three{grid-template-columns:1fr 1fr 1fr}}
+.card{background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.card-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.card-meta{font-size:12px;color:var(--text-tertiary);margin-bottom:2px}
+.card-desc{font-size:12px;color:var(--text-secondary);line-height:1.6}
+.card-badge{display:inline-block;font-size:10px;padding:1px 10px;border-radius:12px;font-weight:500;margin-top:6px}
+.card-badge.blue{color:var(--accent);background:var(--accent-bg)}
+.card-badge.green{color:var(--green);background:var(--green-bg)}
+.card-badge.amber{color:var(--amber);background:var(--amber-bg)}
+.card-badge.purple{color:var(--purple);background:var(--purple-bg)}
+.card-badge.teal{color:var(--teal);background:var(--teal-bg)}
+.card-badge.pink{color:var(--pink);background:var(--pink-bg)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+thead th{text-align:left;padding:10px 12px;background:var(--surface-alt);color:var(--text-tertiary);font-weight:500;border-bottom:2px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+tbody td{padding:10px 12px;border-bottom:1px solid var(--border-light);color:var(--text-secondary);vertical-align:top}
+tbody tr:hover{background:var(--surface-alt)}
+.steps{list-style:none;padding:0;margin:14px 0}
+.steps li{padding:12px 16px 12px 44px;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;position:relative;font-size:13px;color:var(--text-secondary);line-height:1.6}
+.steps li .sn{position:absolute;left:12px;top:12px;width:24px;height:24px;border-radius:50%;background:var(--accent-bg);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.steps li strong{color:var(--text)}
+ul{list-style:none;padding:0;margin:8px 0}
+ul li{padding:4px 0 4px 20px;font-size:13px;color:var(--text-secondary);position:relative}
+ul li::before{content:'\25B8';position:absolute;left:0;color:var(--accent);font-size:11px}
+.phase-grid{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0}
+@media(min-width:700px){.phase-grid{grid-template-columns:1fr 1fr}}
+.phase-card{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface-alt)}
+.phase-h{padding:10px 14px;font-size:13px;font-weight:700;color:#fff}
+.phase-h.p1{background:var(--purple)}
+.phase-h.p2{background:var(--blue,#1f6feb)}
+.phase-h.p3{background:var(--amber)}
+.phase-h.p4{background:var(--green)}
+.phase-body{padding:12px 14px;font-size:12px;color:var(--text-secondary);line-height:1.7}
+.phase-body strong{color:var(--text)}
+.phase-body .row{display:flex;gap:6px;margin:4px 0}
+.phase-body .label{color:var(--accent);font-weight:600;min-width:56px;flex-shrink:0}
+hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+.num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}
+.num.purple{background:var(--purple-bg);color:var(--purple)}
+.num.blue{background:var(--accent-bg);color:var(--accent)}
+.num.green{background:var(--green-bg);color:var(--green)}
+.num.amber{background:var(--amber-bg);color:var(--amber)}
+@media(max-width:700px){
+  .h-title{font-size:20px}
+  table{font-size:12px}
+  thead th,tbody td{padding:7px 8px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="back" href="https://chenyusheng.github.io/daily-briefing/">← 返回首页</a>
+  <div class="h-title">TikTok新店60天冷启动实战框架</div>
+  <div class="h-sub">四阶段系统化拆解，找到曝光与出单的核心转化关系</div>
+  <div class="h-meta">2026-07-17 · 跨境电商</div>
+  <div class="tags">
+    <span class="tag">TikTok</span>
+    <span class="tag pink">冷启动</span>
+    <span class="tag">达人合作</span>
+    <span class="tag green">商品卡</span>
+    <span class="tag amber">短视频</span>
+    <span class="tag teal">跨境电商</span>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="callout success" style="font-size:15px;font-weight:600">
+  🎯 60天只做一件事：拼命搞曝光，搞清楚多少曝光 = 1单。找到转化关系后，持续买曝光就行了。
+</div>
+
+<!-- 核心理念 -->
+<h2>核心理念</h2>
+
+<p>冷启动阶段的唯一核心任务是<strong>拼命获取曝光</strong>，并通过数据验证，最终搞清楚多少曝光能带来一单的固定关系。一旦这个关系被找到，后续的运营就变得简单只需要持续获取曝光即可。</p>
+
+<div class="callout danger" style="font-size:14px">
+  <strong>淘汰机制：</strong>如果一个产品经过60天极限测试后依然无法出单说明产品本身有问题，果断放弃无需纠结。
+</div>
+
+<!-- 60天四阶段 -->
+<h2>60天四阶段总览</h2>
+
+<div class="phase-grid">
+
+<div class="phase-card">
+  <div class="phase-h p1">🟣 第1个15天 · 囤素材期</div>
+  <div class="phase-body">
+    <div class="row"><span class="label">商品卡</span>持续优化头图/详情页，每日$25固定投流</div>
+    <div class="row"><span class="label">短视频</span>每天发3-5条，<strong>不投流</strong>，纯自然流量攒约80条素材</div>
+    <div class="row"><span class="label">达人</span>送样100份，等视频产出</div>
+  </div>
+</div>
+
+<div class="phase-card">
+  <div class="phase-h p2">🔵 第2个15天 · 测试期</div>
+  <div class="phase-body">
+    <div class="row"><span class="label">商品卡</span>持续优化+固定投流</div>
+    <div class="row"><span class="label">短视频</span>对已有素材<strong>小预算投流</strong>，增量到5-8条/天</div>
+    <div class="row"><span class="label">达人</span>视频开始返样→小预算投流+继续送100份</div>
+  </div>
+</div>
+
+<div class="phase-card">
+  <div class="phase-h p3">🟡 第3个15天 · 验证期</div>
+  <div class="phase-body">
+    <div class="row"><span class="label">商品卡</span>持续优化+固定投流</div>
+    <div class="row"><span class="label">短视频</span>200-300条素材中筛出<strong>~10条稳定消耗</strong>的，每天10条</div>
+    <div class="row"><span class="label">达人</span>返样20-40条→开始出单→送样缩至50份</div>
+  </div>
+</div>
+
+<div class="phase-card">
+  <div class="phase-h p4">🟢 第4个15天 · 放量期</div>
+  <div class="phase-body">
+    <div class="row"><span class="label">商品卡</span>持续优化+固定投流</div>
+    <div class="row"><span class="label">短视频</span>保持稳定更新，维持曝光效率</div>
+    <div class="row"><span class="label">达人</span>返样~80条，出单趋于稳定</div>
+  </div>
+</div>
+
+</div>
+
+<!-- 各渠道要点 -->
+<h2>各渠道执行要点</h2>
+
+<div class="card-grid two">
+
+<div class="card">
+  <div class="card-title">📦 商品卡</div>
+  <div class="card-badge blue">贯穿全程</div>
+  <div class="card-desc" style="margin-top:8px">
+    每天固定预算$25投流，持续优化头图和详情页。判断标准：花同样的钱，曝光有没有变多。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">🎬 自营短视频</div>
+  <div class="card-badge green">分阶段放量</div>
+  <div class="card-desc" style="margin-top:8px">
+    前15天纯自然流量攒素材→15天后小预算投流测效率→从200条中筛出10条能稳定消耗的持续发布。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">🤝 达人合作</div>
+  <div class="card-badge amber">核心出单渠道</div>
+  <div class="card-desc" style="margin-top:8px">
+    先送100份等产出→视频返样后投流测试→验证高效达人方向后缩减送样→找到稳定的达人ROI。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">🔴 直播（可选）</div>
+  <div class="card-badge pink">高门槛非普适</div>
+  <div class="card-desc" style="margin-top:8px">
+    仅当团队+产品适合才做。成本可控前提下验证出单效率，效率不高果断放弃。
+  </div>
+</div>
+
+</div>
+
+<!-- 个人卖家调整建议 -->
+<h2>为个人卖家精简</h2>
+
+<div class="callout info" style="font-size:14px">
+  原文方案适合团队作战。你是一个人起步，以下是调整建议：
+</div>
+
+<div class="card-grid two">
+  <div class="card">
+    <div class="card-title">✅ 保留的核心</div>
+    <div class="card-desc" style="margin-top:6px">
+      <ul>
+        <li>达人送样策略（初期送50份就够）</li>
+        <li>商品卡优化（一个人就能干）</li>
+        <li>数据验证逻辑（先小成本试，跑通再放大）</li>
+        <li>淘汰机制（没验证通过的品果断放弃）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">⚠️ 需要调整</div>
+    <div class="card-desc" style="margin-top:6px">
+      <ul>
+        <li>每天3-5条短视频量太大 → 用AI辅助生成素材</li>
+        <li>每日$25投流预算 → 60天约$1500（1万RMB），前期可减半</li>
+        <li>直播渠道直接跳过（非普适）</li>
+        <li>达人送样从50份开始，验证后再加量</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="callout success" style="font-size:14px">
+  <strong>个人卖家精简策略：</strong>商品卡 + 达人合作两条腿先走，自营短视频用AI辅助产出，验证转化率后再慢慢加码。
+</div>
+
+<!-- 最终成果 -->
+<h2>60天后的成果</h2>
+
+<table>
+<thead><tr><th>成果</th><th>说明</th></tr></thead>
+<tbody>
+  <tr><td><strong>✅ 明确转化关系</strong></td><td>例如2万播放≈1单，知道花多少钱能换来多少订单</td></tr>
+  <tr><td><strong>✅ 确定最优渠道</strong></td><td>在不同渠道中选单位成本最低、曝光最多的方式规模化投入</td></tr>
+  <tr><td><strong>✅ 淘汰烂品</strong></td><td>60天极限测试还不出单的品，果断放弃不纠结</td></tr>
+</tbody>
+</table>
+
+<div class="callout neutral">
+  来源：抖音@吞吞的出海营销战略 · TikTok新店60天从0-1冷启动拆解 · 经艾瑞丝整理简化
+</div>
+
+</div>
+</body>
+</html>

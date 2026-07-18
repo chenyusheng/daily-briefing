@@ -1,36 +1,36 @@
 {
   "events": [
     {
-      "id": "korea-etf-suspension-aug-2026",
-      "date": "2026-08-05",
-      "date_label": "8月5日起",
-      "title": "韩国暂停单一股票杠杆ETF新上市+提高最低保证金",
+      "id": "samsung-q2-2026-full",
+      "date": "2026-07-23",
+      "date_label": "7月23日",
+      "title": "三星电子Q2 2026完整财报",
       "stock": "07709",
       "stock_name": "XL二南方海力士",
       "color": "purple",
-      "importance": 5,
-      "impact": "利空",
-      "impact_dir": "down",
+      "importance": 4,
+      "impact": "双向",
+      "impact_dir": "both",
       "status": "upcoming",
-      "type": "政策监管",
-      "description": "韩国金融委员会7/16宣布暂停单一股票杠杆ETF新上市，8月5日起将最低保证金从1000万韩元提至3000万韩元。虽07709为港股产品，但底层追踪韩国股票，监管收紧可能降低杠杆产品整体需求。",
-      "tags": ["海力士", "杠杆ETF", "韩国监管", "政策收紧"]
+      "type": "财报",
+      "description": "三星Q2初报7/7已出(营业利润89.4万亿韩元创纪录但股价跌7%)。7/23完整财报含各部门细节。作为SK海力士Q2(7/29)的前瞻信号,memory利润率趋势将直接预演海力士财报后的市场反应。",
+      "tags": ["三星", "财报", "海力士", "memory"]
     },
     {
-      "id": "haiti-strait-conflict-jul-2026",
-      "date": "2026-07-16",
-      "date_label": "7月14-17日（进行中）",
-      "title": "美伊霍尔木兹海峡冲突升级（第二轮）",
-      "stock": "宏观",
-      "stock_name": "宏观事件",
-      "color": "gray",
-      "importance": 5,
-      "impact": "全持仓利空",
+      "id": "tech-rotation-selloff-jul-2026",
+      "date": "2026-07-17",
+      "date_label": "7月17日起",
+      "title": "全球科技股轮动抛售(芯片领跌)",
+      "stock": "07709",
+      "stock_name": "XL二南方海力士",
+      "color": "purple",
+      "importance": 4,
+      "impact": "利空",
       "impact_dir": "down",
       "status": "ongoing",
-      "type": "地缘冲突",
-      "description": "7/14起美伊在霍尔木兹海峡再生冲突，伊朗威胁停止区域能源出口。布伦特原油涨至$84，连涨4日。美股半导体暴跌（SOX-4%）。这是2026年第二次霍尔木兹危机（首次2月），二次冲击有免疫记忆但三重利空共振（利率+油+半导体）。",
-      "tags": ["伊朗", "霍尔木兹", "石油", "地缘", "全球risk-off"]
+      "type": "市场趋势",
+      "description": "7/17 Morningstar/Barron报道全球芯片卖压加深,投资者从科技股轮动至其他板块。SK海力士ADR股价估值$1,540。与Q2财报窗口叠加,获利了结压力加大。",
+      "tags": ["芯片", "科技股", "轮动", "获利了结"]
     }
   ]
 }

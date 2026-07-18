@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>巴菲特投资体系 — 价值投资的本源与进化</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --accent: #22c55e;
+    --gold: #fbbf24;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: #334155;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    padding: 2rem 1rem;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  h2 { font-size: 1.4rem; color: var(--gold); margin: 2rem 0 1rem; border-left: 4px solid var(--gold); padding-left: 1rem; }
+  h3 { font-size: 1.1rem; color: var(--accent); margin: 1.5rem 0 0.8rem; }
+  p { margin-bottom: 1rem; }
+  .quote {
+    border-left: 3px solid var(--accent);
+    background: var(--card);
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #bbf7d0;
+  }
+  ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+  li { margin-bottom: 0.3rem; }
+  .highlight {
+    background: linear-gradient(135deg, var(--card), #1a3a2a);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+  }
+  .highlight strong { color: var(--gold); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+  }
+  th { background: var(--card); color: var(--gold); font-weight: 600; }
+  tr:nth-child(even) { background: rgba(255,255,255,0.03); }
+  code {
+    background: var(--card);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+  .divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin: 2rem 0;
+  }
+  .skill-badge {
+    display: inline-block;
+    background: #1a3a2a;
+    color: var(--accent);
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-right: 0.3rem;
+  }
+  .key-point {
+    background: var(--card);
+    border-left: 4px solid var(--gold);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+  @media (max-width: 640px) {
+    body { padding: 1rem; }
+    h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🧑‍💼 巴菲特投资体系——价值投资的本源与进化</h1>
+<div class="meta">📅 2026-07-18 · 🏷️ <span class="skill-badge">价值投资</span> <span class="skill-badge">value-school</span> · 学习自 Warren Buffett</div>
+
+<hr class="divider">
+
+<h2>一、生平与地位</h2>
+<p>沃伦·巴菲特（Warren Buffett, 1930— ），伯克希尔·哈撒韦董事长兼CEO，被誉为"奥马哈先知"、"股神"。11岁买入第一支股票，师从本杰明·格雷厄姆，在哥伦比亚大学接受了价值投资的系统训练。1965年接管伯克希尔后，将其从一家濒临倒闭的纺织厂打造成市值近万亿美元的巨型控股集团。</p>
+<p>巴菲特打破了一个神话：不需要内幕消息、不需要高频交易、不需要复杂的数学模型，仅凭常识、耐心和纪律，就能在60年间实现约20%的年化收益率，成为史上最成功的投资者。</p>
+
+<div class="highlight">
+  <strong>巴菲特的进化轨迹：</strong><br>
+  格雷厄姆式"烟蒂投资"（买便宜货）→ 芒格式"以合理价格买好公司"（看品质） → 伯克希尔式"购买整个企业+卓越资本配置"（生态级投资）
+</div>
+
+<h2>二、核心哲学</h2>
+
+<h3>原则1：买股票=买公司</h3>
+<p>这是巴菲特哲学的第一性原理。当你买入一股股票时，你买的不是屏幕上跳动的代码，而是一家真实企业的部分所有权。这个视角转换决定了所有的后续决策：</p>
+<ul>
+  <li>你会关心这家公司如何赚钱、竞争力如何、管理层是否靠谱</li>
+  <li>你不会因短期价格波动而恐慌</li>
+  <li>你只会在对这家企业有足够了解时才出价</li>
+</ul>
+
+<h3>原则2：护城河（Economic Moat）</h3>
+<p>巴菲特认为，护城河是识别优质企业的核心。他从本杰明·格雷厄姆的"买便宜货"进化到"买好生意"，关键就在于认识到——好的护城河比好的管理团队更重要。平庸的管理者在好生意上也能赚钱，而天才管理者在差生意上必然失败。</p>
+
+<table>
+  <tr><th>护城河类型</th><th>定义</th><th>经典案例</th></tr>
+  <tr><td>🏰 品牌溢价</td><td>客户因信任而愿意多付钱</td><td>可口可乐、喜诗糖果</td></tr>
+  <tr><td>🔄 高转换成本</td><td>客户难以更换供应商</td><td>SAP、银行系统</td></tr>
+  <tr><td>🌐 网络效应</td><td>用户越多产品越值钱</td><td>Visa、美国运通</td></tr>
+  <tr><td>💰 成本优势</td><td>结构性低成本碾压对手</td><td>GEICO、Costco</td></tr>
+  <tr><td>📜 专利/监管壁垒</td><td>法律保护免受竞争</td><td>制药、公用事业</td></tr>
+  <tr><td>📈 定价权</td><td>能提价而不失销量</td><td>可口可乐、茅台</td></tr>
+</table>
+
+<div class="quote">
+  "如果你给我1000亿美元，让我打败可口可乐，我做不到。这才是真正的护城河。" —— 巴菲特
+</div>
+
+<h3>原则3：能力圈（Circle of Competence）</h3>
+<p>能力圈不是你知道多少，而是你知道自己不知道什么。巴菲特清晰地知道自己的能力边界，这是他敢于说不的底气——他在90年代整个科技泡沫期间不碰科技股，被嘲笑"过时了"，但当泡沫破裂时，他看起来像个天才。</p>
+<div class="key-point">
+  <strong>能力圈操作守则：</strong><br>
+  ✅ 只投资你能用两句话解释清楚商业模式的公司<br>
+  ✅ 圈的大小不重要，边界清晰才重要<br>
+  ❌ 永远不要因为"别人都在赚钱"而踏出圈外<br>
+  ❌ 不要因为某公司"看起来不错"而降低研究标准
+</div>
+
+<h3>原则4：安全边际（Margin of Safety）</h3>
+<p>由导师格雷厄姆提出，被巴菲特奉为核心原则。安全边际=内在价值-买入价格。这个差值不是让你多赚，而是防止你犯错。每个人都会犯错，安全边际让你的错误可以承受。</p>
+<ul>
+  <li>保守估计：买入价至少低于内在价值20-30%</li>
+  <li>激进派（巴菲特后期）：可接受10-15%，前提是确定性极高</li>
+  <li>核心逻辑：不要追求精确的错误，而要追求模糊的正确</li>
+</ul>
+
+<hr class="divider">
+
+<h2>三、巴菲特的估值体系</h2>
+
+<h3>15倍PE + 7%增长的隐含框架</h3>
+<p>这是巴菲特估值体系中<strong>最具体也最被低估</strong>的部分。伯克希尔投资经理库姆斯披露，巴菲特筛选标的时会问三个问题：</p>
+<ol>
+  <li>未来12个月有多少公司到15倍PE？</li>
+  <li>多少家5年后赚得更多（置信度90%）？</li>
+  <li>多少家达到7%复合增长率（置信度50%）？</li>
+</ol>
+<p>全美同时满足这三条的，通常只有3-5家公司。苹果是其中之一。</p>
+
+<div class="highlight">
+  <strong>15倍PE的逻辑：</strong><br>
+  15倍PE买入 → 首年收益率6.67%<br>
+  + 7%年增长 → 第5年收益率9.35%，第10年13.11%<br>
+  → 10年累计约100%回报（≈年化10%），等价于早期10倍PE的无增长烟蒂投资<br>
+  <strong>结论：</strong>15倍PE+7%增长=巴菲特愿意为"成长"支付的溢价上限
+</div>
+
+<h3>所有者盈余（Owner Earnings）</h3>
+<p>巴菲特认为GAAP净利润无法反映真实盈利能力。他提出"所有者盈余"概念：</p>
+<div class="key-point">
+  <strong>所有者盈余 = 净利润 + 折旧摊销 − 维持性资本支出</strong><br><br>
+  ⚠️ 关键在于区分两种资本支出：<br>
+  · <strong>维持性CAPEX</strong>：维持现有业务所需的必要投入（真正成本）<br>
+  · <strong>增长性CAPEX</strong>：扩张新业务的可选投入（投资，不是成本）
+</div>
+<p>实战意义：重资产行业（航空、钢铁、铁路）的净利润往往被严重高估，因为它们需要大量维持性资本支出才能维持现状。</p>
+
+<h3>确定性优先于增长率</h3>
+<p>这是巴菲特最被忽视但最重要的理念。很多人执着于"找到成长最快的公司"，但巴菲特更关心"我对这家公司的成长有多大把握"。</p>
+<ul>
+  <li>确定性高的7%增长 > 确定性低的15%增长</li>
+  <li>确定性来源于：业务模式简单、护城河深、历史数据可验证、逻辑清晰不可打断</li>
+  <li>"置信度50%"不是随便说说的——伯克希尔内部认为，5年后还能保持增长的标普500公司不到2%</li>
+</ul>
+
+<h2>四、集中投资与资本配置</h2>
+
+<h3>集中投资</h3>
+<div class="quote">
+  "分散投资是对无知的保护。如果你知道自己在做什么，分散就没有意义。" —— 巴菲特
+</div>
+<p>巴菲特的仓位管理：</p>
+<ul>
+  <li>好机会极少（一年可能只有1-2个），应该下重注</li>
+  <li>伯克希尔单只股票最高仓位曾达40%+</li>
+  <li>集中不是赌博——集中发生在深入研究和极高确定性之后</li>
+</ul>
+
+<h3>资本配置矩阵</h3>
+<table>
+  <tr><th>市场状态</th><th>最佳行动</th><th>条件</th></tr>
+  <tr><td>股价 < 内在价值</td><td>回购</td><td>创造每股内在价值</td></tr>
+  <tr><td>有优质收购标的</td><td>再投资</td><td>ROIC > 现有业务</td></tr>
+  <tr><td>无更好机会</td><td>持有现金</td><td>等市场犯错误</td></tr>
+  <tr><td>泡沫期极度高估</td><td>卖出/减持</td><td>疯狂赚取泡沫溢价</td></tr>
+</table>
+
+<div class="quote">
+  "如果你有一个肯定赚8%的机会，另一个看起来很好但只能赚7%，那就不需要浪费5分钟讨论。你的机会成本就是你做出决定的依据。" —— 查理·芒格
+</div>
+
+<h2>五、巴菲特 vs 现有价值派体系的互补关系</h2>
+
+<table>
+  <tr><th>维度</th><th>段永平/冯柳已有</th><th>巴菲特新增</th></tr>
+  <tr><td>买入标准</td><td>好生意+好团队+好价格</td><td>15倍PE上限 + 所有者盈余检查 + 确定性验证</td></tr>
+  <tr><td>护城河</td><td>提了一笔"护城河宽"</td><td>八大类型分类 + 定价权优先 + 1000亿测试</td></tr>
+  <tr><td>估值</td><td>分部估值法</td><td>15倍PE+7%增长框架 + 机会成本比较</td></tr>
+  <tr><td>仓位</td><td>单只不超过20%</td><td>确定性极高时可到30-40%</td></tr>
+  <tr><td>资本配置</td><td>未涉及</td><td>完整的回购/分红/再投资决策矩阵</td></tr>
+  <tr><td>现金流</td><td>未涉及</td><td>所有者盈余（排除重资产陷阱）</td></tr>
+</table>
+
+<h2>六、实战应用：如何用巴菲特框架分析标的</h2>
+
+<div class="highlight">
+  <strong>巴菲特式选股清单：</strong><br><br>
+  ✅ 我能否用两句话讲清这家公司如何赚钱？<br>
+  ✅ 这家公司有没有至少一种护城河（且通过了1000亿测试）？<br>
+  ✅ 近5年平均ROE是否 ≥ 15%？<br>
+  ✅ 所有者盈余是否 ≥ 净利润的80%？（排除大量维持性CAPEX）<br>
+  ✅ 当前PE是否 ≤ 15？（或合理范围内）<br>
+  ✅ 未来5年能否达到复合7%增长？置信度是否≥50%？<br>
+  ✅ 如果这只股票明天停牌3年，我还愿意持有吗？<br>
+  ✅ 我有足够的资金和时间持有至少3年以上吗？<br><br>
+  <strong>如果以上全是YES，就进入了巴菲特射程。</strong>
+</div>
+
+<h2>七、关键警示</h2>
+<ul>
+  <li><strong>巴菲特不是"只买不卖"</strong>——他重仓过的航空股在疫情期间全部清仓，说明逻辑损坏时必须卖出，即使亏钱</li>
+  <li><strong>持仓不透明≠策略不透明</strong>——巴菲特近年购入日本商社（三菱、三井等），说明他也在能力圈内国际化拓展</li>
+  <li><strong>15倍PE不是教条</strong>——2020年后市场利率极低，巴菲特也以更高估值买入苹果。关键是与无风险收益率对比</li>
+  <li><strong>巴菲特不适合所有人</strong>——他的成功极度依赖超长期（10年+）持有，以及对商业本质的深刻理解。短线选手勿模仿</li>
+</ul>
+
+<hr class="divider">
+
+<h2>八、与现有技能体系的整合</h2>
+<p>巴菲特的体系已全部分流吸收到 <span class="skill-badge">value-school</span>（价值投资派skill）中，包括：</p>
+<ul>
+  <li>护城河八大分类表 → 替换原来笼统的"护城河宽"概述</li>
+  <li>所有者盈余公式+实战应用 → 新增在买入规则第三项</li>
+  <li>15倍PE+7%增长框架 → 新增在买入规则第六项</li>
+  <li>确定性优先理念 → 新增在买入规则第五项</li>
+  <li>集中投资仓位指南 → 更新仓位管理章节</li>
+  <li>资本配置矩阵 → 新增为第9条核心哲学</li>
+  <li>机会成本决策原则（芒格） → 补充芒格条目</li>
+</ul>
+
+<div class="quote">
+  "人生就像滚雪球，重要的是找到很湿的雪和很长的坡。" —— 巴菲特
+</div>
+
+<p style="text-align:center;color:var(--muted);font-size:0.85rem;margin-top:3rem;">
+  📖 学习日期：2026-07-18 · 来源：KeepRule / TaylorFamilySoftware / Chian.io / Lockshell<br>
+  已吸收到：<code>value-school</code> · 路线图状态：✅ 已学
+</p>
+
+</div>
+</body>
+</html>

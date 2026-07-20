@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>查理·芒格工具箱：如何像世界上最聪明的投资者一样思考</title>
+<style>
+  :root {
+    --bg: #0f0f14;
+    --card: #1a1a24;
+    --border: #2a2a3a;
+    --accent: #c8a84e;
+    --accent2: #6ba3d6;
+    --text: #e0e0e8;
+    --text-muted: #8888a0;
+    --green: #5fba7a;
+    --red: #d45a5a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px 100px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+  .header .date {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 12px;
+  }
+  .tag {
+    display: inline-block;
+    background: rgba(200,168,78,0.12);
+    color: var(--accent);
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin: 4px;
+  }
+  h2 {
+    font-size: 1.4rem;
+    margin: 36px 0 16px;
+    color: var(--accent2);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1.15rem;
+    margin: 28px 0 12px;
+    color: var(--accent);
+  }
+  h4 {
+    font-size: 1rem;
+    margin: 20px 0 8px;
+    color: var(--text);
+  }
+  p { margin: 12px 0; }
+  .quote {
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin: 20px 0;
+    background: rgba(200,168,78,0.06);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #ccc;
+  }
+  .quote .source {
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  th {
+    background: rgba(200,168,78,0.1);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  code {
+    background: rgba(255,255,255,0.06);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--accent2);
+  }
+  pre {
+    background: rgba(0,0,0,0.3);
+    padding: 16px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 16px 0;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+  .checklist li {
+    padding: 6px 0;
+    padding-left: 28px;
+    position: relative;
+  }
+  .checklist li::before {
+    content: "□";
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+  }
+  .highlight-box {
+    background: rgba(107,163,214,0.08);
+    border: 1px solid rgba(107,163,214,0.3);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .highlight-box .label {
+    color: var(--accent2);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .summary-box {
+    background: linear-gradient(135deg, rgba(200,168,78,0.08), rgba(200,168,78,0.02));
+    border: 1px solid rgba(200,168,78,0.25);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 32px 0;
+  }
+  .summary-box h3 {
+    margin-top: 0;
+  }
+  .footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    body { padding: 24px 16px 60px; }
+    .header h1 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <span class="tag">#价值投资</span>
+    <span class="tag">#思维模型</span>
+    <span class="tag">#逆向思维</span>
+    <span class="tag">#行为金融</span>
+  </div>
+  <h1>查理·芒格工具箱</h1>
+  <div class="subtitle">如何像世界上最聪明的投资者一样思考</div>
+  <div class="date">学习日期：2026-07-20 | 系列：「投资大师每日学」</div>
+</div>
+
+<div class="summary-box">
+  <h3>📋 一句话总结</h3>
+  <p style="font-size:1.1rem; margin:8px 0;"><strong>理性 + 耐心 + 纪律 = 复利。</strong></p>
+  <p>芒格对价值投资最大的贡献不是"买什么"，而是"怎么想"。本文系统介绍他改变投资认知的五种核心思维工具——逆向思维、Lollapalooza效应、能力圈深化、坐等投资法和检查清单。每个工具都配有可直接执行的实战规则，不需要哲学博士也能用。</p>
+</div>
+
+<h2>一、为什么今天学芒格？</h2>
+
+<p>在中国投资圈，芒格的<strong>多元思维模型</strong>和<strong>逆向思维</strong>被很多人挂在嘴边，但真正用起来的人少之又少。为什么？因为大部分人的"学习"停留在知道概念，没有转化为可执行的决策规则。</p>
+
+<p>本文的目标是：<strong>把芒格的每一种思维工具，变成你在交易前可以进行的操作。</strong> 每次学完，你（和你的交易系统）都会比5分钟前多一点理性。</p>
+
+<p>芒格对已有交易体系的增量价值：</p>
+
+<table>
+  <tr><th>现有 Skill</th><th>芒格带来的新内容</th></tr>
+  <tr><td>value-school（价值派）</td><td>逆向思维、Lollapalooza效应、能力圈深化、坐等投资法、检查清单、机会成本强化</td></tr>
+  <tr><td>investor-psychology-check（心理自查）</td><td>人类误判心理学25种倾向 → 交易前30秒自查</td></tr>
+  <tr><td>seven-no-buy-three-no-sell</td><td>芒格式检查清单补充 → 更系统化的行为纪律</td></tr>
+</table>
+
+<h2>二、芒格工具箱：五种思维工具</h2>
+
+<h3>① 逆向思维（Inversion）—「反过来想，总是反过来想」</h3>
+
+<p>这是芒格最标志性的思维习惯。大多数投资者想的是<strong>"怎么赚钱"</strong>，芒格想的是<strong>"怎么才能不亏钱"</strong>。</p>
+
+<div class="quote">
+  反过来想，总是反过来想。<br>
+  <span class="source">— 查理·芒格</span>
+</div>
+
+<table>
+  <tr><th>投资场景</th><th>正向想（平庸）</th><th>逆向想（芒格式）</th></tr>
+  <tr><td>选股</td><td>如何找到10倍股？</td><td><strong>如何确保不亏钱？</strong> 活得久比赚得快重要100倍</td></tr>
+  <tr><td>研究公司</td><td>它的增长点在哪？</td><td><strong>它可能怎么死？</strong> 护城河是怎样被攻破的？</td></tr>
+  <tr><td>价格判断</td><td>它能涨到多少？</td><td><strong>哪些因素会让它腰斩？</strong></td></tr>
+  <tr><td>组合管理</td><td>怎么配置收益最高？</td><td><strong>怎么配置才能睡得好？</strong></td></tr>
+</table>
+
+<div class="card">
+  <div class="card-title">🛠️ 实战规则</div>
+  <p><strong>每次买入前，做一次"逆向推演"：</strong></p>
+  <ol style="padding-left:20px; margin:8px 0;">
+    <li>列出这只股票可能腰斩的<strong>所有原因</strong>（行业、公司、政策、竞争、管理层）</li>
+    <li>评估每个原因的发生<strong>概率</strong>（10%、30%、50%？）</li>
+    <li>如果概率最大的几个原因同时发生，你最坏会亏多少？</li>
+    <li><strong>你能接受这个最坏结果吗？</strong> 能 → 可以买。不能 → 放弃。</li>
+  </ol>
+</div>
+
+<h3>② Lollapalooza效应 — 多因素叠加的非线性放大</h3>
+
+<p>芒格自造的词，指<strong>多种心理倾向同时作用，产生超预期的极端效果</strong>。这是理解市场极端情绪（泡沫和恐慌）的核心框架。</p>
+
+<div class="highlight-box">
+  <div class="label">📐 公式</div>
+  单因素 A → 效果 10<br>
+  单因素 B → 效果 10<br>
+  A + B + C → <strong>效果 100</strong>（非线性放大）
+</div>
+
+<table>
+  <tr><th>市场阶段</th><th>叠加因素</th><th>结果</th></tr>
+  <tr><td>📈 泡沫顶部</td><td>社会认同+权威偏见+奖励超级反应+厌恶后悔</td><td>非理性追涨，价格远超价值</td></tr>
+  <tr><td>📉 恐慌底部</td><td>损失厌恶+社会认同+可得性偏差+被剥夺超级反应</td><td>非理性杀跌，价格远低于价值</td></tr>
+  <tr><td>🔄 趋势强化</td><td>从众+确认偏误+彩票心态</td><td>自我强化，极端化</td></tr>
+</table>
+
+<div class="card">
+  <div class="card-title">🛠️ 实战规则</div>
+  <p><strong>当市场出现极端情绪时，问自己：</strong></p>
+  <p>"现在是不是有多重因素在叠加放大？"</p>
+  <p>如果是 → <strong>价格已经脱离基本面</strong>。反向操作（或至少不参与）的机会可能来了。</p>
+</div>
+
+<h3>③ 能力圈深化 — 芒格版 vs 段永平版</h3>
+
+<p>段永平说"不做不懂的东西"。芒格更进一步：<strong>不仅要懂，还要知道自己的懂有多深，以及不懂的有哪些。</strong></p>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">段永平版（被动筛选）</div>
+    <ul style="padding-left:16px;">
+      <li>不懂 → 不买</li>
+      <li>能理解 → 可以看</li>
+      <li>"不做什么"清单</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">芒格版（主动界定）</div>
+    <ul style="padding-left:16px;">
+      <li>画清楚能力圈的<strong>边界</strong></li>
+      <li>知道自己不知道什么</li>
+      <li>只在自己的圈内活动</li>
+    </ul>
+  </div>
+</div>
+
+<div class="quote">
+  如果你不知道自己的才能边界在哪里，那它就不算能力圈。<br>
+  <span class="source">— 查理·芒格</span>
+</div>
+
+<pre>
+能力圈三层检查（芒格版）：
+
+第一层：我真的懂这家公司吗？
+  → 能说清未来10年怎么赚钱吗？
+  → 能说清最大的三个风险吗？
+
+第二层：我知道自己不知道什么吗？
+  → 这个行业哪些方面我完全不懂？
+  → 哪些因素可能出乎我意料？
+
+第三层：我的判断可靠吗？
+  → 我过去在这个领域的判断准确率？
+  → 我是研究透了，还是"先入为主"？
+</pre>
+
+<h3>④ 坐等投资法（Sit-on-Your-Ass Investing）</h3>
+
+<p>芒格认为大部分投资者的错误来自一个根本问题：<strong>把行动等同于进步。</strong></p>
+
+<table>
+  <tr><th>维度</th><th>普通投资者</th><th>芒格式投资者</th></tr>
+  <tr><td>交易频率</td><td>每周甚至每天交易</td><td>一年可能1-2次操作</td></tr>
+  <tr><td>等待态度</td><td>焦虑，怕错过</td><td>耐心，等最佳击球区</td></tr>
+  <tr><td>对新闻的反应</td><td>每有消息就行动</td><td>99%的新闻与长期价值无关</td></tr>
+  <tr><td>持仓心态</td><td>总想优化、调仓</td><td>买对了就让它自己跑</td></tr>
+</table>
+
+<div class="quote">
+  把投资想象成棒球击球手泰德·威廉姆斯。他只打进入"最佳击球区"的球。如果球不在最佳位置，他宁愿被三击不中也绝不出手。<br>
+  <span class="source">— 查理·芒格</span>
+</div>
+
+<div class="highlight-box">
+  <div class="label">🛠️ 击球区六条件</div>
+  <ol style="padding-left:20px; margin:4px 0;">
+    <li style="margin:4px 0;">✅ 好生意（商业模式清晰，护城河宽）</li>
+    <li style="margin:4px 0;">✅ 好价格（20%+安全边际）</li>
+    <li style="margin:4px 0;">✅ 好团队（管理层靠谱诚信）</li>
+    <li style="margin:4px 0;">✅ 自己能看懂（能力圈内）</li>
+    <li style="margin:4px 0;">✅ 确定性高（置信度≥50%）</li>
+    <li style="margin:4px 0;">✅ 逆向验证通过（知道风险且能接受）</li>
+  </ol>
+  <p style="margin-top:8px;"><strong>缺一个 → 这一球不打 → 继续等。</strong></p>
+</div>
+
+<h3>⑤ 投资检查清单</h3>
+
+<p>芒格受飞行员行业启发：飞行员起飞前有固定检查清单，为什么投资没有？</p>
+
+<pre>
+买入前 8 项：
+
+□ 价格是否合理？（估值层面）
+□ 管理层是否值得信任？（品格层面）
+□ 竞争优势能否持续5-10年？（护城河层面）
+□ 是否有冗余的安全边际？（安全层面）
+□ 我看得懂这个生意吗？（认知层面）
+□ 最大的风险是什么？我能否承受？（逆向层面）
+□ 这个决定是否受某种心理倾向影响？（人性层面）
+□ 如果持有10年，我会开心吗？（时间层面）
+
+持续检查（每季度）：
+
+□ 当初买入的逻辑还在吗？
+□ 护城河是变宽了还是变窄了？
+□ 管理层有没有变得自大/腐败/不专注？
+□ 我是不是对负面消息选择性忽视了？
+□ 如果现在没持有，我会买入吗？
+</pre>
+
+<h2>三、人类误判心理学：交易中最致命的10种倾向</h2>
+
+<p>芒格花了25年归纳出25种导致人类做出错误判断的心理倾向。以下是在<strong>日常交易中最危险的10种</strong>，每一项都有一个🚦自查问题，30秒即可完成。</p>
+
+<table>
+  <tr><th>#</th><th>心理倾向</th><th>交易中的表现</th><th>🚦 30秒自查</th></tr>
+  <tr><td>1</td><td><strong>奖惩超级反应</strong></td><td>亏损仓位不卖，因为"卖=认错"</td><td>我是不是怕"认错"才不卖？</td></tr>
+  <tr><td>2</td><td><strong>社会认同</strong></td><td>别人买我也买，别人卖我也卖</td><td>这是独立思考还是跟风？</td></tr>
+  <tr><td>3</td><td><strong>确认偏误</strong></td><td>持有时只找利好，想卖时只找利空</td><td>我主动搜过反对意见吗？</td></tr>
+  <tr><td>4</td><td><strong>可得性偏差</strong></td><td>最近暴涨就觉得还会涨</td><td>依据是近期事件还是长期数据？</td></tr>
+  <tr><td>5</td><td><strong>损失厌恶</strong></td><td>死扛亏损，赚一点就跑</td><td>空仓的话，我现在会买入吗？</td></tr>
+  <tr><td>6</td><td><strong>被剥夺超级反应</strong></td><td>"终于回本了"急于卖出</td><td>卖是因为回本，不是基本面问题？</td></tr>
+  <tr><td>7</td><td><strong>锚定效应</strong></td><td>从100跌到50就觉得便宜</td><td>我的参考锚点合理吗？</td></tr>
+  <tr><td>8</td><td><strong>过度自信</strong></td><td>连续正确后加大仓位</td><td>如果50%概率错，仓位还合理吗？</td></tr>
+  <tr><td>9</td><td><strong>逃避不确定性</strong></td><td>没看懂也强行交易</td><td>交易是因为"确定"还是"焦虑"？</td></tr>
+  <tr><td>10</td><td><strong>嫉妒/羡慕</strong></td><td>看别人赚了追自己不熟的</td><td>研究透了还是看别人赚钱了？</td></tr>
+</table>
+
+<div class="card">
+  <div class="card-title">🛠️ 30秒交易前扫描</div>
+  <p>每次开仓前快速过一遍：</p>
+  <ul class="checklist">
+    <li>我是不是因为怕踏空（社会认同）才想买？</li>
+    <li>我是不是只找了利好信息（确认偏误）？</li>
+    <li>我是不是因为"回本了"（被剥夺超级反应）才卖？</li>
+    <li>我是不是参考了不合理的价格锚点（锚定效应）？</li>
+  </ul>
+  <p style="margin-top:8px;"><strong>2个以上答"是" → 🚦 暂停交易，明天再说。</strong></p>
+</div>
+
+<h2>四、芒格 vs 已有体系：对比与整合</h2>
+
+<table>
+  <tr><th>芒格概念</th><th>已有skill已有</th><th>新增</th></tr>
+  <tr><td>逆向思维</td><td>❌ 没有独立章节</td><td>✅ 完整方法论+实战规则（挂失法）</td></tr>
+  <tr><td>多元思维模型</td><td>❌ 仅提及概念</td><td>✅ Lollapalooza效应的实战应用</td></tr>
+  <tr><td>能力圈</td><td>⚠️ 段永平版"不做不懂"</td><td>✅ 三层检查框架，主动界定</td></tr>
+  <tr><td>坐等投资法</td><td>❌ 没有</td><td>✅ 击球区六条件</td></tr>
+  <tr><td>检查清单</td><td>⚠️ 七不买三不卖（技术）</td><td>✅ 芒格版8项综合检查+季度复查</td></tr>
+  <tr><td>人类误判心理学</td><td>❌ 没有系统框架</td><td>✅ 10种致命倾向+30秒自查</td></tr>
+  <tr><td>机会成本</td><td>⚠️ 已有§9引用</td><td>✅ "可拒绝标准"强化</td></tr>
+</table>
+
+<h2>五、如果只能记住3件事</h2>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title" style="color:var(--red);">1. 逆向思维</div>
+    <p>知道在哪里会死，就永远不去那里。每次买入前，先想清楚这家公司<strong>可能怎么死</strong>。</p>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--accent2);">2. Lollapalooza效应</div>
+    <p>当多重心理倾向同时作用时，结果是<strong>非线性</strong>的。市场极端情绪=最好的反向指标。</p>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--green);">3. 耐心 + 纪律 = 复利</div>
+    <p>80%时间阅读和思考，20%时间行动。等最佳击球区，用检查清单确保不犯错。</p>
+  </div>
+</div>
+
+<h2>六、吸收到交易系统的改动</h2>
+
+<div class="card">
+  <div class="card-title">🟢 value-school — 新增"芒格工具箱"章节（§11）</div>
+  <p>包含：逆向思维（挂失法/案例）、Lollapalooza效应（定义/实战用法）、能力圈深化（三层检查）、坐等投资法（击球区六条件）、检查清单（8项+季度复查）、机会成本强化。引用信息已更新。</p>
+</div>
+
+<div class="card">
+  <div class="card-title">🟢 investor-psychology-check — 新增"人类误判心理学"章节</div>
+  <p>25种心理倾向筛选出最致命的10种，附带30秒交易前自查表和Lollapalooza效应说明。作为认知陷阱章节的自然延伸。</p>
+</div>
+
+<div class="card">
+  <div class="card-title">🟢 seven-no-buy-three-no-sell — 芒格式纪律补充</div>
+  <p>段永平不为清单+芒格检查清单=双重行为纪律护城河，与七不买技术形态形成互补。</p>
+</div>
+
+<hr style="border-color: var(--border); margin: 40px 0;">
+
+<h2>附：芒格生平快览</h2>
+
+<table>
+  <tr><td>全名</td><td>Charlie Thomas Munger</td></tr>
+  <tr><td>生卒</td><td>1924年1月1日 — 2023年11月28日（享年99岁）</td></tr>
+  <tr><td>身份</td><td>伯克希尔·哈撒韦副董事长，巴菲特的黄金搭档</td></tr>
+  <tr><td>最知名著作</td><td>《穷查理宝典》（Poor Charlie's Almanack）</td></tr>
+  <tr><td>核心标签</td><td>多元思维模型、逆向思维、人类误判心理学、检查清单、Lollapalooza效应、能力圈</td></tr>
+  <tr><td>标志性投资</td><td>比亚迪（2008年买入，15年+持有期，数十倍回报）</td></tr>
+  <tr><td>一句话描述</td><td>"世界上最聪明的投资者"——巴菲特称芒格让他从猿进化到人</td></tr>
+</table>
+
+<div class="highlight-box">
+  <div class="label">📖 推荐阅读</div>
+  <ul style="padding-left:16px; margin:8px 0;">
+    <li>《穷查理宝典》— 芒格思想全集，必读</li>
+    <li>《Seeking Wisdom: From Darwin to Munger》— 系统化理解芒格的思维模型</li>
+    <li>芒格1994年USC商学院演讲《基础的世俗智慧》</li>
+    <li>芒格2007年南加州大学法学院毕业演讲</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>📚 系列：投资大师每日学 | 第10位大师</p>
+  <p>学习日期：2026-07-20 | 吸收到：value-school / investor-psychology-check / seven-no-buy-three-no-sell</p>
+  <p>© 个人投资学习笔记，不构成投资建议</p>
+</div>
+
+</body>
+</html>

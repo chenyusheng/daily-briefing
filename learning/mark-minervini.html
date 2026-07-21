@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>马克·米勒维尼：SEPA策略与VCP波动率收缩交易体系 | 投资大师学习</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-secondary: #8b949e;
+    --red: #f85149;
+    --green: #3fb950;
+    --blue: #58a6ff;
+    --orange: #d29922;
+    --gold: #ffd700;
+    --purple: #bc8cff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 20px;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+  .header {
+    text-align: center;
+    padding: 40px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+  }
+  .header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .header .subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+  .header .tags {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: rgba(88, 166, 255, 0.1);
+    color: var(--blue);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+  }
+  .tag.trend { background: rgba(188, 140, 255, 0.1); color: var(--purple); border-color: rgba(188, 140, 255, 0.2); }
+  .tag.quant { background: rgba(63, 185, 80, 0.1); color: var(--green); border-color: rgba(63, 185, 80, 0.2); }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .section h2 {
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section h3 {
+    font-size: 16px;
+    color: var(--blue);
+    margin: 20px 0 12px;
+  }
+  .section h4 {
+    font-size: 14px;
+    color: var(--orange);
+    margin: 16px 0 8px;
+  }
+  .section p { margin-bottom: 12px; color: var(--text); }
+  .section ul, .section ol { margin: 8px 0 16px 20px; color: var(--text); }
+  .section li { margin-bottom: 6px; }
+  .quote {
+    border-left: 3px solid var(--orange);
+    padding: 12px 16px;
+    margin: 16px 0;
+    background: rgba(210, 153, 34, 0.05);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  .quote p { margin-bottom: 4px; }
+  .highlight-box {
+    background: rgba(88, 166, 255, 0.05);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+  }
+  .highlight-box.yellow { border-color: rgba(210, 153, 34, 0.3); background: rgba(210, 153, 34, 0.05); }
+  .highlight-box.green { border-color: rgba(63, 185, 80, 0.3); background: rgba(63, 185, 80, 0.05); }
+  .highlight-box h4 { margin: 0 0 8px; color: var(--blue); }
+  .highlight-box.yellow h4 { color: var(--orange); }
+  .highlight-box.green h4 { color: var(--green); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  th {
+    background: rgba(88, 166, 255, 0.08);
+    color: var(--blue);
+    font-weight: 600;
+  }
+  td { color: var(--text); }
+  .summary-bar {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 24px;
+    text-align: center;
+    min-width: 120px;
+  }
+  .stat-card .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+  }
+  code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    background: rgba(48, 54, 61, 0.5);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  @media (max-width: 600px) {
+    .header h1 { font-size: 22px; }
+    .section { padding: 16px; }
+    .summary-bar { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>📊 马克·米勒维尼</h1>
+  <div class="subtitle">SEPA策略与VCP波动率收缩交易体系</div>
+  <div class="tags">
+    <span class="tag trend">📈 趋势/动量派</span>
+    <span class="tag quant">🔢 量化选股</span>
+    <span class="tag">🔄 SEPA</span>
+    <span class="tag">📉 VCP</span>
+  </div>
+  <div class="summary-bar">
+    <div class="stat-card">
+      <div class="num">220%</div>
+      <div class="label">年均回报<br>(5年)</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">2x</div>
+      <div class="label">全美投资<br>大赛冠军</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">2.8x</div>
+      <div class="label">标普500<br>超额收益</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">📖</div>
+      <div class="label">《股票魔法师》<br>畅销全球</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🧑‍🏫 人物速览</h2>
+  <p><strong>马克·米勒维尼（Mark Minervini）</strong>—— 美国传奇成长股交易大师、两届全美投资大赛冠军（1997-2000+2届）。在五年投资比赛中，年均回报高达220%（扣除所有费用后），而同期标普500年均涨幅仅14%，超额收益达2.8倍。</p>
+  <p>他的著作《股票魔法师》（<em>Trade Like a Stock Market Wizard</em> / <em>Think and Trade Like a Champion</em>）被公认为趋势交易者的必读经典。与利弗莫尔的直觉性趋势交易不同，米勒维尼将趋势交易<strong>系统化、量化、可复制</strong>——创造了一套从选股到出场都有精确标准的完整工程体系。</p>
+  <p>他是利弗莫尔的学生（自称），欧奈尔CAN SLIM的继承者（曾师从David Ryan学RS排名），但最终走出了自己的路：<strong>SEPA + VCP</strong>。</p>
+</div>
+
+<div class="section">
+  <h2>🏗️ SEPA策略五层架构</h2>
+  <p>SEPA = <strong>S</strong>pecific <strong>E</strong>ntry <strong>P</strong>oint <strong>A</strong>nalysis（特定进场点分析），是米勒维尼的完整交易方法论。它由五层架构组成，每一层都像筛子——只有全部通过才能进入下一层：</p>
+
+  <h3>第一层：趋势确认（Trend）—— 8条件趋势模板</h3>
+  <p>这是SEPA的入口屏障。一只股票必须在月线/周线上是一个明确的上升趋势股，才值得分析。米勒维尼的8条件趋势模板是目前最精确的趋势量化标准：</p>
+  <ul>
+    <li><strong>条件1-2</strong>：股价 > 50日均线 > 150日均线 > 200日均线，且所有均线同步上升</li>
+    <li><strong>条件3</strong>：当前股价至少高于50日均线30%——趋势必须足够强势</li>
+    <li><strong>条件4</strong>：当前股价比52周最低点高至少25%——已从底部走出</li>
+    <li><strong>条件5</strong>：当前股价处于52周高点的25%以内——正在接近新高</li>
+    <li><strong>条件6</strong>：相对强弱线（RS Line）上升，RS评分≥70——相对于整个市场在走强</li>
+    <li><strong>条件7</strong>：流通市值在行业前20%或机构增持——有大资金关注</li>
+    <li><strong>条件8</strong>：行业板块排名前40%——整体板块共识</li>
+  </ul>
+  <div class="highlight-box green">
+    <h4>💡 与趋势分歧交易法的差异</h4>
+    <p>趋势分歧交易法现有技术面过滤只要求"股价在20日均线之上"，米勒维尼的8条件模板更严格、更精确。建议在A股中大盘（非ST）股中优先使用此模板，小盘股可适当放宽。</p>
+  </div>
+
+  <h3>第二层：基本面确认（Fundamentals）—— 业绩加速增长</h3>
+  <p>这是米勒维尼<strong>区别于纯技术派趋势交易者</strong>的关键特征——他只买业绩加速增长的公司：</p>
+  <ul>
+    <li>✅ 当季EPS同比增长 > <strong>25%</strong></li>
+    <li>✅ <strong>业绩加速</strong>：最近2个季度EPS增速 > 之前2个季度EPS增速</li>
+    <li>✅ 营收增长率 > <strong>25%</strong>（营收增长比利润增长更可靠）</li>
+    <li>✅ 近3年每年EPS均为正增长</li>
+    <li>✅ 净利润率 > 行业中位数</li>
+    <li>✅ ROE > <strong>17%</strong></li>
+  </ul>
+  <div class="highlight-box">
+    <h4>💡 A股适用提示</h4>
+    <p>A股中关注"扣非净利润增速 > 25%"更实用（避免一次性收益干扰），科创/创业板可直接使用此框架。营收增速比EPS增速在A股可能更可靠（A股有非经常性损益）。</p>
+  </div>
+
+  <h3>第三层：催化剂（Catalyst）</h3>
+  <p>好公司还要有好故事。米勒维尼只买有明显催化剂的股票：</p>
+  <ul>
+    <li>新产品/新服务/新专利</li>
+    <li>管理层换血或重大战略转型</li>
+    <li>行业政策利好（风电、半导体、AI等）</li>
+    <li>业绩超预期（Beat & Raise）</li>
+    <li>机构大幅增持（聪明钱先动手）</li>
+  </ul>
+
+  <h3>第四层：精确入场时机（Entry Timing）—— VCP波动率收缩形态</h3>
+  <p>这是米勒维尼<strong>最著名的技术贡献</strong>。VCP（Volatility Contraction Pattern）是他独创的入场形态：</p>
+
+  <div class="highlight-box yellow">
+    <h4>⚡ VCP核心思想：线的最小阻力</h4>
+    <p>当一只股票的价格波动越来越小、成交量越来越低，说明短线投机者已被清洗，筹码从弱势手转移到强势手手中。此时价格处于"最小阻力线"——只要一点点买盘就能突破——这就是最佳的精确入场点。</p>
+  </div>
+
+  <p><strong>VCP三要素：</strong></p>
+  <ol>
+    <li><strong>价格波动递减</strong>：每次回调幅度都比上一次小（如 18% → 12% → 6% → 3%），至少3次收缩</li>
+    <li><strong>成交量递减</strong>：每次回调的成交量逐步缩小，说明卖压枯竭</li>
+    <li><strong>突破放量</strong>：收缩到极致后，以放量阳线突破收缩区上沿</li>
+  </ol>
+
+  <p><strong>VCP的数学参数：</strong></p>
+  <ul>
+    <li>T值：收缩次数。3T=3次收缩，4T=4次收缩。T值越高，蓄势越充分</li>
+    <li>总收缩幅度：一般25%-35%，大盘股可低至15-20%，小盘股可达35-50%</li>
+    <li>右手边（右侧）收缩幅度应明显小于左侧——形态的收敛性确认</li>
+    <li>止损位设在收缩区最低点下方</li>
+  </ul>
+
+  <p><strong>VCP vs 传统箱体突破（趋势分歧Setup A）的区别：</strong></p>
+  <table>
+    <tr><th>维度</th><th>传统箱体突破</th><th>VCP收缩突破</th></tr>
+    <tr><td>关注点</td><td>水平箱体（价格区间）</td><td>收敛三角形（递减波动）</td></tr>
+    <tr><td>入场方式</td><td>突破箱体→回踩→再向上</td><td>在收缩末端直接突破</td></tr>
+    <tr><td>成交量</td><td>关注突破时的量</td><td>全程监控量价关系</td></tr>
+    <tr><td>验证方式</td><td>回踩确认</td><td>收缩幅度递减验证</td></tr>
+  </table>
+
+  <h3>第五层：风险管理（Risk Management）</h3>
+  <p><strong>每笔交易硬限制：</strong></p>
+  <ul>
+    <li>单笔最大亏损 ≤ 总资金的 <strong>1%-2%</strong>（机械执行，没有任何例外）</li>
+    <li>单只股票最大仓位：<strong>25%-30%</strong>（高度确信也不超限）</li>
+  </ul>
+  <p><strong>止损升级路径：</strong></p>
+  <ul>
+    <li>初始止损：VCP收缩区最低点下方</li>
+    <li>股价快速上涨后 → 止损上移至盈亏平衡点（不亏本）</li>
+    <li>股价上涨20%后 → 使用10周均线（50日均线）作为跟踪止损</li>
+  </ul>
+  <p><strong>财报季处理（米勒维尼独特贡献）：</strong></p>
+  <ul>
+    <li>财报公布前——仓位减半或退出（不确定性最大化）</li>
+    <li>财报后如果突破新高——重新进场</li>
+    <li>财报后如果暴跌——绝不可逆势补仓</li>
+  </ul>
+  <p><strong>分批止盈：</strong></p>
+  <ul>
+    <li>第一目标：利润达20%-25%时 <strong>卖出半仓</strong></li>
+    <li>剩余半仓：使用50日均线追踪</li>
+  </ul>
+  <div class="highlight-box">
+    <h4>🔄 两种止盈模式对比</h4>
+    <p><strong>现有趋势分歧</strong>：8-10%卖1/3，15-20%卖1/3，剩余跟踪<br>
+    <strong>米勒维尼</strong>：20-25%卖半仓，剩余跟踪<br>
+    一个稳健（更快锁定），一个激进（利润空间更大）。两种模式都可选用。</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🔢 MMM量化选股评分体系（新增模块）</h2>
+  <p>米勒维尼体系的一大优势是<strong>可量化、可编程</strong>。下面是从他的著作和社区实践中总结的10因子打分框架，可直接在A股应用：</p>
+
+  <table>
+    <tr><th>#</th><th>条件</th><th>原版参数</th><th>A股调整</th></tr>
+    <tr><td>1</td><td>EPS同比增速 > 25%</td><td>最近季度</td><td>扣非净利润增速 > 25%</td></tr>
+    <tr><td>2</td><td>营收增速 > 25%</td><td>最近季度</td><td>营收增速 > 20%</td></tr>
+    <tr><td>3</td><td>EPS加速</td><td>最近2季 > 前2季</td><td>同左</td></tr>
+    <tr><td>4</td><td>相对强度RS > 80</td><td>12个月排名</td><td>52周涨幅排名（同花顺）</td></tr>
+    <tr><td>5</td><td>股价 > 50日均线</td><td>价格确认</td><td>同左</td></tr>
+    <tr><td>6</td><td>50日均线 > 150日均线</td><td>均线多头</td><td>同左</td></tr>
+    <tr><td>7</td><td>行业板块排名前40%</td><td>全市场</td><td>申万一级/二级行业</td></tr>
+    <tr><td>8</td><td>机构持仓 > 30%</td><td>基金/机构持股</td><td>基金重仓</td></tr>
+    <tr><td>9</td><td>净利润率 > 行业中位数</td><td>盈利质量</td><td>同左</td></tr>
+    <tr><td>10</td><td>ROE > 17%</td><td>资本回报</td><td>ROE > 15%</td></tr>
+  </table>
+
+  <div class="highlight-box green">
+    <h4>📋 应用方式</h4>
+    <p>在趋势分歧交易法的候选池筛选阶段，先对候选股按此表打分：</p>
+    <ul>
+      <li>✅ <strong>7/10 以上</strong> → A+候选，强烈关注</li>
+      <li>✅ <strong>5-7/10</strong> → B级候选，可观察</li>
+      <li>❌ <strong>&lt;5/10</strong> → 排除，不进入后续技术分析</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🇨🇳 A股实战调整指南</h2>
+  <p>米勒维尼体系源于美股，在A股使用必须适配：</p>
+  <table>
+    <tr><th>原版</th><th>A股适配</th></tr>
+    <tr><td>8条件趋势模板</td><td>✅ 中小盘趋势确认有效</td></tr>
+    <tr><td>EPS增长25%</td><td>⚠️ 可放宽至15-20%（A股成长股标准不同）</td></tr>
+    <tr><td>RS评分80</td><td>⚡ 改用同花顺/通达信52周涨幅排名</td></tr>
+    <tr><td>机构持仓>30%</td><td>✅ 基金重仓股可参考</td></tr>
+    <tr><td>VCP收缩25-35%</td><td>⚠️ A股波动更大，总收缩30-50%可接受</td></tr>
+    <tr><td>止损20-25%</td><td>⚠️ 短线A股建议8-15%（跌停限制，更紧）</td></tr>
+    <tr><td>半仓止盈法</td><td>✅ 直接可用</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>🔄 与利弗莫尔体系整合（完整趋势武器库）</h2>
+  <p>米勒维尼和利弗莫尔同属趋势流派，整合后可形成从筛选到出场的完整工作流：</p>
+  <table>
+    <tr><th>步骤</th><th>工具</th><th>来源</th></tr>
+    <tr><td>1. 初筛候选池</td><td>MMM 10因子打分</td><td>米勒维尼</td></tr>
+    <tr><td>2. 确认趋势有效</td><td>8条件趋势模板</td><td>米勒维尼</td></tr>
+    <tr><td>3. 确认入场形态</td><td>VCP波动收缩</td><td>米勒维尼</td></tr>
+    <tr><td>4. 确认关键点</td><td>关键点 + 3点验证</td><td>利弗莫尔</td></tr>
+    <tr><td>5. 试仓建仓</td><td>20%初始仓位</td><td>利弗莫尔</td></tr>
+    <tr><td>6. 确认后加仓</td><td>金字塔递减模型</td><td>利弗莫尔</td></tr>
+    <tr><td>7. 每笔风险控制</td><td>1-2%组合止损</td><td>米勒维尼</td></tr>
+    <tr><td>8. 达到20-25%利润</td><td>半仓止盈 + 追踪止损</td><td>米勒维尼</td></tr>
+    <tr><td>9. 财报季管理</td><td>减半或不持仓过财报</td><td>米勒维尼</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>🎯 十大核心纪律</h2>
+  <ol>
+    <li><strong>不要爱上股票</strong> — 没有一只股票值得你在亏损中死守</li>
+    <li><strong>不要提前预判</strong> — 等待VCP收缩到极致、放量突破后再行动</li>
+    <li><strong>不要试图抄底</strong> — VCP突破之前，下跌不是机会，是危险</li>
+    <li><strong>不要让亏损变成大窟窿</strong> — 1-2%硬止损，没有例外</li>
+    <li><strong>不要被次要信号分散注意力</strong> — 不符合趋势模板的股票，基本面再好也不买</li>
+    <li><strong>不要在财报季前重仓</strong> — 不确定性是最好的对手</li>
+    <li><strong>不要追逐已经大涨50%+的股票</strong> — 你错过的是错过，强行上车可能接盘</li>
+    <li><strong>不要忽视市场整体环境</strong> — 个股再好，熊市里也大多下跌</li>
+    <li><strong>不要羡慕别人的涨停</strong> — 做自己模式内的交易，不嫉妒不属于你的利润</li>
+    <li><strong>不要停止学习</strong> — 每天复盘，每周总结，每月迭代</li>
+  </ol>
+</div>
+
+<div class="section">
+  <h2>💬 经典语录</h2>
+  <div class="quote">
+    <p>"当你买入一只股票后，如果它下跌了，说明你的买点或选股有问题。不要和市场争辩。"</p>
+  </div>
+  <div class="quote">
+    <p>"不是每个VCP都能成功突破，但每次大行情启动前一定会出现VCP形态。"</p>
+  </div>
+  <div class="quote">
+    <p>"风险控制不是防守——它是进攻的燃料。越少亏损，你越有资本在真正的机会来临时全力以赴。"</p>
+  </div>
+  <div class="quote">
+    <p>"最好的交易不是最让你兴奋的交易——而是让你感到无聊的交易，因为一切都按计划发生。"</p>
+  </div>
+  <div class="quote">
+    <p>"我不会试图预测市场。我只关注今天的价格行为和我的规则。"</p>
+  </div>
+  <div class="quote">
+    <p>"在股票魔法师的世界里，纪律比预测更有价值。"</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📚 延伸阅读</h2>
+  <ul>
+    <li>📖 《股票魔法师》—— Mark Minervini 著（中文译本，电子工业出版社）</li>
+    <li>📖 《像冠军一样思考和交易》—— Mark Minervini 著</li>
+    <li>📖 衔接阅读：<a href="livermore.html" style="color: var(--blue);">利弗莫尔：关键点交易法与金字塔加仓体系</a></li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>📅 2026-07-21 | 📂 吸收到 trend-disagreement-trading 技能</p>
+  <p style="margin-top: 8px;">投资大师学习计划 · 每日精进一家 · 第19/24位</p>
+</div>
+
+</div>
+</body>
+</html>

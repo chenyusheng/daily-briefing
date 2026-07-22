@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>威廉·欧奈尔：CAN SLIM系统与杯柄形态交易体系 | 投资大师学习</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-secondary: #8b949e;
+    --red: #f85149;
+    --green: #3fb950;
+    --blue: #58a6ff;
+    --orange: #d29922;
+    --gold: #ffd700;
+    --purple: #bc8cff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 20px;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+  .header {
+    text-align: center;
+    padding: 40px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+  }
+  .header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .header .subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+  .header .tags {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: rgba(88, 166, 255, 0.1);
+    color: var(--blue);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+  }
+  .tag.trend { background: rgba(188, 140, 255, 0.1); color: var(--purple); border-color: rgba(188, 140, 255, 0.2); }
+  .tag.quant { background: rgba(63, 185, 80, 0.1); color: var(--green); border-color: rgba(63, 185, 80, 0.2); }
+  .tag.fundamental { background: rgba(210, 153, 34, 0.1); color: var(--orange); border-color: rgba(210, 153, 34, 0.2); }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .section h2 {
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section h3 {
+    font-size: 16px;
+    color: var(--blue);
+    margin: 20px 0 12px;
+  }
+  .section h4 {
+    font-size: 14px;
+    color: var(--orange);
+    margin: 16px 0 8px;
+  }
+  .section p { margin-bottom: 12px; color: var(--text); }
+  .section ul, .section ol { margin: 8px 0 16px 20px; color: var(--text); }
+  .section li { margin-bottom: 6px; }
+  .quote {
+    border-left: 3px solid var(--orange);
+    padding: 12px 16px;
+    margin: 16px 0;
+    background: rgba(210, 153, 34, 0.05);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  .quote p { margin-bottom: 4px; }
+  .highlight-box {
+    background: rgba(88, 166, 255, 0.05);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+  }
+  .highlight-box.yellow { border-color: rgba(210, 153, 34, 0.3); background: rgba(210, 153, 34, 0.05); }
+  .highlight-box.green { border-color: rgba(63, 185, 80, 0.3); background: rgba(63, 185, 80, 0.05); }
+  .highlight-box.red { border-color: rgba(248, 81, 73, 0.3); background: rgba(248, 81, 73, 0.05); }
+  .highlight-box h4 { margin: 0 0 8px; color: var(--blue); }
+  .highlight-box.yellow h4 { color: var(--orange); }
+  .highlight-box.green h4 { color: var(--green); }
+  .highlight-box.red h4 { color: var(--red); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  th {
+    background: rgba(88, 166, 255, 0.08);
+    color: var(--blue);
+    font-weight: 600;
+  }
+  td { color: var(--text); }
+  .summary-bar {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 24px;
+    text-align: center;
+    min-width: 120px;
+  }
+  .stat-card .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+  }
+  code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    background: rgba(48, 54, 61, 0.5);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  @media (max-width: 600px) {
+    .header h1 { font-size: 22px; }
+    .section { padding: 16px; }
+    .summary-bar { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>📊 威廉·欧奈尔</h1>
+  <div class="subtitle">CAN SLIM选股系统与杯柄形态交易体系</div>
+  <div class="tags">
+    <span class="tag trend">📈 趋势/动量派</span>
+    <span class="tag quant">🔢 量化选股</span>
+    <span class="tag fundamental">📋 基本面+技术面</span>
+  </div>
+  <div class="summary-bar">
+    <div class="stat-card">
+      <div class="num">CAN SLIM</div>
+      <div class="label">7因子<br>选股体系</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">杯柄</div>
+      <div class="label">四种经典<br>入场形态</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">8%</div>
+      <div class="label">硬止损<br>纪律</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">FTD</div>
+      <div class="label">跟进日<br>市场时机</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🧑‍🏫 人物速览</h2>
+  <p><strong>威廉·欧奈尔（William J. O'Neil, 1933-2023）</strong>—— 美国成长股投资大师，<em>Investor's Business Daily（IBD）</em> 创办人，<em>How to Make Money in Stocks</em>（中文《笑傲股市》）作者。与巴菲特、彼得·林奇齐名的投资宗师。</p>
+  <p>欧奈尔在26岁时用5笔交易赚了20倍，随后自己开了一家经纪公司。他通过研究1953年以来每年最成功的股票，发现了这些超级牛股的共同特征，最终凝聚为 <strong>CAN SLIM 选股系统</strong>。</p>
+  <p>他的最大贡献是<strong>打通了基本面和技术的壁垒</strong>——不只看图形，也不只看财报，而是两者结合。他还独创了 <strong>跟进日（Follow-Through Day）</strong> 来机械地判断市场方向，以及 <strong>杯柄形态（Cup with Handle）</strong> 来精确识别买入时机。</p>
+</div>
+
+<div class="section">
+  <h2>🧩 CAN SLIM 七因子选股系统</h2>
+  <p>欧奈尔将超级牛股的特征浓缩为7个字母。每只候选股必须满足全部或大多数条件：</p>
+
+  <h3>C = Current Earnings（当季盈余）</h3>
+  <p>当季每股收益（EPS）同比增速 ≥ <strong>25%</strong>，理想值 50%+。低于18%即使其他条件良好也应放弃。营收增长同等重要。</p>
+  <div class="highlight-box yellow">
+    <h4>📌 A股调整</h4>
+    <p>使用"扣非净利润增速 > 25%"更可靠（排除一次性收益干扰），同时关注营收增速是否匹配。</p>
+  </div>
+
+  <h3>A = Annual Earnings（年度盈余）</h3>
+  <p>过去3年每年年度EPS增长率 ≥ <strong>25%</strong>，且呈加速趋势（如20%→50%→100%）。增长断断续续的股票淘汰。</p>
+
+  <h3>N = New（新公司/新产品/新高）</h3>
+  <p>必须有<strong>创新催化剂</strong>：新产品、新服务、新管理层、行业新趋势。最重要的是：CAN SLIM股票通常接近或处于 <strong>52周新高</strong>。欧奈尔说：买已经在创新高的股票，不是抄底。</p>
+  <div class="highlight-box">
+    <h4>🆕 与现有框架差异</h4>
+    <p>趋势分歧交易法允许"回踩买入"，欧奈尔更强调"突破新高时买入"。两者互补：新高突破=趋势确认后的买点，回踩=二次入场。</p>
+  </div>
+
+  <h3>S = Supply and Demand（供给与需求）</h3>
+  <p>优先<strong>小流通盘</strong>（更易拉升）+ 公司<strong>回购</strong>（减少供给=看涨信号）。A股对应流通市值1-50亿小盘成长股。</p>
+
+  <h3>L = Leader or Laggard（领涨或跟风）</h3>
+  <p>相对强度RS评分 ≥ <strong>80</strong>（理想≥87）——过去12个月涨幅超过市场80%的股票。只买行业第1-2名，不买第5名以后。</p>
+
+  <h3>I = Institutional Sponsorship（机构认同）</h3>
+  <p>有机构投资者持有（基金/社保/QFII），近期有增持迹象。A股参考：北向资金增持、基金重仓股。</p>
+
+  <h3>M = Market Direction（市场方向 —— 最重要）</h3>
+  <p>欧奈尔的核心发现：<strong>3/4的股票跟随大盘</strong>。即使选对了股票，大盘下跌时也大概率亏。使用跟进日（FTD）判断上升趋势开始，使用分销日计数判断市场是否见顶。</p>
+</div>
+
+<div class="section">
+  <h2>🎯 四种经典入场形态</h2>
+  <p>欧奈尔最著名的技术贡献——比米勒维尼VCP更完整的形态体系：</p>
+
+  <h3>① 杯柄形态（Cup with Handle）⭐最经典</h3>
+  <ul>
+    <li><strong>杯体</strong>：U形（非V形），深度20-30%，时长7-12周</li>
+    <li><strong>杯柄</strong>：右侧回落8-12%以内，成交量递减，持续1-2周</li>
+    <li><strong>Pivot Point</strong>：柄的右上方放量突破点（左壁最高价+0.01）</li>
+    <li><strong>突破量</strong>：当日成交量 ≥ 前一日150%</li>
+    <li><strong>止损</strong>：柄最低点下方（通常距买点≤8%）</li>
+  </ul>
+  <div class="highlight-box green">
+    <h4>🎯 与现有Setup A关系</h4>
+    <p>现有"箱体突破回踩"≈ 杯柄变体。欧奈尔提供了精确的量化标准（深度/时长/柄回落/成交量放大倍数），可升级现有买点判断。</p>
+  </div>
+
+  <h3>② 双底形态（Double Bottom）</h3>
+  <ul>
+    <li>W形：两个相近低点，第二底成交量更小</li>
+    <li>买点：放量突破W的中位高点</li>
+  </ul>
+
+  <h3>③ 平底形态（Flat Base）</h3>
+  <ul>
+    <li>窄幅横盘5周+，波动≤10-15%</li>
+    <li>成交量极度萎缩后放量突破上沿</li>
+    <li>🔥 FTD确认后最常用——强势整理</li>
+  </ul>
+
+  <h3>④ 高窄旗形（High Tight Flag）⭐爆发力最强</h3>
+  <ul>
+    <li>旗杆：4-8周内拉升100-120%</li>
+    <li>旗面：极高处横盘3-5周，回调≤10-15%</li>
+    <li>突破上沿买入→翻倍后再翻倍潜力</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>📈 M=市场方向判断（关键创新）</h2>
+  <p>欧奈尔提供了两大量化工具来判断市场方向——这是现有趋势分歧交易法的市场环境过滤最欠缺的：</p>
+
+  <h3>跟进日（Follow-Through Day, FTD）</h3>
+  <p>股市下跌后，反弹第4-10天出现放量上涨日（涨幅>1%）→确认新一轮上升趋势。此时才可以重仓操作。</p>
+  <ul>
+    <li>反弹前3天：保持20-40%仓位</li>
+    <li>FTD出现后：加仓至60-80%</li>
+    <li>反弹失败（指数跌回前低）：减至20%以下</li>
+  </ul>
+
+  <h3>分销日（Distribution Day）</h3>
+  <p>指数收盘下跌且成交量大于前一日=机构抛售信号。25个交易日内≥5个分销日→市场可能见顶。</p>
+
+  <table>
+    <tr><th>市场状态</th><th>条件</th><th>仓位建议</th></tr>
+    <tr><td>🟢 确认上升趋势</td><td>FTD确认+分销日<5</td><td>重仓60-80%</td></tr>
+    <tr><td>🟡 上升趋势但警示</td><td>FTD确认+分销日≥5</td><td>减仓至40-50%</td></tr>
+    <tr><td>🔴 下行趋势</td><td>跌破关键均线+分销日密集</td><td>轻仓≤20%或空仓</td></tr>
+    <tr><td>⚪ 震荡市</td><td>不合上行也无明确下行</td><td>观察仓20%</td></tr>
+  </table>
+
+  <div class="highlight-box yellow">
+    <h4>⚠️ A股适配</h4>
+    <p>等效跟进日判定：大盘连续下跌后出现放量阳线突破5日/10日均线，且次日确认不跌回。</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📋 完整交易规则体系</h2>
+
+  <h3>买入规则</h3>
+  <ul>
+    <li>等Pivot Point：放量突破杯柄/底部上沿才买入，不提前预判</li>
+    <li>放量确认：突破日成交量≥前日均量150%</li>
+    <li>止损预先设定：放在买点下方7-8%</li>
+    <li>金字塔加仓：先买50%，上涨2-2.5%后加仓剩50%</li>
+    <li>未突破不追：股价已在Pivot Point上方3%以上，放弃</li>
+    <li>分散行业：持仓分散在2-3个不同行业</li>
+  </ul>
+
+  <h3>8%硬止损（最著名的规则）</h3>
+  <div class="highlight-box red">
+    <h4>⚡ 核心数字</h4>
+    <p>以8%止损、20-25%止盈，即使胜率50%仍然盈利。亏损8%后剩92%——亏损20%以上要用125%回本。这是数学，不是感觉。</p>
+  </div>
+  <ul>
+    <li>任何下跌达7-8%无条件卖出，没有例外</li>
+    <li>EPS增速开始下降时提前卖（不等8%）</li>
+    <li>RPS跌破70时提前卖</li>
+    <li>大盘出现密集分销日时减仓</li>
+    <li>行业龙头集体走弱时警惕</li>
+  </ul>
+
+  <h3>20-25%止盈+8周轮动</h3>
+  <ul>
+    <li>大部分股票上涨20-25%后会出现回调</li>
+    <li>利润达20-25%时卖出大部分仓位</li>
+    <li>剩余仓位用追踪止损保护</li>
+    <li>卖出后至少等8周才重新买入该股</li>
+  </ul>
+
+  <div class="highlight-box green">
+    <h4>🔶 与现有止盈规则对比</h4>
+    <p>趋势分歧现有：8-10%卖1/3, 15-20%卖1/3, 剩余追踪<br>
+    欧奈尔建议：20-25%卖大部分，剩余追踪+8周轮动<br>
+    <strong>建议融合</strong>：早期按现有分批，到达20-25%时按欧奈尔大比例减仓。</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📐 RPS相对强度曲线</h2>
+  <p>欧奈尔RPS指标：计算股票过去N日涨幅在全市场的排名百分比。RPS=95意味着涨幅超过95%的股票。</p>
+  <table>
+    <tr><th>周期</th><th>用途</th><th>门槛</th></tr>
+    <tr><td>RPS 120（半年）</td><td>基础强度判断</td><td>≥80入候选</td></tr>
+    <tr><td>RPS 250（一年）</td><td>长期趋势确认</td><td>≥90为优</td></tr>
+    <tr><td>双强股</td><td>RPS120≥90 + RPS250≥90</td><td>重点关注</td></tr>
+  </table>
+  <p>📌 A股可用同花顺/通达信条件选股公式，或自行抓取数据计算。</p>
+</div>
+
+<div class="section">
+  <h2>💡 综合打分表</h2>
+  <table>
+    <tr><th>维度</th><th>条件</th><th>权重</th><th>A股调整</th></tr>
+    <tr><td><strong>C</strong></td><td>当季扣非净利润>25%</td><td>★★★</td><td>扣非净利润增速</td></tr>
+    <tr><td><strong>A</strong></td><td>年度EPS≥25%（3年）</td><td>★★★</td><td>年度业绩达标</td></tr>
+    <tr><td><strong>N</strong></td><td>新产品/新高/新趋势</td><td>★★★</td><td>至少满足1项</td></tr>
+    <tr><td><strong>S</strong></td><td>流通市值适中</td><td>★★</td><td>A股10-200亿</td></tr>
+    <tr><td><strong>L</strong></td><td>RS评分≥80</td><td>★★★</td><td>行业前3+涨幅排名</td></tr>
+    <tr><td><strong>I</strong></td><td>机构增持中</td><td>★★</td><td>基金/北向/社保</td></tr>
+    <tr><td><strong>M</strong></td><td>市场确认上升趋势</td><td>★★★</td><td>最优先检查</td></tr>
+  </table>
+  <p>≥6/7→A+候选；4-5/7→B级可观察；<4/7→排除</p>
+</div>
+
+<div class="section">
+  <h2>📜 欧奈尔十大纪律</h2>
+  <ol>
+    <li><strong>不要抄底</strong>——等形态完成，放量突破Pivot Point再买入</li>
+    <li><strong>不要亏损超过8%</strong>——硬性纪律，没有例外</li>
+    <li><strong>不要摊平成本</strong>——亏损就是错了，不是补仓机会</li>
+    <li><strong>不要持有弱势股</strong>——大盘涨而你的股票跌，说明选错了</li>
+    <li><strong>不要和趋势争论</strong>——M是最重要的字母</li>
+    <li><strong>不要贪最后一截</strong>——20-25%利润后卖出大部分</li>
+    <li><strong>不要担心错过</strong>——空仓不是亏损，乱买才是亏损的开始</li>
+    <li><strong>不要买第5、10名</strong>——只买行业第1-2名</li>
+    <li><strong>不要在季报前重仓</strong>——季报前减仓回避不确定性</li>
+    <li><strong>不要逆势止盈</strong>——止盈是因为到了目标价，而不是因为怕</li>
+  </ol>
+</div>
+
+<div class="section">
+  <h2>💬 经典语录</h2>
+  <div class="quote"><p>"最重要的一条投资原则是：每只股票都必须设置止损位，而且止损位不能超过买入价的8%。"</p></div>
+  <div class="quote"><p>"从不在下跌时加仓，只在股价创新高时买入——这才是顺势而为。"</p></div>
+  <div class="quote"><p>"我买入的不是最低点，而是在股票已经走出底部、开始上涨之后才买入。我放弃底部最便宜的10-15%的涨幅，换取更高的确定性和更快的回报。"</p></div>
+  <div class="quote"><p>"你的亏损水平决定了你的投资能力。亏损越少，你活得越久，越能等到真正的大行情。"</p></div>
+  <div class="quote"><p>"业余投资者盯着股价波动，专业投资者盯着成交量是否配合。"</p></div>
+  <div class="quote"><p>"创新高的股票还会创新高，创新低的股票还会创新低——这是市场最基本的法则。"</p></div>
+  <div class="quote"><p>"如果市场转向下行，即使你选对了股票，它也会跌。因为3/4的股票都跟着大盘走。"</p></div>
+</div>
+
+<div class="section">
+  <h2>🔄 与现有趋势流派整合</h2>
+  <table>
+    <tr><th>场景</th><th>使用</th><th>来源</th></tr>
+    <tr><td>初步基本面筛选</td><td>CAN SLIM打分（C/A/N/S/L/I）</td><td>欧奈尔</td></tr>
+    <tr><td>量化强度筛选</td><td>MMM打分 + RS评分≥80</td><td>米勒维尼 + 欧奈尔</td></tr>
+    <tr><td>确认上升趋势</td><td>8条件趋势模板 + RPS≥80</td><td>米勒维尼 + 欧奈尔</td></tr>
+    <tr><td>确认入场形态</td><td>四种经典形态 + VCP</td><td>欧奈尔 + 米勒维尼</td></tr>
+    <tr><td>关键点突破</td><td>关键点 + 3点验证</td><td>利弗莫尔</td></tr>
+    <tr><td>市场时机判断</td><td>FTD跟进日 + 分销日计数</td><td>欧奈尔</td></tr>
+    <tr><td>试仓建仓</td><td>50%试仓（突破日）</td><td>欧奈尔</td></tr>
+    <tr><td>加仓</td><td>金字塔递减 + 上涨2-2.5%后加</td><td>利弗莫尔 + 欧奈尔</td></tr>
+    <tr><td>风险控制</td><td>7-8%硬止损 + 1-2%组合止损</td><td>欧奈尔 + 米勒维尼</td></tr>
+    <tr><td>目标后止盈</td><td>20-25%止盈 + 半仓/大部分+8周轮动</td><td>欧奈尔</td></tr>
+    <tr><td>财报季</td><td>减半或不持仓过财报</td><td>米勒维尼</td></tr>
+  </table>
+</div>
+
+<div class="footer">
+  <p>📅 2026-07-22 · 投资大师学习系列 · 趋势分歧交易法技能已更新</p>
+  <p>威廉·欧奈尔（William O'Neil）CAN SLIM系统 + 杯柄形态 + 市场方向判断</p>
+</div>
+
+</div>
+</body>
+</html>

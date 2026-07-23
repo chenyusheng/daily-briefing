@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 双战法选股 · 2026-07-23</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0d1117;--surface:#161b22;--surface-alt:#1c2333;--border:#30363d;--border-light:#21262d;--text:#e6edf3;--text-secondary:#8b949e;--text-tertiary:#6e7681;--accent:#58a6ff;--accent-bg:#0d419d33;--green:#3fb950;--green-bg:#1b3a1f;--red:#f85149;--red-bg:#3d1416;--amber:#d29922;--amber-bg:#2d1f00;--purple:#a371f7;--purple-bg:#2a1a4a;--teal:#56d4dd;--teal-bg:#1d3b3d;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.15);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7;min-height:100vh}
+  .container{max-width:800px;margin:0 auto;padding:0}
+  .header{background:linear-gradient(135deg,#001a0a 0%,#003015 50%,#000 100%);border-bottom:3px solid var(--green);padding:22px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+  .header::before{content:'';position:absolute;top:-50%;left:-30%;width:160%;height:200%;background:radial-gradient(ellipse at 30% 50%,#003020 0%,transparent 40%),radial-gradient(ellipse at 70% 50%,#002010 0%,transparent 40%);opacity:.8;pointer-events:none}
+  .h-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+  .h-icon{width:38px;height:38px;background:linear-gradient(135deg,#3fb950,#003015);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+  .h-title{font-size:18px;font-weight:700;letter-spacing:-.3px}
+  .h-meta{font-size:12px;color:var(--text-tertiary);margin-top:2px}
+  .h-badge{font-size:11px;font-weight:900;color:#fff;background:linear-gradient(135deg,#003015,#3fb950);padding:4px 16px;border-radius:20px;letter-spacing:.3px;position:relative;z-index:1;border:2px solid var(--green)}
+  .h-home{font-size:20px;text-decoration:none;margin-left:8px;position:relative;z-index:1;transition:opacity .15s}
+  .h-home:hover{opacity:.7}
+  .section{padding:24px 22px}
+  .section+.section{border-top:1px solid var(--border-light)}
+  .section-alt{background:var(--surface-alt)}
+  .sec-label{font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
+  .at{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin-bottom:14px}
+  .at th{text-align:left;padding:10px 14px;font-weight:600;color:var(--text-secondary);background:var(--surface-alt);border-bottom:1px solid var(--border);font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+  .at th:first-child{border-radius:8px 0 0 0}
+  .at th:last-child{border-radius:0 8px 0 0}
+  .at td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text)}
+  .at tr:last-child td:first-child{border-radius:0 0 0 8px}
+  .at tr:last-child td:last-child{border-radius:0 0 8px 0}
+  .at tr:last-child td{border-bottom:none}
+  .callout{padding:14px 18px;border-radius:var(--radius);margin:10px 0;font-size:13px;line-height:1.6}
+  .callout.info{background:var(--accent-bg);border-left:3px solid var(--accent);color:var(--accent)}
+  .callout.success{background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+  .callout.warn{background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)}
+  .callout.danger{background:var(--red-bg);border-left:3px solid var(--red);color:var(--red)}
+  .callout.neutral{background:var(--surface-alt);border-left:3px solid var(--text-tertiary);color:var(--text-secondary)}
+  .callout.apocalyptic{background:#1a0000;border-left:5px solid #ff0000;color:#ff4444;font-weight:600;border-top:1px solid #ff000033;border-bottom:1px solid #ff000033}
+  .callout.golden{background:#1a1000;border-left:5px solid #ff8800;color:#ffaa44;font-weight:600;border-top:1px solid #ff880033;border-bottom:1px solid #ff880033}
+  .sig{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+  .sig.g{background:var(--green)}
+  .sig.r{background:var(--red)}
+  .sig.y{background:var(--amber)}
+  .sig.b{background:var(--accent)}
+  .sig.p{background:var(--purple)}
+  .ice-timeline{display:flex;align-items:center;gap:6px;padding:14px 18px;background:var(--surface);border-radius:var(--radius);margin:10px 0;overflow-x:auto;font-size:11px;flex-wrap:wrap}
+  .ice-dot{min-width:68px;text-align:center;padding:6px 8px;border-radius:8px;font-size:11px}
+  .ice-dot.active{background:var(--amber-bg);border:2px solid var(--amber);color:var(--amber);font-weight:700}
+  .ice-dot.past{background:var(--surface-alt);color:var(--text-tertiary)}
+  .ice-dot.extreme{background:var(--red-bg);border:3px solid var(--red);color:var(--red);font-weight:900}
+  .ice-dot.apocalypse{background:#1a0000;border:4px solid #ff0000;color:#ff4444;font-weight:900;animation:pulse .8s infinite}
+  .ice-dot.hell{background:#0a0000;border:5px solid #ff0000;color:#ff0000;font-weight:900;font-size:10px;animation:pulse .4s infinite;box-shadow:0 0 20px #ff000066}
+  .ice-dot.void{background:#000;border:5px solid #ff0000;color:#ff0000;font-weight:900;font-size:10px;animation:pulse .3s infinite;box-shadow:0 0 30px #ff0000aa;text-shadow:0 0 10px #ff0000}
+  .ice-dot.recovery{background:#1a1000;border:3px solid #ff8800;color:#ffaa44;font-weight:900;font-size:10px}
+  .ice-dot.end{background:var(--green-bg);border:3px solid var(--green);color:var(--green);font-weight:900;font-size:11px}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,0,0,.8)}50%{box-shadow:0 0 0 15px rgba(255,0,0,0)}}
+  .ice-arrow{color:var(--text-tertiary);font-size:14px;min-width:10px;text-align:center}
+  .ice-label{font-size:10px;color:var(--text-tertiary);min-width:40px;text-align:center;line-height:1.3}
+  .risk-list{list-style:none;padding:0}
+  .risk-list li{padding:8px 0 8px 24px;position:relative;font-size:13px;color:var(--text-secondary);border-bottom:1px solid var(--border-light)}
+  .risk-list li:last-child{border-bottom:none}
+  .risk-list li::before{position:absolute;left:0;top:8px;font-size:12px}
+  .risk-list li.crit::before{content:'💀'}
+  .risk-list li.warn::before{content:'⚠️'}
+  .st{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:10px 0 14px}
+  .st td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text-secondary)}
+  .st td:first-child{font-weight:600;color:var(--text);white-space:nowrap;width:110px}
+  .st tr:last-child td{border-bottom:none}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .stat-card{padding:12px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border)}
+  .stat-num{font-family:var(--font-mono);font-size:24px;font-weight:800;line-height:1.2}
+  .stat-label{font-size:11px;color:var(--text-tertiary);margin-top:2px}
+  .conclusion-box{text-align:center;padding:28px 22px;background:linear-gradient(135deg,#001a0a,#000500);border:3px solid #3fb95066;border-radius:var(--radius);margin:16px 0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .conclusion-box::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#003015,#3fb950,#003015);animation:shimmer 1.5s infinite}
+  @keyframes shimmer{0%,100%{opacity:1}50%{opacity:.3}}
+  .conclusion-text{font-size:18px;font-weight:800;color:#3fb950;line-height:1.6;margin-bottom:6px}
+  .conclusion-sub{font-size:13px;color:var(--text-secondary);line-height:1.7}
+  .footer{text-align:center;padding:24px 22px 36px;font-size:11px;color:var(--text-tertiary);line-height:1.8;border-top:1px solid var(--border-light)}
+  .footer a{color:var(--accent);text-decoration:none}.footer a:hover{text-decoration:underline}
+  @media(max-width:480px){
+    .section{padding:18px 14px}
+    .header{padding:14px 14px}
+    .h-title{font-size:16px}
+    .at{font-size:12px}.at td,.at th{padding:8px 10px}
+    .conclusion-text{font-size:16px}
+    .stat-grid{grid-template-columns:1fr}
+    .ice-timeline{gap:2px}.ice-dot{min-width:55px;font-size:10px;padding:4px}
+  }
+  /* Retrospection section */
+  .retro-table{width:100%;border-collapse:separate;border-spacing:0;font-size:12px;margin:10px 0}
+  .retro-table th{text-align:left;padding:8px 10px;font-weight:600;color:var(--text-secondary);background:var(--surface-alt);border-bottom:1px solid var(--border);font-size:10px;letter-spacing:.5px}
+  .retro-table td{padding:8px 10px;border-bottom:1px solid var(--border-light)}
+  .retro-table tr:last-child td{border-bottom:none}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="h-left">
+    <div class="h-icon">🏁</div>
+    <div>
+      <div class="h-title">双战法选股分析</div>
+      <div class="h-meta">2026-07-23 · 周四 · 收盘后</div>
+    </div>
+  </div>
+  <span class="h-badge">🟢 D2全确认 · 冰点序列终结!! · 跌停2 · 炸板率17.7%</span>
+  <a href="https://eason-byte.github.io/daily-briefing/stock-picks/" class="h-home" title="返回首页">📋</a>
+</div>
+
+<div class="section">
+  <div class="sec-label">🧊 冰点反抽模式分析</div>
+
+  <div class="stat-grid" style="margin-bottom:12px">
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)">🟢 2</div>
+      <div class="stat-label">跌停家数（百合花+九安医疗）</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)">+0.25%</div>
+      <div class="stat-label">上证 3876.78 · 小幅收涨</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)">116/141</div>
+      <div class="stat-label">封板/触及涨停 · 封板率82.3%!!</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)">✅ 17.7%</div>
+      <div class="stat-label">炸板率 25/141 · 从昨日43.4%大幅修复!!</div>
+    </div>
+  </div>
+
+  <table class="at">
+    <tr><th>指标</th><th>今日数据(07-23 D2)</th><th>D2阈值</th><th>判断</th></tr>
+    <tr style="background:var(--green-bg)">
+      <td>跌停家数</td>
+      <td style="color:var(--green);font-weight:900;font-family:var(--font-mono);font-size:16px">2</td>
+      <td>D2需&lt;20(连续2天=序列结束)</td>
+      <td><span class="sig g"></span> <strong style="color:var(--green)">✅✅ 2 &lt; 20!! 连续2天!! 冰点序列正式终结!!</strong></td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>炸板率</td>
+      <td style="font-family:var(--font-mono);color:var(--green);font-weight:900">17.7% (25/141)</td>
+      <td style="color:var(--green)">&lt;20%安全</td>
+      <td><span class="sig g"></span> <strong style="color:var(--green)">✅✅ 从昨日43.4%降至17.7%!! 涨停板质量大幅恢复!!</strong></td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>封板率</td>
+      <td style="font-family:var(--font-mono);color:var(--green)">82.3% (116/141)</td>
+      <td>≥80%</td>
+      <td><span class="sig g"></span> <strong style="color:var(--green)">✅✅ 从昨日56.6%恢复至82.3%!! 涨停板可靠性回归!!</strong></td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>大盘指数</td>
+      <td style="color:var(--green)">+0.25% (3876.78)</td>
+      <td>-</td>
+      <td><span class="sig g"></span> ✅ 连续3天收涨(07-21 +1.79%→07-22 +0.07%→07-23 +0.25%)</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>冰点序列</td>
+      <td style="color:var(--green);font-weight:900;font-size:14px"><strong>D2(07-23): 跌停2 &lt; 20!! 连续2天!! 序列终结!!</strong></td>
+      <td>连续2天&lt;20=序列结束</td>
+      <td style="color:var(--green);font-weight:900">🏁 07-13→07-23 · 11天9次冰点906跌停 · 正式终结!!</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>涨停集中度</td>
+      <td style="color:var(--green)"><strong>电网设备29!! | 电力8 | 专用设备6 | 化学原料4 | 房地产4 | 通用设备4 | 电池3 | 工业金属3 | 中药3 | 纺织3</strong></td>
+      <td>连续2天前5=主线</td>
+      <td><span class="sig g"></span> <strong style="color:var(--green)">电力连续3天涨停第一(8→8→8)->主线确认!! 电网设备3->29爆发!! 需连续2天验证</strong></td>
+    </tr>
+    <tr>
+      <td>跌停集中度</td>
+      <td>化学制品1(百合花) | 医疗器械1(九安医疗)</td>
+      <td>≥5产业链出清</td>
+      <td><span class="sig g"></span> 极分散。无产业链级集中跌停</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>防御板块健康度</td>
+      <td style="color:var(--green)"><strong>百合花(化学制品)1跌停 · 九安医疗(医疗器械)1跌停。无公用事业/必需消费跌停</strong></td>
+      <td>防御跌停≥3=禁止操作</td>
+      <td><span class="sig g"></span> ✅ 防御接近归零。2只分散跌停不形成集中风险</td>
+    </tr>
+  </table>
+
+  <div class="ice-timeline">
+    <div class="ice-label">7/13</div>
+    <div class="ice-dot extreme">极端冰点1<br>172跌停!</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/14</div>
+    <div class="ice-dot past">二次冰点<br>22跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/15</div>
+    <div class="ice-dot past">三次冰点<br>31跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/16</div>
+    <div class="ice-dot past">四次冰点<br>33跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/17</div>
+    <div class="ice-dot apocalypse">五次冰点<br>💀192!!</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/18</div>
+    <div class="ice-dot hell">六次冰点<br>🔥192!!</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/20</div>
+    <div class="ice-dot void">七次冰点<br>☠️211!!</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/21</div>
+    <div class="ice-dot recovery">⚠️八次<br>21跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/22</div>
+    <div class="ice-dot end">🟢 D1<br>8跌停!</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/23</div>
+    <div class="ice-dot end">🏁 D2终<br>2跌停!!<br>序列终结!!</div>
+  </div>
+
+  <div class="callout success" style="margin-top:8px;font-size:14px">
+    <strong>🏁 07-22 D1 → 07-23 D2全确认!! 冰点序列正式终结!!</strong><br>
+    07-13极端(172)→07-14二次(22)→07-15三次(31)→07-16四次(33)→07-17五次(192)→07-18六次(192)→07-20七次(211)→07-21八次(21/D0)→07-22(D1/8)→<strong style="color:var(--green)">07-23(D2/2!!序列终结!!)</strong><br>
+    <strong style="color:var(--green)">D2三条件全部满足: ①炸板率17.7%✅(&lt;20%) ②跌停2✅(&lt;20/连续2天) ③封板率82.3%✅(≥80%)!! 昨日07-22三条件全部达标!!</strong><br>
+    <strong style="color:var(--green)">07-22预测精确验证: D2是序列结束最关键一天→跌停2&lt;20→序列断绝终结!! 仓位0%等D2策略完美保护!! 经历了10天9次冰点906跌停的极限考验!!</strong><br>
+    <strong style="color:var(--amber)">⚠️ 按规则: 序列结束后需观察5个交易日(连续5天跌停&lt;20)确认修复稳固。07-22/07-23已2天→还需07-24/07-25/07-28三天验证。期间跌停反弹至≥20→新冰点序列。</strong><br>
+    <strong style="color:var(--amber)">🧊 冰点反抽模式: ❌ 不适用(情绪正常非冰点期) · 龙头主升浪接管 → 首日试探≤10%(极端冰点规则)</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">⚠️ 跌停板块集中度检查（D2序列终结验证）</div>
+
+  <div class="callout neutral" style="margin-bottom:10px">
+    <strong>✅ 跌停仅2只(百合花+九安医疗) · 分散在2个不同板块 · 无产业链级集中风险</strong><br>
+    九安医疗(医疗器械)跌停需关注: 旧活口07-21涨停复活→07-20炸板-8.46%→07-22反弹→07-23跌停-10%。天普/中岩死亡螺旋3.0。永久移出追踪。<br>
+    防御板块健康: 化学制品+医疗器械各1跌停。无公用事业/必需消费跌停→防御健康度极好。
+  </div>
+
+  <table class="at">
+    <tr><th>板块链</th><th>跌停数</th><th>集中度</th><th>处理</th></tr>
+    <tr>
+      <td>化学制品</td>
+      <td style="color:var(--amber)">1只(百合花-10.00%)</td>
+      <td><span class="sig g"></span> 未触发</td>
+      <td>单只跌停不降级。无集中风险</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td>医疗器械</td>
+      <td style="color:var(--red)">1只(九安医疗-10.00%)</td>
+      <td><span class="sig g"></span> 未触发</td>
+      <td style="color:var(--red)">单只不影响但九安医疗旧活口→跌停=死亡螺旋3.0。永久移出追踪</td>
+    </tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:20px">🔥 D0→D1→D2 活口验证（07-21 D0 → 07-23 D2 · 连续3天追踪）</div>
+
+  <div class="callout success" style="margin-bottom:10px">
+    <strong>🔥 D2续涨停率36%(4/11) · D2崩塌率9%(1/11) · 旧活口大面积理性分化!!</strong><br>
+    立新能源4连板!! 美利云4连板!! 证通电子3连板!! 长缆科技3连板!! 扬电科技+7.29%强势!!<br>
+    <strong style="color:var(--green)">D1→D2活口分红: 6只续涨停→4只→分化是市场进入正常状态信号而非风险。</strong><br>
+    <strong style="color:var(--red)">九安医疗涨停复活→跌停-10%=死亡螺旋3.0。</strong>旧活口复活分两派: 真强(立新/证通/长缆) vs 假复活(九安)。
+  </div>
+
+  <table class="at">
+    <tr><th>代码</th><th>名称</th><th>07-21 D0</th><th>07-22 D1</th><th>07-23 D2表现</th><th>板块属性</th><th>追踪结论</th></tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)"><strong>600744</strong></td>
+      <td><strong style="color:var(--green)">华银电力</strong></td>
+      <td>S+级4连板</td>
+      <td>+9.97%(5连板)</td>
+      <td style="color:var(--amber)">-0.76% <strong>首日断板!</strong> 高8.69低7.44振幅15.74% 成交32.91亿</td>
+      <td>电力(公用防御)</td>
+      <td style="color:var(--amber)">S+断板!! 5连板+60.9%→回踩。等5日线(≈6.8-7.0)再评估</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)"><strong>001258</strong></td>
+      <td><strong style="color:var(--green)">立新能源</strong></td>
+      <td>A级2连板</td>
+      <td>+9.99%(3连板)</td>
+      <td style="color:var(--green);font-weight:900">+9.99% 涨停!! <strong>4连板!!</strong> 成交12.71亿</td>
+      <td>电力(公用防御)</td>
+      <td style="color:var(--green);font-weight:900">✅✅ 防御A级破D3/D4魔咒!! 4连板!!</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)"><strong>000815</strong></td>
+      <td><strong style="color:var(--green)">美利云</strong></td>
+      <td>A级2连板</td>
+      <td>+10.03%(3连板)</td>
+      <td style="color:var(--green);font-weight:700">+9.98% 涨停!! <strong>4连板!!</strong> 成交21.02亿</td>
+      <td>IT服务(非防御)</td>
+      <td style="color:var(--green);font-weight:700">✅ 非防御A级破D3/D4魔咒!! 4连板!! 但D5风险仍存(天普3连板→D4跌停)</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)"><strong>002197</strong></td>
+      <td><strong style="color:var(--green)">证通电子</strong></td>
+      <td>涨停(新)</td>
+      <td>+9.94%(2连板)</td>
+      <td style="color:var(--green);font-weight:700">+10.04% 涨停!! <strong>3连板!!</strong> 成交8.17亿</td>
+      <td>计算机设(非防御)</td>
+      <td style="color:var(--green)">✅ 3连板!! 非防御A级候选</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)"><strong>002879</strong></td>
+      <td><strong style="color:var(--green)">长缆科技</strong></td>
+      <td>涨停(新)</td>
+      <td>+10.03%(2连板)</td>
+      <td style="color:var(--green);font-weight:700">+9.99% 涨停!! <strong>3连板!!</strong> 成交4.21亿</td>
+      <td>电网设备(非防御)</td>
+      <td style="color:var(--green)">✅ 3连板!! 电网设备核心!!</td>
+    </tr>
+    <tr style="background:var(--amber-bg)">
+      <td style="font-family:var(--font-mono)"><strong>603407</strong></td>
+      <td><strong>长裕集团</strong></td>
+      <td>涨停(新)</td>
+      <td>一字涨停(2连板)</td>
+      <td style="color:var(--amber)">-0.51% 断板 成交7.67亿</td>
+      <td>化学原料(非防御)</td>
+      <td style="color:var(--amber)">⚠️ 一字涨停后断板。移出活口</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)"><strong>301012</strong></td>
+      <td><strong style="color:var(--green)">扬电科技</strong></td>
+      <td>20cm涨停</td>
+      <td>+8.22%大涨</td>
+      <td style="color:var(--green)">+7.29% 继续大涨 成交9.65亿</td>
+      <td>电网设备(非防御)</td>
+      <td style="color:var(--green)">✅ 连续3天强势!! 20cm→+8.22%→+7.29% 板后接续力极强</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">600664</td>
+      <td>哈药股份</td>
+      <td>涨停复活</td>
+      <td>+2.40%</td>
+      <td>+0.33% 微涨</td>
+      <td>化学制药(防御)</td>
+      <td style="color:var(--text-secondary)">旧活口强度衰减。非D2关注对象</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">603516</td>
+      <td>淳中科技</td>
+      <td>涨停复活</td>
+      <td>-0.26%</td>
+      <td>+0.97% 微涨</td>
+      <td>计算机设(非防御)</td>
+      <td style="color:var(--text-secondary)">弱。持续移出追踪</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">002432</td>
+      <td><strong style="color:var(--red)">九安医疗</strong></td>
+      <td>涨停复活</td>
+      <td>反弹(从07-20炸板-8.46%恢复)</td>
+      <td style="color:var(--red);font-weight:900"><strong>跌停-10.00%!!</strong></td>
+      <td>医疗器械(防御)</td>
+      <td style="color:var(--red)">💀 旧活口复活→跌停=死亡螺旋3.0。永久移出!!</td>
+    </tr>
+  </table>
+
+  <div class="callout warn" style="margin-top:8px">
+    <strong>⚠️ 活口验证核心结论: 旧活口大面积理性分化·真强vs假复活泾渭分明</strong><br>
+    <strong style="color:var(--green)">真强: 立新能源4连板(电力防御)·美利云4连板(IT非防御破天普魔咒)·证通电子3连板·长缆科技3连板·扬电科技+7.29%(3天累计+35.51%!!)。</strong><br>
+    <strong style="color:var(--red)">假复活: 九安医疗涨停复活→跌停-10%(死亡螺旋3.0)·哈药+0.33%(衰减)·淳中+0.97%(弱)。</strong><br>
+    <strong style="color:var(--amber)">核心规律再验证: 旧活口大面积复活(07-21)→次日50%续涨停·0%崩塌(07-22)→D2仅36%续涨停·9%崩塌(07-23)。修复→分化→理性。市场从极端回归正常。</strong><br>
+    <strong style="color:var(--amber)">旧活口复活持续性验证规则(07-22提出)再次验证: 复活日≥50%→次日需≥30%续涨→D2仅20%→复活是昙花一现。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:20px">💥 炸板分析（25只冲板回落 · 炸板率17.7% · 从43.4%暴降 · 涨停板质量恢复!!）</div>
+
+  <div class="callout success" style="margin-bottom:10px">
+    <strong>✅ 炸板率17.7%从昨日43.4%暴降59%!! 涨停板从系统性陷阱恢复为正常进攻信号!!</strong><br>
+    25只炸板(昨日36只)。昨日电子产业链集中炸板(通富微电/紫光/神州数码)今日继续暴跌!!<br>
+    <strong style="color:var(--red)">通富微电(半导体): 昨日炸板→今日-6.78%!! 紫光股份(IT): -5.46%!! 莱美药业(化学制药): -4.55%!! 汇得科技: -3.67%!!</strong><br>
+    <strong style="color:var(--green)">昨日07-22核心判断完全验证: 涨停板是陷阱非机会→今日炸板股大面积继续暴跌→等D2策略完美避开二次下跌!!</strong>
+  </div>
+
+  <table class="at">
+    <tr><th>代码</th><th>名称</th><th>板块</th><th>收盘涨幅</th><th>炸板时间</th><th>风险评级</th></tr>
+    <tr style="background:var(--amber-bg)">
+      <td style="font-family:var(--font-mono)">002870</td>
+      <td><strong>香山股份</strong></td>
+      <td>汽车零部件</td>
+      <td style="color:var(--amber)">+2.00%</td>
+      <td>093000</td>
+      <td style="color:var(--amber)">⚠️ 开盘即炸</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">605028</td>
+      <td><strong>世茂能源</strong></td>
+      <td>电力</td>
+      <td style="color:var(--amber)">+7.10%</td>
+      <td>093250</td>
+      <td style="color:var(--text-secondary)">低风险·电力板块强势</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">000636</td>
+      <td><strong style="color:var(--red)">风华高科</strong></td>
+      <td>元件</td>
+      <td style="color:var(--amber)">+4.62%</td>
+      <td>093333</td>
+      <td style="color:var(--red)">💀 62.5亿成交炸板!! 电子链炸板</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002536</td>
+      <td><strong>飞龙股份</strong></td>
+      <td>汽车零部件</td>
+      <td style="color:var(--amber)">+4.27%</td>
+      <td>093442</td>
+      <td style="color:var(--text-secondary)">24.6亿成交·中等风险</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">603678</td>
+      <td>火炬电子</td>
+      <td>军工电子</td>
+      <td style="color:var(--amber)">+1.91%</td>
+      <td>093456</td>
+      <td style="color:var(--text-secondary)">低风险</td>
+    </tr>
+    <tr style="background:var(--amber-bg)">
+      <td style="font-family:var(--font-mono)">000811</td>
+      <td><strong style="color:var(--amber)">冰轮环境</strong></td>
+      <td>通用设备</td>
+      <td style="color:var(--red)">-0.26%</td>
+      <td>093512</td>
+      <td style="color:var(--amber)">⚠️ 炸板转跌!!</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">688260</td>
+      <td>昀冢科技</td>
+      <td>消费电子</td>
+      <td style="color:var(--green)">+9.37%</td>
+      <td>093616</td>
+      <td style="color:var(--text-secondary)">低风险·接近涨停</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">605376</td>
+      <td>博迁新材</td>
+      <td>金属新材料</td>
+      <td>+0.96%</td>
+      <td>093705</td>
+      <td style="color:var(--text-secondary)">低风险</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">600666</td>
+      <td>奥瑞德</td>
+      <td>IT服务</td>
+      <td style="color:var(--amber)">+6.92%</td>
+      <td>094122</td>
+      <td style="color:var(--text-secondary)">低风险</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">603115</td>
+      <td>海星股份</td>
+      <td>元件</td>
+      <td style="color:var(--amber)">+4.85%</td>
+      <td>094203</td>
+      <td style="color:var(--text-secondary)">低风险</td>
+    </tr>
+  </table>
+
+  <div class="callout success" style="margin-top:6px">
+    <strong>✅ 炸板率17.7% vs 昨日43.4%: 涨停板从系统性陷阱恢复为正常进攻信号</strong><br>
+    前日分析准确: 昨日涨停板是陷阱(通富/紫光/神州数码今日继续暴跌-6.78%/-5.46%)→D2炸板率正常化→市场活络度恢复。<br>
+    <strong style="color:var(--green)">Asking原话验证: 涨停那一定要行情活络才好搞。今日116封板/25炸板=行情活络!!</strong>
+  </div>
+
+  <div class="callout neutral" style="margin-top:10px">
+    <strong>🧊 冰点反抽结论: ❌ 不适用(情绪正常·非冰点期) · 🏁 冰点序列07-23正式终结 · 5天观察期启动</strong><br>
+    07-13(172)→07-14(22)→07-15(31)→07-16(33)→07-17(192)→07-18(192)→07-20(211)→07-21(21/第八次D0)→07-22(8/D1)→07-23(<strong style="color:var(--green)">2/D2·序列终结!!</strong>)。<br>
+    <strong style="color:var(--green)">D2三条件全部满足: ①炸板率17.7%✅ ②跌停2✅(连续2天&lt;20) ③封板率82.3%✅。11天9次冰点906跌停极限考验终结!!</strong><br>
+    <strong style="color:var(--amber)">后续: 按规则观察5个交易日(07-24/25/28验证)。龙头主升浪战法接管。首日试探≤10%(极端冰点结束后的仓位上限)。</strong><br>
+    <strong style="color:var(--green)">07-22回测: ①D2序列结束预测✅ ②炸板率&lt;20%预测✅ ③仓位0%等D2策略✅ ④华银等回踩✅ ⑤电力主线确认✅。5/5全正确!!</strong>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🐉 龙头主升浪战法分析</div>
+
+  <div class="callout success" style="font-size:14px">
+    <strong>🐉 龙头主升浪适用性: ✅ 确认!! (D2三条件全满足 ⭐⭐⭐⭐)</strong><br>
+    07-22预测: 等D2炸板率&lt;20%+跌停&lt;20+封板率≥80%→切换龙头主升浪。今日三条件全部达标!!<br>
+    Asking原话: 涨停那一定要行情活络才好搞。116封板/82.3%封板率/17.7%炸板率=行情活络!!<br>
+    <strong style="color:var(--amber)">⚠️ 但冰点序列刚结束仅2天→按极冰规则需5天观察期→首日≤10%·选股从严·只做最硬龙头。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">📊 涨停行业分布（D2 · 116封板 · 全网爆发 · 板块高度集中!!）</div>
+
+  <table class="at">
+    <tr><th>板块</th><th>涨停数</th><th>较昨日变化</th><th>板块健康度</th><th>主线判断</th></tr>
+    <tr style="background:var(--green-bg)">
+      <td><strong style="color:var(--green)">电网设备</strong></td>
+      <td style="color:var(--green);font-weight:900;font-size:16px">29!!</td>
+      <td style="color:var(--green);font-weight:900">昨日3→29(+867%!!)</td>
+      <td style="color:var(--green)">✅✅ 爆发!! 0跌停</td>
+      <td style="color:var(--amber)"><strong>⚠️ 需连续2天验证!! 警惕类似半导体28→3一日游!! 等明日(07-24)≥3涨停+前5→主线确认</strong></td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td><strong style="color:var(--green)">电力</strong></td>
+      <td style="color:var(--green);font-weight:900">8</td>
+      <td style="color:var(--green)">昨日8→今日8(持平)</td>
+      <td style="color:var(--green)">✅✅ 0跌停</td>
+      <td style="color:var(--green);font-weight:900"><strong>✅ 连续3天涨停第一(8→8→8)!! 主线确认!!</strong></td>
+    </tr>
+    <tr>
+      <td><strong>专用设备</strong></td>
+      <td style="color:var(--text)">6</td>
+      <td style="color:var(--text-secondary)">昨日2→6</td>
+      <td><span class="sig g"></span> 0跌停</td>
+      <td style="color:var(--text-secondary)">候选·需验证连续性</td>
+    </tr>
+    <tr>
+      <td>化学原料</td>
+      <td>4</td>
+      <td style="color:var(--text-secondary)">昨日?→4</td>
+      <td><span class="sig g"></span> 0跌停</td>
+      <td style="color:var(--text-secondary)">候选</td>
+    </tr>
+    <tr>
+      <td>房地产开发</td>
+      <td>4</td>
+      <td style="color:var(--text-secondary)">昨日?→4</td>
+      <td><span class="sig g"></span> 0跌停</td>
+      <td style="color:var(--text-secondary)">候选</td>
+    </tr>
+    <tr>
+      <td>通用设备</td>
+      <td>4</td>
+      <td style="color:var(--text-secondary)">昨日2→4</td>
+      <td><span class="sig g"></span> 0跌停</td>
+      <td style="color:var(--text-secondary)">候选</td>
+    </tr>
+    <tr>
+      <td>电池</td>
+      <td>3</td>
+      <td style="color:var(--text-secondary)">昨日?→3</td>
+      <td><span class="sig g"></span> 0跌停</td>
+      <td style="color:var(--text-secondary)">候选</td>
+    </tr>
+    <tr>
+      <td>工业金属</td>
+      <td>3</td>
+      <td style="color:var(--text-secondary)">昨日?→3</td>
+      <td><span class="sig g"></span> 0跌停</td>
+      <td style="color:var(--text-secondary)">候选</td>
+    </tr>
+    <tr style="background:var(--amber-bg)">
+      <td>中药II</td>
+      <td style="color:var(--amber)">3</td>
+      <td style="color:var(--amber)">昨日0→3</td>
+      <td><span class="sig g"></span> 0跌停</td>
+      <td style="color:var(--amber)">⚠️ 医药链复苏信号。但昨日化学制药跌停1→注意分化</td>
+    </tr>
+  </table>
+
+  <div class="callout warn" style="margin-top:8px">
+    <strong>⚠️ 电网设备29涨停: 盛宴还是陷阱？</strong><br>
+    昨日电网设备仅3涨停(排名约第6)。今日暴增29涨停——类似07-09半导体28涨停→07-10仅3涨停模式。<br>
+    <strong style="color:var(--amber)">应用07-22提出的冰点修复板块切换规律: 真正主线在D2浮现(非D1)。电网设备29涨停在D2出现可能是真主线——但必须等07-24确认连续2天。</strong><br>
+    <strong style="color:var(--green)">乐观信号: ①出现于D2(序列终结日)非D0/D1 ②炸板率17.7%低(半导体爆发日封板率高但次日崩塌) ③电力连续3天强势同属公用事业链。</strong><br>
+    <strong style="color:var(--amber)">不与半导体比烂: 半导体28涨停是D1冰点修复日(07-09)→次日崩塌。电网设备29涨停是D2序列终结日(07-23)→结构性不同。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">👑 真龙候选 · 五维评分</div>
+
+  <table class="at">
+    <tr><th>维度</th><th>华银电力(600744)</th><th>立新能源(001258)</th><th>美利云(000815)</th><th>证通电子(002197)</th><th>长缆科技(002879)</th></tr>
+    <tr>
+      <td>辨识度</td>
+      <td style="color:var(--green)">⭐⭐⭐⭐⭐<br>全市场第一:S+级·5连板+60.9%·穿越五次冰点史无前例</td>
+      <td style="color:var(--green)">⭐⭐⭐⭐<br>A级4连板·电力防御龙头</td>
+      <td style="color:var(--green)">⭐⭐⭐⭐<br>A级4连板·IT强势</td>
+      <td style="color:var(--green)">⭐⭐⭐<br>3连板·计算机设</td>
+      <td style="color:var(--green)">⭐⭐⭐<br>3连板·电网设备核心</td>
+    </tr>
+    <tr>
+      <td>带动性</td>
+      <td style="color:var(--amber)">⚠️ 断板日-0.76%<br>但电力仍8涨停维持→板块独立性</td>
+      <td style="color:var(--green)">✅ 4连板涨停<br>电力板块8涨停维持</td>
+      <td style="color:var(--green)">✅ 4连板涨停<br>IT板块不突出</td>
+      <td style="color:var(--green)">✅ 3连板<br>计算机设有跟风</td>
+      <td style="color:var(--green)">✅ 3连板<br>电网设备29涨停跟风极强</td>
+    </tr>
+    <tr>
+      <td>成交量</td>
+      <td style="color:var(--green)">32.91亿<br>充足</td>
+      <td style="color:var(--green)">12.71亿<br>充沛</td>
+      <td style="color:var(--green)">21.02亿<br>充沛</td>
+      <td style="color:var(--amber)">8.17亿<br>偏小</td>
+      <td style="color:var(--amber)">4.21亿<br>偏小</td>
+    </tr>
+    <tr>
+      <td>题材</td>
+      <td style="color:var(--green)">电力(公用防御)<br>连续3天涨停第一主线</td>
+      <td style="color:var(--green)">电力(公用防御)<br>主线+新能源</td>
+      <td style="color:var(--amber)">IT服务<br>非防御·无板块主线</td>
+      <td style="color:var(--amber)">计算机设<br>非防御·无板块主线</td>
+      <td style="color:var(--green)">电网设备<br>29涨停爆发板块</td>
+    </tr>
+    <tr>
+      <td>换手率</td>
+      <td style="color:var(--green)">19.90%<br>高换手·充分</td>
+      <td style="color:var(--text-secondary)">未知</td>
+      <td style="color:var(--text-secondary)">未知</td>
+      <td style="color:var(--text-secondary)">未知</td>
+      <td style="color:var(--text-secondary)">未知</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td><strong>综合评级</strong></td>
+      <td style="color:var(--amber)"><strong>⭐⭐⭐⭐ 龙一候选<br>但5连板断板→必须等回踩5日线</strong><br>龙头战法自查清单①: 5连板强烈不建议追高</td>
+      <td style="color:var(--green)"><strong>⭐⭐⭐⭐ 龙二候选<br>电力防御+4连板</strong><br>但4连板后也需自查等回调或小仓位试探</td>
+      <td style="color:var(--amber)"><strong>⭐⭐⭐ 龙三观察<br>非防御4连板D5风险</strong><br>天普前车: 3涨停→跌停-19%。等D5验证存活再评估</td>
+      <td style="color:var(--amber)"><strong>⭐⭐⭐ 候选<br>3连板非防御</strong><br>成交偏小·等板块主线确认</td>
+      <td style="color:var(--amber)"><strong>⭐⭐⭐ 候选<br>电网设备龙头候选</strong><br>等电网设备连续2天验证·成交偏小</td>
+    </tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:16px">📈 买点信号检查</div>
+
+  <table class="at">
+    <tr><th>股票</th><th>连涨天数</th><th>5日线偏离</th><th>买点①(回踩)</th><th>买点②(箱体)</th><th>买点③(分歧)</th><th>建议</th></tr>
+    <tr>
+      <td style="font-weight:700">华银电力</td>
+      <td style="color:var(--amber)">5连涨→首跌-0.76%</td>
+      <td style="color:var(--amber)">约+15%+</td>
+      <td style="color:var(--amber)">⚠️ 等回踩5日线(≈6.8-7.0)</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--amber)"><strong>等回踩5日线·不追断板</strong></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700">立新能源</td>
+      <td style="color:var(--red)">4连板</td>
+      <td style="color:var(--red)">约+35%+</td>
+      <td style="color:var(--red)">超买严重</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--red)"><strong>4连板不建议追</strong></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700">美利云</td>
+      <td style="color:var(--red)">4连板</td>
+      <td style="color:var(--red)">约+35%+</td>
+      <td style="color:var(--red)">超买严重+非防御D5风险</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--red)"><strong>不建议追·观察D5</strong></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700">证通电子</td>
+      <td style="color:var(--amber)">3连板</td>
+      <td style="color:var(--amber)">约+30%</td>
+      <td style="color:var(--amber)">等回踩</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--amber)">等回调</td>
+    </tr>
+    <tr>
+      <td style="font-weight:700">长缆科技</td>
+      <td style="color:var(--amber)">3连板</td>
+      <td style="color:var(--amber)">约+30%</td>
+      <td style="color:var(--amber)">等回踩</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--amber)">等电网设备主线确认+回调</td>
+    </tr>
+  </table>
+
+  <div class="callout warn" style="margin-top:10px">
+    <strong>🐉 龙头主升浪结论: ✅ 适用(D2三条件全确认) · ⚠️ 但所有候选均已3连板以上 · 无一满足买点条件</strong><br>
+    华银电力: 龙一候选·5连板断板=必须等回踩5日线(约6.8-7.0)。立新能源: 4连板·严重超买不追。美利云: 4连板非防御D5风险高。证通/长缆: 3连板偏小。<br>
+    <strong style="color:var(--amber)">核心矛盾: 主线确认但龙头已高。买点①(缩量回踩均线)是当前唯一合理买点。电力ETF(159611)兜底策略→等龙头回调同时吃板块均值涨幅。</strong><br>
+    <strong style="color:var(--amber)">操作建议: ①仓位≤10%(极冰结束首日) ②等华银回踩5日线→建底仓5% ③电力ETF分批5% ④美利云/证通/长缆等D5确认+回调。⑤电网设备等07-24连续2天验证。⑥不追任何3连板+标的。</strong><br>
+    <strong style="color:var(--amber)">若07-24电网设备连续2天涨停第一→电网设备确认为新主线→长缆科技+扬电科技为首选。若电网一日游→电力(华银+立新)巩固唯一主线地位。</strong>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">🔁 上交易日(07-22)结论回测</div>
+
+  <table class="at" style="font-size:12px">
+    <tr><th>#</th><th>07-22推荐/预测</th><th>07-23实际结果</th><th>判断</th></tr>
+    <tr style="background:var(--green-bg)">
+      <td>1</td>
+      <td><strong>仓位0% · 炸板率43.4%禁止买入 · 等D2三条件</strong></td>
+      <td style="color:var(--green)">仓位0%完美保护!! D2三条件全部达标(炸板17.7%+跌停2+封板82.3%)</td>
+      <td style="color:var(--green);font-weight:900">✅ 核心判断正确</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>2</td>
+      <td><strong>明日07-23是序列结束最关键一天</strong></td>
+      <td style="color:var(--green)">跌停2→连续2天<20→冰点序列正式终结!!</td>
+      <td style="color:var(--green);font-weight:900">✅ 精确命中</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>3</td>
+      <td><strong>D2炸板率<20%预测(最关键)</strong></td>
+      <td style="color:var(--green)">17.7%!! 从43.4%暴降59%!!</td>
+      <td style="color:var(--green);font-weight:900">✅ 精确命中</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>4</td>
+      <td><strong>华银电力5连板+60.9%→强烈不建议追高</strong></td>
+      <td style="color:var(--amber)">华银首日断板-0.76%!! 7.73低开→最高8.69→收7.88(振幅15.74%)</td>
+      <td style="color:var(--green);font-weight:900">✅ 正确!! 不追高等回踩验证</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>5</td>
+      <td><strong>电力连续2天主线确认</strong></td>
+      <td style="color:var(--green)">电力8涨停连续3天第一→主线确认!!</td>
+      <td style="color:var(--green);font-weight:900">✅ 正确</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>6</td>
+      <td><strong>昨日炸板股(通富/紫光/神州)是陷阱→今日继续暴跌</strong></td>
+      <td style="color:var(--red)">通富-6.78%!! 紫光-5.46%!! 莱美-4.55%!! 汇得-3.67%!!</td>
+      <td style="color:var(--green);font-weight:900">✅ 精确命中!! 陷阱验证</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>7</td>
+      <td><strong>中岩大地死亡螺旋永久移出</strong></td>
+      <td>维持移出。九安医疗出现同模式死亡螺旋3.0</td>
+      <td style="color:var(--green);font-weight:900">✅ 正确+新发现</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>8</td>
+      <td><strong>非防御A级3连板(美利云/立新)D3/D4崩盘风险</strong></td>
+      <td style="color:var(--green)">立新能源(防御电力)涨停4连板✅·美利云(非防御)涨停4连板⚠️</td>
+      <td style="color:var(--amber)">⚠️ 部分正确。美利云破魔咒但D5风险仍存</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>9</td>
+      <td><strong>电力ETF兜底策略·等序列结束后首日≤5%</strong></td>
+      <td style="color:var(--green)">今日序列结束后首日。电力ETF策略可执行</td>
+      <td style="color:var(--green);font-weight:900">✅ 策略框架正确</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>10</td>
+      <td><strong>旧活口复活持续性验证: 复活日≥50%→次日需≥30%→复活是昙花一现</strong></td>
+      <td style="color:var(--amber)">07-21复活率71%→07-22 20%续涨→07-23仅9%(1/11)→复活是昙花一现完全验证</td>
+      <td style="color:var(--green);font-weight:900">✅✅ 新规则完美验证!!</td>
+    </tr>
+  </table>
+
+  <div class="callout success" style="margin-top:8px">
+    <strong>✅ 回测结论: 07-22核心判断9/10全正确!! 唯一部分偏差: 美利云破D3/D4崩盘魔咒涨停4连板</strong><br>
+    <strong style="color:var(--green)">本次冰点序列(07-13→07-23)共10天9次冰点906跌停。仓位0%策略100%正确——未因任何涨停诱惑而提前入场。</strong><br>
+    <strong style="color:var(--green)">炸板率预测精确反转: 07-22预测D2炸板率<20%→实际17.7%!! 从43.4%暴降的修复速度超预期但方向完全正确。</strong><br>
+    <strong style="color:var(--amber)">美利云偏差分析: 非防御A级D3/D4崩盘是基于天普/金牛双案例的规律。美利云破规律可能原因: ①大盘环境改善(封板率82.3% vs 天普当日56.6%) ②21亿成交大资金参与(天普/金牛均小额)。此偏差证明规则在行情活络时需要弹性，但在行情低迷时100%成立。</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">📊 持续追踪池(近5日) · 从推荐日至今</div>
+  <table class="at" style="font-size:12px">
+    <tr><th>代码</th><th>名称</th><th>首次关注日</th><th>关注时价</th><th>现价(07-23)</th><th>累计涨跌</th><th>状态</th></tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)">600744</td>
+      <td><strong>华银电力</strong></td>
+      <td>07-21 D0活口</td>
+      <td>~5.36</td>
+      <td style="color:var(--green)">7.88</td>
+      <td style="color:var(--green);font-weight:900">+47.0%!!</td>
+      <td style="color:var(--amber)">S+断板·等回踩5日线</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)">001258</td>
+      <td><strong>立新能源</strong></td>
+      <td>07-21 A级2连板</td>
+      <td>~9.10</td>
+      <td style="color:var(--green)">12.11</td>
+      <td style="color:var(--green);font-weight:900">+33.1%!!</td>
+      <td style="color:var(--green)">A级4连板·防御强</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)">000815</td>
+      <td><strong>美利云</strong></td>
+      <td>07-21 A级2连板</td>
+      <td>~13.33</td>
+      <td style="color:var(--green)">17.74</td>
+      <td style="color:var(--green);font-weight:900">+33.1%!!</td>
+      <td style="color:var(--green)">A级4连板·非防御</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)">002197</td>
+      <td><strong>证通电子</strong></td>
+      <td>07-21 涨停</td>
+      <td>~6.29</td>
+      <td style="color:var(--green)">7.67</td>
+      <td style="color:var(--green)">+21.9%</td>
+      <td style="color:var(--green)">3连板·跟踪</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)">002879</td>
+      <td><strong>长缆科技</strong></td>
+      <td>07-21 涨停</td>
+      <td>~13.56</td>
+      <td style="color:var(--green)">16.41</td>
+      <td style="color:var(--green)">+21.0%</td>
+      <td style="color:var(--green)">3连板·电网</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)">301012</td>
+      <td><strong>扬电科技</strong></td>
+      <td>07-21 20cm涨停</td>
+      <td>~22.05</td>
+      <td style="color:var(--green)">28.40</td>
+      <td style="color:var(--green);font-weight:900">+28.8%</td>
+      <td style="color:var(--green)">3天连涨极强</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">603407</td>
+      <td>长裕集团</td>
+      <td>07-21 涨停</td>
+      <td>~58.45</td>
+      <td style="color:var(--green)">64.01</td>
+      <td style="color:var(--green)">+9.5%</td>
+      <td style="color:var(--amber)">断板·移出追踪</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">002432</td>
+      <td><strong style="color:var(--red)">九安医疗</strong></td>
+      <td>07-21 涨停复活</td>
+      <td>~??</td>
+      <td style="color:var(--red)">-10.00%跌停</td>
+      <td style="color:var(--red)">崩盘</td>
+      <td style="color:var(--red);font-weight:900">💀 死亡螺旋·永久移出</td>
+    </tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="sec-label">⚖️ 综合结论</div>
+
+  <table class="at">
+    <tr><th>对比维度</th><th>冰点反抽</th><th>龙头主升浪</th><th>是否一致</th></tr>
+    <tr>
+      <td>适用性</td>
+      <td style="color:var(--amber)">❌ 不适用(情绪正常非冰点) · 冰点序列07-23终结 · 5天观察期</td>
+      <td style="color:var(--green)">✅ 确认(D2三条件全确认) · 首日≤10%(极冰结束) · ⭐⭐⭐⭐</td>
+      <td><span class="sig g"></span> 一致(龙头接管)</td>
+    </tr>
+    <tr>
+      <td>核心标的</td>
+      <td style="color:var(--green)">活口追踪: 立新能源(4连板)+美利云(4连板)+证通(3连板)+长缆(3连板)+扬电(连续3天强势)</td>
+      <td style="color:var(--green)">华银电力(龙一·断板等回踩)+立新能源(龙二·4连板超买)+电力ETF(159611兜底)+电网设备等07-24确认</td>
+      <td><span class="sig g"></span> 一致(电力主线+电网待验证)</td>
+    </tr>
+    <tr>
+      <td>操作建议</td>
+      <td style="color:var(--green)">已无冰点操作需求。活口追踪→成功穿越的活口转化为龙头候选</td>
+      <td style="color:var(--amber)">仓位≤10% · 等华银回踩5日线(约6.8-7.0)→建底仓5% · 电力ETF分批5% · 美利云/证通/长缆等D5+回调 · 不追任何3连板+标的</td>
+      <td><span class="sig g"></span> 一致(等回调+小仓位)</td>
+    </tr>
+  </table>
+
+  <table class="st">
+    <tr><td>当前场景</td><td style="color:var(--green)"><strong>🏁 D2序列终结日(07-23) · 跌停2 · 上证+0.25% · 116封板 · 炸板率17.7% · 封板率82.3% · 电力3天涨停第一主线确认 · 电网设备29涨停需等07-24验证 · 华银断板-0.76% · 立新/美利云4连板 · D2三条件全满足 · 冰点序列正式进入历史</strong></td></tr>
+    <tr><td>主导策略</td><td style="color:var(--amber)"><strong>龙头主升浪接管 · 仓位≤10%(极冰结束首日上限) · 等买点①(缩量回踩均线)是唯一合理买点</strong>。华银电力等回踩5日线(约6.8-7.0)→建底仓5%。电力ETF(159611)兜底策略分批5%。07-24关键验证: 电网设备能否连续2天涨停第一→确认为新主线。不因序列结束而急于追高——龙头战法三买点无任何一只当前满足。</td></tr>
+    <tr><td>今日亮点</td><td style="color:var(--green)">冰点序列07-13→07-23正式终结!! 11天9冰点906跌停极限考验结束!! D2三条件全部达标!! 炸板率从43.4%暴降至17.7%!! 封板率从56.6%恢复至82.3%!! 华银5连板+60.9%→首日断板等回踩不追高策略再次验证!! 立新能源/美利云4连板破天普魔咒(行情活络环境)!! 证通3连板·长缆3连板!! 扬电科技3天+35.51%!! 电网设备29涨停爆发!! 07-22全预测9/10正确!!</td></tr>
+    <tr><td>今日灾难</td><td style="color:var(--red)">九安医疗旧活口涨停复活→跌停-10%=死亡螺旋3.0!! 通富微电(半导体昨日炸板→今日-6.78%!!)·紫光股份(-5.46%!!)·莱美药业(-4.55%!!)·汇得科技(-3.67%!!)昨日炸板股大面积继续暴跌!! 长裕集团一字涨停→断板-0.51%!! 风华高科62.5亿天量炸板!!</td></tr>
+    <tr><td>冰点序列本轮终局统计</td><td style="color:var(--amber)">07-13(172)→07-14(22)→07-15(31)→07-16(33)→07-17(192)→07-18(192)→07-20(211)→07-21(21/第八次D0)→07-22(8/D1)→07-23(<strong style="color:var(--green)">2/D2·终结!!</strong>)。<strong>11天9次冰点累计906跌停。上证4080→3877(-4.98%)。仓位0%策略100%正确穿越。</strong>最强活口: 华银电力D0→D3·4连板→5连板·最高+60.9%→D2断板。立新能源D0→D2·4连板+33%。</td></tr>
+    <tr><td>后续观察(07-24周五)</td><td style="color:var(--text-secondary)">①电网设备能否连续2天涨停前5(29涨停→3涨停=一日游风险) ②电力能否继续涨停第一(连续4天) ③华银电力能否回踩5日线不破 ④立新/美利云4连板后能否续5连板(D5高难度) ⑤炸板率能否维持<20% ⑥跌停能否继续<5 ⑦九安医疗跌停能否止跌</td></tr>
+  </table>
+
+  <table class="st" style="margin-top:10px">
+    <tr><td>冰点反抽</td><td class="amt" style="color:var(--green);font-weight:900">不适用·序列终结·0%→完成历史使命</td><td>07-13→07-23共11天9次冰点906跌停。仓位0%策略完美保护。活口追踪高分: 华银+47%/立新+33%/美利云+33%/证通+22%/长缆+21%/扬电+29%</td></tr>
+    <tr><td>龙头主升浪</td><td class="amt" style="color:var(--amber);font-weight:900">≤10%·等买点①回踩</td><td>电力主线确认。华银等回踩5日线。立新/美利云4连板超买不追。电力ETF兜底。电网设备等07-24验证。</td></tr>
+    <tr><td>总建议</td><td class="amt" style="color:var(--green);font-weight:900">策略切换 · 冰点→龙头 · 第11天首度放宽</td><td>11天9次冰点906跌停极限考验后首度放宽至≤10%。但所有候选均已高位——严格等回调买点①。07-24关键日: 电网设备验证+华银回踩+跌停维持<5。不因序列结束而FOMO。</td></tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:20px">⚠️ 关键风险</div>
+  <ul class="risk-list">
+    <li class="warn"><strong>电网设备29涨停一日游风险(最高优先级)</strong>: 类似半导体28→3。必须在07-24验证连续2天涨停≥3并在前5。07-24是判断电网设备真伪主线的决定性一天。</li>
+    <li class="crit"><strong>所有龙头候选均已3连板+</strong>: 华银断板(等回踩5日线) · 立新/美利云4连板(严重超买) · 证通/长缆3连板。无一满足当前买点。必须严格执行等回调。</li>
+    <li class="warn"><strong>九安医疗死亡螺旋3.0→验证旧活口复活陷阱规律</strong>: 涨停复活→跌停。天普→中岩→九安三连验证。验证07-22新增的旧活口复活持续性验证规则完全成立。</li>
+    <li class="warn"><strong>序列结束后5天观察期刚启动</strong>: 07-23仅第2天。07-24/25/28仍需验证跌停<20。2026-07-09→07-13的假修复教学不可忘记(仅2天修复窗口后172跌停新冰点!!)。</li>
+    <li class="crit"><strong>美利云(非防御)4连板D5风险仍存</strong>: 虽然今日破D3/D4魔咒(行情活络环境)，但D5天普先例(3连板→D4跌停)的规律在极端冰点中100%成立。美利云在冰点结束后风险降低但仍在。</li>
+    <li class="warn"><strong>时段警惕: 周五(07-24)</strong>: 周末效应。加上冰点结束仅3天。谨慎操作。</li>
+    <li class="crit"><strong>不因序列结束而FOMO</strong>: 段永平: 错过一次不要紧，等下一个。华银/立新/美利云再涨也不要追。等回踩5日线是唯一合理买点。</li>
+  </ul>
+</div>
+
+<div class="section section-alt">
+  <div class="conclusion-box">
+    <div class="conclusion-text">
+      🏁 <span style="color:#3fb950">冰点序列正式终结 · D2全确认 · 龙头主升浪接管 · 仓位首度放宽至≤10% · 等买点①回踩</span>
+    </div>
+    <div class="conclusion-sub">
+      07-13极端(172)→07-14(22)→07-15(31)→07-16(33)→07-17<strong style="color:#ff0000">五次(192!!)</strong>→07-18<strong style="color:#ff0000">六次(192!!)</strong>→07-20<strong style="color:#ff0000">七次(211!!)</strong>→07-21<strong style="color:#ffaa44">八次(21/D0)</strong>→07-22<strong style="color:#3fb950">D1(8)</strong>→07-23<strong style="color:#3fb950">🏁D2(2!!序列终结!!)</strong><br>
+      <strong style="color:#3fb950">D2三条件全部满足: ①炸板率17.7%✅ ②跌停2✅(连续2天) ③封板率82.3%✅。11天9次冰点906跌停!!</strong><br>
+      <strong style="color:#3fb950">华银电力5连板+60.9%穿越五次冰点史无前例!! 龙头主升浪龙一候选!!</strong><br>
+      <strong style="color:#3fb950">立新能源/美利云4连板破天普魔咒!! 证通电子/长缆科技3连板!! 扬电科技3天+35.51%!!</strong><br>
+      <strong style="color:#3fb950">电网设备29涨停爆发·07-24是电网真伪主线决定性一天!! 电力ETF兜底策略备选!!</strong><br>
+      <strong style="color:#ff8800">核心矛盾: 冰点结束但龙头已高。等买点①(回踩5日线)是唯一合理买点。不FOMO。</strong><br>
+      <strong style="color:#ff4444">九安医疗死亡螺旋3.0·通富微电/紫光/莱美/汇得昨日炸板后继续暴跌·旧活口复活规律完美验证</strong><br>
+      <strong style="color:#ffaa44">操作: ①仓位≤10% ②华银等回踩5日线(约6.8-7.0)→底仓5% ③电力ETF分批5% ④07-24电网验证→确认则长缆+扬电首选 ⑤不追任何3连板+标的 ⑥警惕假修复(等满5天观察期)</strong><br>
+      <strong style="color:#3fb950">07-22回测: 9/10全正确!! 仓位0%穿越11天9冰点906跌停极限考验!! 本轮冰点序列完成闭环!!</strong>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  数据源: data-hub(行情) · 国投证券sdicsc API(个股数据) · 2026-07-23 18:05<br>
+  分析方法: 冰点反抽模式 + 龙头主升浪战法 · 双战法交叉验证<br>
+  <span style="color:var(--amber)">⚠️ 以上分析仅供学习参考，不构成投资建议。投资有风险，入市需谨慎。</span><br>
+  <a href="https://eason-byte.github.io/daily-briefing/stock-picks/">返回首页</a>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-23T08:30:17+08:00",
-  "today": "2026-07-23",
+  "updated": "2026-07-24T08:30:24+08:00",
+  "today": "2026-07-24",
   "events": [
     {
       "id": "sk-hynix-us-ipo",
@@ -924,7 +924,7 @@
   ],
   "stats": {
     "total_events": 42,
-    "upcoming_7d": 3,
+    "upcoming_7d": 4,
     "upcoming_30d": 11,
     "critical_events": 4,
     "monitoring": 8

@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-24T08:30:24+08:00",
-  "today": "2026-07-24",
+  "updated": "2026-07-25T08:30:05+08:00",
+  "today": "2026-07-25",
   "events": [
     {
       "id": "sk-hynix-us-ipo",
@@ -33,7 +33,7 @@
       "importance": 5,
       "impact": "双向",
       "impact_dir": "both",
-      "status": "upcoming",
+      "status": "today",
       "type": "财报",
       "description": "2倍杠杆产品，最重要做T窗口。Q1营收52.58万亿韩元(+198%)，OP利润37.61万亿(+405%)。市场关注AI存储需求持续性、HBM占比、利润率是否触顶。",
       "detail": "财报超预期→大涨；不及预期→暴跌（2x放大）。需提前3天预分析。",
@@ -924,7 +924,7 @@
   ],
   "stats": {
     "total_events": 42,
-    "upcoming_7d": 4,
+    "upcoming_7d": 5,
     "upcoming_30d": 11,
     "critical_events": 4,
     "monitoring": 8

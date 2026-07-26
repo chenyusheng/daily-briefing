@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>涨停板总舵主——徐翔的八步操盘法与交易哲学</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --heading: #f0f6fc;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --red: #f85149;
+    --yellow: #d29922;
+    --orange: #d4760e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+    line-height: 1.8;
+    padding: 20px;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+  header {
+    text-align: center;
+    padding: 40px 0 30px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+  }
+  h1 { color: var(--heading); font-size: 1.8em; margin-bottom: 10px; }
+  .subtitle { color: #8b949e; font-size: 0.95em; }
+  .date { color: #8b949e; font-size: 0.85em; margin-top: 8px; }
+  h2 {
+    color: var(--accent);
+    font-size: 1.35em;
+    margin: 35px 0 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 { color: var(--heading); font-size: 1.1em; margin: 25px 0 12px; }
+  p { margin: 12px 0; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .card h3 { margin-top: 0; }
+  .quote {
+    border-left: 3px solid var(--yellow);
+    padding: 12px 16px;
+    margin: 16px 0;
+    background: rgba(210, 153, 34, 0.08);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: #d2a8ff;
+  }
+  .table-wrap { overflow-x: auto; margin: 16px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    text-align: left;
+  }
+  th { background: #1c2128; color: var(--accent); font-weight: 600; }
+  tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin: 2px;
+  }
+  .tag-red { background: rgba(248,81,73,0.15); color: var(--red); }
+  .tag-green { background: rgba(63,185,80,0.15); color: var(--green); }
+  .tag-yellow { background: rgba(210,153,34,0.15); color: var(--yellow); }
+  .tag-blue { background: rgba(88,166,255,0.15); color: var(--accent); }
+  .tag-orange { background: rgba(212,118,14,0.15); color: var(--orange); }
+  .warning {
+    background: rgba(248,81,73,0.1);
+    border: 1px solid rgba(248,81,73,0.3);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 18px 0;
+    color: var(--red);
+    font-size: 0.92em;
+  }
+  .insight-box {
+    background: rgba(63,185,80,0.08);
+    border: 1px solid rgba(63,185,80,0.25);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 18px 0;
+  }
+  ul, ol { margin: 10px 0 10px 20px; }
+  li { margin: 6px 0; }
+  .num-list { list-style: none; counter-reset: step; }
+  .num-list li {
+    counter-increment: step;
+    margin: 14px 0;
+    padding-left: 36px;
+    position: relative;
+  }
+  .num-list li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 26px;
+    height: 26px;
+    background: var(--accent);
+    color: #000;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 26px;
+    font-weight: 700;
+    font-size: 0.85em;
+  }
+  .skills-link {
+    display: inline-block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 6px;
+    color: var(--accent);
+    text-decoration: none;
+    margin: 4px;
+    font-size: 0.9em;
+  }
+  .skills-link:hover { border-color: var(--accent); }
+  footer {
+    text-align: center;
+    padding: 30px 0;
+    color: #8b949e;
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    h1 { font-size: 1.4em; }
+    table { font-size: 0.8em; }
+    th, td { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>🦅 涨停板总舵主——徐翔的八步操盘法与交易哲学</h1>
+  <div class="subtitle">从3万到210亿：关于专注、人性博弈与打板体系的方法论</div>
+  <div class="date">📅 2026-07-26 | 投资大师学习笔记 #14</div>
+</header>
+
+<div style="text-align:center;margin:20px 0;">
+  <span class="tag tag-orange">涨停板敢死队总舵主</span>
+  <span class="tag tag-red">打板体系集大成者</span>
+  <span class="tag tag-yellow">人性博弈</span>
+  <span class="tag tag-green">极致专注</span>
+  <span class="tag tag-blue">龙虎榜分析</span>
+</div>
+
+<!-- ======== 导语 ======== -->
+<h2>导语：争议与传奇并存</h2>
+
+<p>徐翔（1977-），浙江宁波人，中国证券市场最具传奇色彩也最具争议性的人物之一。17岁辍学入市，3万元起家，巅峰时期身家超210亿。他是涨停板敢死队总舵主、宁波解放南路的灵魂人物、泽熙投资创始人。</p>
+
+<p>本文聚焦其<strong>方法论层面</strong>的价值——他创立并完善了中国最著名的涨停板交易体系。他的八步操盘法、抄底黑天鹅的博弈逻辑、对人性底层的深刻理解，以及22年如一日每天12小时的极致专注，都是值得每个交易者学习的。</p>
+
+<div class="warning">
+  ⚠️ <strong>重要声明</strong>：徐翔后期因内幕交易、操纵市场被司法审判。本文<strong>只研究其方法论价值</strong>，不认可其违法行为。涨停板战法本身是中性的，但涉及内幕信息/市场操纵的环节严禁模仿，仅作为"识别这类模式、避免成为接盘侠"的市场知识收录。
+</div>
+
+<!-- ======== 一、涨停板八步操盘法 ======== -->
+<h2>一、涨停板八步操盘法（核心遗产）</h2>
+
+<p>1996年A股推行涨跌停板制度，徐翔与表哥马信琪根据新规则琢磨出了这套战法，堪称中国打板交易的"九阴真经"。6个月实战磨合后，成为他从3万到210亿的底层工具。</p>
+
+<div class="card">
+<h3>📋 八步原则详解</h3>
+<div class="table-wrap">
+<table>
+  <tr><th>#</th><th>原则</th><th>实战逻辑</th></tr>
+  <tr><td>1</td><td><strong>上午十点半前封板</strong></td><td>打板本质是事件驱动。前一夜的重要消息在早盘一小时集中兑现，十点半前封板代表主力认可度最高</td></tr>
+  <tr><td>2</td><td><strong>低价股优先</strong></td><td>价格低不引人注目，散户有资金参与第二天接力，空间大</td></tr>
+  <tr><td>3</td><td><strong>分时走势凌厉</strong></td><td>直线拉升或三段式拉升秒板——不给散户上车机会的板质量更高。犹豫式封板往往是诱多</td></tr>
+  <tr><td>4</td><td><strong>股性要活</strong></td><td>历史上出现过连续涨停板的票，说明股性好、有人气记忆、号召力强。冷门股即使涨停也难成龙头</td></tr>
+  <tr><td>5</td><td><strong>避开基金重仓股</strong></td><td>基金是游资的对立方。基金持仓占比过高，游资拉升时基金会砸盘。这是游资选股的核心限制条件</td></tr>
+  <tr><td>6</td><td><strong>题材+次新股</strong></td><td>主流题材叠加次新股属性，是妖股高频组合。次新股筹码干净、无历史套牢盘、流通盘小</td></tr>
+  <tr><td>7</td><td><strong>充分换手</strong></td><td>换手足够代表买卖双方充分博弈，能经受群众检验的封板才真实。缩量一字板后续容易A杀</td></tr>
+  <tr><td>8</td><td><strong>看龙虎榜</strong></td><td>注意上榜游资的口碑。某些游资被其他游资视为"砸盘王"，看到他在榜就该回避</td></tr>
+</table>
+</div>
+</div>
+
+<div class="quote">
+  "跟庄涨停板八步操盘法"——徐翔从不承认自己有一套"系统"，但研究他的交易记录可以清晰地归纳出这八个筛选维度。
+</div>
+
+<h3>八步法与龙头派体系的关系</h3>
+<ul>
+  <li><strong>Asking（A神）</strong> 提出了方向："只做龙头"</li>
+  <li><strong>徐翔</strong> 提供了筛选标准：八步法解决"哪个候选股可能成为龙头"</li>
+  <li><strong>赵老哥</strong> 解决了买点："二板定龙头"确认时机</li>
+  <li>三者形成完整链条：<strong>徐翔筛选候选 → 赵老哥确认买点 → Asking执行龙头交易</strong></li>
+</ul>
+
+<!-- ======== 二、抄底黑天鹅 ======== -->
+<h2>二、抄底黑天鹅：重庆啤酒经典复盘</h2>
+
+<div class="card">
+<h3>📈 重庆啤酒（2011-2012）完整时间线</h3>
+<ul>
+  <li><strong>2011年12月</strong>：重庆啤酒乙肝疫苗揭盲数据失败，股价从83.12元开始连续跌停</li>
+  <li><strong>第8个跌停后（~24元）</strong>：徐翔第一次试探性抄底</li>
+  <li><strong>继续跌停至第11个（~20元）</strong>：徐翔第二次重仓抄底，买入约3000万股</li>
+  <li><strong>2012年1-2月</strong>：股价反弹至35元附近，一个月涨幅近75%</li>
+  <li><strong>35元附近</strong>：徐翔迅速清仓套现，获利数亿元</li>
+</ul>
+</div>
+
+<div class="quote">
+  "人在绝望的时候，只要看见一点点希望，被套牢的人就会去期待这个缥缈的希望，不停的幻想，能不能再涨一点？——而这，就给了我控制局面的机会。" — 徐翔
+</div>
+
+<h3>抄底方法论提炼</h3>
+<ol>
+  <li><strong>不等猜底，等极端恐慌释放</strong>：连板跌停不是买点，等恐慌充分释放+出现"绝望中的一丝希望"才是</li>
+  <li><strong>分步抄底，不all-in</strong>：第一次试探仓（24元）→确认止跌后加更大仓位（20元）</li>
+  <li><strong>利用套牢者心理博弈</strong>：深套者看到反弹不舍得割，甚至会幻想"还能再涨一点"追加买入，形成反弹合力</li>
+  <li><strong>反弹到位立刻离场</strong>：赚修复的钱，不做"价值投资"式长持</li>
+</ol>
+
+<div class="insight-box">
+  <strong>💡 与冰点反抽的异同：</strong><br>
+  情绪派的冰点反抽做的是<strong>市场/板块冰点</strong>；徐翔做的是<strong>个股黑天鹅</strong>，需要对公司基本面的独立判断（判断利空是否已price in）。散户模仿风险极高，但对理解极端行情的反弹结构有参考价值。
+</div>
+
+<!-- ======== 三、定增+二级联动 ======== -->
+<h2>三、一二级联动（知识储备型）</h2>
+
+<p>徐翔后期转型阳光私募后发展出的核心模式，以下仅作为市场知识收录：</p>
+
+<div class="table-wrap">
+<table>
+  <tr><th>环节</th><th>操作</th><th>盈利来源</th></tr>
+  <tr><td>① 定增参与</td><td>通过泽熙产品低价参与上市公司定向增发</td><td>折价安全垫</td></tr>
+  <tr><td>② 利好推动</td><td>与上市公司配合推出高送转、并购等利好</td><td>拉升股价</td></tr>
+  <tr><td>③ 二级退出</td><td>在股价拉升后有序卖出</td><td>一二级市场价差</td></tr>
+  <tr><td>④ 闭环</td><td>与原始股东利益绑定，形成循环</td><td>多轮操作</td></tr>
+</table>
+</div>
+
+<div class="warning">
+  <strong>‼️ 法律红线</strong>：该模式已被司法定性为内幕交易和市场操纵。学习的价值在于<strong>识别</strong>——当看到某公司"定增解禁+密集利好+大股东减持"同时出现时，能判断其背后的利益链条，避免成为接盘侠。
+</div>
+
+<!-- ======== 四、极致专注力 ======== -->
+<h2>四、交易员的极致专注：22年如一日</h2>
+
+<div class="quote">
+  "徐翔每天至少在股市上花12小时研究，不做其他任何事。除生病起不来和亲人手术陪护外，从未缺席。从1993年到2015年，持续22年。" — 泽熙前员工回忆
+</div>
+
+<p>徐翔的日程表：</p>
+<ul>
+  <li><strong>早间</strong>：听取研究员行业汇报，梳理当日信息</li>
+  <li><strong>交易时间</strong>：进入交易室，全神贯注盯盘，下达指令</li>
+  <li><strong>收盘后</strong>：复盘研究，逐笔检查交易记录</li>
+  <li><strong>生活</strong>：身家过亿仅买几套西服，无奢华开销</li>
+  <li><strong>驱动力</strong>：后期已不为钱，纯粹是对交易本身的热爱和痴迷</li>
+</ul>
+
+<div class="insight-box">
+  <strong>💡 可落地的启发</strong>：<br>
+  「专注就是最好的天赋」——22年如一日的12小时工作，才是徐翔真正的"天赋"。每天收盘后至少花1小时深度复盘，逐笔检查交易逻辑、情绪状态、纪律执行，比任何技术指标都重要。
+</div>
+
+<!-- ======== 五、与其他流派的关系 ======== -->
+<h2>五、徐翔与龙头派其他大师对比</h2>
+
+<div class="table-wrap">
+<table>
+  <tr><th>维度</th><th>徐翔</th><th>Asking（A神）</th><th>赵老哥</th><th>章盟主</th></tr>
+  <tr><td>起步</td><td>3万（17岁辍学）</td><td>10万</td><td>10万</td><td>5万</td></tr>
+  <tr><td>终极规模</td><td>~210亿</td><td>~10亿</td><td>~10亿</td><td>~20-50亿</td></tr>
+  <tr><td>核心武器</td><td>八步打板+一二级联动</td><td>龙头战法</td><td>二板定龙头</td><td>格局+容量趋势</td></tr>
+  <tr><td>方法论体系</td><td>最完整、最系统</td><td>偏心法理念</td><td>偏操作技术</td><td>偏宏观判断</td></tr>
+  <tr><td>历史定位</td><td>涨停战法集大成者</td><td>龙头战法开创者</td><td>打板技术最纯熟</td><td>游资机构化代表</td></tr>
+</table>
+</div>
+
+<!-- ======== 六、吸收总结 ======== -->
+<h2>六、吸收总结：学到了什么</h2>
+
+<div class="card">
+<h3>✅ 主要吸收 → dragon-head-school（龙头派）</h3>
+<ul>
+  <li><strong>八步操盘法</strong>：完整补充了龙头派的选股标准——从封板时间、价格、换手、基金持仓到龙虎榜的全维度筛选</li>
+  <li><strong>人性博弈</strong>：深套者的心理博弈逻辑，补充了"为什么冰点后会有反弹"的行为金融学解释</li>
+  <li><strong>专注力纪律</strong>：每天12小时的研究复出纪律，成为龙头派交易员的职业要求参考</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>📎 次要参考 → sentiment-school（情绪派）</h3>
+<ul>
+  <li>个股级黑天鹅抄底作为冰点反抽的平行视角补充</li>
+  <li>深套者心理模型有助于理解极端行情的反弹结构</li>
+</ul>
+</div>
+
+<div class="warning">
+  <strong>学习的边界：</strong> 徐翔的定增+二级联动属于违法行为，只作为市场知识收录。技能更新中明确标注了法律红线，操作时严禁模仿。
+</div>
+
+<!-- ======== 金句 ======== -->
+<h2>七、徐翔语录精选</h2>
+
+<div class="quote">
+  "别人不敢像我赌这么大，因为别人没有钱。"
+</div>
+<div class="quote">
+  "人在绝望的时候，只要看见一点点希望，被套牢的人就会去期待这个缥缈的希望。"
+</div>
+<div class="quote">
+  "有些游资口碑很差，其他游资只要看到他来了，第二天开盘就砸。"
+</div>
+<div class="quote">
+  "他每天早上开会，然后进交易室到收盘，收盘后复盘研究，二十多年都是这样。"
+</div>
+
+<!-- ======== 学习卡片 ======== -->
+<h2>📊 今日学习卡片</h2>
+<div class="card" style="background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);">
+<table>
+  <tr><td><strong>大师</strong></td><td>徐翔（总舵主）</td></tr>
+  <tr><td><strong>标签</strong></td><td>涨停板八步操盘法 / 抄底黑天鹅 / 人性博弈 / 极致专注</td></tr>
+  <tr><td><strong>核心一句话</strong></td><td>用系统化的八步筛选找到龙头候选股，用对套牢者人性的深刻理解赚修复的钱</td></tr>
+  <tr><td><strong>吸收到skill</strong></td><td>dragon-head-school（主要）+ sentiment-school（补充）</td></tr>
+  <tr><td><strong>最值的实战标准</strong></td><td>避开基金重仓股（八步法#5）+ 充分换手检验（八步法#7）</td></tr>
+  <tr><td><strong>最值得学习的素质</strong></td><td>22年每天12小时的专注——天赋的本质是持续的时间投入</td></tr>
+  <tr><td><strong>法律红线</strong></td><td>定增+内幕信息+二级联动的违法模式，仅作为"避免被割"的知识储备</td></tr>
+</table>
+</div>
+
+<footer>
+  <p>📖 投资大师学习计划 · 第14天</p>
+  <p>返回 <a href="https://chenyusheng.github.io/daily-briefing/" style="color:var(--accent);">每日简报</a></p>
+</footer>
+
+</div>
+</body>
+</html>

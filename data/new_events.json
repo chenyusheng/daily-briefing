@@ -33,20 +33,36 @@
       "tags": ["SpaceX", "Starship", "助推器失败", "SPCX", "Starlink"]
     },
     {
-      "id": "sk-hynix-q2-early-results-20260724",
+      "id": "sk-hynix-q2-confirmed-20260724",
       "date": "2026-07-24",
-      "date_label": "7月24日(疑似提前披露)",
-      "title": "SK海力士Q2业绩可能已提前披露(韩联社7/24报道创纪录利润)",
+      "date_label": "7月24日(已确认)",
+      "title": "SK海力士Q2业绩确认:创纪录利润但股价暴跌-8.53%",
       "stock": "07709",
       "stock_name": "XL二南方海力士",
       "color": "purple",
       "importance": 5,
-      "impact": "利好",
-      "impact_dir": "up",
+      "impact": "双向",
+      "impact_dir": "both",
+      "status": "monitoring",
+      "type": "财报后续",
+      "description": "SK海力士7/24公布Q2营业利润首超9万亿韩元(创纪录),营收22.23万亿(+35.4%),净利6.99万亿(+69.8%)。但同日股价暴跌-8.53%至178.1万韩元。Buy the rumor sell the news:财报前已涨(7/23 +4.86%),利好兑现后获利盘涌出。市场同时担忧DRAM周期见顶,叠加ADR套利卖压。2x杠杆07709单日跌幅可能达-17%。需跟踪是否连续下跌或企稳。",
+      "tags": ["海力士", "Q2", "selloff", "sell the news", "DRAM周期"]
+    },
+    {
+      "id": "fomc-rate-hike-expectations-20260726",
+      "date": "2026-07-29",
+      "date_label": "7月29日FOMC",
+      "title": "FOMC加息预期逆转:降息变加息(油价飙升驱动)",
+      "stock": "宏观",
+      "stock_name": "宏观事件",
+      "color": "gray",
+      "importance": 5,
+      "impact": "重大利空",
+      "impact_dir": "down",
       "status": "upcoming",
-      "type": "财报",
-      "description": "韩联社(Yonhap)7/24报道称SK海力士Q2营业利润首超9万亿韩元(+35.4% YoY营收至22.23万亿),净利润+69.8%至6.99万亿。营收和利润均超历史最高(Q4 2025)。此前events.json标注7/22-29范围,new_events标注7/29精确日期。韩联社属韩国官方通讯社,可能为官方提前披露或记者预览。需确认真实性。若属实,7/25(今日)韩国/港股应有明显上涨。",
-      "tags": ["海力士", "Q2财报", "创纪录", "HBM", "日期确认"]
+      "type": "宏观",
+      "description": "CME FedWatch 7/24:7月FOMC加息25bp概率35.8%,9月至少加息25bp概率82.1%。此前市场普遍预期7月开启降息。预期逆转主因:布伦特原油7月涨30%逼近$100(霍尔木兹二次封锁),通胀压力卷土重来。若7/29美联储确认加息或鹰派→全球风险资产承压,小米/海力士/恒生科技ETF均受冲击。",
+      "tags": ["美联储", "加息", "FOMC", "通胀", "油价", "利率"]
     }
   ]
 }

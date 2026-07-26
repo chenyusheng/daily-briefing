@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-25T08:30:05+08:00",
-  "today": "2026-07-25",
+  "updated": "2026-07-26T08:30:29+08:00",
+  "today": "2026-07-26",
   "events": [
     {
       "id": "sk-hynix-us-ipo",
@@ -25,7 +25,7 @@
     {
       "id": "sk-hynix-q2-2026",
       "date": "2026-07-25",
-      "date_label": "7月22-29日",
+      "date_label": "✅ 7月22-29日",
       "title": "SK海力士Q2 2026财报",
       "stock": "07709",
       "stock_name": "XL二南方海力士",
@@ -33,7 +33,7 @@
       "importance": 5,
       "impact": "双向",
       "impact_dir": "both",
-      "status": "today",
+      "status": "done",
       "type": "财报",
       "description": "2倍杠杆产品，最重要做T窗口。Q1营收52.58万亿韩元(+198%)，OP利润37.61万亿(+405%)。市场关注AI存储需求持续性、HBM占比、利润率是否触顶。",
       "detail": "财报超预期→大涨；不及预期→暴跌（2x放大）。需提前3天预分析。",
@@ -924,8 +924,8 @@
   ],
   "stats": {
     "total_events": 42,
-    "upcoming_7d": 5,
-    "upcoming_30d": 11,
+    "upcoming_7d": 4,
+    "upcoming_30d": 10,
     "critical_events": 4,
     "monitoring": 8
   }

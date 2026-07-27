@@ -841,6 +841,51 @@
         "集采",
         "医药"
       ]
+    },
+    {
+      "id": "xiaomi-kunlun-launch-20260730",
+      "date": "2026-07-30",
+      "date_label": "7月30日 19:00",
+      "title": "小米昆仑技术架构发布会+澎程新车亮相",
+      "stock": "01810",
+      "stock_name": "小米集团",
+      "color": "blue",
+      "importance": 5,
+      "impact": "利好",
+      "impact_dir": "up",
+      "status": "upcoming",
+      "type": "新品发布",
+      "description": "昆仑平台+超级增程+全域安全三大技术发布。寻天第二品牌正式亮相，澎程N90 Max/N70 Max增程SUV首秀。小米增程路线落地，2027年销量预期催化。",
+      "tags": [
+        "小米",
+        "汽车",
+        "增程",
+        "昆仑",
+        "寻天",
+        "发布会"
+      ]
+    },
+    {
+      "id": "xiaomi-xuntian-brand-20260730",
+      "date": "2026-07-30",
+      "date_label": "7月30日",
+      "title": "小米寻天(SKY NOMAD)第二品牌发布",
+      "stock": "01810",
+      "stock_name": "小米集团",
+      "color": "blue",
+      "importance": 4,
+      "impact": "利好",
+      "impact_dir": "up",
+      "status": "upcoming",
+      "type": "品牌发布",
+      "description": "寻天品牌独立运营，定位家用增程SUV市场，与小米主品牌(纯电/性能)切割。首款车型昆仑N3定位最高端。打开全新市场空间。",
+      "tags": [
+        "小米",
+        "寻天",
+        "品牌",
+        "增程",
+        "SUV"
+      ]
     }
   ],
   "stocks": [

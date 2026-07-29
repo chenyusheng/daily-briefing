@@ -1,0 +1,36 @@
+{
+  "events": [
+    {
+      "id": "iran-missile-attack-20260728",
+      "date": "2026-07-28",
+      "date_label": "7月28-29日",
+      "title": "伊朗对美国驻中东部队发动弹道导弹突袭",
+      "stock": "宏观",
+      "stock_name": "宏观事件",
+      "color": "gray",
+      "importance": 5,
+      "impact": "利空",
+      "impact_dir": "down",
+      "status": "today",
+      "type": "地缘冲突",
+      "description": "伊朗伊斯兰革命卫队向中东美军发射多枚弹道导弹，美军中央司令部确认拦截。打破了7/26以来的短暂停火。CNBC 7/29报道，BBC称此次袭击粉碎了战斗间歇。",
+      "tags": ["美伊冲突", "霍尔木兹", "地缘", "弹道导弹"]
+    },
+    {
+      "id": "fomc-jul-2026-expectation-shift",
+      "date": "2026-07-29",
+      "date_label": "7月29日",
+      "title": "FOMC利率决议预期逆转：市场定价HOLD而非降息",
+      "stock": "宏观",
+      "stock_name": "宏观事件",
+      "color": "gray",
+      "importance": 5,
+      "impact": "双向",
+      "impact_dir": "both",
+      "status": "today",
+      "type": "宏观",
+      "description": "events.json原标注降息周期但市场实际预期为第5次连续HOLD(3.50-3.75%)。加息概率7/24达38%。焦点在会后声明措辞而非利率本身。若鹰派声明+伊朗冲突=双重利空",
+      "tags": ["美联储", "FOMC", "利率", "预期逆转"]
+    }
+  ]
+}

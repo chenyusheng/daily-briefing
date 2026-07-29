@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📰 晨间速览 · 2026-07-29</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#f8f9fa;--surface:#fff;--surface-alt:#f2f3f5;--border:#e8eaed;--border-light:#f0f1f3;--text:#1a1d23;--text-secondary:#5a5f6b;--text-tertiary:#8a8f98;--blue:#0066cc;--blue-light:#e8f0fe;--blue-bg:#f0f5ff;--green:#059669;--green-bg:#ecfdf5;--red:#dc2626;--red-bg:#fef2f2;--amber:#d97706;--amber-bg:#fffbeb;--purple:#7c3aed;--purple-bg:#f5f3ff;--radius:10px;--shadow:0 1px 4px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.03);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7}
+  .container{max-width:720px;margin:0 auto;padding:0}
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:20px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(255,255,255,.92)}
+  .h-left{display:flex;align-items:center;gap:12px}
+  .h-icon{width:38px;height:38px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+  .h-title{font-size:18px;font-weight:600;letter-spacing:-.3px}
+  .h-meta{font-size:13px;color:var(--text-tertiary);margin-top:2px}
+  .h-badge{font-size:11px;font-weight:500;color:var(--green);background:var(--green-bg);padding:4px 14px;border-radius:20px;letter-spacing:.3px}
+  .insight-bar{background:var(--red-bg);margin:0;padding:14px 22px;font-size:14px;color:var(--text-secondary);line-height:1.6;border-bottom:1px solid var(--border-light)}
+  .insight-bar strong{color:var(--text)}
+  .section{padding:24px 22px}
+  .section+.section{border-top:1px solid var(--border-light)}
+  .sec-label{font-size:13px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px;display:flex;align-items:center;gap:6px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
+  .section-alt{background:var(--surface-alt)}
+  .mkt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+  @media(min-width:480px){.mkt-grid{grid-template-columns:repeat(4,1fr)}}
+  .mkt-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .mkt-label{font-size:12px;color:var(--text-tertiary);font-weight:500;margin-bottom:2px}
+  .mkt-val{font-size:18px;font-weight:600;font-family:var(--font-mono)}
+  .mkt-chg{font-size:13px;font-weight:500;margin-left:3px}
+  .mkt-chg.up{color:var(--red)}.mkt-chg.down{color:var(--green)}.mkt-chg.neu{color:var(--text-tertiary)}
+  .ticker-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .ticker{display:flex;align-items:center;padding:10px 16px;font-size:14px;border-bottom:1px solid var(--border-light)}
+  .ticker:last-child{border-bottom:none}
+  .ticker-ico{width:20px;text-align:center;margin-right:10px;font-size:15px}
+  .ticker-nm{font-weight:500;min-width:70px}
+  .ticker-bar{flex:1;height:5px;background:var(--border);border-radius:2px;margin:0 12px;overflow:hidden;max-width:70px}
+  .ticker-fill{height:100%;border-radius:2px}.ticker-fill.up{background:var(--red)}.ticker-fill.down{background:var(--green)}
+  .ticker-px{font-family:var(--font-mono);font-weight:500;min-width:75px;text-align:right;font-size:13px;color:var(--text-secondary)}
+  .ticker-ch{min-width:55px;text-align:right;font-weight:500;font-size:12px}
+  .ticker-ch.up{color:var(--red)}.ticker-ch.down{color:var(--green)}
+  .hk-implication{font-size:13px;color:var(--text-secondary);line-height:1.7;padding:12px 16px;background:var(--blue-bg);border-radius:8px;margin-top:12px}
+  .news{display:flex;flex-direction:column;gap:12px}
+  .news-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .news-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+  .news-card.pos::before{background:var(--red)}.news-card.neg::before{background:var(--green)}.news-card.neu::before{background:var(--text-tertiary)}
+  .news-tag{font-size:10px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;padding:2px 10px;border-radius:3px;display:inline-block;margin-bottom:6px}
+  .nt-mi{background:#eef0ff;color:#5e6ad2}.nt-macro{background:var(--red-bg);color:var(--red)}.nt-tech{background:var(--green-bg);color:var(--green)}.nt-crypto{background:var(--amber-bg);color:var(--amber)}.nt-policy{background:#f0fdf4;color:#16a34a}.nt-ind{background:var(--purple-bg);color:var(--purple)}
+  .news-t{font-size:16px;font-weight:600;line-height:1.4;margin-bottom:4px;letter-spacing:-.15px}
+  .news-t a{color:inherit;text-decoration:none}.news-t a:hover{color:var(--blue);text-decoration:underline}
+  .news-d{font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:8px}
+  .news-f{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--text-tertiary)}
+  .news-f .nl{color:var(--blue);text-decoration:none;font-weight:500}.nl:hover{text-decoration:underline}
+  .news-f .ip{font-size:11px;font-weight:500;padding:1px 10px;border-radius:20px}.ip.pos{background:var(--red-bg);color:var(--red)}.ip.neg{background:var(--green-bg);color:var(--green)}.ip.neu{background:var(--surface-alt);color:var(--text-tertiary)}
+  .news-f .ndate{color:var(--text-tertiary);font-size:11px}
+  .crypto{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .c-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 8px;text-align:center;box-shadow:var(--shadow)}
+  .c-sym{font-size:12px;font-weight:600;margin-bottom:3px}
+  .c-px{font-size:15px;font-weight:600;font-family:var(--font-mono)}
+  .c-chg{font-size:11px;font-weight:500}.c-chg.up{color:var(--red)}.c-chg.down{color:var(--green)}
+  .c-bar{height:4px;border-radius:2px;margin-top:6px;overflow:hidden;background:var(--border)}
+  .c-bar .f{height:100%;border-radius:2px}.c-bar .f.up{background:var(--red)}.c-bar .f.down{background:var(--green)}
+  .c-src{font-size:11px;color:var(--text-tertiary);text-align:center;margin-top:8px}
+  .hot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(min-width:480px){.hot-grid{grid-template-columns:repeat(3,1fr)}}
+  .hot-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .hot-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px}
+  .hot-card.hot-1::after{background:linear-gradient(90deg,#ef4444,#f97316)}
+  .hot-card.hot-2::after{background:linear-gradient(90deg,#f59e0b,#eab308)}
+  .hot-card.hot-3::after{background:linear-gradient(90deg,#10b981,#059669)}
+  .hot-rank{font-size:11px;font-weight:700;color:var(--text-tertiary);margin-bottom:3px}
+  .hot-name{font-size:16px;font-weight:600;margin-bottom:3px;letter-spacing:-.15px}
+  .hot-desc{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:6px}
+  .hot-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+  .hot-chip{font-size:11px;padding:2px 10px;border-radius:12px;border:1px solid var(--border)}
+  .hot-chip.up{color:var(--red);border-color:var(--red-bg);background:var(--red-bg)}
+  .hot-chip.down{color:var(--green);border-color:var(--green-bg);background:var(--green-bg)}
+  .stock-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin-bottom:12px}
+  .stock-box:last-child{margin-bottom:0}
+  .sb-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .sb-name{font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
+  .sb-name .stag{font-size:10px;font-weight:600;padding:1px 8px;border-radius:3px}
+  .sb-name .stag.p1{background:#dcfce7;color:#166534}.sb-name .stag.p2{background:#fef3c7;color:#92400e}.sb-name .stag.p3{background:#fee2e2;color:#991b1b}
+  .sb-price{font-size:18px;font-weight:600;font-family:var(--font-mono)}
+  .sb-price .schg{font-size:12px;font-weight:500;margin-left:4px}.sb-price .schg.g{color:var(--red)}.sb-price .schg.r{color:var(--green)}
+  .sb-meta{font-size:12px;color:var(--text-tertiary);margin-bottom:6px}
+  .sb-table{width:100%;border-collapse:collapse;font-size:12px;margin:4px 0}
+  .sb-table td{padding:3px 8px 3px 0;vertical-align:top}
+  .sb-table .lbl{color:var(--text-tertiary);white-space:nowrap;width:65px}
+  .sb-table .val{color:var(--text)}
+  .sb-verdict{font-size:13px;line-height:1.5;padding:8px 12px;border-radius:6px;margin-top:6px}
+  .sb-verdict.g{background:var(--green-bg);color:var(--green);border-left:3px solid var(--green)}
+  .sb-verdict.y{background:var(--amber-bg);color:var(--amber);border-left:3px solid var(--amber)}
+  .sb-verdict.r{background:var(--red-bg);color:var(--red);border-left:3px solid var(--red)}
+  .sb-verdict.b{background:var(--blue-light);color:var(--blue);border-left:3px solid var(--blue)}
+  .focus{display:flex;flex-direction:column;gap:10px}
+  .f-item{display:flex;gap:12px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--blue);box-shadow:var(--shadow);font-size:14px;line-height:1.6}
+  .f-n{font-weight:600;color:var(--blue);min-width:20px}
+  .f-t{color:var(--text-secondary)}.f-t strong{color:var(--text)}
+  .verdict{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-top:12px;border-left:3px solid var(--blue);box-shadow:var(--shadow)}
+  .v-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+  .v-text{font-size:15px;color:var(--text-secondary);line-height:1.7}
+  .bt-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+  .bt-table th{text-align:left;padding:8px 10px;font-size:11px;font-weight:600;color:var(--text-tertiary);border-bottom:2px solid var(--border);letter-spacing:.5px;text-transform:uppercase}
+  .bt-table td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top}
+  .bt-table .ok{color:var(--red)}.bt-table .ko{color:var(--green)}.bt-table .warn{color:var(--amber)}
+  .footer{text-align:center;padding:24px 22px 36px;font-size:12px;color:var(--text-tertiary);line-height:1.8;border-top:1px solid var(--border-light)}
+  .footer a{color:var(--blue);text-decoration:none}.footer a:hover{text-decoration:underline}
+  @media(max-width:700px){
+    .section{padding:16px 14px}
+    .header{padding:12px 14px}
+    .h-title{font-size:15px}
+    .h-icon{width:32px;height:32px;font-size:15px}
+    .h-badge{font-size:10px;padding:3px 10px}
+    .insight-bar{padding:10px 14px;font-size:12px}
+    .mkt-grid{gap:6px}.mkt-cell{padding:10px 11px;border-radius:8px}.mkt-val{font-size:14px}
+    .mkt-label{font-size:10px}
+    .news-card{padding:12px 14px;border-radius:8px}.news-t{font-size:14px}.news-d{font-size:12px}
+    .ticker{padding:8px 12px;font-size:13px;-webkit-tap-highlight-color:transparent}
+    .crypto{gap:4px}.c-cell{padding:8px 4px;border-radius:8px}.c-px{font-size:12px}
+    .f-item{padding:10px 12px;font-size:12px}
+    .stock-box{padding:12px 14px}
+    .sb-price{font-size:15px}
+    .hot-grid{gap:6px}.hot-card{padding:10px 12px}.hot-name{font-size:14px}
+    .footer{padding:18px 14px 28px;font-size:11px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="h-left">
+    <div class="h-icon">&#x1F4F0;</div>
+    <div>
+      <div class="h-title">&#x6668;&#x95F4;&#x65B0;&#x95FB;&#x901F;&#x89C8;</div>
+      <div class="h-meta">2026-07-29 &#xB7; &#x5468;&#x4E09; &#xB7; 08:00 CST</div>
+    </div>
+  </div>
+  <span class="h-badge">&#x975E;&#x9AD8;&#x5CF0;</span>
+  <a href="https://chenyusheng.github.io/daily-briefing/" class="h-home" style="font-size:20px;text-decoration:none;margin-left:8px" title="&#x8FD4;&#x56DE;&#x9996;&#x9875;">&#x1F3E0;</a>
+</div>
+
+<div class="insight-bar">&#x1F4A1; <strong>&#x9694;&#x591C;&#x8981;&#x95FB;&#xFF1A;</strong>&#x5468;&#x4E8C;(7/28)A&#x80A1;&#x906D;&#x9047;&#x9ED1;&#x8272;&#x661F;&#x671F;&#x4E8C;&#xFF01;&#x521B;&#x4E1A;&#x677F;&#x66B4;&#x8DCC;-7.35%&#x79D1;&#x521B;50&#x8DCC;-6.33%&#x79D1;&#x6280;&#x80A1;&#x8840;&#x6D41;&#x6210;&#x6CB3;&#x3002;&#x4ECE;&#x5468;&#x4E00;&#x5168;&#x9762;&#x53CD;&#x5F39;&#x2192;&#x5468;&#x4E8C;&#x5168;&#x9762;&#x66B4;&#x8DCC;&#x4EC5;&#x7528;&#x4E86;24&#x5C0F;&#x65F6;&#x3002;&#x5168;&#x7403;&#x82AF;&#x7247;&#x80A1;&#x540C;&#x6B65;&#x8840;&#x6D17;&#xFF1A;&#x8D39;&#x57CE;&#x534A;&#x5BFC;&#x4F53;-5%+&#xFF0C;&#x6D77;&#x529B;&#x58EB;-7%&#x95EA;&#x8FEA;-11%&#x7F8E;&#x5149;-2%NVDA-5%&#x3002;&#x5C0F;&#x7C73;&#x9006;&#x52BF;+2.02%&#x81F3;29.26&#x72EC;&#x5584;&#x5176;&#x8EAB;&#xFF01;&#x8D22;&#x5BCC;500&#x5F3A;&#x6392;&#x540D;232&#x521B;&#x65B0;&#x9AD8;&#x3002;&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;&#x9884;&#x8BA1;&#x4ECA;&#x660E;&#x53EC;&#x5F00;&#x2014;&#x2014;&#x5E02;&#x573A;&#x5C4F;&#x606F;&#x7B49;&#x5F85;&#x653F;&#x7B56;&#x4FE1;&#x53F7;&#x3002;&#x8D85;&#x7EA7;&#x8D22;&#x62A5;&#x5468;&#x9AD8;&#x6F6E;&#xFF1A;Microsoft+Meta&#x4ECA;&#x665A;(7/29)&#x76D8;&#x540E;&#x516C;&#x5E03;Q2&#x4E1A;&#x7EE9;&#x3002;Trump&#x8003;&#x8651;&#x5BF9;&#x4F0A;&#x6717;&#x53D1;&#x52A8;&#x5927;&#x89C4;&#x6A21;&#x88AD;&#x51FB;&#x2014;&#x2014;&#x5730;&#x7F18;&#x98CE;&#x9669;&#x91CD;&#x65B0;&#x5347;&#x6E29;&#x3002;</div>
+
+<div class="section">
+  <div class="sec-label">&#x1F4CA; &#x5468;&#x4E8C;&#x6536;&#x76D8; &#xB7; 2026-07-28</div>
+  <div class="mkt-grid">
+    <div class="mkt-cell"><div class="mkt-label">&#x4E0A;&#x8BC1;&#x6307;&#x6570;</div><div class="mkt-val">3,813</div><div class="mkt-chg down">-1.16%</div></div>
+    <div class="mkt-cell"><div class="mkt-label">&#x6DF1;&#x8BC1;&#x6210;&#x6307;</div><div class="mkt-val">13,510</div><div class="mkt-chg down">-4.52%</div></div>
+    <div class="mkt-cell"><div class="mkt-label">&#x521B;&#x4E1A;&#x677F;&#x6307;</div><div class="mkt-val">3,327</div><div class="mkt-chg down">-7.35%</div></div>
+    <div class="mkt-cell"><div class="mkt-label">&#x79D1;&#x521B;50</div><div class="mkt-val">1,693</div><div class="mkt-chg down">-6.33%</div></div>
+  </div>
+  <div style="margin-top:14px">
+    <div class="ticker-list">
+      <div class="ticker"><span class="ticker-ico">&#x1F697;</span><span class="ticker-nm">&#x5C0F;&#x7C73;&#x96C6;&#x56E2;-W</span><div class="ticker-bar"><div class="ticker-fill up" style="width:95%"></div></div><span class="ticker-px">29.26</span><span class="ticker-ch up">+2.02%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F50B;</span><span class="ticker-nm">&#x5B81;&#x5FB7;&#x65F6;&#x4EE3;</span><div class="ticker-bar"><div class="ticker-fill down" style="width:49%"></div></div><span class="ticker-px">390.86</span><span class="ticker-ch down">-2.29%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F48A;</span><span class="ticker-nm">&#x4E5D;&#x5178;&#x5236;&#x836F;</span><div class="ticker-bar"><div class="ticker-fill up" style="width:50%"></div></div><span class="ticker-px">10.53</span><span class="ticker-ch up">+0.10%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F377;</span><span class="ticker-nm">&#x4F0A;&#x529B;&#x7279;</span><div class="ticker-bar"><div class="ticker-fill up" style="width:50%"></div></div><span class="ticker-px">10.15</span><span class="ticker-ch up">+0.89%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F3D6;</span><span class="ticker-nm">&#x5B8B;&#x57CE;&#x6F14;&#x827A;</span><div class="ticker-bar"><div class="ticker-fill up" style="width:50%"></div></div><span class="ticker-px">6.04</span><span class="ticker-ch up">+0.17%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x2708;</span><span class="ticker-nm">&#x6D77;&#x5357;&#x673A;&#x573A;</span><div class="ticker-bar"><div class="ticker-fill up" style="width:50%"></div></div><span class="ticker-px">2.83</span><span class="ticker-ch up">+1.07%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F699;</span><span class="ticker-nm">&#x667A;&#x80FD;&#x9A7E;&#x9A76;ETF</span><div class="ticker-bar"><div class="ticker-fill down" style="width:49%"></div></div><span class="ticker-px">1.03</span><span class="ticker-ch down">-2.09%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F4E1;</span><span class="ticker-nm">&#x79D1;&#x521B;50ETF</span><div class="ticker-bar"><div class="ticker-fill down" style="width:48%"></div></div><span class="ticker-px">1.07</span><span class="ticker-ch down">-6.20%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F1ED;&#x1F1F0;</span><span class="ticker-nm">&#x6052;&#x751F;&#x79D1;&#x6280;ETF</span><div class="ticker-bar"><div class="ticker-fill up" style="width:50%"></div></div><span class="ticker-px">0.59</span><span class="ticker-ch up">+0.17%</span></div>
+    </div>
+  </div>
+  <div class="hk-implication"><strong>&#x1F4CC; &#x5468;&#x4E8C;&#x5173;&#x952E;&#x8BCD;&#xFF1A;&#x9ED1;&#x8272;&#x661F;&#x671F;&#x4E8C;&#xFF01;&#x79D1;&#x6280;&#x5D29;&#x76D8;&#xB7;&#x98CE;&#x683C;&#x5207;&#x6362;&#xB7;&#x5C0F;&#x7C73;&#x72EC;&#x5584;&#x5176;&#x8EAB;&#x3002;</strong>A&#x80A1;&#x4E09;&#x5927;&#x6307;&#x6570;&#x5168;&#x7EBF;&#x91CD;&#x644C;&#x2014;&#x2014;&#x521B;&#x4E1A;&#x677F;-7.35%&#x79D1;&#x521B;50-6.33%&#x521B;&#x8FD1;&#x671F;&#x6700;&#x5927;&#x5355;&#x65E5;&#x8DCC;&#x5E45;&#x3002;&#x6210;&#x4EA4;&#x989D;2.03&#x4E07;&#x4EBF;&#x7F29;&#x91CF;495&#x4EBF;&#x3002;&#x76D8;&#x9762;&#x5206;&#x5316;&#x6781;&#x81F4;&#xFF1A;&#x4E0A;&#x8BC1;&#x4EC5;&#x8DCC;-1.16%(&#x6743;&#x91CD;&#x6297;&#x8DCC;)vs&#x521B;&#x4E1A;&#x677F;-7.35%(&#x79D1;&#x6280;&#x6210;&#x957F;&#x6740;&#x8DCC;)&#x3002;CPO/&#x5B58;&#x50A8;&#x82AF;&#x7247;/AI&#x786C;&#x4EF6;&#x5168;&#x7EBF;&#x66B4;&#x8DCC;&#x2014;&#x2014;&#x8FD9;&#x4E0E;&#x7F8E;&#x80A1;&#x5B58;&#x50A8;&#x82AF;&#x7247;&#x8840;&#x6D17;&#x5F62;&#x6210;&#x8DE8;&#x5E02;&#x573A;&#x5171;&#x632F;&#x3002;&#x8D44;&#x91D1;&#x4ECE;&#x79D1;&#x6280;&#x80A1;&#x5411;&#x9632;&#x5FA1;&#x6027;&#x677F;&#x5757;&#x5927;&#x89C4;&#x6A21;&#x8FC1;&#x5F99;&#x3002;&#x5C0F;&#x7C73;+2.02%&#x662F;&#x6301;&#x4ED3;&#x4E2D;&#x552F;&#x4E00;&#x9006;&#x52BF;&#x6807;&#x7684;&#x2014;&#x2014;&#x8D22;&#x5BCC;500&#x5F3A;&#x6392;&#x540D;232&#x521B;&#x65B0;&#x9AD8;+&#x5357;&#x5411;&#x8D44;&#x91D1;&#x589E;&#x6301;85.2&#x4E07;&#x80A1;&#x3002;</div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">&#x1F534; &#x76F4;&#x63A5;&#x5F71;&#x54CD;&#x6301;&#x4ED3;</div>
+  <div class="news">
+    <div class="news-card neg">
+      <span class="news-tag nt-macro">&#x1F4A5; A&#x80A1;&#x66B4;&#x8DCC;</span>
+      <div class="news-t"><a href="https://m.jrj.com.cn/madapter/stock/2026/07/28150357923375.shtml">&#x2B50; &#x521B;&#x4E1A;&#x677F;&#x66B4;&#x8DCC;-7.35%&#x79D1;&#x521B;50&#x8DCC;-6.33%&#xFF01;&#x79D1;&#x6280;&#x80A1;&#x9ED1;&#x8272;&#x661F;&#x671F;&#x4E8C;&#xFF0C;CPO/&#x5B58;&#x50A8;&#x82AF;&#x7247;/AI&#x786C;&#x4EF6;&#x5168;&#x7EBF;&#x5D29;&#x6E83;</a></div>
+      <div class="news-d">7&#x6708;28&#x65E5;A&#x80A1;&#x4E09;&#x5927;&#x80A1;&#x6307;&#x5168;&#x7EBF;&#x4E0B;&#x644C;&#xFF1A;&#x4E0A;&#x8BC1;-1.16%&#x62A5;3813.31&#x3001;&#x6DF1;&#x6210;&#x6307;-4.52%&#x3001;&#x521B;&#x4E1A;&#x677F;-7.35%&#x3001;&#x79D1;&#x521B;50-6.33%&#x3002;&#x4E24;&#x5E02;&#x6210;&#x4EA4;2.03&#x4E07;&#x4EBF;&#x3002;&#x5168;&#x5E02;&#x573A;&#x8D85;2700&#x53EA;&#x4E2A;&#x80A1;&#x4E0B;&#x8DCC;&#x3002;CPO&#x3001;&#x5B58;&#x50A8;&#x82AF;&#x7247;&#x3001;AI&#x786C;&#x4EF6;&#x677F;&#x5757;&#x91CD;&#x644C;&#x2014;&#x2014;&#x901A;&#x4FE1;ETF&#x3001;&#x4E2D;&#x97E9;&#x534A;&#x5BFC;&#x4F53;ETF&#x8DCC;&#x505C;&#x3002;&#x6301;&#x4ED3;&#x5168;&#x519B;&#x8986;&#x6CA1;&#xFF1A;&#x79D1;&#x521B;50ETF-6.20%&#x8DCC;&#x5E45;&#x6700;&#x5927;&#x3002;</div>
+      <div class="news-f"><span class="ip neg">&#x91CD;&#x5927;&#x5229;&#x7A7A;&#x2014;&#x2014;&#x6301;&#x4ED3;&#x5168;&#x7EBF;&#x627F;&#x538B;</span><span class="nl"><a href="https://m.jrj.com.cn/madapter/stock/2026/07/28150357923375.shtml">&#x1F517; &#x91D1;&#x878D;&#x754C; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-28</span></div>
+    </div>
+    <div class="news-card pos">
+      <span class="news-tag nt-mi">&#x2B50; &#x5C0F;&#x7C73;&#x9006;&#x52BF;</span>
+      <div class="news-t"><a href="https://hk.stockstar.com/RB2026072800031447.shtml">&#x2B50; &#x5C0F;&#x7C73;+2.02%&#x81F3;29.26&#x9006;&#x52BF;&#x5927;&#x6DA8;&#xFF01;&#x8D22;&#x5BCC;500&#x5F3A;&#x6392;&#x540D;232&#x521B;&#x65B0;&#x9AD8;&#xFF0C;&#x5357;&#x5411;&#x8D44;&#x91D1;&#x589E;&#x6301;85.2&#x4E07;&#x80A1;</a></div>
+      <div class="news-d">7&#x6708;28&#x65E5;&#x5C0F;&#x7C73;&#x96C6;&#x56E2;-W(01810)&#x9006;&#x52BF;+2.02%&#x81F3;29.26&#x6E2F;&#x5143;&#x2014;&#x2014;&#x5728;A&#x80A1;&#x521B;&#x4E1A;&#x677F;-7.35%&#x7684;&#x9ED1;&#x8272;&#x661F;&#x671F;&#x4E8C;&#x4E2D;&#x72EC;&#x5584;&#x5176;&#x8EAB;&#xFF01;&#x8FDE;&#x7EED;8&#x5E74;&#x4E0A;&#x699C;&#x300A;&#x8D22;&#x5BCC;&#x300B;&#x4E16;&#x754C;500&#x5F3A;&#xFF0C;&#x6392;&#x540D;232&#x4F4D;&#x521B;&#x5386;&#x53F2;&#x65B0;&#x9AD8;&#x3002;&#x5357;&#x5411;&#x8D44;&#x91D1;&#x51C0;&#x4E70;&#x5165;85.2&#x4E07;&#x80A1;&#xFF0C;&#x4E2D;&#x5355;&#x8D44;&#x91D1;&#x51C0;&#x6D41;&#x5165;2.83&#x4EBF;&#x6E2F;&#x5143;&#x3002;&#x4E3B;&#x529B;&#x8D44;&#x91D1;&#x51C0;&#x6D41;&#x51FA;7367&#x4E07;(&#x77ED;&#x7EBF;&#x83B7;&#x5229;&#x4E86;&#x7ED3;)&#x4F46;&#x4E2D;&#x5C0F;&#x5355;&#x627F;&#x63A5;&#x529B;&#x5F3A;&#x52B2;&#x3002;&#x8DDD;&#x79BB;&#x6210;&#x672C;30.60&#x4EC5;-4.4%&#x3002;</div>
+      <div class="news-f"><span class="ip pos">&#x5229;&#x597D;&#x2014;&#x2014;&#x6301;&#x4ED3;&#x6700;&#x4F73;&#x6807;&#x7684;</span><span class="nl"><a href="https://hk.stockstar.com/RB2026072800031447.shtml">&#x1F517; &#x8BC1;&#x5238;&#x4E4B;&#x661F; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-28</span></div>
+    </div>
+    <div class="news-card neg">
+      <span class="news-tag nt-macro">&#x1F4BE; &#x82AF;&#x7247;&#x8840;&#x6D17;</span>
+      <div class="news-t"><a href="https://m.21jingji.com/article/20260728/herald/8d4e798f460710a740e628220fde1049.html">&#x1F4A5; &#x5168;&#x7403;&#x5B58;&#x50A8;&#x82AF;&#x7247;&#x8840;&#x6D17;&#xFF01;&#x8D39;&#x57CE;&#x534A;&#x5BFC;&#x4F53;-5%+&#xFF0C;&#x6D77;&#x529B;&#x58EB;-7%&#x95EA;&#x8FEA;-11%&#x7F8E;&#x5149;-2%NVDA-5%</a></div>
+      <div class="news-d">&#x7F8E;&#x80A1;7&#x6708;28&#x65E5;&#x5B58;&#x50A8;&#x677F;&#x5757;&#x5D29;&#x76D8;&#xFF1A;&#x95EA;&#x8FEA;&#x66B4;&#x8DCC;-11%(&#x4E0A;&#x5E02;&#x4EC5;12&#x4E2A;&#x4EA4;&#x6613;&#x65E5;&#x7834;&#x53D1;)&#xFF0C;SK&#x6D77;&#x529B;&#x58EB;&#x8DCC;&#x903E;7%&#xFF0C;&#x897F;&#x90E8;&#x6570;&#x636E;/&#x5E0C;&#x6377;-4%+&#xFF0C;&#x7F8E;&#x5149;&#x4E00;&#x5EA6;&#x8DCC;&#x8D85;7%&#x5C3E;&#x76D8;&#x6536;&#x7A84;&#x81F3;-2%&#xFF0C;&#x82F1;&#x4F1F;&#x8FBE;&#x906D;&#x629B;&#x552E;&#x8DCC;&#x8FD1;5%&#x3002;&#x8D39;&#x57CE;&#x534A;&#x5BFC;&#x4F53;&#x6307;&#x6570;&#x5355;&#x65E5;&#x8DCC;&#x8D85;5%&#x2014;&#x2014;&#x5DF2;&#x4ECE;6&#x6708;&#x5386;&#x53F2;&#x9AD8;&#x70B9;&#x56DE;&#x843D;&#x8D85;20%&#x8FDB;&#x5165;&#x6280;&#x672F;&#x6027;&#x718A;&#x5E02;&#x3002;&#x673A;&#x6784;vs&#x6563;&#x6237;&#x884C;&#x4E3A;&#x5206;&#x5316;&#xFF1A;&#x5927;&#x989D;&#x8BA2;&#x5355;&#x5728;&#x66B4;&#x8DCC;&#x4E2D;&#x52A0;&#x901F;&#x6D41;&#x5165;&#xFF0C;&#x6563;&#x6237;&#x6295;&#x964D;&#x5F0F;&#x51FA;&#x9003;&#x3002;</div>
+      <div class="news-f"><span class="ip neg">&#x91CD;&#x5927;&#x5229;&#x7A7A;&#x2014;&#x2014;&#x79D1;&#x6280;&#x80A1;&#x7CFB;&#x7EDF;&#x6027;&#x98CE;&#x9669;</span><span class="nl"><a href="https://m.21jingji.com/article/20260728/herald/8d4e798f460710a740e628220fde1049.html">&#x1F517; 21&#x8D22;&#x7ECF; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-28</span></div>
+    </div>
+    <div class="news-card neu">
+      <span class="news-tag nt-tech">&#x1F4CA; &#x8D85;&#x7EA7;&#x8D22;&#x62A5;&#x5468;</span>
+      <div class="news-t"><a href="https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q2/performance">&#x1F3AF; &#x4ECA;&#x665A;&#xFF01;Microsoft+Meta Q2&#x8D22;&#x62A5;&#x76D8;&#x540E;&#x516C;&#x5E03;&#x2014;&#x2014;&#x672C;&#x5468;&#x6700;&#x5173;&#x952E;&#x53D8;&#x91CF;</a></div>
+      <div class="news-d">&#x8D22;&#x62A5;&#x65E5;&#x7A0B;&#xFF1A;&#x4ECA;&#x665A;(7/29&#x76D8;&#x540E;)Microsoft FY26 Q2+Meta Q2 2026&#x3002;&#x5E02;&#x573A;&#x9884;&#x671F;&#x5FAE;&#x8F6F;&#x8425;&#x6536;&#x589E;&#x957F;17%&#x4E3B;&#x8981;&#x7531;Azure&#x548C;M365&#x9A71;&#x52A8;&#x3002;&#x4E24;&#x5927;&#x5DE8;&#x5934;&#x7684;AI&#x8D44;&#x672C;&#x5F00;&#x652F;&#x6307;&#x5F15;&#x5C06;&#x76F4;&#x63A5;&#x51B3;&#x5B9A;&#x5168;&#x7403;AI&#x53D9;&#x4E8B;&#x7684;&#x8D70;&#x5411;&#x3002;&#x6301;&#x4ED3;&#x5EFA;&#x8BAE;&#xFF1A;&#x4E0D;&#x8D4C;&#x8D22;&#x62A5;&#x65B9;&#x5411;&#x2014;&#x2014;&#x4ECA;&#x665A;&#x4E4B;&#x524D;&#x4E0D;&#x52A0;&#x4ED3;&#x79D1;&#x6280;&#x76F8;&#x5173;&#x6807;&#x7684;&#x3002;</div>
+      <div class="news-f"><span class="ip neu">&#x4E2D;&#x6027;&#x2014;&#x2014;&#x51B3;&#x5B9A;&#x6027;&#x53D8;&#x91CF;</span><span class="nl"><a href="https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q2/performance">&#x1F517; Microsoft IR &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-29&#x76D8;&#x540E;</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">&#x1F30D; &#x5B8F;&#x89C2; &amp; &#x653F;&#x7B56;</div>
+  <div class="news">
+    <div class="news-card neg">
+      <span class="news-tag nt-macro">&#x1F525; &#x7F8E;&#x4F0A;&#x5C40;&#x52BF;</span>
+      <div class="news-t"><a href="https://finance.sina.com.cn/roll/2026-07-28/doc-inikiewr0386132.shtml">Trump&#x8003;&#x8651;&#x5BF9;&#x4F0A;&#x6717;&#x53D1;&#x52A8;&#x5927;&#x89C4;&#x6A21;&#x88AD;&#x51FB;&#xFF01;&#x5730;&#x7F18;&#x98CE;&#x9669;&#x9AA4;&#x5347;</a></div>
+      <div class="news-d">&#x7279;&#x6717;&#x666E;&#x53CD;&#x590D;&#x6A2A;&#x8DF3;&#xFF1A;&#x5728;&#x521A;&#x8BF4;&#x5B8C;&quot;&#x6B63;&#x5728;&#x826F;&#x597D;&#x5BF9;&#x8BDD;&quot;&#x540E;&#x4E0D;&#x5230;24&#x5C0F;&#x65F6;&#xFF0C;&#x4EE5;&#x8272;&#x5217;&#x5A92;&#x4F53;N12&#x62A5;&#x9053;Trump&#x6B63;&#x5728;&#x8003;&#x8651;&#x5BF9;&#x4F0A;&#x6717;&#x53D1;&#x52A8;&#x4E00;&#x6B21;&#x89C4;&#x6A21;&#x7A7A;&#x524D;&#x7684;&quot;&#x5927;&#x89C4;&#x6A21;&#x88AD;&#x51FB;&quot;&#x3002;&#x6B64;&#x524D;&#x7F8E;&#x56FD;&#x5DF2;&#x8FDE;&#x7EED;13&#x5929;&#x8F70;&#x70B8;&#x4F0A;&#x6717;&#x5883;&#x5185;&#x76EE;&#x6807;&#x3002;Polymarket&#x505C;&#x706B;&#x6982;&#x7387;&#x4ECE;75%&#x6025;&#x964D;&#x3002;&#x5BF9;A&#x80A1;&#x5F71;&#x54CD;&#xFF1A;&#x5730;&#x7F18;&#x98CE;&#x9669;&#x91CD;&#x65B0;&#x5347;&#x6E29;&#x2192;&#x5168;&#x7403;risk-off&#x60C5;&#x7EEA;&#x2192;&#x79D1;&#x6280;&#x80A1;&#x627F;&#x538B;+&#x9632;&#x5FA1;&#x677F;&#x5757;&#x53D7;&#x76CA;&#x3002;</div>
+      <div class="news-f"><span class="ip neg">&#x5730;&#x7F18;&#x98CE;&#x9669;&#x5347;&#x7EA7;</span><span class="nl"><a href="https://finance.sina.com.cn/roll/2026-07-28/doc-inikiewr0386132.shtml">&#x1F517; &#x65B0;&#x6D6A;&#x8D22;&#x7ECF; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-28</span></div>
+    </div>
+    <div class="news-card neu">
+      <span class="news-tag nt-policy">&#x1F3DB; &#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;</span>
+      <div class="news-t"><a href="https://economy.caixin.com/2026-07-27/102468531.html">&#x4E2D;&#x592E;&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;&#x9884;&#x8BA1;&#x4ECA;&#x660E;&#x4E24;&#x65E5;&#x53EC;&#x5F00;&#x2014;&#x2014;&#x4E0B;&#x534A;&#x5E74;&#x7ECF;&#x6D4E;&#x653F;&#x7B56;&#x5B9A;&#x8C03;</a></div>
+      <div class="news-d">&#x6309;&#x60EF;&#x4F8B;7&#x6708;&#x4E0B;&#x65EC;&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;&#x5206;&#x6790;&#x5F53;&#x524D;&#x7ECF;&#x6D4E;&#x5F62;&#x52BF;&#x3001;&#x90E8;&#x7F72;&#x4E0B;&#x534A;&#x5E74;&#x7ECF;&#x6D4E;&#x5DE5;&#x4F5C;&#x3002;&#x4E8C;&#x5B63;&#x5EA6;GDP&#x589E;&#x901F;&#x8DCC;&#x51FA;&#x76EE;&#x6807;&#x533A;&#x95F4;&#x540E;&#xFF0C;&#x5E02;&#x573A;&#x9AD8;&#x5EA6;&#x5173;&#x6CE8;&#xFF1A;&#x2460;&#x662F;&#x5426;&#x6709;&#x589E;&#x91CF;&#x8D22;&#x653F;/&#x8D27;&#x5E01;&#x653F;&#x7B56; &#x2461;&#x6269;&#x5927;&#x6D88;&#x8D39;&#x5341;&#x4E94;&#x4E94;&#x89C4;&#x5212;&#x5982;&#x4F55;&#x843D;&#x5730; &#x2462;&#x623F;&#x5730;&#x4EA7;&#x653F;&#x7B56;&#x662F;&#x5426;&#x4F1A;&#x8FDB;&#x4E00;&#x6B65;&#x677E;&#x7ED1; &#x2463;&#x5730;&#x65B9;&#x653F;&#x5E9C;&#x503A;&#x52A1;&#x5316;&#x89E3;&#x65B9;&#x6848;&#x3002;</div>
+      <div class="news-f"><span class="ip neu">&#x4E2D;&#x6027;&#x2014;&#x2014;&#x7B49;&#x5F85;&#x653F;&#x7B56;&#x4FE1;&#x53F7;</span><span class="nl"><a href="https://economy.caixin.com/2026-07-27/102468531.html">&#x1F517; &#x8D22;&#x65B0;&#x7F51; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-28</span></div>
+    </div>
+    <div class="news-card pos">
+      <span class="news-tag nt-policy">&#x1F4CB; &#x6269;&#x5BB9;&#x6D88;&#x8D39;</span>
+      <div class="news-t"><a href="https://www.gov.cn/zhengce/zhengceku/202606/content_7073322.htm">&#x6269;&#x5927;&#x6D88;&#x8D39;&quot;&#x5341;&#x4E94;&#x4E94;&quot;&#x89C4;&#x5212;&#x6B63;&#x5F0F;&#x5370;&#x53D1;&#x2014;&#x2014;2030&#x5E74;&#x793E;&#x96F6;&#x8FBE;60&#x4E07;&#x4EBF;</a></div>
+      <div class="news-d">&#x56FD;&#x52A1;&#x9662;7&#x6708;13&#x65E5;&#x6279;&#x590D;&#x300A;&#x6269;&#x5927;&#x6D88;&#x8D39;&quot;&#x5341;&#x4E94;&#x4E94;&quot;&#x89C4;&#x5212;&#x300B;&#xFF0C;&#x660E;&#x786E;&#x5C06;&#x6269;&#x5927;&#x5185;&#x9700;&#x4F5C;&#x4E3A;&#x201C;&#x5341;&#x4E94;&#x4E94;&#x201D;&#x6218;&#x7565;&#x57FA;&#x70B9;&#x3002;&#x63D0;&#x51FA;2030&#x5E74;&#x793E;&#x4F1A;&#x6D88;&#x8D39;&#x54C1;&#x96F6;&#x552E;&#x603B;&#x989D;&#x8FBE;60&#x4E07;&#x4EBF;&#x3001;&#x5B9E;&#x65BD;&#x63D0;&#x632F;&#x6D88;&#x8D39;&#x4E13;&#x9879;&#x884C;&#x52A8;&#x3001;&#x652F;&#x6301;&#x91D1;&#x878D;&#x673A;&#x6784;&#x6269;&#x5927;&#x6D88;&#x8D39;&#x9886;&#x57DF;&#x4FE1;&#x8D37;&#x6295;&#x653E;&#x3002;</div>
+      <div class="news-f"><span class="ip pos">&#x4E2D;&#x957F;&#x671F;&#x5229;&#x597D;&#x6D88;&#x8D39;</span><span class="nl"><a href="https://www.gov.cn/zhengce/zhengceku/202606/content_7073322.htm">&#x1F517; &#x4E2D;&#x56FD;&#x653F;&#x5E9C;&#x7F51; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-13</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">&#x1F52C; &#x79D1;&#x6280; &amp; &#x884C;&#x4E1A;</div>
+  <div class="news">
+    <div class="news-card neg">
+      <span class="news-tag nt-tech">&#x1F4BE; &#x82AF;&#x7247;&#x718A;&#x5E02;</span>
+      <div class="news-t"><a href="https://www.163.com/dy/article/L2TM5TVR05199NPP.html">&#x8D39;&#x57CE;&#x534A;&#x5BFC;&#x4F53;&#x6307;&#x6570;&#x8FDB;&#x5165;&#x6280;&#x672F;&#x6027;&#x718A;&#x5E02;&#x2014;&#x2014;&#x4ECE;6&#x6708;&#x9AD8;&#x70B9;&#x8DCC;&#x8D85;20%&#xFF0C;AI&#x6CE1;&#x6CAB;&#x7834;&#x88C2;&#x8FD8;&#x662F;&#x6B63;&#x5E38;&#x56DE;&#x8C03;&#xFF1F;</a></div>
+      <div class="news-d">&#x8D39;&#x57CE;&#x534A;&#x5BFC;&#x4F53;&#x6307;&#x6570;7&#x6708;28&#x65E5;&#x518D;&#x8DCC;5%+&#x2014;&#x2014;&#x5DF2;&#x4ECE;6&#x6708;&#x5386;&#x53F2;&#x9AD8;&#x70B9;&#x56DE;&#x843D;&#x8D85;20%&#x6B63;&#x5F0F;&#x8FDB;&#x5165;&#x6280;&#x672F;&#x6027;&#x718A;&#x5E02;&#x3002;&#x95EA;&#x8FEA;&#x4E0A;&#x5E02;&#x4EC5;12&#x4E2A;&#x4EA4;&#x6613;&#x65E5;&#x5373;&#x7834;&#x53D1;(-11%)&#x662F;&#x60C5;&#x7EEA;&#x6781;&#x5EA6;&#x6076;&#x5316;&#x7684;&#x6807;&#x5FD7;&#x3002;&#x4F46;&#x673A;&#x6784;vs&#x6563;&#x6237;&#x884C;&#x4E3A;&#x5206;&#x5316;&#x2014;&#x2014;&#x5927;&#x989D;&#x8BA2;&#x5355;(&#x5355;&#x7B14;&#x8D85;100&#x4E07;&#x7F8E;&#x5143;)&#x5728;&#x66B4;&#x8DCC;&#x4E2D;&#x52A0;&#x901F;&#x6D41;&#x5165;&#x3002;&#x5386;&#x53F2;&#x89C4;&#x5F8B;&#xFF1A;&#x8D39;&#x57CE;&#x534A;&#x5BFC;&#x4F53;&#x8DCC;&#x5E45;&#x8D85;20%&#x540E;&#x5E73;&#x5747;3&#x4E2A;&#x6708;&#x5185;&#x53CD;&#x5F39;15-20%&#x3002;&#x5173;&#x952E;&#x53D8;&#x91CF;&#x662F;&#x4ECA;&#x665A;Microsoft+Meta&#x7684;AI&#x8D44;&#x672C;&#x5F00;&#x652F;&#x6307;&#x5F15;&#x3002;</div>
+      <div class="news-f"><span class="ip neg">&#x5229;&#x7A7A;&#x2014;&#x2014;&#x4F46;&#x673A;&#x6784;&#x9006;&#x52BF;&#x4E70;&#x5165;</span><span class="nl"><a href="https://www.163.com/dy/article/L2TM5TVR05199NPP.html">&#x1F517; &#x7F51;&#x6613; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-29</span></div>
+    </div>
+    <div class="news-card pos">
+      <span class="news-tag nt-tech">&#x1F4F1; &#x5C0F;&#x7C73;&#x6C7D;&#x8F66;</span>
+      <div class="news-t"><a href="https://hk.stockstar.com/RB2026072800031447.shtml">&#x5C0F;&#x7C73;&#x8D22;&#x5BCC;500&#x5F3A;&#x6392;&#x540D;232&#x521B;&#x65B0;&#x9AD8;+&quot;&#x4EBA;&#x8F66;&#x5BB6;&#x5168;&#x751F;&#x6001;&quot;&#x6218;&#x7565;&#x91CA;&#x653E;&#x589E;&#x957F;&#x52A8;&#x80FD;</a></div>
+      <div class="news-d">2026&#x5E74;&#x300A;&#x8D22;&#x5BCC;&#x300B;&#x4E16;&#x754C;500&#x5F3A;&#x699C;&#x5355;&#x53D1;&#x5E03;&#x2014;&#x2014;&#x5C0F;&#x7C73;&#x8FDE;&#x7EED;8&#x5E74;&#x4E0A;&#x699C;&#xFF0C;&#x6392;&#x540D;232&#x4F4D;&#x521B;&#x5386;&#x53F2;&#x65B0;&#x9AD8;&#x3002;&quot;&#x4EBA;&#x8F66;&#x5BB6;&#x5168;&#x751F;&#x6001;&quot;&#x6218;&#x7565;&#x6B63;&#x91CA;&#x653E;&#x589E;&#x957F;&#x52A8;&#x80FD;&#x2014;&#x2014;&#x624B;&#x673A;+&#x6C7D;&#x8F66;+IoT&#x4E09;&#x5927;&#x4E1A;&#x52A1;&#x534F;&#x540C;&#x6548;&#x5E94;&#x5F00;&#x59CB;&#x663E;&#x73B0;&#x3002;&#x5168;&#x65B0;&quot;SkyNomad&#x6F8E;&#x7A0B;&quot;&#x589E;&#x7A0B;&#x7CFB;&#x5217;&#x6280;&#x672F;&#x53D1;&#x5E03;&#x4F1A;7&#x6708;&#x5E95;&#x4E3E;&#x884C;&#x3002;&#x5C0F;&#x7C73;&#x5728;A&#x80A1;&#x9ED1;&#x8272;&#x661F;&#x671F;&#x4E8C;&#x4E2D;&#x9006;&#x52BF;+2.02%&#x2014;&#x2014;&#x9A8C;&#x8BC1;&#x4E86;&#x5C0F;&#x7C73;&#x4F5C;&#x4E3A;&quot;&#x6D88;&#x8D39;+&#x79D1;&#x6280;&quot;&#x53CC;&#x5C5E;&#x6027;&#x7684;&#x9632;&#x5FA1;&#x6EA2;&#x4EF7;&#x3002;</div>
+      <div class="news-f"><span class="ip pos">&#x5229;&#x597D;&#x2014;&#x2014;&#x54C1;&#x724C;&#x529B;&#x8DC3;&#x5347;</span><span class="nl"><a href="https://hk.stockstar.com/RB2026072800031447.shtml">&#x1F517; &#x8BC1;&#x5238;&#x4E4B;&#x661F; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-28</span></div>
+    </div>
+    <div class="news-card neu">
+      <span class="news-tag nt-tech">&#x1F916; AI&#x53D9;&#x4E8B;</span>
+      <div class="news-t"><a href="https://finance.sina.com.cn/roll/2026-07-24/doc-iniivpqu9367140.shtml">&#x7F8E;&#x80A1;&#x79D1;&#x6280;&#x8D22;&#x62A5;&#x5B63;&#x8003;&#x9A8C;AI&#x53D9;&#x4E8B;&#x2014;&#x2014;&#x4ECE;&#x6295;&#x5165;&#x89C4;&#x6A21;&#x8F6C;&#x5411;&#x4EA7;&#x51FA;&#x6548;&#x7387;</a></div>
+      <div class="news-d">&#x968F;&#x7740;&#x4ECA;&#x665A;Microsoft+Meta&#x8D22;&#x62A5;&#x516C;&#x5E03;&#xFF0C;&#x5E02;&#x573A;&#x76EE;&#x5149;&#x6B63;&#x4ECE;AI&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x7684;&#x6295;&#x5165;&#x89C4;&#x6A21;&#x8F6C;&#x5411;&#x4EA7;&#x51FA;&#x6548;&#x7387;&#x2014;&#x2014;&#x5373;AI&#x4E1A;&#x52A1;&#x80FD;&#x5426;&#x5151;&#x73B0;&#x5B9E;&#x8D28;&#x6027;&#x7684;&#x6536;&#x5165;&#x589E;&#x957F;&#x4E0E;&#x73B0;&#x91D1;&#x6D41;&#x6539;&#x5584;&#x3002;&#x524D;&#x671F;Alphabet/Tesla&#x8D22;&#x62A5;&#x540E;Mag 7&#x84B8;&#x53D1;$797B&#x5DF2;&#x7ECF;&#x9884;&#x8B66;&#x4E86;&#x5E02;&#x573A;&#x5BF9;AI&#x8D44;&#x672C;&#x5F00;&#x652F;&#x7684;&#x654F;&#x611F;&#x5EA6;&#x3002;</div>
+      <div class="news-f"><span class="ip neu">&#x4E2D;&#x6027;&#x2014;&#x2014;&#x4ECA;&#x665A;&#x6700;&#x5173;&#x952E;</span><span class="nl"><a href="https://finance.sina.com.cn/roll/2026-07-24/doc-iniivpqu9367140.shtml">&#x1F517; &#x4E0A;&#x6D77;&#x8BC1;&#x5238;&#x62A5; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-24</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">&#x1F525; &#x5468;&#x4E8C;(7/28)&#x677F;&#x5757;&#x8F6E;&#x52A8; &#xB7; A&#x80A1;&#x6536;&#x76D8;</div>
+  <div class="hot-grid">
+    <div class="hot-card hot-1"><div class="hot-rank">#1 &#xB7; &#x79D1;&#x6280;&#x8840;&#x6D17; &#x2198;</div><div class="hot-name">&#x521B;&#x4E1A;&#x677F;-7.35%/&#x79D1;&#x521B;50-6.33%</div><div class="hot-desc">CPO/&#x5B58;&#x50A8;&#x82AF;&#x7247;/AI&#x786C;&#x4EF6;&#x5168;&#x7EBF;&#x5D29;&#x76D8;&#x3002;&#x901A;&#x4FE1;ETF&#x3001;&#x4E2D;&#x97E9;&#x534A;&#x5BFC;&#x4F53;ETF&#x8DCC;&#x505C;&#x3002;&#x6E2F;&#x80A1;&#x901A;&#x51C0;&#x5356;&#x51FA;24.95&#x4EBF;</div><div class="hot-chips"><span class="hot-chip down">&#x79D1;&#x6280;&#x80A1;&#x707E;</span><span class="hot-chip down">&#x8DE8;&#x5E02;&#x573A;&#x5171;&#x632F;</span></div></div>
+    <div class="hot-card hot-2"><div class="hot-rank">#2 &#xB7; &#x98CE;&#x683C;&#x5207;&#x6362; &#x2197;</div><div class="hot-name">&#x6587;&#x5B57;&#x5A92;&#x4F53;+5.60%/&#x91D1;&#x878D;&#x4FE1;&#x606F;+4.26%</div><div class="hot-desc">&#x8D44;&#x91D1;&#x4ECE;&#x79D1;&#x6280;&#x677F;&#x5757;&#x5411;&#x51B7;&#x95E8;&#x9632;&#x5FA1;&#x677F;&#x5757;&#x5927;&#x8FC1;&#x5F99;&#x3002;&#x9632;&#x5FA1;&#x6027;&#x677F;&#x5757;&#x5305;&#x63FD;TOP5</div><div class="hot-chips"><span class="hot-chip up">&#x9632;&#x5FA1;&#x8F6E;&#x52A8;</span><span class="hot-chip up">&#x98CE;&#x683C;&#x5207;&#x6362;</span></div></div>
+    <div class="hot-card hot-3"><div class="hot-rank">#3 &#xB7; &#x5C0F;&#x7C73;&#x72EC;&#x5584; &#x2197;</div><div class="hot-name">&#x5C0F;&#x7C73;+2.02%&#x81F3;29.26</div><div class="hot-desc">&#x5728;A&#x80A1;&#x521B;&#x4E1A;&#x677F;-7.35%&#x7684;&#x9ED1;&#x8272;&#x661F;&#x671F;&#x4E8C;&#x4E2D;&#x9006;&#x52BF;&#x4E0A;&#x6DA8;&#xFF01;&#x8D22;&#x5BCC;500&#x5F3A;232&#x4F4D;&#x521B;&#x65B0;&#x9AD8;</div><div class="hot-chips"><span class="hot-chip up">&#x9006;&#x52BF;&#x4E0A;&#x6DA8;</span><span class="hot-chip up">&#x54C1;&#x724C;&#x8DC3;&#x5347;</span></div></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">⚡ 十五五能源 · 观察池扫描 · 2026-07-28 收盘</div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">宁德时代 <span class="stag p2">300750</span></div><div class="sb-price">390.86<span class="schg r">-2.29%</span></div></div>
+    <div class="sb-meta">📊 2026-07-28 收盘 | 从400关口回落 · MA5 385 MA10 375 MA20 367</div>
+    <table class="sb-table">
+      <tr><td class="lbl">趋势：</td><td class="val">400.00→390.86(-2.29%)。周二在创业板-7.35%的血洗中仅跌-2.29%——相对抗跌！验证了400亿回购注销的底部支撑。MA5(385)>MA10(375)>MA20(367)多头排列未被破坏。390.86恰好落在昨天设定的"回调至390-395再接"的区间上沿。</td></tr>
+      <tr><td class="lbl">催化：</td><td class="val">①半年报432.84亿+42% ②200-400亿注销式回购(持续执行中) ③摩根大通上调盈利预测至940亿 ④十五五双能源规划 ⑤全球芯片暴跌中宁德作为非芯片股反而获得防御溢价</td></tr>
+    </table>
+    <div class="sb-verdict b"><strong>🔄 390-395建仓窗口重新开启：</strong>周二-2.29%至390.86恰好回到昨日设定的"390-395再介入"区间。操作：①若已在375-383建仓→持有，止损维持380 ②若未建仓→390-395是上车窗口 ③不追——等390以下缩量企稳 ④第一目标420，第二目标450。核心逻辑不变：回购+业绩双轮驱动。但今天面临政治局会议+Microsoft/Meta财报双重不确定性——建议等落地后再动手。</div>
+  </div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">国电南瑞 <span class="stag p1">600406</span></div><div class="sb-price">23.56<span class="schg r">-1.42%</span></div></div>
+    <div class="sb-meta">📊 2026-07-28 收盘 | 电网投资核心标的 · 建仓区间持续有效</div>
+    <table class="sb-table">
+      <tr><td class="lbl">趋势：</td><td class="val">23.90→23.56(-1.42%)。在创业板-7.35%的血洗中仅跌-1.42%——电网防御属性再次确认！23.56仍在23.50-24.00建仓区间内。MA20在23.00附近提供强支撑。</td></tr>
+    </table>
+    <div class="sb-verdict g"><strong>✅ 建仓条件成熟——23.50-24.00区间仍有效：</strong>周二23.56精确落在建仓区间中央。操作：①试探建仓维持23.50-24.00缩量企稳条件 ②止损维持23.00(MA20) ③第一目标26.00。相比宁德更安全——电网投资是政策确定性最高的方向。</div>
+  </div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">阳光电源 <span class="stag p2">300274</span></div><div class="sb-price">112.08<span class="schg r">-3.55%</span></div></div>
+    <div class="sb-meta">📊 2026-07-28 收盘 | 储能出海 · 终于进入105-112目标区间！</div>
+    <table class="sb-table">
+      <tr><td class="lbl">趋势：</td><td class="val">116.21→112.08(-3.55%)。连续多日"继续等待105-112"的判断被周二暴跌兑现——112.08精确进入目标区间上沿！从117.79高点到112.08回调了-4.9%。储能出海中长期逻辑不变。</td></tr>
+    </table>
+    <div class="sb-verdict b"><strong>🔄 建仓窗口打开——112进入观察区：</strong>等待了多日的105-112区间终于接近。操作：①112已进入建仓区间上沿——若今日继续缩量回调至110以下→首笔试探建仓 ②止损104 ③第一目标125 ④首笔仓位从计划10%降为5%(机构减仓仍在进行)。</div>
+  </div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">龙源电力 <span class="stag p3">001289</span></div><div class="sb-price">16.20<span class="schg r">-1.34%</span></div></div>
+    <div class="sb-meta">📊 2026-07-28 收盘 | 绿电龙头 · 精确触及16.20止损线！</div>
+    <table class="sb-table">
+      <tr><td class="lbl">趋势：</td><td class="val">16.42→16.20(-1.34%)——精确触及昨日设定的16.20止损线！在创业板-7.35%血洗中仅跌-1.34%体现极强防御性。但16.20止损已被精确触及——按照纪律应该执行。</td></tr>
+    </table>
+    <div class="sb-verdict r"><strong>⚠️ 止损触发——今天必须决策：</strong>16.20止损已被精确触及。操作：①严格执行16.20止损纪律——如果今天无法站稳16.20以上→卖出 ②若能快速收回16.40以上→可给予1天观察期(但纪律高于观察)。绿电中长期逻辑不变但短线技术面已发出警告。</div>
+  </div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">信义光能 <span class="stag p2">00968.HK</span></div><div class="sb-price">2.13<span class="schg r">-0.93%</span></div></div>
+    <div class="sb-meta">📊 2026-07-28 收盘 | 光伏玻璃龙头 · 维持观察</div>
+    <table class="sb-table">
+      <tr><td class="lbl">趋势：</td><td class="val">2.15→2.13(-0.93%)轻微回调。光伏行业产能过剩问题仍在。在周二暴跌中-0.93%相对抗跌。</td></tr>
+    </table>
+    <div class="sb-verdict y"><strong>观察为主——不主动建仓：</strong>维持原判。操作：①不建仓——等产能出清信号 ②已持仓者持有但设止损2.00 ③优先关注储能/电网/绿电(政策确定性更高)。</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">📱 小米集团-W · 盘前分析 · 2026-07-29</div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">小米集团-W <span class="stag p1">01810.HK</span></div><div class="sb-price">29.26<span class="schg g">+2.02%<span style="font-size:11px;color:var(--text-tertiary)"> (7/28收盘)</span></span></div></div>
+    <div class="sb-meta">📊 2026-07-29 分析 | 黑色星期二唯一逆势标的 · 浮亏缩至-4.4% · 财富500强232位 · 距成本30.60仅-4.4%</div>
+    <table class="sb-table">
+      <tr><td class="lbl">持仓成本：</td><td class="val">30.60（浮亏-4.4%，较上周五的-12.7%大幅缩窄8.3个百分点）</td></tr>
+      <tr><td class="lbl">趋势结构：</td><td class="val">28.68→29.26(+2.02%)！在A股创业板-7.35%的黑色星期二中逆势上涨——这是最强的相对强度信号！MA5(27.70)>MA10(27.39)>MA20(25.77)多头排列加速向上发散。从21.42→26.30→28.68→29.26的路径看——已完成底部反弹→回踩确认→突破→加速的完整趋势结构。29.26距离成本30.60仅差+4.6%——解放胜利在望。</td></tr>
+      <tr><td class="lbl">技术面：</td><td class="val">均线多头排列✅加速发散✅。MA5(27.70)与MA10(27.39)金叉张口扩大。关键价位：支撑28.68/28.00/27.50，阻力29.50/30.00/30.60(成本)。周二+2.02%在暴跌市中极度耀眼——小米成为资金从科技股撤离时的"避风港"。主力资金净流出7367万vs中小单承接力强劲形成博弈。</td></tr>
+      <tr><td class="lbl">七不买检查：</td><td class="val">均线多头✅。无破位✅。无高位横盘出货✅。无均线空头✅。MA多头排列加速发散——技术面完全健康。唯一风险：从21.42涨至29.26已涨+36.6%——趋势加速中但追高风险增大。</td></tr>
+      <tr><td class="lbl">三不卖检查：</td><td class="val">①上升趋势回踩MA10→上周五26.72精确回踩MA10 26.70✅ ②三连涨(上周五+7.34%→周一+7.34%→周二+2.02%)持续强势✅ ③均线多头排列+逆势上涨——强势确认✅。三不卖全面成立——不要让"赚太多了"成为卖出的理由。</td></tr>
+      <tr><td class="lbl">基本面：</td><td class="val">①财富500强排名232位创历史新高——品牌力跃升 ②7月底SkyNomad澎程增程技术发布会(可能就在本周) ③小米Q2交付数据即将公布(8月初) ④南向资金增持85.2万股 ⑤200亿回购额度仍充裕 ⑥在芯片血洗+科技股灾中逆势+2.02%——验证了小米作为"消费+科技"双属性的防御溢价</td></tr>
+      <tr><td class="lbl">风险：</td><td class="val">①今晚Microsoft+Meta财报——若双双不及预期→全球科技risk-off可能带动港股 ②Trump对伊朗大规模袭击→地缘风险 ③连续大涨后短线获利盘回吐(主力已开始净流出) ④YU7交付周期跌至7周——7月交付数据若跌破3万台可能触发回调 ⑤距成本30.60仅4.6%——触及成本后是否获利了结？</td></tr>
+    </table>
+    <div class="sb-verdict g"><strong>✅ 操作建议：坚定持有，止损上移至27.70(MA5)。从"趋势持有"升级为"攻击持有"。</strong>周二+2.02%在黑色星期二中逆势上涨——这是最强烈的"趋势健康"信号！当全市场科技股暴跌而小米独涨时——说明小米已经脱离了"科技股"标签成为资金避险选择。今日操作：①持有现有仓位，止损从27.00上移至27.70(MA5——距现价-5.3%) ②若回踩28.68(前日收盘)缩量企稳→可加仓第二档 ③若今日放量突破30.00→趋势加速但距成本30.60极近——不加仓，持有等解套 ④若盘中跌破28.00→减1/3仓位。成本30.60已近在咫尺——如果本周增程发布会催化+小米Q2交付数据强劲→有望完全解套甚至盈利！</div>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">₿ 虚拟货币 · CoinGecko API (2026-07-29 08:00)</div>
+  <div class="crypto">
+    <div class="c-cell"><div class="c-sym">₿ BTC</div><div class="c-px">$63,983</div><div class="c-chg up">+0.63%</div><div class="c-bar"><div class="f up" style="width:50%"></div></div></div>
+    <div class="c-cell"><div class="c-sym">⟠ ETH</div><div class="c-px">$1,922</div><div class="c-chg up">+2.02%</div><div class="c-bar"><div class="f up" style="width:52%"></div></div></div>
+    <div class="c-cell"><div class="c-sym">🔶 BNB</div><div class="c-px">$571</div><div class="c-chg up">+1.08%</div><div class="c-bar"><div class="f up" style="width:51%"></div></div></div>
+    <div class="c-cell"><div class="c-sym">◎ SOL</div><div class="c-px">$73.94</div><div class="c-chg down">-0.07%</div><div class="c-bar"><div class="f down" style="width:49%"></div></div></div>
+    <div class="c-cell"><div class="c-sym">💧 XRP</div><div class="c-px">$1.07</div><div class="c-chg up">+0.90%</div><div class="c-bar"><div class="f up" style="width:51%"></div></div></div>
+  </div>
+  <div class="c-src">2026-07-29 08:00 CST · CoinGecko API · 加密小幅反弹！ETH+2.02%领涨，BTC+0.63%守稳$64K附近。与昨日全线下跌(-2.42%~-4.18%)形成对比。SOL微跌-0.07%表现最弱。关注：今晚Microsoft+Meta财报若超预期→加密可能同步反弹。BTC关键支撑$62,000/阻力$65,000。</div>
+</div>
+
+<div class="section">
+  <div class="sec-label">🔄 昨日简报回测 · 2026-07-28判断 → 7/28实际</div>
+  <table class="bt-table">
+    <tr><th>项目</th><th>昨日判断(7/28简报)</th><th>周二验证(7/28实际)</th><th>结果</th><th>教训</th></tr>
+    <tr><td><strong>A股延续反弹</strong></td><td>"从防御观察升级为谨慎参与——等周二确认""周一全面反弹的持续性需要周二确认"</td><td>上证-1.16%深证-4.52%创业板-7.35%——全面暴跌而非延续反弹！</td><td class="ko">❌ 方向错误</td><td>近期最大方向性误判。根因：周一反弹后过高估计修复持续性——将"空头回补"误判为"趋势反转"。三大脆弱性被忽视：①长鑫虹吸1200亿后的还债压力 ②美伊和谈仅一天后反转 ③全球存储芯片崩盘的跨市场传导。教训：反弹第1天不能确认任何方向。</td></tr>
+    <tr><td><strong>小米操作判断</strong></td><td>"持有，止损上移至27.00。从防御持有升级为趋势持有"</td><td>29.26(+2.02%)！逆势暴涨——创业板-7.35%中唯一亮点。止损27.00远未触发</td><td class="ok">✅ 精确正确</td><td>昨天最重要的正确判断。在小米+7.34%后没有因"涨太多了"而建议卖出——坚定持有+止损上移。三不卖信号全面成立时——坚定持有比频繁交易更有效。</td></tr>
+    <tr><td><strong>宁德回调判断</strong></td><td>"375-380建仓窗口关闭——不追400以上。等390-395回调"</td><td>390.86(-2.29%)——精确回调至390-395区间上沿！</td><td class="ok">✅ 精准预判</td><td>最精准部分。周一400.00时明确"不追"——周二回调至390.86落入预判区间。核心教训：强势股不追高、等回调的纪律永远正确。</td></tr>
+    <tr><td><strong>能源池策略</strong></td><td>"宁德等390-395；国电23.50-24.00建仓；阳光等105-112；龙源持有止损16.20"</td><td>宁德390.86(✅入区间)；国电23.56(✅在区间)；阳光112.08(✅入区间上沿)；龙源16.20(⚠️精确触止损)</td><td class="warn">🟡 策略正确+龙源警告</td><td>四只标的策略全部正确。周二暴跌给了更好的入场价格。但龙源精确触及16.20止损——纪律问题需立即处理。</td></tr>
+    <tr><td><strong>美伊和谈预判</strong></td><td>"美伊和谈进展——地缘风险溢价消退。Polymarket停火概率75%"</td><td>仅24小时后Trump考虑扩大军事行动！停火概率急降。</td><td class="ko">❌ 方向逆转</td><td>最大意外变量。美伊从"正在对话"到"考虑大规模袭击"只用了24小时。教训：地缘政治变量的预测价值极低——不预测、只应对。</td></tr>
+    <tr><td><strong>超级财报周预判</strong></td><td>"市场在财报前观望。周二市场可能继续窄幅震荡"</td><td>存储芯片血洗——远非"窄幅震荡"</td><td class="ko">❌ 低估波动</td><td>根因：忽略了闪迪破发+海力士暴跌的传导。财报前观望也可以是恐慌出逃——取决于对财报结果的预判。</td></tr>
+  </table>
+  <div class="verdict" style="margin-top:16px">
+    <div class="v-label">📊 回测总结</div>
+    <div class="v-text"><strong>昨日判断命中率：2✅/1🟡/3❌（33%方向正确）</strong>——从上周五75%断崖式跌落至33%。这是五天回测中最差的一次。核心错误：在周一反弹后过早判断"企稳确认"而忽视了三大脆弱性。<br><br><strong>💡 核心收获——五大方法论修正：</strong><br>①<strong>反弹第1天不能确认任何方向。</strong>"等周二确认"的耐心是对的但"预判周二延续反弹"是错的。正确做法：等周二走出来后再判断——不是提前预判。<br>②<strong>全球芯片崩盘的跨市场传导被系统性低估。</strong>费城半导体-5%+的冲击力远超预期。今后全球重大板块异动必须列为最高优先级。<br>③<strong>地缘政治变量的不可预测性再次确认。</strong>正确策略：不在"和谈利好"时加仓——第二天就可能反转。<br>④<strong>小米逆势的正确判断是最大亮点。</strong>趋势交易法(三不卖+均线多头+趋势确认)在极端市场中依然有效。<br>⑤<strong>龙源止损精确触及——纪律高于一切。</strong>不能因为"只差一点点"或"中长期逻辑好"而放弃执行。</div>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🎯 今日关注 & 综合判断 · 2026-07-29 周三</div>
+  <div class="focus">
+    <div class="f-item"><span class="f-n">1</span><span class="f-t"><strong>🏛️ 政治局会议决议——今天最重要的政策变量（最高优先级）：</strong>按惯例7月下旬政治局会议分析经济形势、部署下半年工作。市场对增量政策高度期待。关注：①财政政策是否加码 ②货币政策是否进一步宽松 ③房地产/消费/科技政策走向 ④地方债化解方案。如果释放强刺激信号→A股可能暴力反弹；如果无超预期内容→市场失望。会议通稿可能在今日盘后或明日发布。</span></div>
+    <div class="f-item"><span class="f-n">2</span><span class="f-t"><strong>📊 今晚Microsoft+Meta Q2财报——决定全球AI叙事走向：</strong>今晚盘后公布——这是本周最大的市场变量。Azure AI收入增速+Meta AI广告收入是核心看点。AI资本开支指引将直接决定存储芯片"需求真空"是短期调整还是长期趋势。策略：不在财报前加仓任何科技相关标的(小米除外——因其消费+汽车属性正在脱离纯科技标签)。等财报落地后再决策。</span></div>
+    <div class="f-item"><span class="f-n">3</span><span class="f-t"><strong>📱 小米——从"持有"升级为"攻击持有"止损上移至27.70(MA5)：</strong>周二+2.02%在黑色星期二中逆势上涨——最强趋势确认。距成本30.60仅-4.4%。操作：①持有，止损27.70 ②若回踩28.68缩量企稳→加仓 ③若放量突破30.00→不加仓但持有等解套 ④不因"快回本了"而急于卖出——三不卖全面成立。</span></div>
+    <div class="f-item"><span class="f-n">4</span><span class="f-t"><strong>💥 A股周二暴跌后周三能否企稳——检验"一日游"vs"趋势转折"：</strong>创业板-7.35%是近期最大单日跌幅。历史规律：次日反弹概率约60%。关键看：①上证能否守住3800 ②科创50能否收复1700 ③成交额是否继续萎缩。如果周三继续下跌→恐慌升级→减仓防御；如果止跌企稳→观察不急着抄底。</span></div>
+    <div class="f-item"><span class="f-n">5</span><span class="f-t"><strong>⚡ 能源池建仓窗口开启但今天先不动手：</strong>周二暴跌让宁德(390)、国电(23.56)、阳光(112)全部进入或接近建仓区间。但今天面临政治局会议+Microsoft/Meta财报双重不确定性。建议：等这两个变量落地后(周四)再评估是否建仓。宁德若继续回调至385-390且缩量→优先关注。</span></div>
+    <div class="f-item"><span class="f-n">6</span><span class="f-t"><strong>⚠️ 龙源电力16.20止损精确触发——今天必须决策：</strong>16.20止损在连续两周暴跌中未被触发——周二精确触及。纪律高于一切：①如果今天无法站稳16.20以上→严格执行止损 ②若能快速收回16.40以上→可给予1天观察期(但这不是延迟止损的借口)。不要让"再等等"变成"等更深的亏损"。</span></div>
+  </div>
+  <div class="verdict">
+    <div class="v-label">💬 综合判断</div>
+    <div class="v-text"><strong>市场状态：从"全面反弹"到"全面暴跌"的V→A反转——恐慌重回市场。</strong>周二A股创业板-7.35%科创50-6.33%的黑色星期二与周一全面反弹形成冰火两重天。核心驱动力：①全球存储芯片血洗(费城半导体-5%+)的跨市场共振 ②美伊和谈仅维持24小时——Trump考虑扩大军事行动→地缘风险重新升温 ③周一反弹的脆弱性：空头回补≠趋势反转。从上周五暴跌→周一反弹→周二再暴跌的三天路径看——市场已形成"暴跌→反弹→再暴跌"的恶化结构(而非"暴跌→反弹→企稳"的修复结构)。<br><br><strong>今日操作建议：从"谨慎参与"撤回"只观察"——等政治局会议+财报落地。</strong>①小米——持有，止损上移至27.70。小米是持仓中唯一健康的标的——不要因市场恐慌而错卖。②宁德——等385-390缩量企稳(优先关注) ③国电南瑞——23.50-24.00区间维持但等政策落地 ④阳光电源——112进入建仓区间上沿但首笔仓位减半至5% ⑤龙源电力——16.20止损触发，今天必须决策(纪律优先) ⑥其余持仓——不补仓不割肉，等市场方向明朗。⑦不开新仓——等政治局会议决议+Microsoft/Meta财报两个最大不确定性落地。<br><br><strong>今日核心观察(按时间顺序)：</strong>①上午A股开盘——周二暴跌后周三能否企稳(最关键) ②政治局会议通稿发布(可能在盘后) ③今晚盘后Microsoft+Meta Q2财报——本周最大变量 ④小米能否站稳29.00延续逆势走势 ⑤龙源16.20能否收复(决定是否执行止损)。<br><br><strong>🏆 昨日回测：33%方向正确(2✅/1🟡/3❌)——从75%断崖式跌落。</strong>核心错误：在反弹第1天过早判断"企稳确认"。最重要的方法论修正：反弹第1天不能确认任何方向——"等周二走出来再判断方向"不是"等周二验证反弹预期"。但小米的判断(持有+止损上移+不早卖)被周二黑色星期二完美验证——趋势交易法在极端市场中依然有效。炒股养家："买入机会，卖出风险，只做对的交易，胜负交给概率。"——周二我们识别出风险并调整策略(从"谨慎参与"撤回"只观察")本身就是"做对的交易"。</div>
+  </div>
+</div>
+
+<div class="footer">
+  数据源：CoinGecko API · data-hub · web_search · 金融界 · 证券之星 · 21财经 · 财新 · 新浪财经 · 网易 · Fortune · Microsoft IR<br>
+  数据时间：2026-07-29 08:00 CST · 非高峰时段运行 · 每日自动生成<br>
+  <a href="https://github.com/eason-byte/daily-briefing">GitHub</a><br>
+  ⚠️ 本报告由AI自动生成，仅供参考，不构成投资建议
+</div>
+</div>
+</body>
+</html>

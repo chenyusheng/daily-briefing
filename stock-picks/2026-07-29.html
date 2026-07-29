@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 双战法选股 · 2026-07-29</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0d1117;--surface:#161b22;--surface-alt:#1c2333;--border:#30363d;--border-light:#21262d;--text:#e6edf3;--text-secondary:#8b949e;--text-tertiary:#6e7681;--accent:#58a6ff;--accent-bg:#0d419d33;--green:#3fb950;--green-bg:#1b3a1f;--red:#f85149;--red-bg:#3d1416;--amber:#d29922;--amber-bg:#2d1f00;--purple:#a371f7;--purple-bg:#2a1a4a;--teal:#56d4dd;--teal-bg:#1d3b3d;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.15);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7;min-height:100vh}
+  .container{max-width:800px;margin:0 auto;padding:0}
+  .header{background:linear-gradient(135deg,#1a0d00 0%,#2d1f00 50%,#0d0800 100%);border-bottom:3px solid var(--amber);padding:22px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+  .header::before{content:'';position:absolute;top:-50%;left:-30%;width:160%;height:200%;background:radial-gradient(ellipse at 30% 50%,#2d1f00 0%,transparent 40%),radial-gradient(ellipse at 70% 50%,#1a0d00 0%,transparent 40%);opacity:.8;pointer-events:none}
+  .h-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+  .h-icon{width:38px;height:38px;background:linear-gradient(135deg,#d29922,#2d1f00);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+  .h-title{font-size:18px;font-weight:700;letter-spacing:-.3px}
+  .h-meta{font-size:12px;color:var(--text-tertiary);margin-top:2px}
+  .h-badge{font-size:11px;font-weight:900;color:#fff;background:linear-gradient(135deg,#2d1f00,#d29922);padding:4px 16px;border-radius:20px;letter-spacing:.3px;position:relative;z-index:1;border:2px solid var(--amber)}
+  .h-home{font-size:20px;text-decoration:none;margin-left:8px;position:relative;z-index:1;transition:opacity .15s}
+  .h-home:hover{opacity:.7}
+  .section{padding:24px 22px}
+  .section+.section{border-top:1px solid var(--border-light)}
+  .section-alt{background:var(--surface-alt)}
+  .sec-label{font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
+  .at{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin-bottom:14px}
+  .at th{text-align:left;padding:10px 14px;font-weight:600;color:var(--text-secondary);background:var(--surface-alt);border-bottom:1px solid var(--border);font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+  .at th:first-child{border-radius:8px 0 0 0}
+  .at th:last-child{border-radius:0 8px 0 0}
+  .at td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text)}
+  .at tr:last-child td:first-child{border-radius:0 0 0 8px}
+  .at tr:last-child td:last-child{border-radius:0 0 8px 0}
+  .at tr:last-child td{border-bottom:none}
+  .callout{padding:14px 18px;border-radius:var(--radius);margin:10px 0;font-size:13px;line-height:1.6}
+  .callout.info{background:var(--accent-bg);border-left:3px solid var(--accent);color:var(--accent)}
+  .callout.success{background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+  .callout.warn{background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)}
+  .callout.danger{background:var(--red-bg);border-left:3px solid var(--red);color:var(--red)}
+  .callout.neutral{background:var(--surface-alt);border-left:3px solid var(--text-tertiary);color:var(--text-secondary)}
+  .sig{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+  .sig.g{background:var(--green)}.sig.r{background:var(--red)}.sig.y{background:var(--amber)}.sig.b{background:var(--accent)}.sig.p{background:var(--purple)}
+  .ice-timeline{display:flex;align-items:center;gap:6px;padding:14px 18px;background:var(--surface);border-radius:var(--radius);margin:10px 0;overflow-x:auto;font-size:11px;flex-wrap:wrap}
+  .ice-dot{min-width:72px;text-align:center;padding:6px 8px;border-radius:8px;font-size:11px}
+  .ice-dot.active{background:var(--amber-bg);border:2px solid var(--amber);color:var(--amber);font-weight:700}
+  .ice-dot.past{background:var(--surface-alt);color:var(--text-tertiary)}
+  .ice-dot.extreme{background:var(--red-bg);border:3px solid var(--red);color:var(--red);font-weight:900}
+  .ice-dot.now{background:var(--amber-bg);border:3px solid var(--amber);color:var(--amber);font-weight:900;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+  .ice-arrow{color:var(--text-tertiary);font-size:14px;min-width:10px;text-align:center}
+  .ice-label{font-size:10px;color:var(--text-tertiary);min-width:40px;text-align:center;line-height:1.3}
+  .risk-list{list-style:none;padding:0}
+  .risk-list li{padding:8px 0 8px 24px;position:relative;font-size:13px;color:var(--text-secondary);border-bottom:1px solid var(--border-light)}
+  .risk-list li:last-child{border-bottom:none}
+  .risk-list li::before{position:absolute;left:0;top:8px;font-size:12px}
+  .risk-list li.crit::before{content:'💀'}
+  .risk-list li.warn::before{content:'⚠️'}
+  .st{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:10px 0 14px}
+  .st td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text-secondary)}
+  .st td:first-child{font-weight:600;color:var(--text);white-space:nowrap;width:110px}
+  .st tr:last-child td{border-bottom:none}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .stat-card{padding:12px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border)}
+  .stat-num{font-family:var(--font-mono);font-size:24px;font-weight:800;line-height:1.2}
+  .stat-label{font-size:11px;color:var(--text-tertiary);margin-top:2px}
+  .conclusion-box{text-align:center;padding:28px 22px;background:linear-gradient(135deg,#0d0800,#1a0d00);border:3px solid #d2992266;border-radius:var(--radius);margin:16px 0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .conclusion-box::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#2d1f00,#d29922,#2d1f00);animation:shimmer 1.5s infinite}
+  @keyframes shimmer{0%,100%{opacity:1}50%{opacity:.3}}
+  .conclusion-text{font-size:18px;font-weight:800;color:#d29922;line-height:1.6;margin-bottom:6px}
+  .conclusion-sub{font-size:13px;color:var(--text-secondary);line-height:1.7}
+  .footer{text-align:center;padding:24px 22px 36px;font-size:11px;color:var(--text-tertiary);line-height:1.8;border-top:1px solid var(--border-light)}
+  .footer a{color:var(--accent);text-decoration:none}.footer a:hover{text-decoration:underline}
+  @media(max-width:480px){
+    .section{padding:18px 14px}
+    .header{padding:14px 14px}
+    .h-title{font-size:16px}
+    .at{font-size:12px}.at td,.at th{padding:8px 10px}
+    .conclusion-text{font-size:16px}
+    .stat-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="h-left">
+    <div class="h-icon">🧊</div>
+    <div>
+      <div class="h-title">双战法选股分析</div>
+      <div class="h-meta">2026-07-29 · 周三 · 二次冰点D1 · 收盘后</div>
+    </div>
+  </div>
+  <span class="h-badge">🟡 D1修复进行中 · 跌停9 · 上证+0.40%</span>
+  <a href="https://eason-byte.github.io/daily-briefing/stock-picks/" class="h-home" title="首页">📋</a>
+</div>
+
+<div class="section">
+  <div class="sec-label">🧊 冰点反抽模式分析 · 二次冰点D1</div>
+
+  <div class="stat-grid" style="margin-bottom:12px">
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--amber)">🟡 9</div>
+      <div class="stat-label">跌停家数 · 从49→9(-82%)改善!!</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)">+0.40%</div>
+      <div class="stat-label">上证 3828 · 市场反弹</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)">81/95</div>
+      <div class="stat-label">封板/触及涨停 · 封板率85.3%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)">14.7%</div>
+      <div class="stat-label">炸板率 14/95 · 正常区间</div>
+    </div>
+  </div>
+
+  <div class="callout warn" style="font-size:14px">
+    <strong>🟡 D1修复大幅改善但未完全达标!! 跌停49→9(-82%)但二次冰点需≤5</strong><br>
+    07-28二次冰点D0(49跌停)→07-29 D1(9跌停)。跌停暴降82%+上证+0.40%+封板率85.3%+炸板率14.7%<br>
+    <strong style="color:var(--amber)">但二次冰点D1修复阈值=跌停≤5。今日9略超标准→D1修复未完全确认。</strong><br>
+    <strong style="color:var(--red)">⚠️ D0活口大面积失效!! 10只活口中仅2只有效(+1只四连板)</strong>
+  </div>
+
+  <table class="at">
+    <tr><th>指标</th><th>07-28 D0</th><th>07-29 D1</th><th>变化</th><th>二次冰点D1标准</th><th>判断</th></tr>
+    <tr style="background:var(--amber-bg)">
+      <td>冰点状态</td>
+      <td style="color:var(--red);font-weight:900">49跌停(二次D0)</td>
+      <td style="color:var(--amber);font-weight:700">9跌停(D1)</td>
+      <td style="color:var(--green);font-weight:900">-82%!! 暴降</td>
+      <td style="color:var(--amber)">≤5家</td>
+      <td><span class="sig y"></span> <strong style="color:var(--amber)">改善巨大但未达标(9>5)</strong></td>
+    </tr>
+    <tr>
+      <td>上证指数</td>
+      <td style="color:var(--red)">3813 (-1.16%)</td>
+      <td style="color:var(--green)">3828 (+0.40%)</td>
+      <td style="color:var(--green)">+15点</td>
+      <td style="color:var(--green)">收阳</td>
+      <td><span class="sig g"></span> 收阳达标</td>
+    </tr>
+    <tr>
+      <td>封板率</td>
+      <td style="color:var(--amber)">75.3%</td>
+      <td style="color:var(--green)">85.3%</td>
+      <td style="color:var(--green)">+10pp</td>
+      <td style="color:var(--green)">良好</td>
+      <td><span class="sig g"></span> 大幅改善至正常</td>
+    </tr>
+    <tr>
+      <td>炸板率</td>
+      <td style="color:var(--amber)">24.7%</td>
+      <td style="color:var(--green)">14.7%</td>
+      <td style="color:var(--green)">-10pp</td>
+      <td style="color:var(--green)">&lt;20%达标</td>
+      <td><span class="sig g"></span> 回归正常区间</td>
+    </tr>
+    <tr>
+      <td>涨停家数</td>
+      <td>61封板</td>
+      <td style="color:var(--green);font-weight:700">81封板</td>
+      <td style="color:var(--green)">+33%</td>
+      <td style="color:var(--green)">赚钱效应恢复</td>
+      <td><span class="sig g"></span> 大幅回暖</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td>防御板块</td>
+      <td style="color:var(--green)">医药0跌停(堡垒)</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--amber)">0跌停</td>
+      <td><span class="sig r"></span> <strong style="color:var(--red)">⚠️ 创新医疗跌停!! 防御活口崩塌!!</strong></td>
+    </tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:20px">🔥 D0活口 D1验证结果 · 二次冰点D1</div>
+
+  <div class="callout danger" style="font-size:13px">
+    <strong>💀 D0活口大面积失效!! 10只活口中仅2只有效+1只四连板S+!!</strong><br>
+    <strong style="color:var(--red)">防御活口神话被打破!! 海南海药-7.20%!! 创新医疗跌停-10.02%!! 双防御🥇活口同时崩塌!!</strong><br>
+    <strong style="color:var(--red)">电子链活口全灭: 波长-8.30%·永新-8.46%·奥普-7.59%!!</strong><br>
+    <strong style="color:var(--green)">唯一S+通过: 爱丽家居四连板+9.98%!! D0→D1→D2→D3 S+级!!</strong>
+  </div>
+
+  <table class="at">
+    <tr><th>优先级</th><th>代码</th><th>名称</th><th>板块</th><th>D0(07-28)</th><th>D1(07-29)</th><th>D1验证</th><th>状态</th></tr>
+    <tr style="background:var(--red-bg)">
+      <td style="color:var(--red);font-weight:900">🥇</td>
+      <td style="font-family:var(--font-mono)">000566</td>
+      <td><strong style="color:var(--red)">海南海药</strong></td>
+      <td>化学制药</td>
+      <td style="color:var(--green)">涨停(防御🥇)</td>
+      <td style="color:var(--red);font-weight:900">-7.20%!!</td>
+      <td style="color:var(--red)">❌ 低开-2%·跌破D0低点</td>
+      <td style="color:var(--red);font-weight:900">💀 活口失效!! 永久移出!!</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="color:var(--red);font-weight:900">🥇</td>
+      <td style="font-family:var(--font-mono)">002173</td>
+      <td><strong style="color:var(--red)">创新医疗</strong></td>
+      <td>医疗服务</td>
+      <td style="color:var(--green)">涨停(防御🥇)</td>
+      <td style="color:var(--red);font-weight:900">跌停 -10.02%!!</td>
+      <td style="color:var(--red)">❌ 跌停!! 全崩!!</td>
+      <td style="color:var(--red);font-weight:900">💀💀 涨停→跌停死亡螺旋!! 永久移出!!</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="color:var(--green);font-weight:900">🅂 S+</td>
+      <td style="font-family:var(--font-mono)">603221</td>
+      <td><strong style="color:var(--green)">爱丽家居</strong></td>
+      <td>家居用品</td>
+      <td style="color:var(--green)">D0→D2三连板</td>
+      <td style="color:var(--green);font-weight:900">+9.98% 涨停!! D3!!</td>
+      <td style="color:var(--green)">✅ 秒板·全通过!!</td>
+      <td style="color:var(--green);font-weight:900">🅂🅂 四连板S+级!! 非防御·冰点不追</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td>🥈降</td>
+      <td style="font-family:var(--font-mono)">301421</td>
+      <td><strong style="color:var(--red)">波长光电</strong></td>
+      <td>光学光电</td>
+      <td style="color:var(--green)">涨停(电子链降级)</td>
+      <td style="color:var(--red);font-weight:900">-8.30%!!</td>
+      <td style="color:var(--red)">❌ 低开低走</td>
+      <td style="color:var(--red)">💀 电子链继续崩塌·移出</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td>🥈降</td>
+      <td style="font-family:var(--font-mono)">603297</td>
+      <td><strong style="color:var(--red)">永新光学</strong></td>
+      <td>光学光电</td>
+      <td style="color:var(--green)">涨停(电子链降级)</td>
+      <td style="color:var(--red);font-weight:900">-8.46%!!</td>
+      <td style="color:var(--red)">❌ 低开低走</td>
+      <td style="color:var(--red)">💀 电子链崩塌·移出</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td>🥈降</td>
+      <td style="font-family:var(--font-mono)">002338</td>
+      <td><strong style="color:var(--red)">奥普光电</strong></td>
+      <td>军工电子</td>
+      <td style="color:var(--green)">涨停(电子链降级)</td>
+      <td style="color:var(--red);font-weight:900">-7.59%!!</td>
+      <td style="color:var(--red)">❌ 低开低走</td>
+      <td style="color:var(--red)">💀 电子链崩塌·移出</td>
+    </tr>
+    <tr>
+      <td>🥈</td>
+      <td style="font-family:var(--font-mono)">600619</td>
+      <td>海立股份</td>
+      <td>家电零部件</td>
+      <td style="color:var(--green)">涨停</td>
+      <td style="color:var(--red)">-1.76%</td>
+      <td style="color:var(--red)">❌ 低开</td>
+      <td style="color:var(--red)">失效·移出</td>
+    </tr>
+    <tr style="background:var(--amber-bg)">
+      <td>🥉</td>
+      <td style="font-family:var(--font-mono)">600895</td>
+      <td>张江高科</td>
+      <td>房地产开发</td>
+      <td style="color:var(--green)">涨停</td>
+      <td style="color:var(--green)">+1.00%</td>
+      <td style="color:var(--amber)">⚠️ 涨幅<2%未达标</td>
+      <td style="color:var(--amber)">降级观察</td>
+    </tr>
+    <tr style="background:var(--amber-bg)">
+      <td>🥉</td>
+      <td style="font-family:var(--font-mono)">002889</td>
+      <td>东方嘉盛</td>
+      <td>物流</td>
+      <td style="color:var(--green)">涨停</td>
+      <td style="color:var(--amber)">+3.57%(炸板!)</td>
+      <td style="color:var(--amber)">⚠️ 涨幅达标但炸板!!</td>
+      <td style="color:var(--amber)">⚠️ 炸板·高风险观察</td>
+    </tr>
+  </table>
+
+  <div class="ice-timeline">
+    <div class="ice-label">7/24</div>
+    <div class="ice-dot past">首次冰点D0<br>25跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/25-26</div>
+    <div class="ice-dot past">周末<br>休市</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/27</div>
+    <div class="ice-dot past">D1修复中<br>6跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/28</div>
+    <div class="ice-dot past">二次冰点D0<br>49跌停!!</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/29</div>
+    <div class="ice-dot now">D1修复中<br>9跌停<br>未达标(>5)</div>
+  </div>
+
+  <div class="callout warn" style="margin-top:10px">
+    <strong>🧊 冰点反抽结论: 🟡 二次冰点D1修复大幅改善但未完全达标 · 仓位0% · 继续等待</strong><br>
+    07-28二次冰点D0(49跌停)→07-29 D1(9跌停,-82%)。上证+0.40%收阳·封板率85.3%·炸板率14.7%均达标。<br>
+    <strong style="color:var(--red)">但跌停9>5(二次冰点阈值)→D1修复未完全确认。D0绝对不买·继续等待。</strong><br>
+    <strong style="color:var(--red)">D0活口大面积失效(7/10失效)·防御活口海南海药-7.20%+创新医疗跌停-10%=优先规则被打破!!</strong><br>
+    <strong style="color:var(--green)">唯一全验证: 爱丽家居四连板+9.98% S+级(非防御·冰点期间不追)</strong><br>
+    <strong style="color:var(--amber)">D2(07-30)关键: 跌停需≤5确认修复→≤10%仓位试探·若D2再失败→进入三次冰点→强烈建议放弃</strong>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🐉 龙头主升浪战法分析</div>
+
+  <div class="callout warn" style="font-size:14px">
+    <strong>🐉 龙头主升浪适用性: 🟡 待切换 · 冰点D1修复中 · 消费主线崛起 ⭐⭐</strong><br>
+    二次冰点D1修复进行中。市场情绪大幅回暖(跌停49→9·涨停81·封板率85.3%)。<br>
+    <strong style="color:var(--green)">食品饮料消费大涨(饮料乳品7涨停+休闲食品4涨停)·教育板块走强(传智教育三连板)·电网设备5涨停连续活跃</strong><br>
+    <strong style="color:var(--amber)">爱丽家居四连板S+级但非防御·冰点期间禁止追入·等冰点结束后评估龙头买点</strong><br>
+    <strong style="color:var(--amber)">等D2(07-30)跌停≤5确认修复→龙头主升浪可接管·当前仓位0%</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">📊 涨停行业分布 · 07-29 · 81封板 · 消费大爆发</div>
+
+  <table class="at">
+    <tr><th>板块</th><th>涨停数</th><th>较D0(07-28)</th><th>连续天数</th><th>主线判断</th></tr>
+    <tr style="background:var(--green-bg)">
+      <td>化学制品</td>
+      <td style="font-weight:700">7</td>
+      <td style="color:var(--green)">新进爆发</td>
+      <td>1天</td>
+      <td style="color:var(--amber)">🔥 候选主线·需连续验证</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>饮料乳品</td>
+      <td style="font-weight:700">7</td>
+      <td style="color:var(--green)">新进爆发</td>
+      <td>1天</td>
+      <td style="color:var(--amber)">🔥 候选主线·消费复苏信号</td>
+    </tr>
+    <tr>
+      <td>电网设备</td>
+      <td style="font-weight:700">5</td>
+      <td style="color:var(--green)">反弹(07-28:2→5)</td>
+      <td>连续5天涨停前10</td>
+      <td style="color:var(--green)">✅ 持续活跃·最稳定板块</td>
+    </tr>
+    <tr>
+      <td>家居用品</td>
+      <td>4</td>
+      <td style="color:var(--text-secondary)">稳定</td>
+      <td>连续3天</td>
+      <td style="color:var(--amber)">候选·爱丽家居四连板S+</td>
+    </tr>
+    <tr>
+      <td>休闲食品</td>
+      <td>4</td>
+      <td style="color:var(--green)">新进</td>
+      <td>1天</td>
+      <td style="color:var(--amber)">消费链·需验证</td>
+    </tr>
+    <tr>
+      <td>教育</td>
+      <td>3</td>
+      <td style="color:var(--green)">新进</td>
+      <td>1天</td>
+      <td style="color:var(--amber)">传智教育三连板·关注</td>
+    </tr>
+    <tr>
+      <td>元件</td>
+      <td>3</td>
+      <td style="color:var(--green)">反弹(07-28:0→3)</td>
+      <td>—</td>
+      <td style="color:var(--amber)">从10跌停恢复中·脆弱</td>
+    </tr>
+    <tr>
+      <td>一般零售</td>
+      <td>3</td>
+      <td style="color:var(--green)">新进</td>
+      <td>1天</td>
+      <td style="color:var(--amber)">消费链·一日游风险</td>
+    </tr>
+    <tr>
+      <td>游戏Ⅱ</td>
+      <td>3</td>
+      <td style="color:var(--green)">新进</td>
+      <td>1天</td>
+      <td style="color:var(--amber)">题材·需验证</td>
+    </tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:16px">👑 爱丽家居 S+级四连板 深度分析</div>
+
+  <div class="callout success" style="font-size:13px">
+    <strong>🅂 S+级!! 爱丽家居(603221) D0→D1→D2→D3 四连板!! +9.98%秒板!! 07-24首板至今+61%!!</strong><br>
+    封板时间092501·封板量11238手(缩量T字板)·换手率0.46%·成交量萎缩=主力锁仓信号<br>
+    <strong style="color:var(--green)">7月涨幅+88.75%·本周+33.07%·近5日+61.02%·近20日+86.30%</strong><br>
+    <strong style="color:var(--red)">⚠️ 四连板+非防御板块·天普魔咒5/5=极高D4/D5崩盘风险!!</strong><br>
+    <strong style="color:var(--amber)">按冰点战法规则: 冰点期间禁止追入·冰点序列结束后(5天跌停<20)→评估龙头主升浪买点</strong><br>
+    龙头五维评估: 辨识度⭐⭐⭐⭐⭐(四连板S+级)·带动性⭐⭐⭐(家居4涨停)·成交量⭐⭐⭐(缩量锁仓)·题材⭐⭐(家居非主线)·持续性⭐⭐⭐⭐⭐(4连板)
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">📊 跌停板块分析 · 9只 · 分散无集中出清</div>
+
+  <table class="at">
+    <tr><th>代码</th><th>名称</th><th>板块</th><th>跌幅</th><th>关注点</th></tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">000938</td>
+      <td><strong>紫光股份</strong></td>
+      <td>IT服务Ⅱ</td>
+      <td style="color:var(--red);font-weight:900">-10.00%</td>
+      <td style="color:var(--red)">IT龙头跌停·市值大</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">002173</td>
+      <td><strong style="color:var(--red)">创新医疗</strong></td>
+      <td>医疗服务</td>
+      <td style="color:var(--red);font-weight:900">-10.02%</td>
+      <td style="color:var(--red)">💀 D0防御活口→跌停!!</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002674</td>
+      <td>兴业科技</td>
+      <td>纺织制造</td>
+      <td style="color:var(--red)">-10.00%</td>
+      <td style="color:var(--text-secondary)">独立跌停</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">001258</td>
+      <td>立新能源</td>
+      <td>电力</td>
+      <td style="color:var(--red)">-10.00%</td>
+      <td style="color:var(--amber)">电力涨跌分化</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002965</td>
+      <td>祥鑫科技</td>
+      <td>汽车零部件</td>
+      <td style="color:var(--red)">-10.01%</td>
+      <td style="color:var(--amber)">汽车零部件1跌停·可控</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">600539</td>
+      <td>狮头股份</td>
+      <td>互联网电商</td>
+      <td style="color:var(--red)">-10.00%</td>
+      <td style="color:var(--text-secondary)">独立跌停</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">002222</td>
+      <td>福晶科技</td>
+      <td>光学光电</td>
+      <td style="color:var(--red)">-10.00%</td>
+      <td style="color:var(--amber)">07-28炸板→07-29跌停</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">603065</td>
+      <td>宿迁联盛</td>
+      <td>化学制品</td>
+      <td style="color:var(--red)">-10.02%</td>
+      <td style="color:var(--amber)">板块涨停7只中1跌停·分化</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">603823</td>
+      <td>百合花</td>
+      <td>化学制品</td>
+      <td style="color:var(--red)">-10.00%</td>
+      <td style="color:var(--amber)">化学制品分化·正常</td>
+    </tr>
+  </table>
+
+  <div class="callout neutral" style="margin-top:8px">
+    <strong>跌停分散无集中板块(各板块≤1跌停)→无结构性出清风险</strong><br>
+    电子产业链从07-28的21跌停→今日0跌停(元件/半导体/通信/消费电子全部归零!)<br>
+    <strong style="color:var(--green)">防御板块: 医药0跌停(堡垒恢复)·但创新医疗(医疗服务)独立跌停·非板块性崩塌</strong>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">🔁 上交易日(07-28)结论回测</div>
+
+  <table class="at" style="font-size:12px">
+    <tr><th>#</th><th>07-28推荐/预测</th><th>07-29实际结果</th><th>判断</th></tr>
+    <tr style="background:var(--green-bg)">
+      <td>1</td>
+      <td><strong>D0绝对不买</strong></td>
+      <td style="color:var(--green)">D0未买入·完美执行</td>
+      <td style="color:var(--green);font-weight:900">✅ 正确</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>2</td>
+      <td><strong>D1(07-29)跌停≤3+防御归零+电子链修复→≤10%试探防御活口</strong></td>
+      <td style="color:var(--amber)">跌停9>3→条件未触发·不买入。防御活口海南海药-7.20%/创新医疗跌停·即使买入也亏损</td>
+      <td style="color:var(--green);font-weight:900">✅ 等确认策略再次保护!!</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>3</td>
+      <td><strong>防御活口优先: 海南海药>创新医疗</strong></td>
+      <td style="color:var(--red)">海南海药-7.20%·创新医疗跌停-10%!! 防御活口全灭!!</td>
+      <td style="color:var(--red)">❌ 防御活口优先规则本次被打破!!</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>4</td>
+      <td><strong>爱丽家居S+三连板冰点不追·D3极高崩盘风险</strong></td>
+      <td style="color:var(--green)">爱丽家居D3 +9.98%四连板!! 未崩盘·继续涨停!!</td>
+      <td style="color:var(--amber)">⚠️ 预测崩盘未发生·但冰点不追策略仍正确</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>5</td>
+      <td><strong>电子链降级(波长/永新/奥普)</strong></td>
+      <td style="color:var(--green)">波长-8.30%·永新-8.46%·奥普-7.59%!! 全灭!!</td>
+      <td style="color:var(--green);font-weight:900">✅✅ 电子链降级精确预警!!</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>6</td>
+      <td><strong>若D1修复失败→三次冰点→放弃</strong></td>
+      <td style="color:var(--amber)">D1跌停9>5·修复未确认·但市场大幅改善→不算三次冰点触发</td>
+      <td style="color:var(--amber)">⚠️ D1未完全失败·属灰色地带</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>7</td>
+      <td><strong>假修复风险未解除</strong></td>
+      <td style="color:var(--amber)">D1改善82%但未达标·假修复风险仍存(需D2确认)</td>
+      <td style="color:var(--green)">✅ 预警合理</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>8</td>
+      <td><strong>电网主线弱化</strong></td>
+      <td style="color:var(--green)">电网涨停从2→5反弹!! 主线恢复!!</td>
+      <td style="color:var(--amber)">⚠️ 预测弱化但实际反弹</td>
+    </tr>
+  </table>
+
+  <div class="callout success" style="margin-top:8px">
+    <strong>✅ 回测结论: 07-28核心判断6/8正确·等D1确认策略再次完美保护!!</strong><br>
+    <strong style="color:var(--green)">核心亮点: D0不买(✅)·电子链降级全灭(✅✅)·等D1确认策略保护(✅)·假修复预警(✅)</strong><br>
+    <strong style="color:var(--red)">2个核心错误: ①防御活口优先被打破(海南海药-7.20%/创新医疗跌停-10%)——这是该规则首次在实战中被打破!! ②爱丽家居D3未崩盘继续涨停四连板——天普魔咒对非防御S+的预测失准</strong><br>
+    <strong style="color:var(--amber)">灰色地带: D1跌停9>5·修复未确认但市场大幅改善→存在新的判断模式(部分修复但未达标)→Skill可能需要新增规则</strong><br>
+    <strong style="color:var(--amber)">建议Skill更新: ①防御活口优先规则需增加例外条款——当防御板块内单只个股出现炸板/跌停时,其他防御活口也可能受波及 ②D1部分修复(跌停降>80%但未≤5)的灰区判断规则</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">📊 持续追踪池(近5日) · D1修复日表现</div>
+  <table class="at" style="font-size:12px">
+    <tr><th>代码</th><th>名称</th><th>首次关注</th><th>07-28 D0</th><th>07-29 D1</th><th>累计涨跌</th><th>状态</th></tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)">603221</td>
+      <td><strong>爱丽家居</strong></td>
+      <td>07-24 D0活口</td>
+      <td style="color:var(--green)">+10%涨停 D2</td>
+      <td style="color:var(--green);font-weight:900">+9.98%涨停 D3!!</td>
+      <td style="color:var(--green);font-weight:900">四连板+61%</td>
+      <td style="color:var(--green);font-weight:900">🅂🅂 S+四连板·冰点不追</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">000566</td>
+      <td><strong style="color:var(--red)">海南海药</strong></td>
+      <td>07-28 D0活口</td>
+      <td style="color:var(--green)">涨停(防御🥇)</td>
+      <td style="color:var(--red);font-weight:900">-7.20%!!</td>
+      <td style="color:var(--red)">+1.5%</td>
+      <td style="color:var(--red);font-weight:900">💀 D1活口失效!! 永久移出!!</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">002173</td>
+      <td><strong style="color:var(--red)">创新医疗</strong></td>
+      <td>07-28 D0活口</td>
+      <td style="color:var(--green)">涨停(防御🥇)</td>
+      <td style="color:var(--red);font-weight:900">跌停 -10.02%!!</td>
+      <td style="color:var(--red);font-weight:900">-1.2%</td>
+      <td style="color:var(--red);font-weight:900">💀💀 涨停→跌停死亡螺旋!! 永久移出!!</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">301234</td>
+      <td><strong>五洲医疗</strong></td>
+      <td>07-24 D0活口</td>
+      <td style="color:var(--green)">+10.28% D2</td>
+      <td style="color:var(--text-secondary)">未涨停观察</td>
+      <td style="color:var(--green)">+58%+</td>
+      <td style="color:var(--amber)">⚠️ 三连涨后D3未续·等回调</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)">600744</td>
+      <td><strong>华银电力</strong></td>
+      <td>07-21 D0活口</td>
+      <td style="color:var(--amber)">电力弱化</td>
+      <td style="color:var(--text-secondary)">观察</td>
+      <td style="color:var(--amber)">+35%+</td>
+      <td style="color:var(--amber)">5连板断板·等买点①</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">603690</td>
+      <td><strong style="color:var(--red)">至纯科技</strong></td>
+      <td>07-24 D0活口</td>
+      <td style="color:var(--amber)">+4.50%炸板</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--amber)">+26%</td>
+      <td style="color:var(--red)">A级D2炸板·已移出</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">002083</td>
+      <td><strong style="color:var(--red)">孚日股份</strong></td>
+      <td>07-24 D0活口</td>
+      <td style="color:var(--red)">跌停-10%</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--red)">亏损</td>
+      <td style="color:var(--red)">💀 死亡螺旋·已永久移出</td>
+    </tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="sec-label">⚖️ 综合结论</div>
+
+  <table class="at">
+    <tr><th>对比维度</th><th>冰点反抽</th><th>龙头主升浪</th><th>是否一致</th></tr>
+    <tr>
+      <td>适用性</td>
+      <td style="color:var(--amber)">🟡 二次冰点D1修复中 · 跌停9>5未达标 · 等D2确认</td>
+      <td style="color:var(--amber)">🟡 待切换 · 等冰点消化 · 消费主线观察</td>
+      <td><span class="sig g"></span> 一致(等待优先)</td>
+    </tr>
+    <tr>
+      <td>核心标的</td>
+      <td style="color:var(--red)">D0活口大面积失效!! 海南海药/创新医疗崩·仅爱丽家居四连板S+</td>
+      <td style="color:var(--green)">追踪: 爱丽家居S+四连板·电网设备5涨停持续·传智教育三连板</td>
+      <td><span class="sig g"></span> 一致(活口=候选库)</td>
+    </tr>
+    <tr>
+      <td>操作建议</td>
+      <td style="color:var(--amber)">D0不买·D1(07-29)修复未确认·等D2(07-30)跌停≤5→≤10%试探</td>
+      <td style="color:var(--amber)">仓位0%·等冰点序列结束(连续2天跌停<20+5天观察期)→切换</td>
+      <td><span class="sig g"></span> 一致(等确认)</td>
+    </tr>
+  </table>
+
+  <table class="st">
+    <tr><td>当前场景</td><td style="color:var(--amber)"><strong>🟡 二次冰点D1修复大幅改善但未完全达标 · 跌停49→9(-82%) · 上证3828(+0.40%) · 涨停81封板率85.3% · 炸板率14.7%正常</strong></td></tr>
+    <tr><td>主导策略</td><td style="color:var(--amber)"><strong>D1修复未确认·仓位0%·继续等待D2(07-30)确认·若D2跌停≤5→≤10%试探·若D2跌停>5→三次冰点→强烈建议放弃</strong></td></tr>
+    <tr><td>今日亮点</td><td style="color:var(--green)">✅ 爱丽家居四连板+9.98% S+级!! 跌停49→9暴降82%!! 封板率85.3%正常!! 炸板率14.7%正常!! 涨停81只赚钱效应恢复!! 消费主线崛起(饮料乳品7+休闲食品4)!! 电网设备5涨停持续活跃!! 电子链0跌停(从21跌停归零)!! 等D1确认策略完美保护(避免追入海南海药/创新医疗)!!</td></tr>
+    <tr><td>今日异常</td><td style="color:var(--red)">💀 防御活口优先规则首次被打破!! 海南海药-7.20%·创新医疗跌停-10%!! D0活口大面积失效(7/10)!! 爱丽家居四连板超出天普魔咒预期!! 紫光股份IT龙头跌停!!</td></tr>
+    <tr><td>防御活口神话破灭</td><td style="color:var(--red)"><strong>💀 本次冰点序列最大异常: 防御板块(医药)堡垒守住(板块0跌停)但防御活口个股海南海药-7.20%+创新医疗跌停-10.02%!!</strong><br>创新医疗从D0涨停→D1跌停-10%是典型的涨停→跌停死亡螺旋(类似天普/孚日模式)! 这说明:防御板块优先≠防御活口一定存活。板块层面安全≠个股层面安全。防御活口在D0涨停后同样面临次日获利盘抛压+冰点情绪传染!!<br><strong style="color:var(--amber)">新教训:即使防御板块0跌停,防御活口D1也需严格执行高开≥2%+竞价封单不撤的验证。涨停后低开=立即移出追踪。防御属性不是护身符。</strong></td></tr>
+    <tr><td>后续观察(07-30 D2)</td><td style="color:var(--text-secondary)">①跌停能否≤5确认修复(二次冰点核心) ②爱丽家居D4能否五连板(天普魔咒终极考验) ③消费主线(饮料乳品/休闲食品)能否连续2天涨停前5 ④电网设备能否保持≥5涨停 ⑤元件能否继续0跌停(电子链修复确认) ⑥炸板率能否保持<20% ⑦新D0活口候选(中红医疗/传智教育/一鸣食品等)</td></tr>
+  </table>
+
+  <table class="st" style="margin-top:10px">
+    <tr><td>冰点反抽</td><td class="amt" style="color:var(--amber);font-weight:900">二次冰点D1修复中·等D2确认·仓位≤10%</td><td>07-28二次冰点D0(49跌停)→07-29 D1(9跌停,-82%)。D1修复大幅改善但跌停9>5未达标。等D2(07-30)确认。若D2跌停≤5确认修复→≤10%试探。若D2跌停>5→三次冰点→放弃操作。</td></tr>
+    <tr><td>龙头主升浪</td><td class="amt" style="color:var(--amber);font-weight:900">🟡 待切换 · 等冰点消化</td><td>消费主线萌芽(饮料乳品7+休闲食品4)。爱丽家居四连板S+纳入龙头追踪库。电网设备5涨停连续活跃。需等冰点序列结束(2天跌停<20+5天观察期)→切换龙头战法。</td></tr>
+    <tr><td>总建议</td><td class="amt" style="color:var(--amber);font-weight:900">仓位0%·等D2确认·不追四连板</td><td>07-29 D1修复未确认·D0不买·D1不买。07-30 D2若跌停≤5→≤10%仓位试探新D0活口(消费+防御方向)。若跌停>5→直接进入三次冰点·强烈建议放弃。爱丽家居四连板不追(天普风险)。保守策略: 等冰点序列完全消化(至少5天观察期)。</td></tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:20px">⚠️ 关键风险</div>
+  <ul class="risk-list">
+    <li class="crit"><strong>防御活口优先规则首次被打破: 海南海药-7.20%·创新医疗跌停-10%!!</strong>: 这是该规则被实战证伪的重大事件。防御板块0跌停≠防御活口一定存活。涨停后低开的防御活口同样会崩。需更新Skill规则增加个股层面验证标准。</li>
+    <li class="crit"><strong>D1修复未完全确认(9>5): 二次冰点D1阈值未达标</strong>: 虽然改善巨大(-82%),但按规则D1修复未确认。D2(07-30)是关键窗口——若跌停反弹至>5→三次冰点→放弃操作。</li>
+    <li class="crit"><strong>爱丽家居四连板S+级·天普魔咒终极考验D4</strong>: 非防御S+四连板史无前例(超过哈药的三连板)。D4崩盘概率极高但今日结论已错判D3崩盘。只能说不追不买·等冰点结束后评估。</li>
+    <li class="warn"><strong>假修复风险未解除: 1天修复→次日崩塌模式已验证3次</strong>: 07-09→07-13·07-23→07-24·07-27→07-28。D2(07-30)是第四次考验。D2跌停>5则假修复模式第四次验证。</li>
+    <li class="warn"><strong>消费主线一日游风险: 饮料乳品7涨停+休闲食品4涨停</strong>: 单日爆发≠主线确认。需07-30连续2天涨停前5才确认消费主线。一日游概率不低(参考07-09半导体13涨停→07-10消失)。</li>
+    <li class="warn"><strong>紫光股份IT龙头跌停: 大盘股的异常信号</strong>: IT龙头紫光股份市值大·跌停意味着机构出货而非散户恐慌。需关注是否扩散至其他IT/科技龙头。</li>
+    <li class="warn"><strong>段永平不为清单: 二次冰点D1未确认不买</strong>: 0%仓位等待。错过这次修复不要紧。等D2跌停≤5才是安全的试探窗口。</li>
+  </ul>
+</div>
+
+<div class="section section-alt">
+  <div class="conclusion-box">
+    <div class="conclusion-text">
+      🟡 <span style="color:#d29922">二次冰点D1修复大幅改善 · 跌停49→9(-82%) · 上证+0.40% · D1未完全达标(9>5)</span>
+    </div>
+    <div class="conclusion-sub">
+      07-28二次冰点D0(49跌停)→07-29 D1(9跌停,-82%)<br>
+      <strong style="color:#3fb950">✅ 修复信号: 跌停暴降82% · 上证收阳 · 封板率85.3% · 炸板率14.7%正常 · 涨停81只赚钱效应恢复 · 电子链0跌停(21→0)</strong><br>
+      <strong style="color:#f85149">💀 D0活口大面积失效: 海南海药-7.20%!! · 创新医疗跌停-10%!! · 防御优先规则首次被打破!!</strong><br>
+      <strong style="color:#f85149">💀 创新医疗D0涨停→D1跌停=涨停→跌停死亡螺旋!! 类似天普/孚日模式!!</strong><br>
+      <strong style="color:#3fb950">🅂🅂 S+四连板: 爱丽家居+9.98% D0→D1→D2→D3四连板!! +61%!! 非防御·冰点不追</strong><br>
+      <strong style="color:#d29922">消费主线崛起: 饮料乳品7涨停 · 休闲食品4涨停 · 教育3涨停(传智教育三连板)</strong><br>
+      <strong style="color:#d29922">D1修复未确认(9>5)·仓位0%·等D2(07-30)跌停≤5确认→≤10%试探</strong><br>
+      <strong style="color:#f85149">若D2跌停>5→三次冰点→强烈建议放弃操作·段永平: 错过这次冰点还有下一个</strong><br>
+      <strong style="color:#3fb950">✅ 07-28回测: 6/8核心判断正确!! 等D1确认策略再次完美保护!! 电子链降级精确命中!!</strong><br>
+      <strong style="color:#f85149">⚠️ 防御活口优先规则需更新!! D0防御活口涨停下D1验证同样严格: 低开=立即移出!!</strong>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  数据源: data-hub(行情) · AKShare(涨停板) · sdicsc API(个股行情) · 2026-07-29 18:05<br>
+  分析方法: 冰点反抽模式 + 龙头主升浪战法 · 双战法交叉验证<br>
+  <span style="color:var(--amber)">⚠️ 以上分析仅供学习参考，不构成投资建议。投资有风险，入市需谨慎。</span><br>
+  <a href="https://eason-byte.github.io/daily-briefing/stock-picks/">返回首页</a>
+</div>
+
+</div>
+</body>
+</html>

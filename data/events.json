@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-28T08:30:14+08:00",
-  "today": "2026-07-28",
+  "updated": "2026-07-29T08:30:21+08:00",
+  "today": "2026-07-29",
   "events": [
     {
       "id": "sk-hynix-us-ipo",
@@ -55,7 +55,7 @@
       "importance": 5,
       "impact": "全持仓",
       "impact_dir": "both",
-      "status": "upcoming",
+      "status": "today",
       "type": "宏观",
       "description": "是否开启降息周期？降息→港股/A股受益，北向资金流入增加，科技成长股估值修复。影响全持仓。",
       "detail": "关注点：降息幅度、点阵图前瞻指引、鲍威尔新闻发布会措辞。",

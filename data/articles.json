@@ -1,122 +1,122 @@
 [
   {
-    "slug": "howard-marks",
-    "title": "第二层思维与周期钟摆——霍华德·马克斯投资哲学",
-    "date": "2026-07-28",
-    "file": "learning/howard-marks.html"
+    "date": "霍华德·马克斯",
+    "dow": "第二层思维",
+    "desc": "",
+    "path": "learning/howard-marks.html"
   },
   {
-    "slug": "ray-dalio",
-    "title": "经济机器与原则化投资——Ray Dalio的全天候策略",
-    "date": "2026-07-27",
-    "file": "learning/ray-dalio.html"
+    "date": "Ray Dalio",
+    "dow": "经济机器",
+    "desc": "",
+    "path": "learning/ray-dalio.html"
   },
   {
-    "slug": "xu-xiang",
-    "title": "涨停板总舵主——徐翔的八步操盘法与交易哲学",
-    "date": "2026-07-26",
-    "file": "learning/xu-xiang.html"
+    "date": "徐翔",
+    "dow": "涨停板战法",
+    "desc": "",
+    "path": "learning/xu-xiang.html"
   },
   {
-    "slug": "qingze",
-    "title": "澄明之境——青泽的交易哲学与统一交易系统",
-    "date": "2026-07-25",
-    "file": "learning/qingze.html"
+    "date": "青泽",
+    "dow": "交易哲学",
+    "desc": "",
+    "path": "learning/qingze.html"
   },
   {
-    "slug": "soros",
-    "title": "反身性理论与宏观对冲 —— 索罗斯的\"炼金术\"深度解构",
-    "date": "2026-07-24",
-    "file": "learning/soros.html"
+    "date": "索罗斯",
+    "dow": "反身性理论",
+    "desc": "",
+    "path": "learning/soros.html"
   },
   {
-    "slug": "peter-lynch",
-    "title": "彼得·林奇：从生活中发现十倍股",
-    "date": "2026-07-23",
-    "file": "learning/peter-lynch.html"
+    "date": "彼得·林奇",
+    "dow": "十倍股",
+    "desc": "",
+    "path": "learning/peter-lynch.html"
   },
   {
-    "slug": "william-oneil",
-    "title": "威廉·欧奈尔：CAN SLIM系统与杯柄形态交易体系 | 投资大师学习",
-    "date": "2026-07-22",
-    "file": "learning/william-oneil.html"
+    "date": "威廉·欧奈尔",
+    "dow": "CAN SLIM",
+    "desc": "",
+    "path": "learning/william-oneil.html"
   },
   {
-    "slug": "mark-minervini",
-    "title": "马克·米勒维尼：SEPA策略与VCP波动率收缩交易体系 | 投资大师学习",
-    "date": "2026-07-21",
-    "file": "learning/mark-minervini.html"
+    "date": "马克·米勒维尼",
+    "dow": "SEPA策略",
+    "desc": "",
+    "path": "learning/mark-minervini.html"
   },
   {
-    "slug": "charlie-munger",
-    "title": "查理·芒格工具箱：如何像世界上最聪明的投资者一样思考",
-    "date": "2026-07-20",
-    "file": "learning/charlie-munger.html"
+    "date": "查理·芒格",
+    "dow": "多元思维",
+    "desc": "",
+    "path": "learning/charlie-munger.html"
   },
   {
-    "slug": "buffett",
-    "title": "巴菲特投资体系 — 价值投资的本源与进化",
-    "date": "2026-07-18",
-    "file": "learning/buffett.html"
+    "date": "巴菲特",
+    "dow": "价值投资",
+    "desc": "",
+    "path": "learning/buffett.html"
   },
   {
-    "slug": "livermore",
-    "title": "利弗莫尔：关键点交易法与金字塔加仓体系 | 投资大师学习",
-    "date": "2026-07-17",
-    "file": "learning/livermore.html"
+    "date": "利弗莫尔",
+    "dow": "关键点交易",
+    "desc": "",
+    "path": "learning/livermore.html"
   },
   {
-    "slug": "duan-yongping",
-    "title": "段永平 — 大道无形的价值投资教父",
-    "date": "2026-07-17",
-    "file": "learning/duan-yongping.html"
+    "date": "段永平",
+    "dow": "投资心法",
+    "desc": "",
+    "path": "learning/duan-yongping.html"
   },
   {
-    "slug": "zhao-laoge",
-    "title": "赵老哥：八年一万倍 · 二板定龙头心法全解析",
-    "date": "2026-07-16",
-    "file": "learning/zhao-laoge.html"
+    "date": "赵老哥",
+    "dow": "二板定龙头",
+    "desc": "",
+    "path": "learning/zhao-laoge.html"
   },
   {
-    "slug": "zhang-mengzhu",
-    "title": "章盟主（章建平）— 格局派龙头战法 | 每日学习",
-    "date": "2026-07-15",
-    "file": "learning/zhang-mengzhu.html"
+    "date": "章盟主",
+    "dow": "格局派",
+    "desc": "",
+    "path": "learning/zhang-mengzhu.html"
   },
   {
-    "slug": "asking",
-    "title": "A神Asking：涨停板敢死队始祖的龙头心法 — 投资大师学习系列",
-    "date": "2026-07-14",
-    "file": "learning/asking.html"
+    "date": "A神Asking",
+    "dow": "龙头心法",
+    "desc": "",
+    "path": "learning/asking.html"
   },
   {
-    "slug": "rui-hexian",
-    "title": "三年一千倍 — 瑞鹤仙短线心法深度研习",
-    "date": "2026-07-13",
-    "file": "learning/rui-hexian.html"
+    "date": "瑞鹤仙",
+    "dow": "短线心法",
+    "desc": "",
+    "path": "learning/rui-hexian.html"
   },
   {
-    "slug": "feng-liu",
-    "title": "弱者体系与逆向哲学 — 冯柳（茅台03）投资思想深度研习",
-    "date": "2026-07-13",
-    "file": "learning/feng-liu.html"
+    "date": "冯柳-茅台03",
+    "dow": "投资心法",
+    "desc": "",
+    "path": "learning/feng-liu.html"
   },
   {
-    "slug": "chaogu-yangjia",
-    "title": "养家心法 — 炒股养家：情绪周期与龙头战法的集大成者",
-    "date": "2026-07-05",
-    "file": "learning/chaogu-yangjia.html"
+    "date": "炒股养家",
+    "dow": "情绪周期",
+    "desc": "",
+    "path": "learning/chaogu-yangjia.html"
   },
   {
-    "slug": "yu-boluo-journey",
-    "title": "十年悟道之路 — 从亏货到稳定盈利的交易实录",
-    "date": "2026-07-01",
-    "file": "learning/yu-boluo-journey.html"
+    "date": "十年悟道",
+    "dow": "交易实录",
+    "desc": "",
+    "path": "learning/yu-boluo-journey.html"
   },
   {
-    "slug": "roadmap",
-    "title": "从小白到交易员 — 七阶段投资学习路线图",
-    "date": "2026-07-01",
-    "file": "learning/roadmap.html"
+    "date": "投资路线图",
+    "dow": "系统学习",
+    "desc": "",
+    "path": "learning/roadmap.html"
   }
 ]

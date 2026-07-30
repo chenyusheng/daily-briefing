@@ -1,38 +1,272 @@
 [
   {
-    "date":"段永平",
-    "dow":"投资心法",
-    "desc":"大道无形的价值投资教父 -- 买股票就是买公司、不为清单、好生意好团队好价格、集中投资长期持有。最值得学习的不是做了什么，而是不做什么。",
-    "path":"learning/duan-yongping"
+    "date": "瑞鹤仙",
+    "dow": "投资心法",
+    "desc": "三年一千倍的短线天才 — 价值投机、绝不补仓、手法多样化、死磕失败交割单、不YY不妄想。承认自己可能错，是避免犯大错的第一步。",
+    "path": "learning/rui-hexian"
   },
   {
-    "date":"投资路线图",
-    "dow":"系统学习",
-    "desc":"七阶段系统性进阶：思维重塑→基础知识→技术分析→基本面→交易系统→跟对人→实战训练。附完整书单和交易系统模板。",
-    "path":"learning/roadmap"
+    "date": "炒股养家",
+    "dow": "投资心法",
+    "desc": "A股顶级游资养家心法深度解析。情绪周期理论、龙头战法体系、买在分歧卖在一致、仓位管理与风控哲学。短线交易者的必修课。",
+    "path": "learning/chaogu-yangjia"
   },
   {
-    "date":"十年悟道",
-    "dow":"交易实录",
-    "desc":"宇菠萝从2012年30万入市到稳定盈利的完整历程。七年牛熊洗礼，含冰点反抽模式、龙头主升浪战法、四条铁律、自查清单。",
-    "path":"learning/yu-boluo-journey"
+    "date": "段永平",
+    "dow": "投资心法",
+    "desc": "大道无形的价值投资教父 -- 买股票就是买公司、不为清单、好生意好团队好价格、集中投资长期持有。最值得学习的不是做了什么，而是不做什么。",
+    "path": "learning/duan-yongping"
   },
   {
-    "date":"炒股养家",
-    "dow":"投资心法",
-    "desc":"A股顶级游资养家心法深度解析。情绪周期理论、龙头战法体系、买在分歧卖在一致、仓位管理与风控哲学。短线交易者的必修课。",
-    "path":"learning/chaogu-yangjia"
+    "date": "投资路线图",
+    "dow": "系统学习",
+    "desc": "七阶段系统性进阶：思维重塑→基础知识→技术分析→基本面→交易系统→跟对人→实战训练。附完整书单和交易系统模板。",
+    "path": "learning/roadmap"
   },
   {
-    "date":"冯柳-茅台03",
-    "dow":"投资心法",
-    "desc":"弱者体系与逆向哲学 — 从散户到百亿私募。赔率优先、共识与常识辩证、下跌三分类、虚实结合选股。承认无知才是最大的智慧。",
-    "path":"learning/feng-liu"
+    "date": "十年悟道",
+    "dow": "交易实录",
+    "desc": "宇菠萝从2012年30万入市到稳定盈利的完整历程。七年牛熊洗礼，含冰点反抽模式、龙头主升浪战法、四条铁律、自查清单。",
+    "path": "learning/yu-boluo-journey"
   },
   {
-    "date":"瑞鹤仙",
-    "dow":"投资心法",
-    "desc":"三年一千倍的短线天才 — 价值投机、绝不补仓、手法多样化、死磕失败交割单、不YY不妄想。承认自己可能错，是避免犯大错的第一步。",
-    "path":"learning/rui-hexian"
+    "date": "冯柳-茅台03",
+    "dow": "投资心法",
+    "desc": "弱者体系与逆向哲学 — 从散户到百亿私募。赔率优先、共识与常识辩证、下跌三分类、虚实结合选股。承认无知才是最大的智慧。",
+    "path": "learning/feng-liu"
+  },
+  {
+    "slug": "howard-marks",
+    "title": "第二层思维与周期钟摆——霍华德·马克斯投资哲学",
+    "date": "2026-07-28",
+    "file": "learning/howard-marks.html"
+  },
+  {
+    "slug": "ray-dalio",
+    "title": "经济机器与原则化投资——Ray Dalio的全天候策略",
+    "date": "2026-07-27",
+    "file": "learning/ray-dalio.html"
+  },
+  {
+    "slug": "xu-xiang",
+    "title": "涨停板总舵主——徐翔的八步操盘法与交易哲学",
+    "date": "2026-07-26",
+    "file": "learning/xu-xiang.html"
+  },
+  {
+    "slug": "qingze",
+    "title": "澄明之境——青泽的交易哲学与统一交易系统",
+    "date": "2026-07-25",
+    "file": "learning/qingze.html"
+  },
+  {
+    "slug": "soros",
+    "title": "反身性理论与宏观对冲 —— 索罗斯的\"炼金术\"深度解构",
+    "date": "2026-07-24",
+    "file": "learning/soros.html"
+  },
+  {
+    "slug": "peter-lynch",
+    "title": "彼得·林奇：从生活中发现十倍股",
+    "date": "2026-07-23",
+    "file": "learning/peter-lynch.html"
+  },
+  {
+    "slug": "william-oneil",
+    "title": "威廉·欧奈尔：CAN SLIM系统与杯柄形态交易体系 | 投资大师学习",
+    "date": "2026-07-22",
+    "file": "learning/william-oneil.html"
+  },
+  {
+    "slug": "mark-minervini",
+    "title": "马克·米勒维尼：SEPA策略与VCP波动率收缩交易体系 | 投资大师学习",
+    "date": "2026-07-21",
+    "file": "learning/mark-minervini.html"
+  },
+  {
+    "slug": "charlie-munger",
+    "title": "查理·芒格工具箱：如何像世界上最聪明的投资者一样思考",
+    "date": "2026-07-20",
+    "file": "learning/charlie-munger.html"
+  },
+  {
+    "slug": "buffett",
+    "title": "巴菲特投资体系 — 价值投资的本源与进化",
+    "date": "2026-07-18",
+    "file": "learning/buffett.html"
+  },
+  {
+    "slug": "tiktok-60day-cold-start",
+    "title": "TikTok新店60天冷启动实战框架",
+    "date": "2026-07-18",
+    "file": "learning/tiktok-60day-cold-start.html"
+  },
+  {
+    "slug": "duan-yongping",
+    "title": "段永平 — 大道无形的价值投资教父",
+    "date": "2026-07-17",
+    "file": "learning/duan-yongping.html"
+  },
+  {
+    "slug": "livermore",
+    "title": "利弗莫尔：关键点交易法与金字塔加仓体系 | 投资大师学习",
+    "date": "2026-07-17",
+    "file": "learning/livermore.html"
+  },
+  {
+    "slug": "zhao-laoge",
+    "title": "赵老哥：八年一万倍 · 二板定龙头心法全解析",
+    "date": "2026-07-16",
+    "file": "learning/zhao-laoge.html"
+  },
+  {
+    "slug": "zhang-mengzhu",
+    "title": "章盟主（章建平）— 格局派龙头战法 | 每日学习",
+    "date": "2026-07-15",
+    "file": "learning/zhang-mengzhu.html"
+  },
+  {
+    "slug": "asking",
+    "title": "A神Asking：涨停板敢死队始祖的龙头心法 — 投资大师学习系列",
+    "date": "2026-07-14",
+    "file": "learning/asking.html"
+  },
+  {
+    "slug": "feng-liu",
+    "title": "弱者体系与逆向哲学 — 冯柳（茅台03）投资思想深度研习",
+    "date": "2026-07-13",
+    "file": "learning/feng-liu.html"
+  },
+  {
+    "slug": "ipo-2026-07-13",
+    "title": "7月13日 港股IPO分析",
+    "date": "2026-07-13",
+    "file": "learning/ipo-2026-07-13.html"
+  },
+  {
+    "slug": "rui-hexian",
+    "title": "三年一千倍 — 瑞鹤仙短线心法深度研习",
+    "date": "2026-07-13",
+    "file": "learning/rui-hexian.html"
+  },
+  {
+    "slug": "ipo-2026-07-10",
+    "title": "港股IPO每日扫描 — 2026年7月10日",
+    "date": "2026-07-10",
+    "file": "learning/ipo-2026-07-10.html"
+  },
+  {
+    "slug": "ipo-2026-07-09",
+    "title": "港股打新 · 2026年7月9日 每日IPO分析",
+    "date": "2026-07-09",
+    "file": "learning/ipo-2026-07-09.html"
+  },
+  {
+    "slug": "ipo-2026-07-08",
+    "title": "港股打新 · 2026年7月8日 每日IPO分析",
+    "date": "2026-07-08",
+    "file": "learning/ipo-2026-07-08.html"
+  },
+  {
+    "slug": "guangzhou-supply-chain-guide",
+    "title": "广州产业带与批发市场全攻略 · TikTok跨境电商选品指南",
+    "date": "2026-07-07",
+    "file": "learning/guangzhou-supply-chain-guide.html"
+  },
+  {
+    "slug": "side-hustle-dual-tracks",
+    "title": "普通人副业双赛道：零食推荐官 + 海外新媒体电商",
+    "date": "2026-07-07",
+    "file": "learning/side-hustle-dual-tracks.html"
+  },
+  {
+    "slug": "tiktok-after-sales-compliance-handbook",
+    "title": "TK东南亚跨境电商·售后/客服/合规/避坑实操手册",
+    "date": "2026-07-07",
+    "file": "learning/tiktok-after-sales-compliance-handbook.html"
+  },
+  {
+    "slug": "tiktok-seasia-full-process-guide",
+    "title": "TK跨境电商全流程解析",
+    "date": "2026-07-07",
+    "file": "learning/tiktok-seasia-full-process-guide.html"
+  },
+  {
+    "slug": "tiktok-seasia-guide-for-it-guys",
+    "title": "IT男TikTok东南亚跨境电商·从0到1全攻略",
+    "date": "2026-07-07",
+    "file": "learning/tiktok-seasia-guide-for-it-guys.html"
+  },
+  {
+    "slug": "tiktok-seasia-startup-costs",
+    "title": "TK东南亚启动成本解析",
+    "date": "2026-07-07",
+    "file": "learning/tiktok-seasia-startup-costs.html"
+  },
+  {
+    "slug": "tiktok-tool-list",
+    "title": "跨境电商工具清单与实操流程",
+    "date": "2026-07-07",
+    "file": "learning/tiktok-tool-list.html"
+  },
+  {
+    "slug": "tk-cross-border-learning-resources",
+    "title": "TK东南亚跨境电商·新手学习资源大全",
+    "date": "2026-07-07",
+    "file": "learning/tk-cross-border-learning-resources.html"
+  },
+  {
+    "slug": "cross-border-5-steps",
+    "title": "跨境电商5步实操指南 · 电商经验",
+    "date": "2026-07-06",
+    "file": "learning/cross-border-5-steps.html"
+  },
+  {
+    "slug": "guangzhou-business-license-tiktok",
+    "title": "广州个体工商户注册 · TikTok开店全流程 · 电商经验",
+    "date": "2026-07-06",
+    "file": "learning/guangzhou-business-license-tiktok.html"
+  },
+  {
+    "slug": "ipo-2026-07-06",
+    "title": "港股打新 · 2026年7月6日 每日IPO分析",
+    "date": "2026-07-06",
+    "file": "learning/ipo-2026-07-06.html"
+  },
+  {
+    "slug": "chaogu-yangjia",
+    "title": "养家心法 — 炒股养家：情绪周期与龙头战法的集大成者",
+    "date": "2026-07-05",
+    "file": "learning/chaogu-yangjia.html"
+  },
+  {
+    "slug": "ipo-2026-07-05",
+    "title": "港股打新 · 2026年7月5日 每日IPO分析",
+    "date": "2026-07-05",
+    "file": "learning/ipo-2026-07-05.html"
+  },
+  {
+    "slug": "ipo-2026-07-03",
+    "title": "港股打新 · 2026年7月3日 每日IPO分析",
+    "date": "2026-07-03",
+    "file": "learning/ipo-2026-07-03.html"
+  },
+  {
+    "slug": "ipo-analysis",
+    "title": "港股打新分析 — 2026年7月IPO申购建议",
+    "date": "2026-07-01",
+    "file": "learning/ipo-analysis.html"
+  },
+  {
+    "slug": "roadmap",
+    "title": "从小白到交易员 — 七阶段投资学习路线图",
+    "date": "2026-07-01",
+    "file": "learning/roadmap.html"
+  },
+  {
+    "slug": "yu-boluo-journey",
+    "title": "十年悟道之路 — 从亏货到稳定盈利的交易实录",
+    "date": "2026-07-01",
+    "file": "learning/yu-boluo-journey.html"
   }
 ]

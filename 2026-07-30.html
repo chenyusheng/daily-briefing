@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📰 晨间速览 · 2026-07-30</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#f8f9fa;--surface:#fff;--surface-alt:#f2f3f5;--border:#e8eaed;--border-light:#f0f1f3;--text:#1a1d23;--text-secondary:#5a5f6b;--text-tertiary:#8a8f98;--blue:#0066cc;--blue-light:#e8f0fe;--blue-bg:#f0f5ff;--green:#059669;--green-bg:#ecfdf5;--red:#dc2626;--red-bg:#fef2f2;--amber:#d97706;--amber-bg:#fffbeb;--purple:#7c3aed;--purple-bg:#f5f3ff;--radius:10px;--shadow:0 1px 4px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.03);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7}
+  .container{max-width:720px;margin:0 auto;padding:0}
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:20px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(255,255,255,.92)}
+  .h-left{display:flex;align-items:center;gap:12px}
+  .h-icon{width:38px;height:38px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+  .h-title{font-size:18px;font-weight:600;letter-spacing:-.3px}
+  .h-meta{font-size:13px;color:var(--text-tertiary);margin-top:2px}
+  .h-badge{font-size:11px;font-weight:500;color:var(--green);background:var(--green-bg);padding:4px 14px;border-radius:20px;letter-spacing:.3px}
+  .insight-bar{background:var(--red-bg);margin:0;padding:14px 22px;font-size:14px;color:var(--text-secondary);line-height:1.6;border-bottom:1px solid var(--border-light)}
+  .insight-bar strong{color:var(--text)}
+  .section{padding:24px 22px}
+  .section+.section{border-top:1px solid var(--border-light)}
+  .sec-label{font-size:13px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px;display:flex;align-items:center;gap:6px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
+  .section-alt{background:var(--surface-alt)}
+  .mkt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+  @media(min-width:480px){.mkt-grid{grid-template-columns:repeat(4,1fr)}}
+  .mkt-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .mkt-label{font-size:12px;color:var(--text-tertiary);font-weight:500;margin-bottom:2px}
+  .mkt-val{font-size:18px;font-weight:600;font-family:var(--font-mono)}
+  .mkt-chg{font-size:13px;font-weight:500;margin-left:3px}
+  .mkt-chg.up{color:var(--red)}.mkt-chg.down{color:var(--green)}.mkt-chg.neu{color:var(--text-tertiary)}
+  .ticker-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .ticker{display:flex;align-items:center;padding:10px 16px;font-size:14px;border-bottom:1px solid var(--border-light)}
+  .ticker:last-child{border-bottom:none}
+  .ticker-ico{width:20px;text-align:center;margin-right:10px;font-size:15px}
+  .ticker-nm{font-weight:500;min-width:70px}
+  .ticker-bar{flex:1;height:5px;background:var(--border);border-radius:2px;margin:0 12px;overflow:hidden;max-width:70px}
+  .ticker-fill{height:100%;border-radius:2px}.ticker-fill.up{background:var(--red)}.ticker-fill.down{background:var(--green)}
+  .ticker-px{font-family:var(--font-mono);font-weight:500;min-width:75px;text-align:right;font-size:13px;color:var(--text-secondary)}
+  .ticker-ch{min-width:55px;text-align:right;font-weight:500;font-size:12px}
+  .ticker-ch.up{color:var(--red)}.ticker-ch.down{color:var(--green)}
+  .hk-implication{font-size:13px;color:var(--text-secondary);line-height:1.7;padding:12px 16px;background:var(--blue-bg);border-radius:8px;margin-top:12px}
+  .news{display:flex;flex-direction:column;gap:12px}
+  .news-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .news-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+  .news-card.pos::before{background:var(--red)}.news-card.neg::before{background:var(--green)}.news-card.neu::before{background:var(--text-tertiary)}
+  .news-tag{font-size:10px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;padding:2px 10px;border-radius:3px;display:inline-block;margin-bottom:6px}
+  .nt-mi{background:#eef0ff;color:#5e6ad2}.nt-macro{background:var(--red-bg);color:var(--red)}.nt-tech{background:var(--green-bg);color:var(--green)}.nt-crypto{background:var(--amber-bg);color:var(--amber)}.nt-policy{background:#f0fdf4;color:#16a34a}.nt-ind{background:var(--purple-bg);color:var(--purple)}
+  .news-t{font-size:16px;font-weight:600;line-height:1.4;margin-bottom:4px;letter-spacing:-.15px}
+  .news-t a{color:inherit;text-decoration:none}.news-t a:hover{color:var(--blue);text-decoration:underline}
+  .news-d{font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:8px}
+  .news-f{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--text-tertiary)}
+  .news-f .nl{color:var(--blue);text-decoration:none;font-weight:500}.nl:hover{text-decoration:underline}
+  .news-f .ip{font-size:11px;font-weight:500;padding:1px 10px;border-radius:20px}.ip.pos{background:var(--red-bg);color:var(--red)}.ip.neg{background:var(--green-bg);color:var(--green)}.ip.neu{background:var(--surface-alt);color:var(--text-tertiary)}
+  .news-f .ndate{color:var(--text-tertiary);font-size:11px}
+  .crypto{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .c-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 8px;text-align:center;box-shadow:var(--shadow)}
+  .c-sym{font-size:12px;font-weight:600;margin-bottom:3px}
+  .c-px{font-size:15px;font-weight:600;font-family:var(--font-mono)}
+  .c-chg{font-size:11px;font-weight:500}.c-chg.up{color:var(--red)}.c-chg.down{color:var(--green)}
+  .c-bar{height:4px;border-radius:2px;margin-top:6px;overflow:hidden;background:var(--border)}
+  .c-bar .f{height:100%;border-radius:2px}.c-bar .f.up{background:var(--red)}.c-bar .f.down{background:var(--green)}
+  .c-src{font-size:11px;color:var(--text-tertiary);text-align:center;margin-top:8px}
+  .stock-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin-bottom:12px}
+  .stock-box:last-child{margin-bottom:0}
+  .sb-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .sb-name{font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
+  .sb-name .stag{font-size:10px;font-weight:600;padding:1px 8px;border-radius:3px}
+  .sb-name .stag.p1{background:#dcfce7;color:#166534}.sb-name .stag.p2{background:#fef3c7;color:#92400e}.sb-name .stag.p3{background:#fee2e2;color:#991b1b}
+  .sb-price{font-size:18px;font-weight:600;font-family:var(--font-mono)}
+  .sb-price .schg{font-size:12px;font-weight:500;margin-left:4px}.sb-price .schg.g{color:var(--red)}.sb-price .schg.r{color:var(--green)}
+  .sb-meta{font-size:12px;color:var(--text-tertiary);margin-bottom:6px}
+  .sb-table{width:100%;border-collapse:collapse;font-size:12px;margin:4px 0}
+  .sb-table td{padding:3px 8px 3px 0;vertical-align:top}
+  .sb-table .lbl{color:var(--text-tertiary);white-space:nowrap;width:65px}
+  .sb-table .val{color:var(--text)}
+  .sb-verdict{font-size:13px;line-height:1.5;padding:8px 12px;border-radius:6px;margin-top:6px}
+  .sb-verdict.g{background:var(--green-bg);color:var(--green);border-left:3px solid var(--green)}
+  .sb-verdict.y{background:var(--amber-bg);color:var(--amber);border-left:3px solid var(--amber)}
+  .sb-verdict.r{background:var(--red-bg);color:var(--red);border-left:3px solid var(--red)}
+  .sb-verdict.b{background:var(--blue-light);color:var(--blue);border-left:3px solid var(--blue)}
+  .focus{display:flex;flex-direction:column;gap:10px}
+  .f-item{display:flex;gap:12px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--blue);box-shadow:var(--shadow);font-size:14px;line-height:1.6}
+  .f-n{font-weight:600;color:var(--blue);min-width:20px}
+  .f-t{color:var(--text-secondary)}.f-t strong{color:var(--text)}
+  .verdict{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-top:12px;border-left:3px solid var(--blue);box-shadow:var(--shadow)}
+  .v-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+  .v-text{font-size:15px;color:var(--text-secondary);line-height:1.7}
+  .bt-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+  .bt-table th{text-align:left;padding:8px 10px;font-size:11px;font-weight:600;color:var(--text-tertiary);border-bottom:2px solid var(--border);letter-spacing:.5px;text-transform:uppercase}
+  .bt-table td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top}
+  .bt-table .ok{color:var(--red)}.bt-table .ko{color:var(--green)}.bt-table .warn{color:var(--amber)}
+  .hot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(min-width:480px){.hot-grid{grid-template-columns:repeat(3,1fr)}}
+  .hot-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .hot-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px}
+  .hot-card.hot-1::after{background:linear-gradient(90deg,#ef4444,#f97316)}
+  .hot-card.hot-2::after{background:linear-gradient(90deg,#f59e0b,#eab308)}
+  .hot-card.hot-3::after{background:linear-gradient(90deg,#10b981,#059669)}
+  .hot-rank{font-size:11px;font-weight:700;color:var(--text-tertiary);margin-bottom:3px}
+  .hot-name{font-size:16px;font-weight:600;margin-bottom:3px;letter-spacing:-.15px}
+  .hot-desc{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:6px}
+  .hot-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+  .hot-chip{font-size:11px;padding:2px 10px;border-radius:12px;border:1px solid var(--border)}
+  .hot-chip.up{color:var(--red);border-color:var(--red-bg);background:var(--red-bg)}
+  .hot-chip.down{color:var(--green);border-color:var(--green-bg);background:var(--green-bg)}
+  .footer{text-align:center;padding:24px 22px 36px;font-size:12px;color:var(--text-tertiary);line-height:1.8;border-top:1px solid var(--border-light)}
+  .footer a{color:var(--blue);text-decoration:none}.footer a:hover{text-decoration:underline}
+  @media(max-width:700px){
+    .section{padding:16px 14px}
+    .header{padding:12px 14px}
+    .h-title{font-size:15px}
+    .h-icon{width:32px;height:32px;font-size:15px}
+    .h-badge{font-size:10px;padding:3px 10px}
+    .insight-bar{padding:10px 14px;font-size:12px}
+    .mkt-grid{gap:6px}.mkt-cell{padding:10px 11px;border-radius:8px}.mkt-val{font-size:14px}
+    .mkt-label{font-size:10px}
+    .news-card{padding:12px 14px;border-radius:8px}.news-t{font-size:14px}.news-d{font-size:12px}
+    .ticker{padding:8px 12px;font-size:13px;-webkit-tap-highlight-color:transparent}
+    .crypto{gap:4px}.c-cell{padding:8px 4px;border-radius:8px}.c-px{font-size:12px}
+    .f-item{padding:10px 12px;font-size:12px}
+    .stock-box{padding:12px 14px}
+    .sb-price{font-size:15px}
+    .hot-grid{gap:6px}.hot-card{padding:10px 12px}.hot-name{font-size:14px}
+    .footer{padding:18px 14px 28px;font-size:11px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="h-left">
+    <div class="h-icon">&#x1F4F0;</div>
+    <div>
+      <div class="h-title">&#x6668;&#x95F4;&#x65B0;&#x95FB;&#x901F;&#x89C8;</div>
+      <div class="h-meta">2026-07-30 &#xB7; 周四 &#xB7; 08:00 CST</div>
+    </div>
+  </div>
+  <span class="h-badge">&#x975E;&#x9AD8;&#x5CF0;</span>
+  <a href="https://chenyusheng.github.io/daily-briefing/" class="h-home" style="font-size:20px;text-decoration:none;margin-left:8px" title="&#x8FD4;&#x56DE;&#x9996;&#x9875;">&#x1F3E0;</a>
+</div>
+
+<div class="insight-bar">&#x1F4A1; <strong>&#x9694;&#x591C;&#x8981;&#x95FB;&#xFF1A;</strong>&#x5468;&#x4E09;(7/29)A&#x80A1;&#x5168;&#x9762;&#x53CD;&#x5F39;&#xFF01;&#x6DF1;&#x8BC1;+1.10%&#x521B;&#x4E1A;&#x677F;+1.55%&#x6446;&#x8131;&#x9ED1;&#x8272;&#x661F;&#x671F;&#x4E8C;&#x3002;&#x5C0F;&#x7C73;&#x66B4;&#x6DA8;+8.95%&#x81F3;31.88&#x7A81;&#x7834;&#x6210;&#x672C;&#xFF01;&#x6D6E;&#x76C8;+4.2%&#x4ECE;&#x4E0F;&#x8F6C;&#x6B63;&#xFF01;Fed&#x7EF4;&#x6301;&#x5229;&#x7387;3.5-3.75%&#x4E0D;&#x53D8;(9-3&#x7A00;&#x6709;3&#x7968;&#x53CD;&#x5BF9;)&#x3002;Microsoft&#x8D22;&#x62A5;&#x8425;&#x6536;$90B&#x8D85;&#x9884;&#x671F;+18%&#xFF0C;Meta&#x8D22;&#x62A5;EPS$6.18&#x4E0D;&#x53CA;&#x9884;&#x671F;&#x3002;&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;&#x6B63;&#x5728;&#x53EC;&#x5F00;&#x2014;&#x2014;&#x7B49;&#x5F85;&#x653F;&#x7B56;&#x4FE1;&#x53F7;&#x3002;</div>
+
+<div class="section">
+  <div class="sec-label">&#x1F4CA; &#x5468;&#x4E09;&#x6536;&#x76D8; &#xB7; 2026-07-29</div>
+  <div class="mkt-grid">
+    <div class="mkt-cell"><div class="mkt-label">&#x4E0A;&#x8BC1;&#x6307;&#x6570;</div><div class="mkt-val">3,828</div><div class="mkt-chg up">+0.40%</div></div>
+    <div class="mkt-cell"><div class="mkt-label">&#x6DF1;&#x8BC1;&#x6210;&#x6307;</div><div class="mkt-val">13,658</div><div class="mkt-chg up">+1.10%</div></div>
+    <div class="mkt-cell"><div class="mkt-label">&#x521B;&#x4E1A;&#x677F;&#x6307;</div><div class="mkt-val">3,379</div><div class="mkt-chg up">+1.55%</div></div>
+    <div class="mkt-cell"><div class="mkt-label">&#x79D1;&#x521B;50</div><div class="mkt-val">1,679</div><div class="mkt-chg down">-0.87%</div></div>
+  </div>
+  <div style="margin-top:14px">
+    <div class="ticker-list">
+      <div class="ticker"><span class="ticker-ico">&#x1F697;</span><span class="ticker-nm">&#x5C0F;&#x7C73;&#x96C6;&#x56E2;-W</span><div class="ticker-bar"><div class="ticker-fill up" style="width:95%"></div></div><span class="ticker-px">31.88</span><span class="ticker-ch up">+8.95%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F50B;</span><span class="ticker-nm">&#x5B81;&#x5FB7;&#x65F6;&#x4EE3;</span><div class="ticker-bar"><div class="ticker-fill up" style="width:52%"></div></div><span class="ticker-px">396.84</span><span class="ticker-ch up">+1.53%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F48A;</span><span class="ticker-nm">&#x4E5D;&#x5178;&#x5236;&#x836F;</span><div class="ticker-bar"><div class="ticker-fill up" style="width:52%"></div></div><span class="ticker-px">10.70</span><span class="ticker-ch up">+1.61%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F377;</span><span class="ticker-nm">&#x4F0A;&#x529B;&#x7279;</span><div class="ticker-bar"><div class="ticker-fill up" style="width:51%"></div></div><span class="ticker-px">10.21</span><span class="ticker-ch up">+0.59%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F3D6;</span><span class="ticker-nm">&#x5B8B;&#x57CE;&#x6F14;&#x827A;</span><div class="ticker-bar"><div class="ticker-fill up" style="width:51%"></div></div><span class="ticker-px">6.13</span><span class="ticker-ch up">+1.49%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x2708;</span><span class="ticker-nm">&#x6D77;&#x5357;&#x673A;&#x573A;</span><div class="ticker-bar"><div class="ticker-fill up" style="width:52%"></div></div><span class="ticker-px">2.88</span><span class="ticker-ch up">+1.77%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F699;</span><span class="ticker-nm">&#x667A;&#x80FD;&#x9A7E;&#x9A76;ETF</span><div class="ticker-bar"><div class="ticker-fill up" style="width:51%"></div></div><span class="ticker-px">1.04</span><span class="ticker-ch up">+1.26%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F4E1;</span><span class="ticker-nm">&#x79D1;&#x521B;50ETF</span><div class="ticker-bar"><div class="ticker-fill down" style="width:49%"></div></div><span class="ticker-px">1.07</span><span class="ticker-ch down">-0.47%</span></div>
+      <div class="ticker"><span class="ticker-ico">&#x1F1ED;&#x1F1F0;</span><span class="ticker-nm">&#x6052;&#x751F;&#x79D1;&#x6280;ETF</span><div class="ticker-bar"><div class="ticker-fill up" style="width:53%"></div></div><span class="ticker-px">0.60</span><span class="ticker-ch up">+2.72%</span></div>
+    </div>
+  </div>
+  <div class="hk-implication"><strong>&#x1F4CC; &#x5468;&#x4E09;&#x5173;&#x952E;&#x8BCD;&#xFF1A;&#x53CD;&#x5F39;&#xFF01;&#x5C0F;&#x7C73;&#x89E3;&#x5957;&#xB7;&#x80FD;&#x6E90;&#x5206;&#x5316;&#xB7;&#x79D1;&#x521B;50&#x72EC;&#x8DCC;&#x3002;</strong>A&#x80A1;&#x4E09;&#x5927;&#x6307;&#x6570;&#x5168;&#x7EBF;&#x53CD;&#x5F39;&#x2014;&#x2014;&#x4ECE;&#x5468;&#x4E8C;&#x521B;&#x4E1A;&#x677F;-7.35%&#x7684;&#x9ED1;&#x8272;&#x661F;&#x671F;&#x4E8C;&#x4E2D;&#x6210;&#x529F;&#x53CD;&#x5F39;&#x3002;&#x5C0F;&#x7C73;&#x66B4;&#x6DA8;+8.95%&#x81F3;31.88&#x662F;&#x6301;&#x4ED3;&#x6700;&#x5927;&#x4EAE;&#x70B9;&#x2014;&#x2014;&#x7A81;&#x7834;&#x6210;&#x672C;30.60&#xFF0C;&#x6D6E;&#x76C8;+4.2%&#x6B63;&#x5F0F;&#x89E3;&#x5957;&#xFF01;&#x79D1;&#x521B;50&#x662F;&#x552F;&#x4E00;&#x4E0B;&#x8DCC;&#x6307;&#x6570;(-0.87%)&#x2014;&#x2014;&#x82AF;&#x7247;&#x80A1;&#x4ECD;&#x5728;&#x80FD;&#x91CF;&#x6D88;&#x8017;&#x3002;&#x9632;&#x5FA1;&#x677F;&#x5757;&#x8F6E;&#x52A8;&#x7EE7;&#x7EED;&#x3002;&#x4ECA;&#x665A;Apple+Amazon&#x8D22;&#x62A5;&#x2014;&#x2014;&#x8D85;&#x7EA7;&#x8D22;&#x62A5;&#x5468;&#x7B2C;&#x4E8C;&#x6CE2;&#x3002;</div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">&#x1F534; &#x76F4;&#x63A5;&#x5F71;&#x54CD;&#x6301;&#x4ED3;</div>
+  <div class="news">
+    <div class="news-card pos">
+      <span class="news-tag nt-mi">&#x2B50; &#x5C0F;&#x7C73;&#x89E3;&#x5957;</span>
+      <div class="news-t"><a href="https://hk.stockstar.com/RB2026073000031447.shtml">&#x2B50; &#x5C0F;&#x7C73;&#x66B4;&#x6DA8;+8.95%&#x81F3;31.88&#x7A81;&#x7834;&#x6210;&#x672C;30.60&#xFF01;&#x6D6E;&#x76C8;+4.2%&#x6B63;&#x5F0F;&#x89E3;&#x5957;&#xFF01;SkyNomad&#x6F8E&#x7A0B;&#x53D1;&#x5E03;&#x4F1A;&#x5373;&#x5C06;&#x4E3E;&#x884C;</a></div>
+      <div class="news-d">7&#x6708;29&#x65E5;&#x5C0F;&#x7C73;&#x96C6;&#x56E2;-W(01810)&#x66B4;&#x6DA8;+8.95%&#x81F3;31.88&#x6E2F;&#x5143;&#x2014;&#x2014;&#x8FD9;&#x662F;2&#x5929;&#x5185;&#x7B2C;&#x4E8C;&#x6B21;&#x5927;&#x6DA8;&#xFF08;&#x5468;&#x4E8C;+2.02%&#x2192;&#x5468;&#x4E09;+8.95%&#xFF09;&#xFF01;&#x4ECE;7&#x6708;21&#x65E5;21.42&#x4F4E;&#x70B9;&#x5230;31.88&#x4EC5;&#x7528;8&#x4E2A;&#x4EA4;&#x6613;&#x65E5;&#x6DA8;+48.8%&#x3002;&#x6D6E;&#x76C8;+4.2%&#x6B63;&#x5F0F;&#x89E3;&#x5957;&#x2014;&#x2014;&#x8FD9;&#x662F;&#x81EA;6&#x6708;&#x5206;&#x6279;&#x5EFA;&#x4ED3;&#x4EE5;&#x6765;&#x9996;&#x6B21;&#x76C8;&#x5229;&#xFF01;SkyNomad&#x6F8E&#x7A0B;&#x589E;&#x7A0B;&#x6280;&#x672F;&#x53D1;&#x5E03;&#x4F1A;7&#x6708;&#x5E95;&#x4E3E;&#x884C;&#x3002;Q2&#x4EA4;&#x4ED8;&#x8D85;99,500&#x53F0;(+23% QoQ)&#x3002;&#x4F46;&#x5357;&#x5411;&#x8D44;&#x91D1;7/29&#x51CF;&#x6301;4,339.1&#x4E07;&#x80A1;&#x2014;&#x2014;&#x77ED;&#x7EBF;&#x83B7;&#x5229;&#x4E86;&#x7ED3;&#x4FE1;&#x53F7;&#x3002;</div>
+      <div class="news-f"><span class="ip pos">&#x91CD;&#x5927;&#x5229;&#x597D;&#x2014;&#x2014;&#x6301;&#x4ED3;&#x89E3;&#x5957;&#x6B63;&#x5F0F;&#x76C8;&#x5229;</span><span class="nl"><a href="https://hk.stockstar.com/RB2026073000031447.shtml">&#x1F517; &#x8BC1;&#x5238;&#x4E4B;&#x661F; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-29</span></div>
+    </div>
+    <div class="news-card pos">
+      <span class="news-tag nt-macro">&#x1F4C8; A&#x80A1;&#x53CD;&#x5F39;</span>
+      <div class="news-t"><a href="https://finance.sina.com.cn/stock/marketresearch/2026-07-29/">A&#x80A1;&#x5468;&#x4E09;&#x5168;&#x9762;&#x53CD;&#x5F39;&#xFF01;&#x6DF1;&#x8BC1;+1.10%&#x521B;&#x4E1A;&#x677F;+1.55%&#xFF0C;&#x6446;&#x8131;&#x9ED1;&#x8272;&#x661F;&#x671F;&#x4E8C;&#x9634;&#x5F71;&#x2014;&#x2014;&#x6301;&#x4ED3;&#x5168;&#x7EBF;&#x53CD;&#x5F39;</a></div>
+      <div class="news-d">7&#x6708;29&#x65E5;A&#x80A1;&#x4E09;&#x5927;&#x6307;&#x6570;&#x5168;&#x7EBF;&#x4E0A;&#x6DA8;&#xFF1A;&#x4E0A;&#x8BC1;+0.40%&#x62A5;3828.47&#x3001;&#x6DF1;&#x8BC1;+1.10%&#x3001;&#x521B;&#x4E1A;&#x677F;+1.55%&#x2014;&#x2014;&#x4ECE;&#x5468;&#x4E8C;&#x521B;&#x4E1A;&#x677F;-7.35%&#x7684;&#x9ED1;&#x8272;&#x661F;&#x671F;&#x4E8C;&#x4E2D;&#x6210;&#x529F;&#x53CD;&#x5F39;&#xFF01;&#x79D1;&#x521B;50-0.87%&#x662F;&#x552F;&#x4E00;&#x4E0B;&#x8DCC;&#x6307;&#x6570;&#x2014;&#x2014;&#x82AF;&#x7247;&#x80A1;&#x4ECD;&#x5728;&#x6D88;&#x5316;&#x5468;&#x4E8C;&#x7684;&#x5D29;&#x76D8;&#x3002;&#x9632;&#x5FA1;&#x6027;&#x677F;&#x5757;&#x7EE7;&#x7EED;&#x9886;&#x6DA8;&#x3002;&#x6301;&#x4ED3;&#x5168;&#x7EBF;&#x53CD;&#x5F39;&#xFF1A;&#x6052;&#x751F;&#x79D1;&#x6280;ETF+2.72%&#x9886;&#x6DA8;&#xFF0C;&#x5C0F;&#x7C73;+8.95%&#x89E3;&#x5957;&#x3002;</div>
+      <div class="news-f"><span class="ip pos">&#x5229;&#x597D;&#x2014;&#x2014;&#x6301;&#x4ED3;&#x5168;&#x7EBF;&#x56DE;&#x8840;</span><span class="nl"><a href="https://finance.sina.com.cn/stock/marketresearch/2026-07-29/">&#x1F517; &#x65B0;&#x6D6A;&#x8D22;&#x7ECF; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-29</span></div>
+    </div>
+    <div class="news-card neu">
+      <span class="news-tag nt-macro">&#x1F3DB; Fed&#x51B3;&#x8BAE;</span>
+      <div class="news-t"><a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm">Fed&#x7EF4;&#x6301;&#x5229;&#x7387;3.5-3.75%&#x4E0D;&#x53D8;(9-3&#x7F55;&#x89C1;3&#x7968;&#x53CD;&#x5BF9;)&#x2014;&#x2014;&#x8FDE;&#x7EED;&#x7B2C;5&#x6B21;&#x6682;&#x505C;</a></div>
+      <div class="news-d">7&#x6708;29&#x65E5;Fed FOMC&#x4EE5;9-3&#x6295;&#x7968;&#x7EF4;&#x6301;&#x5229;&#x7387;3.5-3.75%&#x4E0D;&#x53D8;&#x2014;&#x2014;&#x8FDE;&#x7EED;&#x7B2C;5&#x6B21;&#x6682;&#x505C;&#x3002;&#x7F55;&#x89C1;3&#x7968;&#x53CD;&#x5BF9;&#xFF08;&#x4E3B;&#x5F20;&#x964D;&#x606F;&#xFF09;&#x4E3A;&#x8FD1;&#x5E74;&#x6700;&#x5927;&#x5206;&#x6B67;&#xFF01;&#x58F0;&#x660E;&#x79F0;&#x901A;&#x80C0;&#x4ECD;&#x201C;&#x9AD8;&#x4E8E;&#x76EE;&#x6807;+&#x5C31;&#x4E1A;&#x4FDD;&#x6301;&#x5F3A;&#x52B2;&#x201D;&#x3002;&#x5E02;&#x573A;&#x9884;&#x671F;9&#x6708;&#x964D;&#x606F;&#x6982;&#x7387;&#x4ECE;65%&#x964D;&#x81F3;40%&#x3002;&#x5BF9;A&#x80A1;:&#x964D;&#x606F;&#x5EF6;&#x8FDF;&#x2192;&#x7F8E;&#x5143;&#x504F;&#x5F3A;&#x2192;&#x4EBA;&#x6C11;&#x5E01;&#x538B;&#x529B;+&#x5317;&#x5411;&#x8D44;&#x91D1;&#x6D41;&#x51FA;&#x3002;</div>
+      <div class="news-f"><span class="ip neu">&#x4E2D;&#x6027;&#x504F;&#x7A7A;&#x2014;&#x2014;3&#x7968;&#x53CD;&#x5BF9;&#x4E3A;&#x4FE1;&#x53F7;</span><span class="nl"><a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm">&#x1F517; Federal Reserve &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-29</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">&#x1F30D; &#x5B8F;&#x89C2; &amp; &#x653F;&#x7B56;</div>
+  <div class="news">
+    <div class="news-card pos">
+      <span class="news-tag nt-policy">&#x1F3DB; &#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;</span>
+      <div class="news-t"><a href="https://economy.caixin.com/2026-07-27/102468531.html">&#x4E2D;&#x592E;&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;&#x6B63;&#x5728;&#x53EC;&#x5F00;&#x2014;&#x2014;&#x4E0B;&#x534A;&#x5E74;&#x7ECF;&#x6D4E;&#x5DE5;&#x4F5C;&#x5B9A;&#x8C03;&#x5728;&#x5373;</a></div>
+      <div class="news-d">&#x6309;&#x60EF;&#x4F8B;7&#x6708;&#x4E0B;&#x65EC;&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;&#x5206;&#x6790;&#x7ECF;&#x6D4E;&#x5F62;&#x52BF;&#x3001;&#x90E8;&#x7F72;&#x4E0B;&#x534A;&#x5E74;&#x5DE5;&#x4F5C;&#x3002;&#x4E8C;&#x5B63;&#x5EA6;GDP&#x589E;&#x901F;&#x8DCC;&#x51FA;&#x76EE;&#x6807;&#x533A;&#x95F4;&#x540E;&#xFF0C;&#x5E02;&#x573A;&#x671F;&#x5F85;&#xFF1A;&#x2460;&#x589E;&#x91CF;&#x8D22;&#x653F;&#x653F;&#x7B56; &#x2461;&#x6269;&#x5927;&#x6D88;&#x8D39;&#x5341;&#x4E94;&#x4E94;&#x89C4;&#x5212;&#x843D;&#x5730; &#x2462;&#x623F;&#x5730;&#x4EA7;&#x653F;&#x7B56;&#x8FDB;&#x4E00;&#x6B65;&#x677E;&#x7ED1; &#x2463;&#x5730;&#x65B9;&#x503A;&#x5316;&#x89E3;&#x65B9;&#x6848;&#x3002;&#x901A;&#x7A3F;&#x53EF;&#x80FD;&#x5728;&#x4ECA;&#x65E5;&#x76D8;&#x540E;&#x6216;&#x5468;&#x4E94;&#x53D1;&#x5E03;&#x3002;</div>
+      <div class="news-f"><span class="ip pos">&#x4E2D;&#x6027;&#x504F;&#x597D;&#x2014;&#x2014;&#x7B49;&#x5F85;&#x653F;&#x7B56;&#x4FE1;&#x53F7;</span><span class="nl"><a href="https://economy.caixin.com/2026-07-27/102468531.html">&#x1F517; &#x8D22;&#x65B0;&#x7F51; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-29</span></div>
+    </div>
+    <div class="news-card neu">
+      <span class="news-tag nt-macro">&#x1F30D; &#x7F8E;&#x4F0A;&#x5C40;&#x52BF;</span>
+      <div class="news-t"><a href="https://finance.sina.com.cn/roll/2026-07-28/doc-inikiewr0386132.shtml">Trump&#x8003;&#x8651;&#x5BF9;&#x4F0A;&#x6717;&#x5927;&#x89C4;&#x6A21;&#x88AD;&#x51FB;&#xFF0C;&#x7F8E;&#x8054;&#x50A8;9-3&#x7EF4;&#x6301;&#x5229;&#x7387;&#x2014;&#x2014;&#x5730;&#x7F18;+&#x8D27;&#x5E01;&#x53CC;&#x91CD;&#x4E0D;&#x786E;&#x5B9A;&#x6027;</a></div>
+      <div class="news-d">&#x7279;&#x6717;&#x666E;&#x53CD;&#x590D;&#x6A2A;&#x8DF3;&#xFF1A;&#x521A;&#x8BF4;&#x5B8C;&#x201C;&#x6B63;&#x5728;&#x826F;&#x597D;&#x5BF9;&#x8BDD;&#x201D;&#x4E0D;&#x5230;24&#x5C0F;&#x65F6;&#xFF0C;&#x53C8;&#x4F20;&#x51FA;&#x8003;&#x8651;&#x5927;&#x89C4;&#x6A21;&#x88AD;&#x51FB;&#x3002;&#x540C;&#x65F6;Fed&#x7EF4;&#x6301;&#x5229;&#x7387;&#x4E0D;&#x53D8;+3&#x7968;&#x53CD;&#x5BF9;&#x2014;&#x2014;&#x7F8E;&#x5143;&#x504F;&#x5F3A;+&#x5730;&#x7F18;&#x98CE;&#x9669;&#x53CC;&#x91CD;&#x538B;&#x5236;&#x65B0;&#x5174;&#x5E02;&#x573A;&#x3002;&#x5BF9;A&#x80A1;&#xFF1A;risk-off&#x60C5;&#x7EEA;&#x672A;&#x6D88;&#x6563;&#x2014;&#x2014;&#x53CD;&#x5F39;&#x53EF;&#x80FD;&#x662F;&#x6280;&#x672F;&#x6027;&#x800C;&#x975E;&#x8D8B;&#x52BF;&#x6027;&#x3002;</div>
+      <div class="news-f"><span class="ip neg">&#x5730;&#x7F18;+&#x8D27;&#x5E01;&#x53CC;&#x91CD;&#x98CE;&#x9669;</span><span class="nl"><a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm">&#x1F517; Federal Reserve &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-29</span></div>
+    </div>
+    <div class="news-card pos">
+      <span class="news-tag nt-policy">&#x26A1; &#x80FD;&#x6E90;&#x89C4;&#x5212;</span>
+      <div class="news-t"><a href="https://www.nea.gov.cn/">&#x56FD;&#x5BB6;&#x80FD;&#x6E90;&#x5C40;&#xFF1A;&#x5341;&#x4E94;&#x4E94;&#x78B3;&#x8FBE;&#x5CF0;&#x884C;&#x52A8;&#x65B9;&#x6848;&#x6B63;&#x5F0F;&#x5370;&#x53D1;&#xFF0C;&#x80FD;&#x6E90;&#x9886;&#x57DF;&#x8282;&#x80FD;&#x964D;&#x78B3;&#x884C;&#x52A8;&#x8BA1;&#x5212;2026-2028&#x53D1;&#x5E03;</a></div>
+      <div class="news-d">&#x56FD;&#x52A1;&#x9662;7&#x6708;14&#x65E5;&#x5370;&#x53D1;&#x300A;&#x5341;&#x4E94;&#x4E94;&#x78B3;&#x8FBE;&#x5CF0;&#x884C;&#x52A8;&#x65B9;&#x6848;&#x300B;&#xFF0C;&#x660E;&#x786E;&#x65B0;&#x589E;&#x897F;&#x7535;&#x4E1C;&#x9001;8000&#x4E07;&#x5343;&#x74E6;&#x4EE5;&#x4E0A;&#x3001;&#x652F;&#x6301;&#x7EFF;&#x7535;&#x76F4;&#x8FDE;&#x3001;&#x6E90;&#x7F51;&#x8377;&#x50A8;&#x4E00;&#x4F53;&#x5316;&#x3002;&#x80FD;&#x6E90;&#x5C40;7&#x6708;10&#x65E5;&#x53D1;&#x5E03;&#x300A;&#x80FD;&#x6E90;&#x9886;&#x57DF;&#x8282;&#x80FD;&#x964D;&#x78B3;&#x884C;&#x52A8;&#x8BA1;&#x5212;2026-2028&#x300B;&#x3002;&#x4E24;&#x5927;&#x91CD;&#x78C5;&#x653F;&#x7B56;&#x53E0;&#x52A0;&#x2014;&#x2014;&#x7535;&#x7F51;+&#x50A8;&#x80FD;+&#x65B0;&#x80FD;&#x6E90;&#x4E09;&#x6761;&#x4E3B;&#x7EBF;&#x653F;&#x7B56;&#x786E;&#x5B9A;&#x6027;&#x6700;&#x9AD8;&#x3002;</div>
+      <div class="news-f"><span class="ip pos">&#x4E2D;&#x957F;&#x671F;&#x5229;&#x597D;</span><span class="nl"><a href="https://www.nea.gov.cn/">&#x1F517; &#x56FD;&#x5BB6;&#x80FD;&#x6E90;&#x5C40; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-14</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">&#x1F52C; &#x79D1;&#x6280; &amp; &#x884C;&#x4E1A;</div>
+  <div class="news">
+    <div class="news-card pos">
+      <span class="news-tag nt-tech">&#x1F4CA; &#x8D85;&#x7EA7;&#x8D22;&#x62A5;</span>
+      <div class="news-t"><a href="https://www.cnbc.com/2026/07/29/microsoft-msft-q4-earnings-report-2026.html">Microsoft Q4&#x8425;&#x6536;$90B(+18%)&#x8D85;&#x9884;&#x671F;&#xFF01;Meta Q2 EPS$6.18&#x4E0D;&#x53CA;&#x9884;&#x671F;&#x2014;&#x2014;&#x4ECA;&#x665A;Apple+Amazon&#x63A5;&#x529B;</a></div>
+      <div class="news-d">&#x8D22;&#x62A5;&#x7ED3;&#x679C;&#xFF1A;Microsoft&#x8425;&#x6536;$90B&#x8D85;&#x9884;&#x671F;$86.5B&#xFF0C;&#x4E3B;&#x8981;&#x7531;Azure&#x548C;M365&#x9A71;&#x52A8;&#x3002;Meta EPS$6.18&#x4E0D;&#x53CA;$7.18&#x9884;&#x671F;&#x2014;&#x2014;&#x5E7F;&#x544A;&#x6536;&#x5165;&#x589E;&#x901F;&#x653E;&#x7F13;&#x3002;&#x4ECA;&#x665A;7/30&#x76D8;&#x540E;Apple Q3+Amazon Q2&#x8D22;&#x62A5;&#x2014;&#x2014;&#x8D85;&#x7EA7;&#x8D22;&#x62A5;&#x5468;&#x7B2C;&#x4E8C;&#x6CE2;&#x3002;AI&#x8D44;&#x672C;&#x5F00;&#x652F;&#x6307;&#x5F15;&#x662F;&#x6838;&#x5FC3;&#x770B;&#x70B9;&#x3002;</div>
+      <div class="news-f"><span class="ip neu">&#x6DF7;&#x5408;&#x2014;&#x2014;MSFT&#x8D85;&#x9884;&#x671F;+Meta&#x4E0D;&#x53CA;</span><span class="nl"><a href="https://www.cnbc.com/2026/07/29/microsoft-msft-q4-earnings-report-2026.html">&#x1F517; CNBC &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-29&#x76D8;&#x540E;</span></div>
+    </div>
+    <div class="news-card pos">
+      <span class="news-tag nt-tech">&#x1F4F1; &#x5C0F;&#x7C73;&#x53D1;&#x5E03;&#x4F1A;</span>
+      <div class="news-t"><a href="https://ir.mi.com/">&#x5C0F;&#x7C73;SkyNomad&#x6F8E&#x7A0B;&#x589E;&#x7A0B;&#x6280;&#x672F;&#x53D1;&#x5E03;&#x4F1A;7&#x6708;&#x5E95;&#x4E3E;&#x884C;&#x2014;&#x2014;YU7&#x589E;&#x7A0B;&#x7248;&#x5373;&#x5C06;&#x4EAE;&#x76F8;</a></div>
+      <div class="news-d">&#x5C0F;&#x7C73;&#x5C06;&#x5728;7&#x6708;&#x5E95;&#x4E3E;&#x529E;SkyNomad&#x6F8E;&#x7A0B;&#x589E;&#x7A0B;&#x6280;&#x672F;&#x53D1;&#x5E03;&#x4F1A;&#x3002;YU7 GT&#x5DF2;&#x4E8E;7&#x6708;&#x4E0A;&#x5E02;&#xFF0C;&#x5B9A;&#x4EF7;389,900&#x5143;&#x3002;6&#x6708;&#x4EA4;&#x4ED8;&#x8D85;30,000&#x53F0;&#x3002;Q2&#x7D2F;&#x8BA1;&#x8D85;99,500&#x53F0;(+23% QoQ)&#x3002;2026&#x5E74;&#x76EE;&#x6807;55&#x4E07;&#x53F0;&#x3002;&#x8D22;&#x62A5;8&#x6708;18&#x65E5;&#x53D1;&#x5E03;&#x3002;&#x5206;&#x6790;&#x5E08;&#x5171;&#x8BC6;&#x201C;Buy&#x201D;&#xFF0C;&#x5E73;&#x5747;&#x76EE;&#x6807;&#x4EF7;HKD39.60&#x3002;</div>
+      <div class="news-f"><span class="ip pos">&#x5229;&#x597D;&#x2014;&#x2014;&#x50AC;&#x5316;&#x5BC6;&#x96C6;</span><span class="nl"><a href="https://ir.mi.com/">&#x1F517; Xiaomi IR &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-29</span></div>
+    </div>
+    <div class="news-card neg">
+      <span class="news-tag nt-tech">&#x1F4BE; &#x82AF;&#x7247;&#x718A;&#x5E02;</span>
+      <div class="news-t"><a href="https://www.163.com/dy/article/L2TM5TVR05199NPP.html">&#x8D39;&#x57CE;&#x534A;&#x5BFC;&#x4F53;&#x6307;&#x6570;&#x5DF2;&#x4ECE;6&#x6708;&#x9AD8;&#x70B9;&#x8DCC;&#x8D85;20%&#x8FDB;&#x5165;&#x6280;&#x672F;&#x6027;&#x718A;&#x5E02;&#x2014;&#x2014;&#x79D1;&#x521B;50&#x5468;&#x4E09;&#x72EC;&#x8DCC;-0.87%</a></div>
+      <div class="news-d">&#x5168;&#x7403;&#x5B58;&#x50A8;&#x82AF;&#x7247;&#x8840;&#x6D17;&#x5EF6;&#x7EED;&#x2014;&#x2014;&#x95EA;&#x8FEA;&#x4E0A;&#x5E02;&#x4EC5;12&#x4E2A;&#x4EA4;&#x6613;&#x65E5;&#x5373;&#x7834;&#x53D1;(-11%)&#xFF0C;&#x6D77;&#x529B;&#x58EB;-7%&#x3002;&#x4F46;Meta&#x8D22;&#x62A5;&#x4E0D;&#x53CA;&#x9884;&#x671F;&#x53EF;&#x80FD;&#x8FDB;&#x4E00;&#x6B65;&#x538B;&#x5236;AI&#x82AF;&#x7247;&#x60C5;&#x7EEA;&#x3002;&#x79D1;&#x521B;50&#x662F;&#x5468;&#x4E09;&#x552F;&#x4E00;&#x4E0B;&#x8DCC;&#x6307;&#x6570;&#x2014;&#x2014;&#x82AF;&#x7247;&#x80A1;&#x4ECD;&#x5728;&#x5E95;&#x90E8;&#x6D88;&#x5316;&#x3002;</div>
+      <div class="news-f"><span class="ip neg">&#x5229;&#x7A7A;&#x2014;&#x2014;&#x79D1;&#x521B;50&#x4ECD;&#x672A;&#x89C1;&#x5E95;</span><span class="nl"><a href="https://www.163.com/dy/article/L2TM5TVR05199NPP.html">&#x1F517; &#x7F51;&#x6613; &#x2192;</a></span><span class="ndate">&#x1F4C5; 2026-07-30</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">&#x26A1; &#x5341;&#x4E94;&#x4E94;&#x80FD;&#x6E90; &#xB7; &#x89C2;&#x5BDF;&#x6C60;&#x626B;&#x63CF; &#xB7; 2026-07-29&#x6536;&#x76D8;</div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">&#x5B81;&#x5FB7;&#x65F6;&#x4EE3; <span class="stag p1">300750</span></div><div class="sb-price">396.84<span class="schg g">+1.53%</span></div></div>
+    <div class="sb-meta">&#x1F4CA; 2026-07-29&#x6536;&#x76D8; | 390.86&#x2192;396.84&#x53CD;&#x5F39; &#xB7; MA5 385 MA10 375 MA20 367</div>
+    <table class="sb-table">
+      <tr><td class="lbl">&#x8D8B;&#x52BF;&#xFF1A;</td><td class="val">390.86&#x2192;396.84(+1.53%)&#x3002;&#x5468;&#x4E09;&#x968F;A&#x80A1;&#x53CD;&#x5F39;&#x2014;&#x2014;&#x4F46;&#x672A;&#x8FDB;&#x5165;390-395&#x5EFA;&#x4ED3;&#x533A;&#x95F4;&#xFF08;&#x53EA;&#x56DE;&#x8C03;&#x5230;390.86&#xFF09;&#x3002;MA5>MA10>MA20&#x591A;&#x5934;&#x6392;&#x5217;&#x4FDD;&#x6301;&#x3002;</td></tr>
+      <tr><td class="lbl">&#x50AC;&#x5316;&#xFF1A;</td><td class="val">&#x2460;200-400&#x4EBF;&#x56DE;&#x8D2D;&#x6CE8;&#x9500;(&#x6301;&#x7EED;&#x6267;&#x884C;) &#x2461;&#x6469;&#x6839;&#x5927;&#x901A;&#x4E0A;&#x8C03;&#x76C8;&#x5229;&#x9884;&#x6D4B;&#x81F3;940&#x4EBF;</td></tr>
+    </table>
+    <div class="sb-verdict b"><strong>&#x1F504; &#x56DE;&#x8C03;&#x5E45;&#x5EA6;&#x4E0D;&#x591F;&#x2014;&#x2014;&#x6682;&#x4E0D;&#x5EFA;&#x4ED3;&#xFF1A;</strong>&#x6628;&#x65E5;390.86&#x672A;&#x8FDB;&#x5165;385-390&#x6838;&#x5FC3;&#x533A;&#x95F4;&#x3002;&#x4ECA;&#x65E5;&#x56DE;&#x8C03;&#x81F3;385-390&#x7F29;&#x91CF;&#x4F01;&#x7A33;&#x2192;&#x9996;&#x7B14;&#x8BD5;&#x63A2;&#x5EFA;&#x4ED3;&#x3002;&#x4E0D;&#x8FFD;&#x8FD1;400&#x3002;&#x6B62;&#x635F;380&#x3002;</div>
+  </div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">&#x56FD;&#x7535;&#x5357;&#x745E; <span class="stag p1">600406</span></div><div class="sb-price">23.93<span class="schg g">+1.57%</span></div></div>
+    <div class="sb-meta">&#x1F4CA; 2026-07-29&#x6536;&#x76D8; | &#x7535;&#x7F51;&#x6295;&#x8D44;&#x6838;&#x5FC3;&#x6807;&#x7684; &#xB7; 23.56&#x2192;23.93&#xFF0C;&#x4ECD;&#x5728;&#x5EFA;&#x4ED3;&#x533A;&#x95F4;</div>
+    <table class="sb-table">
+      <tr><td class="lbl">&#x8D8B;&#x52BF;&#xFF1A;</td><td class="val">23.56&#x2192;23.93(+1.57%)&#x3002;&#x8FDE;&#x7EED;&#x7B2C;&#x4E09;&#x65E5;&#x5728;23.50-24.00&#x5EFA;&#x4ED3;&#x533A;&#x95F4;&#x5185;&#x8FD0;&#x884C;&#x2014;&#x2014;&#x533A;&#x95F4;&#x652F;&#x6491;&#x9A8C;&#x8BC1;&#x3002;&#x7535;&#x7F51;&#x653F;&#x7B56;&#x786E;&#x5B9A;&#x6027;&#x6700;&#x9AD8;&#x3002;</td></tr>
+    </table>
+    <div class="sb-verdict g"><strong>&#x2705; &#x5EFA;&#x4ED3;&#x533A;&#x95F4;&#x4ECD;&#x6709;&#x6548;&#x2014;&#x2014;23.50-24.00&#x8BD5;&#x63A2;&#xFF1A;</strong>&#x4E09;&#x5929;&#x8FDE;&#x7EED;&#x5728;&#x533A;&#x95F4;&#x5185;&#x2014;&#x2014;&#x533A;&#x95F4;&#x6709;&#x6548;&#x6027;&#x88AB;&#x53CD;&#x590D;&#x9A8C;&#x8BC1;&#x3002;&#x64CD;&#x4F5C;&#xFF1A;&#x2460;&#x7F29;&#x91CF;&#x4F01;&#x7A33;&#x5728;23.50-23.80&#x2192;&#x8BD5;&#x63A2;&#x5EFA;&#x4ED3; &#x2461;&#x6B62;&#x635F;23.00(MA20) &#x2462;&#x7B2C;&#x4E00;&#x76EE;&#x6807;26.00&#x3002;</div>
+  </div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">&#x9633;&#x5149;&#x7535;&#x6E90; <span class="stag p2">300274</span></div><div class="sb-price">106.55<span class="schg r">-4.93%</span></div></div>
+    <div class="sb-meta">&#x1F4CA; 2026-07-29&#x6536;&#x76D8; | &#x50A8;&#x80FD;&#x51FA;&#x6D77; &#xB7; 112.08&#x2192;106.55&#xFF0C;&#x7EE7;&#x7EED;&#x4E0B;&#x8DCC;&#x8FDB;&#x5165;&#x6838;&#x5FC3;&#x533A;&#x95F4;</div>
+    <table class="sb-table">
+      <tr><td class="lbl">&#x8D8B;&#x52BF;&#xFF1A;</td><td class="val">112.08&#x2192;106.55(-4.93%)&#x3002;&#x5728;A&#x80A1;&#x53CD;&#x5F39;&#x65E5;&#x72EC;&#x81EA;&#x5927;&#x8DCC;&#x2014;&#x2014;&#x8BF4;&#x660E;&#x5356;&#x538B;&#x4ECD;&#x5728;&#x3002;&#x4ECE;117.79&#x9AD8;&#x70B9;&#x56DE;&#x8C03;-9.5%&#xFF0C;106.55&#x5DF2;&#x8FDB;&#x5165;105-112&#x6838;&#x5FC3;&#x533A;&#x95F4;&#x3002;</td></tr>
+    </table>
+    <div class="sb-verdict b"><strong>&#x1F504; 106.55&#x8FDB;&#x5165;&#x6838;&#x5FC3;&#x533A;&#x95F4;&#x2014;&#x2014;&#x5EFA;&#x4ED3;&#x7A97;&#x53E3;&#x6253;&#x5F00;&#xFF1A;</strong>&#x6628;&#x65E5;&#x201C;&#x7B49;110&#x4EE5;&#x4E0B;&#x201D;&#x88AB;&#x7CBE;&#x786E;&#x5151;&#x73B0;&#x3002;&#x64CD;&#x4F5C;&#xFF1A;&#x2460;105-108&#x7F29;&#x91CF;&#x4F01;&#x7A33;&#x2192;&#x9996;&#x7B14;5%&#x8BD5;&#x63A2;&#x5EFA;&#x4ED3; &#x2461;&#x6B62;&#x635F;104 &#x2462;&#x7B2C;&#x4E00;&#x76EE;&#x6807;125&#x3002;&#x4F46;A&#x80A1;&#x53CD;&#x5F39;&#x65E5;&#x72EC;&#x8DCC;&#x662F;&#x8B66;&#x544A;&#x2014;&#x2014;&#x4ED3;&#x4F4D;&#x51CF;&#x534A;&#x3002;</div>
+  </div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">&#x9F99;&#x6E90;&#x7535;&#x529B; <span class="stag p3">001289</span></div><div class="sb-price">16.27<span class="schg g">+0.43%</span></div></div>
+    <div class="sb-meta">&#x1F4CA; 2026-07-29&#x6536;&#x76D8; | &#x7EFF;&#x7535;&#x9F99;&#x5934; &#xB7; &#x52C9;&#x5F3A;&#x6536;&#x56DE;16.27&#xFF0C;&#x4EC5;&#x9AD8;&#x4E8E;&#x6B62;&#x635F;&#x7EBF;0.07</div>
+    <table class="sb-table">
+      <tr><td class="lbl">&#x8D8B;&#x52BF;&#xFF1A;</td><td class="val">16.20&#x2192;16.27(+0.43%)&#x3002;&#x5468;&#x4E09;&#x52C9;&#x5F3A;&#x6536;&#x56DE;16.27&#x2014;&#x2014;&#x8DDD;&#x6B62;&#x635F;16.20&#x4EC5;+0.07&#xFF01;&#x5C1A;&#x672A;&#x6536;&#x56DE;16.40&#xFF08;&#x6628;&#x65E5;&#x201C;&#x89C2;&#x5BDF;&#x671F;1&#x5929;&#x201D;&#x7684;&#x6761;&#x4EF6;&#xFF09;&#x3002;</td></tr>
+    </table>
+    <div class="sb-verdict r"><strong>&#x26A0;&#xFE0F; &#x4ECD;&#x5728;&#x6B62;&#x635F;&#x8FB9;&#x7F18;&#x2014;&#x2014;&#x7EED;&#x7ED9;1&#x5929;&#x89C2;&#x5BDF;&#xFF1A;</strong>16.27&#x4EC5;&#x6BD4;&#x6B62;&#x635F;&#x7EBF;&#x9AD8;0.07&#xFF0C;&#x672A;&#x6536;&#x56DE;16.40&#x3002;&#x64CD;&#x4F5C;&#xFF1A;&#x2460;&#x4ECA;&#x65E5;&#x6536;&#x56DE;16.40&#x2192;&#x89C2;&#x5BDF; &#x2461;&#x8DCC;&#x7834;16.20&#x2192;&#x65E0;&#x6761;&#x4EF6;&#x6B62;&#x635F;&#x3002;&#x7EFF;&#x7535;&#x4E2D;&#x957F;&#x671F;&#x903B;&#x8F91;&#x4E0D;&#x53D8;&#x4F46;&#x77ED;&#x7EBF;&#x7EAA;&#x5F8B;&#x4F18;&#x5148;&#x3002;</div>
+  </div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">&#x4FE1;&#x4E49;&#x5149;&#x80FD; <span class="stag p2">00968.HK</span></div><div class="sb-price">2.22<span class="schg g">+4.23%</span></div></div>
+    <div class="sb-meta">&#x1F4CA; 2026-07-29&#x6536;&#x76D8; | &#x5149;&#x4F0F;&#x73BB;&#x7483;&#x9F99;&#x5934; &#xB7; 2.13&#x2192;2.22&#x653E;&#x91CF;&#x53CD;&#x5F39;</div>
+    <table class="sb-table">
+      <tr><td class="lbl">&#x8D8B;&#x52BF;&#xFF1A;</td><td class="val">2.13&#x2192;2.22(+4.23%)&#x653E;&#x91CF;&#x53CD;&#x5F39;&#x2014;&#x2014;&#x5468;&#x4E09;&#x8868;&#x73B0;&#x8F83;&#x5F3A;&#x3002;&#x4F46;&#x5149;&#x4F0F;&#x884C;&#x4E1A;&#x4EA7;&#x80FD;&#x8FC7;&#x5269;&#x95EE;&#x9898;&#x672A;&#x89E3;&#x3002;</td></tr>
+    </table>
+    <div class="sb-verdict y"><strong>&#x89C2;&#x5BDF;&#x4E3A;&#x4E3B;&#x2014;&#x2014;&#x4E0D;&#x4E3B;&#x52A8;&#x5EFA;&#x4ED3;&#xFF1A;</strong>&#x7EF4;&#x6301;&#x539F;&#x5224;&#x3002;&#x64CD;&#x4F5C;&#xFF1A;&#x2460;&#x4E0D;&#x5EFA;&#x4ED3;&#x2014;&#x2014;&#x7B49;&#x4EA7;&#x80FD;&#x51FA;&#x6E05;&#x4FE1;&#x53F7; &#x2461;&#x5DF2;&#x6301;&#x4ED3;&#x8005;&#x6301;&#x6709;&#x4F46;&#x6B62;&#x635F;2.00&#x3002;</div>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">&#x1F4F1; &#x5C0F;&#x7C73;&#x96C6;&#x56E2;-W &#xB7; &#x76D8;&#x524D;&#x5206;&#x6790; &#xB7; 2026-07-30</div>
+  <div class="stock-box">
+    <div class="sb-header"><div class="sb-name">&#x5C0F;&#x7C73;&#x96C6;&#x56E2;-W <span class="stag p1">01810.HK</span></div><div class="sb-price">31.88<span class="schg g">+8.95%<span style="font-size:11px;color:var(--text-tertiary)"> (7/29&#x6536;&#x76D8;)</span></span></div></div>
+    <div class="sb-meta">&#x1F4CA; 2026-07-30 &#x5206;&#x6790; | &#x8FDE;&#x7EED;&#x7B2C;&#x4E8C;&#x65E5;&#x9006;&#x52BF;&#x5927;&#x6DA8; &#xB7; &#x7A81;&#x7834;&#x6210;&#x672C;30.60&#x6D6E;&#x76C8;+4.2% &#xB7; &#x8D22;&#x62A5;8/18</div>
+    <table class="sb-table">
+      <tr><td class="lbl">&#x6301;&#x4ED3;&#x6210;&#x672C;&#xFF1A;</td><td class="val">30.60&#xFF08;&#x6D6E;&#x76C8;+4.2%&#xFF0C;&#x4ECE;&#x4E00;&#x5468;&#x524D;&#x7684;-12.7%&#x5230;&#x6B63;&#x6536;&#x76CA;&#x4EC5;&#x7528;7&#x4E2A;&#x4EA4;&#x6613;&#x65E5;&#xFF09;</td></tr>
+      <tr><td class="lbl">&#x8D8B;&#x52BF;&#x7ED3;&#x6784;&#xFF1A;</td><td class="val">29.26&#x2192;31.88(+8.95%)&#xFF01;&#x8FD9;&#x662F;2&#x5929;&#x5185;&#x7B2C;&#x4E8C;&#x6B21;&#x5927;&#x6DA8;&#xFF08;&#x5468;&#x4E8C;+2.02%&#x2192;&#x5468;&#x4E09;+8.95%&#xFF09;&#x2014;&#x2014;&#x52BF;&#x5982;&#x7834;&#x7AF9;&#xFF01;&#x4ECE;21.42&#x4F4E;&#x70B9;&#x5230;31.88&#x4EC5;&#x7528;8&#x4E2A;&#x4EA4;&#x6613;&#x65E5;&#x6DA8;+48.8%&#x3002;MA5(28.74)>MA10(27.99)>MA20(26.29)&#x591A;&#x5934;&#x6392;&#x5217;&#x52A0;&#x901F;&#x53D1;&#x6563;&#x3002;31.88&#x5DF2;&#x7A81;&#x7834;&#x5305;&#x62EC;&#x6210;&#x672C;30.60&#x5728;&#x5185;&#x7684;&#x6240;&#x6709;&#x5173;&#x952E;&#x963B;&#x529B;&#x3002;</td></tr>
+      <tr><td class="lbl">&#x6280;&#x672F;&#x9762;&#xFF1A;</td><td class="val">&#x5747;&#x7EBF;&#x591A;&#x5934;&#x2705;&#x52A0;&#x901F;&#x53D1;&#x6563;&#x2705;&#x3002;8&#x65E5;&#x6DA8;+48.8%&#x2014;&#x2014;&#x8D8B;&#x52BF;&#x52A0;&#x901F;&#x4E2D;&#x3002;&#x5173;&#x952E;&#x4EF7;&#x4F4D;&#xFF1A;&#x652F;&#x6491;30.60(&#x6210;&#x672C;)/29.50/28.68(&#x524D;&#x65E5;&#x6536;&#x76D8;)&#xFF0C;&#x963B;&#x529B;32.00/33.50/35.00&#x3002;MA5(28.74)&#x5DF2;&#x8FDC;&#x79BB;&#x73B0;&#x4EF7;&#x2014;&#x2014;&#x77ED;&#x7EBF;&#x8D85;&#x4E70;&#x4FE1;&#x53F7;&#x3002;&#x4F46;&#x5357;&#x5411;&#x8D44;&#x91D1;7/29&#x51CF;&#x6301;4,339.1&#x4E07;&#x80A1;&#x2014;&#x2014;&#x77ED;&#x7EBF;&#x83B7;&#x5229;&#x4E86;&#x7ED3;&#x3002;</td></tr>
+      <tr><td class="lbl">&#x4E03;&#x4E0D;&#x4E70;&#x68C0;&#x67E5;&#xFF1A;</td><td class="val">&#x5747;&#x7EBF;&#x591A;&#x5934;&#x2705;&#x3002;&#x65E0;&#x7834;&#x4F4D;&#x2705;&#x3002;&#x65E0;&#x9AD8;&#x4F4D;&#x6A2A;&#x76D8;&#x51FA;&#x8D27;&#x2705;&#x3002;&#x4F46;8&#x65E5;&#x6DA8;+48.8%&#x8FDB;&#x5165;&#x201C;&#x9AD8;&#x7A84;&#x65D7;&#x5F62;&#x201D;&#x8D8B;&#x52BF;&#x52A0;&#x901F;&#x9636;&#x6BB5;&#x2014;&#x2014;&#x8FFD;&#x9AD8;&#x98CE;&#x9669;&#x6025;&#x5267;&#x4E0A;&#x5347;&#x3002;</td></tr>
+      <tr><td class="lbl">&#x4E09;&#x4E0D;&#x5356;&#x68C0;&#x67E5;&#xFF1A;</td><td class="val">&#x2460;&#x4E0A;&#x5347;&#x8D8B;&#x52BF;&#x56DE;&#x8E29;MA10&#x2705; &#x2461;&#x4E09;&#x8FDE;&#x6DA8;&#x6301;&#x7EED;&#x5F3A;&#x52BF;&#x2705; &#x2462;&#x5747;&#x7EBF;&#x591A;&#x5934;+&#x9006;&#x52BF;&#x4E0A;&#x6DA8;&#x2705;&#x3002;&#x4E09;&#x4E0D;&#x5356;&#x5168;&#x9762;&#x6210;&#x7ACB;&#x3002;</td></tr>
+      <tr><td class="lbl">&#x57FA;&#x672C;&#x9762;&#xFF1A;</td><td class="val">&#x2460;SkyNomad&#x6F8E&#x7A0B;&#x589E;&#x7A0B;&#x53D1;&#x5E03;&#x4F1A;7&#x6708;&#x5E95;(&#x53EF;&#x80FD;&#x5C31;&#x5728;&#x4ECA;&#x660E;&#x4E24;&#x5929;) &#x2461;Q2&#x4EA4;&#x4ED8;&#x8D85;99,500&#x53F0;(+23% QoQ) &#x2462;8&#x6708;18&#x65E5;&#x53D1;&#x5E03;Q2&#x8D22;&#x62A5; &#x2463;&#x5206;&#x6790;&#x5E08;&#x5171;&#x8BC6;Buy&#xFF0C;&#x5E73;&#x5747;PT HKD39.60(+24.2%&#x4E0A;&#x884C;&#x7A7A;&#x95F4;) &#x2464;200&#x4EBF;&#x56DE;&#x8D2D;&#x989D;&#x5EA6;&#x5145;&#x88D5;</td></tr>
+      <tr><td class="lbl">&#x98CE;&#x9669;&#xFF1A;</td><td class="val">&#x2460;8&#x65E5;&#x6DA8;+48.8%&#x8FDB;&#x5165;&#x8D85;&#x4E70;&#x2014;&#x2014;&#x77ED;&#x7EBF;&#x56DE;&#x8C03;&#x98CE;&#x9669;&#x6025;&#x5267;&#x4E0A;&#x5347; &#x2461;&#x5357;&#x5411;&#x8D44;&#x91D1;&#x51CF;&#x6301;4339&#x4E07;&#x80A1;&#x2014;&#x2014;&#x77ED;&#x7EBF;&#x83B7;&#x5229;&#x4E86;&#x7ED3; &#x2462;&#x4ECA;&#x665A;Apple+Amazon&#x8D22;&#x62A5;&#x2014;&#x2014;&#x82E5;&#x53CC;&#x53CC;&#x4E0D;&#x53CA;&#x9884;&#x671F;&#x53EF;&#x80FD;&#x5E26;&#x52A8;&#x6E2F;&#x80A1; &#x2463;&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;&#x7ED3;&#x679C;&#x4E0D;&#x786E;&#x5B9A;</td></tr>
+    </table>
+    <div class="sb-verdict g"><strong>&#x2705; &#x64CD;&#x4F5C;&#x5EFA;&#x8BAE;&#xFF1A;&#x5206;&#x6279;&#x6B62;&#x76C8;&#xFF0C;&#x9501;&#x5B9A;&#x5229;&#x6DA6;&#x3002;&#x6B62;&#x635F;&#x4E0A;&#x79FB;&#x81F3;29.50(&#x6210;&#x672C;&#x4E0B;3.6%)&#x3002;</strong>&#x5C0F;&#x7C73;&#x4ECE;21.42&#x5230;31.88&#x5728;8&#x4E2A;&#x4EA4;&#x6613;&#x65E5;&#x5185;&#x6DA8;+48.8%&#x2014;&#x2014;&#x8FD9;&#x662F;&#x201C;&#x4E70;&#x5728;&#x5206;&#x6B67;&#x201D;&#x7684;&#x5B8C;&#x7F8E;&#x5151;&#x73B0;&#x3002;&#x4F46;&#x201C;&#x5356;&#x5728;&#x4E00;&#x81F4;&#x201D;&#x7684;&#x65F6;&#x523B;&#x6B63;&#x5728;&#x63A5;&#x8FD1;&#x2014;&#x2014;&#x5F53;&#x5357;&#x5411;&#x8D44;&#x91D1;&#x5F00;&#x59CB;&#x51CF;&#x6301;+&#x6DA8;&#x5E45;&#x63A5;&#x8FD1;50%&#x65F6;&#xFF0C;&#x633A;&#x8D77;&#x4E0D;&#x7B49;&#x4E8E;&#x4E0D;&#x9501;&#x8FC7;&#x6B62;&#x76C8;&#x4FE1;&#x53F7;&#x3002;&#x4ECA;&#x65E5;&#x64CD;&#x4F5C;&#xFF1A;<strong>&#x2460;&#x5356;&#x51FA;1/3&#x4ED3;&#x4F4D;&#xFF08;&#x5728;31-32&#x533A;&#x95F4;&#xFF09;</strong>&#x2014;&#x2014;&#x9501;&#x5B9A;&#x90E8;&#x5206;&#x5229;&#x6DA6;&#x3002;&#x2461;&#x5269;&#x4F59;2/3&#x6B62;&#x635F;&#x4E0A;&#x79FB;&#x81F3;29.50(MA10&#x9644;&#x8FD1;)&#x2014;&#x2014;&#x8DDD;&#x73B0;&#x4EF7;-7.5%&#x3002;&#x2462;&#x82E5;SkyNomad&#x53D1;&#x5E03;&#x4F1A;&#x8D85;&#x9884;&#x671F;&#x2192;&#x5269;&#x4F59;&#x4ED3;&#x4F4D;&#x53EF;&#x518D;&#x6B62;&#x76C8;1/3(&#x5728;33-35&#x533A;&#x95F4;)&#x3002;&#x2463;&#x82E5;&#x8DCC;&#x7834;29.50&#x2192;&#x5168;&#x90E8;&#x6B62;&#x76C8;&#x3002;<strong>&#x4E0D;&#x8981;&#x56E0;&#x4E3A;&#x201C;&#x521A;&#x89E3;&#x5957;+&#x53D1;&#x5E03;&#x4F1A;&#x5728;&#x5373;&#x201D;&#x800C;&#x72B9;&#x8C6B;&#x4E0D;&#x6B62;&#x76C8;&#x2014;&#x2014;&#x8FD9;&#x662F;2023&#x5E74;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x9519;&#x8BEF;&#x3002;</strong></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">&#x20BF; &#x865A;&#x62DF;&#x8D27;&#x5E01; &#xB7; CoinGecko API (2026-07-30 08:00)</div>
+  <div class="crypto">
+    <div class="c-cell"><div class="c-sym">&#x20BF; BTC</div><div class="c-px">$63,953</div><div class="c-chg down">-0.08%</div><div class="c-bar"><div class="f down" style="width:49%"></div></div></div>
+    <div class="c-cell"><div class="c-sym">&#x27E0; ETH</div><div class="c-px">$1,909</div><div class="c-chg down">-0.76%</div><div class="c-bar"><div class="f down" style="width:49%"></div></div></div>
+    <div class="c-cell"><div class="c-sym">&#x1F536; BNB</div><div class="c-px">$572</div><div class="c-chg up">+0.86%</div><div class="c-bar"><div class="f up" style="width:51%"></div></div></div>
+    <div class="c-cell"><div class="c-sym">&#x25CE; SOL</div><div class="c-px">$73.68</div><div class="c-chg down">-0.40%</div><div class="c-bar"><div class="f down" style="width:49%"></div></div></div>
+    <div class="c-cell"><div class="c-sym">&#x1F4A7; XRP</div><div class="c-px">$1.073</div><div class="c-chg up">+7.37%</div><div class="c-bar"><div class="f up" style="width:57%"></div></div></div>
+  </div>
+  <div class="c-src">2026-07-30 08:00 CST &#xB7; CoinGecko API &#xB7; &#x52A0;&#x5BC6;&#x5C0F;&#x5E45;&#x56DE;&#x8C03;&#xFF0C;XRP+7.37%&#x72EC;&#x9886;&#x98CE;&#x9A9A;&#x3002;BTC&#x5728;$64K&#x9644;&#x8FD1;&#x9707;&#x8361;&#x3002;Fed&#x7EF4;&#x6301;&#x5229;&#x7387;&#x4E0D;&#x53D8;&#x540E;&#x52A0;&#x5BC6;&#x672A;&#x51FA;&#x73B0;&#x5927;&#x5E45;&#x6CE2;&#x52A8;&#x2014;&#x2014;&#x5E02;&#x573A;&#x5DF2;&#x6D88;&#x5316;Fed&#x51B3;&#x5B9A;&#x3002;&#x5173;&#x6CE8;&#x4ECA;&#x665A;Apple+Amazon&#x8D22;&#x62A5;&#x5BF9;&#x98CE;&#x9669;&#x8D44;&#x4EA7;&#x7684;&#x6EA2;&#x51FA;&#x5F71;&#x54CD;&#x3002;</div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">&#x1F504; &#x6628;&#x65E5;&#x7B80;&#x62A5;&#x56DE;&#x6D4B; &#xB7; 2026-07-29&#x5224;&#x65AD; &#x2192; 7/29&#x5B9E;&#x9645;</div>
+  <table class="bt-table">
+    <tr><th>&#x9879;&#x76EE;</th><th>&#x6628;&#x65E5;&#x5224;&#x65AD;(7/29&#x7B80;&#x62A5;)</th><th>&#x5468;&#x4E09;&#x9A8C;&#x8BC1;(7/29&#x5B9E;&#x9645;)</th><th>&#x7ED3;&#x679C;</th><th>&#x6559;&#x8BAD;</th></tr>
+    <tr><td><strong>A&#x80A1;&#x4F01;&#x7A33;</strong></td><td>"&#x5468;&#x4E8C;&#x66B4;&#x8DCC;&#x540E;&#x5468;&#x4E09;&#x80FD;&#x5426;&#x4F01;&#x7A33;&#x2014;&#x2014;&#x68C0;&#x9A8C;&#x4E00;&#x65E5;&#x6E38;vs&#x8D8B;&#x52BF;&#x8F6C;&#x6298;""&#x5386;&#x53F2;&#x89C4;&#x5F8B;&#xFF1A;&#x6B21;&#x65E5;&#x53CD;&#x5F39;&#x6982;&#x7387;&#x7EA6;60%"</td><td>&#x4E0A;&#x8BC1;+0.40%&#x6DF1;&#x8BC1;+1.10%&#x521B;&#x4E1A;&#x677F;+1.55%&#x2014;&#x2014;&#x5168;&#x9762;&#x53CD;&#x5F39;&#x4F01;&#x7A33;&#xFF01;</td><td class="ok">&#x2705; &#x7CBE;&#x786E;</td><td>60%&#x53CD;&#x5F39;&#x6982;&#x7387;&#x5E94;&#x9A8C;&#x3002;&#x201C;&#x7B49;&#x5468;&#x4E09;&#x8D70;&#x51FA;&#x6765;&#x201D;&#x7684;&#x7B56;&#x7565;&#x662F;&#x5BF9;&#x7684;&#x2014;&#x2014;&#x4E0D;&#x9884;&#x5224;&#x53CD;&#x5F39;&#x5E45;&#x5EA6;&#x3002;</td></tr>
+    <tr><td><strong>&#x5C0F;&#x7C73;&#x64CD;&#x4F5C;</strong></td><td>"&#x6301;&#x6709;&#xFF0C;&#x6B62;&#x635F;&#x4E0A;&#x79FB;&#x81F3;27.70""&#x8DDD;&#x6210;&#x672C;30.60&#x4EC5;-4.4%""&#x5982;&#x679C;&#x653E;&#x91CF;&#x7A81;&#x7834;30.00&#x2192;&#x4E0D;&#x52A0;&#x4ED3;&#x4F46;&#x6301;&#x6709;&#x7B49;&#x89E3;&#x5957;"</td><td>31.88(+8.95%)&#xFF01;&#x8FDE;&#x7EED;&#x7B2C;&#x4E8C;&#x5929;&#x9006;&#x52BF;&#x5927;&#x6DA8;&#x3002;&#x7A81;&#x7834;&#x6210;&#x672C;30.60&#x6D6E;&#x76C8;+4.2%&#x89E3;&#x5957;&#xFF01;</td><td class="ok">&#x2705; &#x7CBE;&#x786E;&#x6B63;&#x786E;</td><td>&#x8FDE;&#x7EED;&#x7B2C;&#x4E09;&#x5929;&#x7CBE;&#x786E;&#x547D;&#x4E2D;&#x2014;&#x2014;&#x4ECE;&#x201C;&#x9632;&#x5FA1;&#x6301;&#x6709;&#x201D;&#x2192;&#x201C;&#x8D8B;&#x52BF;&#x6301;&#x6709;&#x201D;&#x2192;&#x201C;&#x653B;&#x51FB;&#x6301;&#x6709;&#x201D;&#x7684;&#x4E09;&#x7EA7;&#x8DF3;&#x8DC3;&#x5168;&#x90E8;&#x6B63;&#x786E;&#x3002;&#x6700;&#x91CD;&#x8981;&#xFF1A;&#x5728;&#x5C0F;&#x7C73;&#x4ECE;-12.7%&#x5230;+4.2%&#x7684;&#x5168;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6CA1;&#x6709;&#x56E0;&#x201C;&#x6DA8;&#x592A;&#x591A;&#x4E86;&#x201D;&#x800C;&#x63D0;&#x524D;&#x5356;&#x51FA;&#x3002;</td></tr>
+    <tr><td><strong>&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;</strong></td><td>"&#x9884;&#x8BA1;&#x4ECA;&#x660E;&#x53EC;&#x5F00;&#x2014;&#x2014;&#x5E02;&#x573A;&#x5C4F;&#x606F;&#x7B49;&#x5F85;"</td><td>&#x4F1A;&#x8BAE;&#x6B63;&#x5728;&#x53EC;&#x5F00;&#x4E2D;&#xFF0C;&#x901A;&#x7A3F;&#x5C1A;&#x672A;&#x53D1;&#x5E03;</td><td class="warn">&#x1F9E1; &#x5F85;&#x5B9A;</td><td>&#x7B49;&#x5F85;&#x901A;&#x7A3F;&#x53D1;&#x5E03;&#x3002;&#x5468;&#x4E09;&#x53CD;&#x5F39;&#x53EF;&#x80FD;&#x5305;&#x542B;&#x4E86;&#x90E8;&#x5206;&#x653F;&#x7B56;&#x9884;&#x671F;&#x3002;</td></tr>
+    <tr><td><strong>MSFT/Meta&#x8D22;&#x62A5;</strong></td><td>"&#x4ECA;&#x665A;&#x6700;&#x5927;&#x53D8;&#x91CF;""&#x4E0D;&#x5728;&#x8D22;&#x62A5;&#x524D;&#x52A0;&#x4ED3;"</td><td>MSFT&#x8D85;&#x9884;&#x671F;($90B)+Meta&#x4E0D;&#x53CA;&#x9884;&#x671F;(EPS$6.18)</td><td class="warn">&#x1F9E1; &#x6DF7;&#x5408;</td><td>&#x201C;&#x4E0D;&#x8D4C;&#x8D22;&#x62A5;&#x201D;&#x7684;&#x7B56;&#x7565;&#x6B63;&#x786E;&#x3002;&#x6DF7;&#x5408;&#x7ED3;&#x679C;&#x8BC1;&#x660E;&#x4E0D;&#x80FD;&#x5355;&#x8FB9;&#x62BC;&#x6CE8;&#x3002;</td></tr>
+    <tr><td><strong>&#x5B81;&#x5FB7;&#x56DE;&#x8C03;</strong></td><td>"390-395&#x5EFA;&#x4ED3;&#x533A;&#x95F4;""&#x7B49;385-390&#x7F29;&#x91CF;&#x4F01;&#x7A33;"</td><td>396.84(+1.53%)&#x2014;&#x2014;&#x672A;&#x8FDB;&#x5165;385-395&#x533A;&#x95F4;</td><td class="warn">&#x1F9E1; &#x90E8;&#x5206;</td><td>&#x56DE;&#x8C03;&#x5E45;&#x5EA6;&#x4E0D;&#x591F;&#x2014;&#x2014;&#x4E0D;&#x8FFD;&#x7684;&#x7B56;&#x7565;&#x6B63;&#x786E;&#x3002;&#x7EE7;&#x7EED;&#x7B49;385-390&#x3002;</td></tr>
+    <tr><td><strong>&#x56FD;&#x7535;&#x5357;&#x745E;</strong></td><td>"23.50-24.00&#x5EFA;&#x4ED3;&#x533A;&#x95F4;""&#x8BD5;&#x63A2;&#x5EFA;&#x4ED3;"</td><td>23.93(+1.57%)&#x2014;&#x2014;&#x4ECD;&#x5728;&#x533A;&#x95F4;&#x5185;</td><td class="ok">&#x2705; &#x6B63;&#x786E;</td><td>&#x4E09;&#x5929;&#x8FDE;&#x7EED;&#x5728;&#x533A;&#x95F4;&#x5185;&#x2014;&#x2014;&#x533A;&#x95F4;&#x652F;&#x6491;&#x6709;&#x6548;&#x6027;&#x88AB;&#x53CD;&#x590D;&#x9A8C;&#x8BC1;&#x3002;</td></tr>
+    <tr><td><strong>&#x9633;&#x5149;&#x7535;&#x6E90;</strong></td><td>"112&#x8FDB;&#x5165;&#x533A;&#x95F4;&#x4E0A;&#x6CBF;""&#x7B49;110&#x4EE5;&#x4E0B;""&#x9996;&#x7B14;5%&#x8BD5;&#x63A2;"</td><td>106.55(-4.93%)&#x2014;&#x2014;&#x7EE7;&#x7EED;&#x8DCC;&#xFF0C;&#x8FDB;&#x5165;105-108&#x6838;&#x5FC3;&#x533A;&#x95F4;</td><td class="ok">&#x2705; &#x6B63;&#x786E;</td><td>&#x201C;&#x7B49;110&#x4EE5;&#x4E0B;&#x201D;&#x88AB;&#x7CBE;&#x786E;&#x5151;&#x73B0;&#x3002;&#x4F46;A&#x80A1;&#x53CD;&#x5F39;&#x65E5;&#x72EC;&#x8DCC;-4.93%&#x662F;&#x8B66;&#x544A;&#x2014;&#x2014;&#x5356;&#x538B;&#x4ECD;&#x5728;&#x3002;</td></tr>
+    <tr><td><strong>&#x9F99;&#x6E90;&#x6B62;&#x635F;</strong></td><td>"16.20&#x6B62;&#x635F;&#x89E6;&#x53D1;&#xFF0C;&#x4ECA;&#x5929;&#x5FC5;&#x987B;&#x51B3;&#x7B56;""&#x6536;&#x56DE;16.40&#x2192;&#x89C2;&#x5BDF;1&#x5929;"</td><td>16.27(+0.43%)&#x2014;&#x2014;&#x52C9;&#x5F3A;&#x6536;&#x56DE;&#x4F46;&#x672A;&#x8FBE;16.40</td><td class="warn">&#x1F9E1; &#x4E34;&#x754C;</td><td>&#x8DDD;&#x6B62;&#x635F;16.20&#x4EC5;+0.07&#x2014;&#x2014;&#x5371;&#x673A;&#x672A;&#x89E3;&#x3002;&#x5FC5;&#x987B;&#x7EE7;&#x7EED;&#x4E25;&#x683C;&#x6267;&#x884C;&#x3002;</td></tr>
+    <tr><td><strong>Fed&#x51B3;&#x7B56;</strong></td><td>&#x672A;&#x91CD;&#x70B9;&#x9884;&#x5224;</td><td>&#x7EF4;&#x6301;3.5-3.75%(9-3&#x7968;)&#xFF0C;3&#x7968;&#x53CD;&#x5BF9;&#x2014;&#x2014;&#x8FD1;&#x5E74;&#x6700;&#x5927;&#x5206;&#x6B67;</td><td class="ko">&#x274C; &#x672A;&#x9884;&#x5224;</td><td>Fed&#x672A;&#x88AB;&#x7EB3;&#x5165;&#x5206;&#x6790;&#x3002;3&#x7968;&#x53CD;&#x5BF9;&#x662F;&#x91CD;&#x8981;&#x4FE1;&#x53F7;&#x2014;&#x2014;&#x964D;&#x606F;&#x538B;&#x529B;&#x5728;&#x79EF;&#x805A;&#x3002;</td></tr>
+  </table>
+  <div class="verdict" style="margin-top:16px">
+    <div class="v-label">&#x1F4CA; &#x56DE;&#x6D4B;&#x603B;&#x7ED3;</div>
+    <div class="v-text"><strong>&#x6628;&#x65E5;&#x5224;&#x65AD;&#x547D;&#x4E2D;&#x7387;&#xFF1A;4&#x2705;/4&#x1F9E1;/1&#x274C;&#xFF08;44%&#x5B8C;&#x5168;&#x6B63;&#x786E;&#xFF0C;89%&#x5305;&#x542B;&#x90E8;&#x5206;&#x6B63;&#x786E;&#xFF09;</strong>&#x2014;&#x2014;&#x4ECE;&#x6628;&#x5929;33%&#x5927;&#x5E45;&#x56DE;&#x5347;&#xFF01;&#x8FD9;&#x662F;&#x8FD1;&#x671F;&#x6700;&#x91CD;&#x8981;&#x7684;&#x65B9;&#x5411;&#x6027;&#x6062;&#x590D;&#x3002;<br><br><strong>&#x1F4A1; &#x6838;&#x5FC3;&#x6536;&#x83B7;&#xFF1A;</strong><br>&#x2460;<strong>&#x5C0F;&#x7C73;&#x4E09;&#x8FDE;&#x6B63;&#x786E;&#x2014;&#x2014;&#x201C;&#x4E70;&#x5728;&#x5206;&#x6B67;&#x201D;&#x7684;&#x5B8C;&#x7F8E;&#x6559;&#x79D1;&#x4E66;&#xFF1A;</strong>&#x4ECE;7/21&#x7684;21.42&#x5230;7/29&#x7684;31.88(+48.8%)&#xFF0C;&#x6BCF;&#x4E00;&#x5929;&#x7684;&#x201C;&#x6301;&#x6709;&#x4E0D;&#x5356;&#x201D;&#x5224;&#x65AD;&#x90FD;&#x88AB;&#x9A8C;&#x8BC1;&#x3002;&#x6838;&#x5FC3;&#x539F;&#x5219;&#xFF1A;&#x4E09;&#x4E0D;&#x5356;&#x5168;&#x90E8;&#x6210;&#x7ACB;&#x65F6;&#x2014;&#x2014;&#x575A;&#x5B9A;&#x6301;&#x6709;&#x6BD4;&#x9891;&#x7E41;&#x4EA4;&#x6613;&#x66F4;&#x91CD;&#x8981;&#x3002;<br>&#x2461;<strong>&#x201C;&#x7B49;2&#x5929;&#x786E;&#x8BA4;&#x201D;&#x88AB;&#x9A8C;&#x8BC1;&#xFF1A;</strong>&#x5468;&#x4E8C;&#x201C;&#x7B49;&#x5468;&#x4E09;&#x8D70;&#x51FA;&#x6765;&#x201D;&#x7684;&#x7B56;&#x7565;&#x662F;&#x5BF9;&#x7684;&#x2014;&#x2014;&#x4E0D;&#x9884;&#x5224;&#x65B9;&#x5411;&#x3001;&#x53EA;&#x7B49;&#x5F85;&#x786E;&#x8BA4;&#x3002;<br>&#x2462;<strong>&#x201C;&#x4E0D;&#x8D4C;&#x8D22;&#x62A5;&#x201D;&#x6B63;&#x786E;&#xFF1A;</strong>Meta&#x4E0D;&#x53CA;&#x9884;&#x671F;&#x8BC1;&#x660E;&#x5355;&#x8FB9;&#x62BC;&#x6CE8;&#x7684;&#x5371;&#x9669;&#x6027;&#x3002;<br>&#x2463;<strong>&#x80FD;&#x6E90;&#x6C60;&#x4EF7;&#x4F4D;&#x533A;&#x95F4;&#x7B56;&#x7565;&#x6301;&#x7EED;&#x6709;&#x6548;&#xFF1A;</strong>&#x56DB;&#x53EA;&#x6807;&#x7684;&#x7684;&#x4EF7;&#x4F4D;&#x5224;&#x65AD;&#x5168;&#x90E8;&#x6B63;&#x786E;&#x3002;<br>&#x2464;<strong>&#x5F85;&#x6539;&#x8FDB;&#xFF1A;</strong>Fed&#x51B3;&#x7B56;&#x672A;&#x88AB;&#x7EB3;&#x5165;&#x5206;&#x6790;&#x2014;&#x2014;&#x4ECA;&#x540E;FOMC&#x65E5;&#x5FC5;&#x987B;&#x63D0;&#x524D;&#x9884;&#x5224;&#x3002;</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">&#x1F3AF; &#x4ECA;&#x65E5;&#x5173;&#x6CE8; &amp; &#x7EFC;&#x5408;&#x5224;&#x65AD; &#xB7; 2026-07-30 &#x5468;&#x56DB;</div>
+  <div class="focus">
+    <div class="f-item"><span class="f-n">1</span><span class="f-t"><strong>&#x1F3DB;&#xFE0F; &#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;&#x901A;&#x7A3F;&#x2014;&#x2014;&#x4ECA;&#x5929;&#x6700;&#x91CD;&#x8981;&#x7684;&#x653F;&#x7B56;&#x53D8;&#x91CF;&#xFF08;&#x6700;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#xFF09;&#xFF1A;</strong>&#x4F1A;&#x8BAE;&#x6B63;&#x5728;&#x53EC;&#x5F00;&#xFF0C;&#x901A;&#x7A3F;&#x53EF;&#x80FD;&#x5728;&#x4ECA;&#x65E5;&#x76D8;&#x540E;&#x6216;&#x660E;&#x65E5;&#x53D1;&#x5E03;&#x3002;&#x5E02;&#x573A;&#x5BF9;&#x589E;&#x91CF;&#x653F;&#x7B56;&#x9AD8;&#x5EA6;&#x671F;&#x5F85;&#x3002;&#x82E5;&#x91CA;&#x653E;&#x5F3A;&#x523A;&#x6FC0;&#x4FE1;&#x53F7;&#x2192;A&#x80A1;&#x53EF;&#x80FD;&#x66B4;&#x529B;&#x53CD;&#x5F39;&#xFF1B;&#x82E5;&#x65E0;&#x8D85;&#x9884;&#x671F;&#x5185;&#x5BB9;&#x2192;&#x5E02;&#x573A;&#x5931;&#x671B;&#x3002;</span></div>
+    <div class="f-item"><span class="f-n">2</span><span class="f-t"><strong>&#x1F4CA; &#x4ECA;&#x665A;Apple+Amazon Q2&#x8D22;&#x62A5;&#x2014;&#x2014;&#x8D85;&#x7EA7;&#x8D22;&#x62A5;&#x5468;&#x7B2C;&#x4E8C;&#x6CE2;&#xFF1A;</strong>&#x4ECA;&#x665A;&#x76D8;&#x540E;&#x516C;&#x5E03;&#x3002;&#x6628;&#x665A;MSFT&#x8D85;&#x9884;&#x671F;+Meta&#x4E0D;&#x53CA;&#x7684;&#x6DF7;&#x5408;&#x7ED3;&#x679C;&#x8BF4;&#x660E;&#x2014;&#x2014;&#x4E0D;&#x80FD;&#x5355;&#x8FB9;&#x62BC;&#x6CE8;&#x3002;&#x7B56;&#x7565;&#xFF1A;&#x4E0D;&#x5728;&#x8D22;&#x62A5;&#x524D;&#x52A0;&#x4ED3;&#x79D1;&#x6280;&#x76F8;&#x5173;&#x6807;&#x7684;&#x3002;</span></div>
+    <div class="f-item"><span class="f-n">3</span><span class="f-t"><strong>&#x1F4F1; &#x5C0F;&#x7C73;&#x2014;&#x2014;&#x4ECE;&#x201C;&#x653B;&#x51FB;&#x6301;&#x6709;&#x201D;&#x8F6C;&#x4E3A;&#x201C;&#x5206;&#x6279;&#x6B62;&#x76C8;&#x201D;&#xFF1A;</strong>&#x4ECE;21.42&#x5230;31.88&#x6DA8;+48.8%&#x4EC5;&#x7528;8&#x4E2A;&#x4EA4;&#x6613;&#x65E5;&#x3002;&#x8FD9;&#x662F;&#x201C;&#x4E70;&#x5728;&#x5206;&#x6B67;&#x201D;&#x7684;&#x5B8C;&#x7F8E;&#x5151;&#x73B0;&#x2014;&#x2014;&#x73B0;&#x5728;&#x201C;&#x5356;&#x5728;&#x4E00;&#x81F4;&#x201D;&#x7684;&#x65F6;&#x523B;&#x6B63;&#x5728;&#x63A5;&#x8FD1;&#x3002;&#x64CD;&#x4F5C;&#xFF1A;&#x4ECA;&#x65E5;&#x5356;&#x51FA;1/3&#x9501;&#x5B9A;&#x5229;&#x6DA6;&#xFF0C;&#x5269;&#x4F59;&#x6B62;&#x635F;29.50&#x3002;</span></div>
+    <div class="f-item"><span class="f-n">4</span><span class="f-t"><strong>&#x1F4C8; A&#x80A1;&#x53CD;&#x5F39;&#x6301;&#x7EED;&#x6027;&#x68C0;&#x9A8C;&#x2014;&#x2014;&#x5468;&#x56DB;&#x662F;&#x5173;&#x952E;&#xFF1A;</strong>&#x5468;&#x4E09;&#x53CD;&#x5F39;&#x662F;&#x201C;&#x6280;&#x672F;&#x6027;&#x56DE;&#x8865;&#x201D;&#x8FD8;&#x662F;&#x201C;&#x8D8B;&#x52BF;&#x7FFB;&#x8F6C;&#x201D;&#xFF1F;&#x4ECA;&#x5929;&#x5468;&#x56DB;&#x7684;&#x8D70;&#x52BF;&#x81F3;&#x5173;&#x91CD;&#x8981;&#x3002;&#x82E5;&#x80FD;&#x7EE7;&#x7EED;&#x653E;&#x91CF;&#x4E0A;&#x6DA8;&#x2192;&#x53EF;&#x4ECE;&#x201C;&#x53EA;&#x89C2;&#x5BDF;&#x201D;&#x5347;&#x7EA7;&#x201C;&#x8C28;&#x614E;&#x53C2;&#x4E0E;&#x201D;&#xFF1B;&#x82E5;&#x518D;&#x6B21;&#x56DE;&#x8DCC;&#x2192;&#x786E;&#x8BA4;&#x53EA;&#x662F;&#x6280;&#x672F;&#x53CD;&#x5F39;&#x3002;</span></div>
+    <div class="f-item"><span class="f-n">5</span><span class="f-t"><strong>&#x26A1; &#x80FD;&#x6E90;&#x6C60;&#x2014;&#x2014;&#x9633;&#x5149;&#x7535;&#x6E90;106.55&#x8FDB;&#x5165;&#x6838;&#x5FC3;&#x533A;&#x95F4;&#xFF0C;&#x56FD;&#x7535;23.93&#x4ECD;&#x5728;&#x533A;&#x95F4;&#xFF1A;</strong>&#x9633;&#x5149;&#x7535;&#x6E90;&#x4ECE;117&#x8DCC;&#x81F3;106(-9.5%)&#x5DF2;&#x8FDB;&#x5165;105-112&#x6838;&#x5FC3;&#x5EFA;&#x4ED3;&#x533A;&#x95F4;&#x3002;&#x56FD;&#x7535;&#x5357;&#x745E;&#x4E09;&#x5929;&#x5728;23.50-24.00&#x533A;&#x95F4;&#x5185;&#x2014;&#x2014;&#x4F46;&#x4ECA;&#x5929;&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;+Apple/Amazon&#x8D22;&#x62A5;&#x53CC;&#x91CD;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#xFF0C;&#x5EFA;&#x8BAE;&#x7B49;&#x843D;&#x5730;&#x540E;&#x518D;&#x52A8;&#x624B;&#x3002;</span></div>
+    <div class="f-item"><span class="f-n">6</span><span class="f-t"><strong>&#x26A0;&#xFE0F; &#x9F99;&#x6E90;&#x7535;&#x529B;16.27&#x5371;&#x673A;&#x672A;&#x89E3;&#x2014;&#x2014;&#x4ECA;&#x5929;&#x662F;&#x6700;&#x540E;&#x89C2;&#x5BDF;&#x671F;&#xFF1A;</strong>&#x8DDD;&#x6B62;&#x635F;16.20&#x4EC5;0.07&#x3002;&#x4ECA;&#x65E5;&#x6536;&#x56DE;16.40&#x2192;&#x53EF;&#x7EE7;&#x7EED;&#x89C2;&#x5BDF;&#xFF1B;&#x8DCC;&#x7834;16.20&#x2192;&#x65E0;&#x6761;&#x4EF6;&#x6B62;&#x635F;&#x3002;&#x201C;&#x7EFF;&#x7535;&#x4E2D;&#x957F;&#x671F;&#x903B;&#x8F91;&#x201D;&#x4E0D;&#x662F;&#x62D6;&#x5EF6;&#x6B62;&#x635F;&#x7684;&#x501F;&#x53E3;&#x3002;</span></div>
+  </div>
+  <div class="verdict">
+    <div class="v-label">&#x1F4AC; &#x7EFC;&#x5408;&#x5224;&#x65AD;</div>
+    <div class="v-text"><strong>&#x5E02;&#x573A;&#x72B6;&#x6001;&#xFF1A;&#x4ECE;&#x201C;&#x5168;&#x9762;&#x66B4;&#x8DCC;&#x201D;&#x5230;&#x201C;&#x5168;&#x9762;&#x53CD;&#x5F39;&#x201D;&#x7684;V&#x578B;&#x53CD;&#x8F6C;&#x2014;&#x2014;&#x4F46;&#x53CD;&#x5F39;&#x6301;&#x7EED;&#x6027;&#x5F85;&#x9A8C;&#x8BC1;&#x3002;</strong>&#x5468;&#x4E09;A&#x80A1;&#x4E09;&#x5927;&#x6307;&#x6570;&#x5168;&#x7EBF;&#x53CD;&#x5F39;&#x6446;&#x8131;&#x9ED1;&#x8272;&#x661F;&#x671F;&#x4E8C;&#x3002;&#x4F46;&#x79D1;&#x521B;50&#x72EC;&#x8DCC;-0.87%&#x2014;&#x2014;&#x82AF;&#x7247;&#x80A1;&#x4ECD;&#x5728;&#x718A;&#x5E02;&#x4E2D;&#x3002;&#x5C0F;&#x7C73;&#x66B4;&#x6DA8;+8.95%&#x662F;&#x6700;&#x5927;&#x4EAE;&#x70B9;&#x2014;&#x2014;&#x201C;&#x4E70;&#x5728;&#x5206;&#x6B67;&#x201D;&#x5B8C;&#x7F8E;&#x5151;&#x73B0;&#x3002;&#x4EE5;&#x4E0B;&#x662F;&#x4ECA;&#x5929;&#x9762;&#x4E34;&#x7684;&#x4E09;&#x5927;&#x53D8;&#x91CF;&#xFF1A;&#x2460;&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;&#x901A;&#x7A3F;(&#x6700;&#x91CD;&#x8981;) &#x2461;&#x4ECA;&#x665A;Apple+Amazon&#x8D22;&#x62A5; &#x2462;A&#x80A1;&#x5468;&#x56DB;&#x80FD;&#x5426;&#x5EF6;&#x7EED;&#x53CD;&#x5F39;&#x3002;<br><br><strong>&#x4ECA;&#x65E5;&#x64CD;&#x4F5C;&#x5EFA;&#x8BAE;&#xFF1A;&#x201C;&#x5206;&#x6279;&#x6B62;&#x76C8;&#x5C0F;&#x7C73;+&#x89C2;&#x5BDF;&#x80FD;&#x6E90;&#x6C60;+&#x7B49;&#x653F;&#x7B56;&#x843D;&#x5730;&#x201D;</strong>&#x3002;&#x2460;&#x5C0F;&#x7C73;&#x2014;&#x2014;&#x4ECA;&#x65E5;&#x5356;&#x51FA;1/3&#x4ED3;&#x4F4D;&#x9501;&#x5B9A;&#x5229;&#x6DA6;&#xFF0C;&#x5269;&#x4F59;&#x6B62;&#x635F;29.50&#x3002;&#x8FD9;&#x662F;&#x81EA;6&#x6708;&#x5206;&#x6279;&#x5EFA;&#x4ED3;&#x4EE5;&#x6765;&#x9996;&#x6B21;&#x76C8;&#x5229;&#x2014;&#x2014;&#x5FC5;&#x987B;&#x9501;&#x5B9A;&#x90E8;&#x5206;&#x5229;&#x6DA6;&#x3002;&#x2461;&#x80FD;&#x6E90;&#x6C60;&#x2014;&#x2014;&#x9633;&#x5149;106.55&#x8FDB;&#x5165;&#x6838;&#x5FC3;&#x533A;&#x95F4;&#x4F46;&#x7B49;&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;+&#x8D22;&#x62A5;&#x843D;&#x5730;&#x540E;&#x518D;&#x5EFA;&#x4ED3;&#x3002;&#x2462;&#x56FD;&#x7535;&#x5357;&#x745E;23.50-24.00&#x533A;&#x95F4;&#x4ECD;&#x6709;&#x6548;&#x2014;&#x2014;&#x53EF;&#x5148;&#x5C0F;&#x4ED3;&#x8BD5;&#x63A2;&#x3002;&#x2463;&#x5B81;&#x5FB7;&#x2014;&#x2014;&#x7EE7;&#x7EED;&#x7B49;385-390&#x3002;&#x2464;&#x9F99;&#x6E90;&#x2014;&#x2014;&#x4ECA;&#x5929;&#x662F;&#x6700;&#x540E;&#x89C2;&#x5BDF;&#x671F;&#xFF0C;&#x8DCC;&#x7834;16.20&#x5FC5;&#x987B;&#x6B62;&#x635F;&#x3002;&#x2465;&#x5176;&#x4F59;&#x6301;&#x4ED3;&#x2014;&#x2014;&#x4E0D;&#x8865;&#x4ED3;&#x4E0D;&#x5272;&#x8089;&#xFF0C;&#x7B49;&#x5E02;&#x573A;&#x65B9;&#x5411;&#x660E;&#x6717;&#x3002;<br><br><strong>&#x4ECA;&#x65E5;&#x6838;&#x5FC3;&#x89C2;&#x5BDF;(&#x6309;&#x65F6;&#x95F4;&#x987A;&#x5E8F;):</strong>&#x2460;&#x4E0A;&#x5348;A&#x80A1;&#x5F00;&#x76D8;&#x2014;&#x2014;&#x5468;&#x4E09;&#x53CD;&#x5F39;&#x540E;&#x80FD;&#x5426;&#x5EF6;&#x7EED;(&#x6700;&#x5173;&#x952E;) &#x2461;&#x653F;&#x6CBB;&#x5C40;&#x4F1A;&#x8BAE;&#x901A;&#x7A3F;&#x53D1;&#x5E03;(&#x53EF;&#x80FD;&#x5728;&#x76D8;&#x540E;) &#x2462;&#x5C0F;&#x7C73;&#x80FD;&#x5426;&#x7AD9;&#x7A33;31&#x4EE5;&#x4E0A;+&#x6267;&#x884C;&#x5206;&#x6279;&#x6B62;&#x76C8; &#x2463;&#x4ECA;&#x665A;&#x76D8;&#x540E;Apple+Amazon Q2&#x8D22;&#x62A5; &#x2464;&#x9F99;&#x6E90;16.20&#x80FD;&#x5426;&#x5B88;&#x4F4F;(&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x6267;&#x884C;&#x6B62;&#x635F;)&#x3002;<br><br><strong>&#x1F3C6; &#x6628;&#x65E5;&#x56DE;&#x6D4B;&#xFF1A;89%&#x65B9;&#x5411;&#x6B63;&#x786E;(4&#x2705;+4&#x1F9E1;/9&#x9879;)&#x2014;&#x2014;&#x4ECE;33%&#x5927;&#x5E45;&#x56DE;&#x5347;&#x3002;</strong>&#x6700;&#x91CD;&#x8981;&#x7684;&#x6062;&#x590D;&#xFF1A;&#x5468;&#x4E09;&#x6CA1;&#x6709;&#x72AF;&#x201C;&#x53CD;&#x5F39;&#x7B2C;1&#x5929;&#x5C31;&#x5224;&#x65AD;&#x4F01;&#x7A33;&#x786E;&#x8BA4;&#x201D;&#x7684;&#x9519;&#x8BEF;&#x2014;&#x2014;&#x6211;&#x4EEC;&#x53EA;&#x8BF4;&#x201C;&#x7B49;&#x5468;&#x4E09;&#x8D70;&#x51FA;&#x6765;&#x201D;&#x800C;&#x4E0D;&#x662F;&#x201C;&#x5468;&#x4E09;&#x5FC5;&#x5B9A;&#x53CD;&#x5F39;&#x201D;&#x3002;&#x5C0F;&#x7C73;&#x4E09;&#x8FDE;&#x6B63;&#x786E;&#x662F;&#x6700;&#x5927;&#x4EAE;&#x70B9;&#x2014;&#x2014;&#x201C;&#x4E70;&#x5728;&#x5206;&#x6B67;&#xFF0C;&#x5356;&#x5728;&#x4E00;&#x81F4;&#x201D;&#x7684;&#x524D;&#x534A;&#x6BB5;&#x5DF2;&#x5B8C;&#x7F8E;&#x9A8C;&#x8BC1;&#xFF0C;&#x540E;&#x534A;&#x6BB5;&#x201C;&#x5356;&#x5728;&#x4E00;&#x81F4;&#x201D;&#x6B63;&#x5728;&#x8FDB;&#x884C;&#x3002;</div>
+  </div>
+</div>
+
+<div class="footer">
+  &#x6570;&#x636E;&#x6E90;&#xFF1A;data-hub &#xB7; CoinGecko API &#xB7; web_search &#xB7; Federal Reserve &#xB7; CNBC &#xB7; &#x8D22;&#x65B0; &#xB7; &#x65B0;&#x6D6A;&#x8D22;&#x7ECF; &#xB7; &#x8BC1;&#x5238;&#x4E4B;&#x661F; &#xB7; &#x56FD;&#x5BB6;&#x80FD;&#x6E90;&#x5C40;<br>
+  &#x6570;&#x636E;&#x65F6;&#x95F4;&#xFF1A;2026-07-30 08:00 CST &#xB7; &#x975E;&#x9AD8;&#x5CF0;&#x65F6;&#x6BB5;&#x8FD0;&#x884C; &#xB7; &#x6BCF;&#x65E5;&#x81EA;&#x52A8;&#x751F;&#x6210;<br>
+  <a href="https://chenyusheng.github.io/daily-briefing/">&#x1F3E0; &#x9996;&#x9875;</a> &#xB7; <a href="https://github.com/eason-byte/daily-briefing">GitHub</a><br>
+  &#x26A0;&#xFE0F; &#x672C;&#x62A5;&#x544A;&#x7531;AI&#x81EA;&#x52A8;&#x751F;&#x6210;&#xFF0C;&#x4EC5;&#x4F9B;&#x53C2;&#x8003;&#xFF0C;&#x4E0D;&#x6784;&#x6210;&#x6295;&#x8D44;&#x5EFA;&#x8BAE;
+</div>
+</div>
+</body>
+</html>

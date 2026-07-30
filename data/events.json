@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-29T08:30:21+08:00",
-  "today": "2026-07-29",
+  "updated": "2026-07-30T08:30:01+08:00",
+  "today": "2026-07-30",
   "events": [
     {
       "id": "sk-hynix-us-ipo",
@@ -47,7 +47,7 @@
     {
       "id": "fomc-jul-2026",
       "date": "2026-07-29",
-      "date_label": "7月29-30日",
+      "date_label": "✅ 7月29-30日",
       "title": "美联储FOMC利率决议",
       "stock": "宏观",
       "stock_name": "宏观事件",
@@ -55,7 +55,7 @@
       "importance": 5,
       "impact": "全持仓",
       "impact_dir": "both",
-      "status": "today",
+      "status": "done",
       "type": "宏观",
       "description": "是否开启降息周期？降息→港股/A股受益，北向资金流入增加，科技成长股估值修复。影响全持仓。",
       "detail": "关注点：降息幅度、点阵图前瞻指引、鲍威尔新闻发布会措辞。",
@@ -238,7 +238,7 @@
       "importance": 4,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "upcoming",
+      "status": "today",
       "type": "产能",
       "description": "产能翻倍→销量预期提升→估值修复催化剂。YU7交付爬坡+二期增产双重利好。",
       "tags": [
@@ -853,7 +853,7 @@
       "importance": 5,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "upcoming",
+      "status": "today",
       "type": "新品发布",
       "description": "昆仑平台+超级增程+全域安全三大技术发布。寻天第二品牌正式亮相，澎程N90 Max/N70 Max增程SUV首秀。小米增程路线落地，2027年销量预期催化。",
       "tags": [
@@ -876,7 +876,7 @@
       "importance": 4,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "upcoming",
+      "status": "today",
       "type": "品牌发布",
       "description": "寻天品牌独立运营，定位家用增程SUV市场，与小米主品牌(纯电/性能)切割。首款车型昆仑N3定位最高端。打开全新市场空间。",
       "tags": [
@@ -969,8 +969,8 @@
   ],
   "stats": {
     "total_events": 44,
-    "upcoming_7d": 6,
-    "upcoming_30d": 12,
+    "upcoming_7d": 5,
+    "upcoming_30d": 11,
     "critical_events": 5,
     "monitoring": 8
   }

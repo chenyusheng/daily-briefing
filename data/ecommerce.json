@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-07-18",
+    "dow": "",
+    "desc": "TikTok新店60天冷启动实战框架",
+    "slug": "tiktok-60day-cold-start",
+    "path": "learning/tiktok-60day-cold-start.html"
+  },
+  {
     "date": "2026-07-17 · TikTok新店60天冷启动实战框架",
     "dow": "运营框架",
     "desc": "TikTok新店从0到1的60天冷启动全流程四个15天阶段系统化运营商品卡自营短视频和达人合作三大渠道核心目标是找到曝光与出单的转化关系附带个人卖家精简版调整建议",
@@ -14,22 +21,6 @@
       "60天计划"
     ],
     "path": "learning/tiktok-60day-cold-start"
-  },
-  {
-    "date": "2026-07-07 · TK东南亚跨境电商学习资源大全",
-    "dow": "学习指南",
-    "desc": "新手做TK东南亚跨境电商的完整学习资源导航：B站UP主推荐（统一的奸商之路/黑马程序员/小强跨境/老白跨境等）+公众号（TK增长会/亿邦动力/雨果网等）+推荐书籍+四周学习路线规划。IT男上手效率最大化。",
-    "tags": [
-      "TikTok",
-      "东南亚",
-      "跨境电商",
-      "学习资源",
-      "B站",
-      "公众号",
-      "书籍推荐",
-      "新手入门"
-    ],
-    "path": "learning/tk-cross-border-learning-resources"
   },
   {
     "date": "2026-07-07 · 跨境电商工具清单与实操流程",
@@ -61,6 +52,22 @@
     "path": "learning/tiktok-seasia-full-process-guide"
   },
   {
+    "date": "2026-07-07 · TK东南亚跨境电商学习资源大全",
+    "dow": "学习指南",
+    "desc": "新手做TK东南亚跨境电商的完整学习资源导航：B站UP主推荐（统一的奸商之路/黑马程序员/小强跨境/老白跨境等）+公众号（TK增长会/亿邦动力/雨果网等）+推荐书籍+四周学习路线规划。IT男上手效率最大化。",
+    "tags": [
+      "TikTok",
+      "东南亚",
+      "跨境电商",
+      "学习资源",
+      "B站",
+      "公众号",
+      "书籍推荐",
+      "新手入门"
+    ],
+    "path": "learning/tk-cross-border-learning-resources"
+  },
+  {
     "date": "2026-07-07 · TK东南亚启动成本解析",
     "dow": "成本核算",
     "desc": "拆解TK东南亚电商真实启动成本从0到1全部开销含两方案全新入局约8328元已有设备约3118元首月回款仅130元回款周期是最大陷阱",
@@ -73,6 +80,91 @@
       "新手开店"
     ],
     "path": "learning/tiktok-seasia-startup-costs"
+  },
+  {
+    "date": "2026-07-07",
+    "dow": "",
+    "desc": "广州产业带与批发市场全攻略 · TikTok跨境电商选品指南",
+    "slug": "guangzhou-supply-chain-guide",
+    "path": "learning/guangzhou-supply-chain-guide.html"
+  },
+  {
+    "date": "2026-07-07",
+    "dow": "",
+    "desc": "TK东南亚跨境电商·售后/客服/合规/避坑实操手册",
+    "slug": "tiktok-after-sales-compliance-handbook",
+    "path": "learning/tiktok-after-sales-compliance-handbook.html"
+  },
+  {
+    "date": "2026-07-07",
+    "dow": "",
+    "desc": "TK跨境电商全流程解析",
+    "slug": "tiktok-seasia-full-process-guide",
+    "path": "learning/tiktok-seasia-full-process-guide.html"
+  },
+  {
+    "date": "2026-07-07",
+    "dow": "",
+    "desc": "IT男TikTok东南亚跨境电商·从0到1全攻略",
+    "slug": "tiktok-seasia-guide-for-it-guys",
+    "path": "learning/tiktok-seasia-guide-for-it-guys.html"
+  },
+  {
+    "date": "2026-07-07",
+    "dow": "",
+    "desc": "TK东南亚启动成本解析",
+    "slug": "tiktok-seasia-startup-costs",
+    "path": "learning/tiktok-seasia-startup-costs.html"
+  },
+  {
+    "date": "2026-07-07",
+    "dow": "",
+    "desc": "跨境电商工具清单与实操流程",
+    "slug": "tiktok-tool-list",
+    "path": "learning/tiktok-tool-list.html"
+  },
+  {
+    "date": "2026-07-07",
+    "dow": "",
+    "desc": "TK东南亚跨境电商·新手学习资源大全",
+    "slug": "tk-cross-border-learning-resources",
+    "path": "learning/tk-cross-border-learning-resources.html"
+  },
+  {
+    "date": "2026-07-06 · 广州产业带与批发市场全攻略",
+    "dow": "选品指南",
+    "desc": "广州跨境电商选品拿货终极指南：十三行中高端女装、沙河30元以下走量款、三元里皮具箱包、番禺大罗塘珠宝、白云美妆批发、狮岭皮革。附拿货话术、避坑清单、新手3天拿货日程。",
+    "tags": [
+      "广州",
+      "批发市场",
+      "产业带",
+      "十三行",
+      "沙河",
+      "三元里",
+      "狮岭",
+      "大罗塘",
+      "拿货攻略",
+      "TikTok",
+      "选品",
+      "跨境电商",
+      "避坑"
+    ],
+    "path": "learning/guangzhou-supply-chain-guide"
+  },
+  {
+    "date": "2026-07-06 · 广州个体户注册+TikTok开店指南",
+    "dow": "实操指南",
+    "desc": "广州个人注册个体工商户营业执照并在TikTok开店的完整流程：准备资料线上申请税务登记入驻TK。广州住宅地址可注册，全程免费线上办，1-3天拿证。",
+    "tags": [
+      "营业执照",
+      "广州",
+      "TikTok",
+      "个体工商户",
+      "开店",
+      "跨境电商",
+      "粤省事"
+    ],
+    "path": "learning/guangzhou-business-license-tiktok"
   },
   {
     "date": "2026-07-06 · 售后客服合规实操手册",
@@ -114,40 +206,18 @@
     "path": "learning/tiktok-seasia-guide-for-it-guys"
   },
   {
-    "date": "2026-07-06 · 广州产业带与批发市场全攻略",
-    "dow": "选品指南",
-    "desc": "广州跨境电商选品拿货终极指南：十三行中高端女装、沙河30元以下走量款、三元里皮具箱包、番禺大罗塘珠宝、白云美妆批发、狮岭皮革。附拿货话术、避坑清单、新手3天拿货日程。",
-    "tags": [
-      "广州",
-      "批发市场",
-      "产业带",
-      "十三行",
-      "沙河",
-      "三元里",
-      "狮岭",
-      "大罗塘",
-      "拿货攻略",
-      "TikTok",
-      "选品",
-      "跨境电商",
-      "避坑"
-    ],
-    "path": "learning/guangzhou-supply-chain-guide"
+    "date": "2026-07-06",
+    "dow": "",
+    "desc": "跨境电商5步实操指南 · 电商经验",
+    "slug": "cross-border-5-steps",
+    "path": "learning/cross-border-5-steps.html"
   },
   {
-    "date": "2026-07-06 · 广州个体户注册+TikTok开店指南",
-    "dow": "实操指南",
-    "desc": "广州个人注册个体工商户营业执照并在TikTok开店的完整流程：准备资料线上申请税务登记入驻TK。广州住宅地址可注册，全程免费线上办，1-3天拿证。",
-    "tags": [
-      "营业执照",
-      "广州",
-      "TikTok",
-      "个体工商户",
-      "开店",
-      "跨境电商",
-      "粤省事"
-    ],
-    "path": "learning/guangzhou-business-license-tiktok"
+    "date": "2026-07-06",
+    "dow": "",
+    "desc": "广州个体工商户注册 · TikTok开店全流程 · 电商经验",
+    "slug": "guangzhou-business-license-tiktok",
+    "path": "learning/guangzhou-business-license-tiktok.html"
   },
   {
     "date": "2026-07-05 · 跨境电商5步实操指南",

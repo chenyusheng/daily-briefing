@@ -317,8 +317,8 @@ function rl(el, data, prefix, tc, tt, showTags) {
 
   var moreId = 'more_' + Math.random().toString(36).slice(2,8);
   el.innerHTML = buildItems(visible)
-    + '<div class="more-wrap"><button class="more-btn" id="btn_'+moreId+'" onclick="var h=document.getElementById(\'hidden_'+moreId+'\');var b=this;var ex=h.style.display===\'block\';h.style.display=ex?\'none\':\'block\';b.classList.toggle(\'expanded\',!ex);b.innerHTML=ex?\'查看全部 ('+deduped.length+'条) ↓\':\'收起 ↑\'">查看全部 ('+deduped.length+'条) ↓</button></div>'
-    + '<div id="hidden_'+moreId+'" style="display:none">'+buildItems(hidden)+'</div>';
+    + '<div id="hidden_'+moreId+'" style="display:none">'+buildItems(hidden)+'</div>'
+    + '<div class="more-wrap"><button class="more-btn" id="btn_'+moreId+'" onclick="var h=document.getElementById(\'hidden_'+moreId+'\');var b=this;var ex=h.style.display===\'block\';h.style.display=ex?\'none\':\'block\';b.classList.toggle(\'expanded\',!ex);b.innerHTML=ex?\'查看全部 ('+deduped.length+'条) ↓\':\'收起 ↑\'">查看全部 ('+deduped.length+'条) ↓</button></div>';
 }
 
 function st(name) {

@@ -123,6 +123,12 @@
   .spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:s .7s linear infinite;margin:0 auto 6px}
   @keyframes s{to{transform:rotate(360deg)}}
 
+  .more-wrap{text-align:center;padding:8px 0 4px}
+  .more-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 18px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text2);font-size:12px;font-family:var(--font);cursor:pointer;transition:all .15s}
+  .more-btn:hover{background:var(--surface-alt);color:var(--text);border-color:var(--text3)}
+  .more-btn .more-arrow{font-size:10px;transition:transform .15s}
+  .more-btn.expanded .more-arrow{transform:rotate(180deg)}
+
   .footer{text-align:center;padding:24px 0 32px;font-size:10px;color:var(--text3);line-height:1.8;border-top:1px solid var(--border-l);margin-top:28px}
 
   @media(max-width:820px){
@@ -284,20 +290,35 @@ var D = {briefings:[], stockpicks:[], articles:[], ipos:[], ecom:[], career:[]};
 // ---- Render helpers ----
 function rl(el, data, prefix, tc, tt, showTags) {
   if (!data || !data.length) { el.innerHTML = '<div class="empty"><div class="eic">📭</div>暂无记录</div>'; return; }
-  var s={}, u=data.filter(function(b){if(s[b.date])return false;s[b.date]=true;return true});
-  el.innerHTML = u.sort(function(a,b){return b.date.localeCompare(a.date)}).map(function(b) {
-    var p = b.path || prefix + b.date + '.html';
-    var tagsHtml = '';
-    if (showTags && b.tags && b.tags.length) {
-      tagsHtml = '<div class="tags-row">' + b.tags.map(function(t){return '<span class="tag-chip">#'+t+'</span>'}).join('') + '</div>';
-    }
-    return '<a class="a-item" href="'+p+'">\
-      <div><div class="a-date">'+b.date+'</div><div class="a-dow">'+b.dow+'</div></div>\
-      <div class="a-desc">'+(b.desc||'')+tagsHtml+'</div>\
-      <span class="a-tag '+tc+'">'+tt+'</span>\
-      <span class="arrow">→</span>\
-    </a>';
-  }).join('');
+  var deduped = [], s2 = {};
+  for (var i = 0; i < data.length; i++) { if (!s2[data[i].date]) { s2[data[i].date] = true; deduped.push(data[i]); } }
+  deduped.sort(function(a,b){ return b.date.localeCompare(a.date); });
+
+  var MAX = 10;
+  var hasMore = deduped.length > MAX;
+  var visible = hasMore ? deduped.slice(0, MAX) : deduped;
+  var hidden = hasMore ? deduped.slice(MAX) : [];
+
+  function buildItems(items) {
+    return items.map(function(b) {
+      var p = b.path || prefix + b.date + '.html';
+      var tagsHtml = '';
+      if (showTags && b.tags && b.tags.length) {
+        tagsHtml = '<div class="tags-row">' + b.tags.map(function(t){return '<span class="tag-chip">#'+t+'</span>'}).join('') + '</div>';
+      }
+      return '<a class="a-item" href="'+p+'"><div><div class="a-date">'+b.date+'</div><div class="a-dow">'+b.dow+'</div></div><div class="a-desc">'+(b.desc||'')+tagsHtml+'</div><span class="a-tag '+tc+'">'+tt+'</span><span class="arrow">→</span></a>';
+    }).join('');
+  }
+
+  if (!hasMore) {
+    el.innerHTML = buildItems(visible);
+    return;
+  }
+
+  var moreId = 'more_' + Math.random().toString(36).slice(2,8);
+  el.innerHTML = buildItems(visible)
+    + '<div class="more-wrap"><button class="more-btn" id="btn_'+moreId+'" onclick="var h=document.getElementById(\'hidden_'+moreId+'\');var b=this;var ex=h.style.display===\'block\';h.style.display=ex?\'none\':\'block\';b.classList.toggle(\'expanded\',!ex);b.innerHTML=ex?\'查看全部 ('+deduped.length+'条) ↓\':\'收起 ↑\'">查看全部 ('+deduped.length+'条) ↓</button></div>'
+    + '<div id="hidden_'+moreId+'" style="display:none">'+buildItems(hidden)+'</div>';
 }
 
 function st(name) {

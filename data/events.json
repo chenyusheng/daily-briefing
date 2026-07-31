@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-30T08:30:01+08:00",
-  "today": "2026-07-30",
+  "updated": "2026-07-31T08:30:44+08:00",
+  "today": "2026-07-31",
   "events": [
     {
       "id": "sk-hynix-us-ipo",
@@ -178,7 +178,7 @@
       "importance": 3,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "upcoming",
+      "status": "today",
       "type": "月度数据",
       "description": "二期工厂投产后产能提升，月交付量能否再创新高。每月跟踪。",
       "tags": [
@@ -230,7 +230,7 @@
     {
       "id": "xiaomi-factory-2",
       "date": "2026-07-30",
-      "date_label": "7-8月",
+      "date_label": "✅ 7-8月",
       "title": "小米二期工厂投产",
       "stock": "01810",
       "stock_name": "小米集团",
@@ -238,7 +238,7 @@
       "importance": 4,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "today",
+      "status": "done",
       "type": "产能",
       "description": "产能翻倍→销量预期提升→估值修复催化剂。YU7交付爬坡+二期增产双重利好。",
       "tags": [
@@ -845,7 +845,7 @@
     {
       "id": "xiaomi-kunlun-launch-20260730",
       "date": "2026-07-30",
-      "date_label": "7月30日 19:00",
+      "date_label": "✅ 7月30日 19:00",
       "title": "小米昆仑技术架构发布会+澎程新车亮相",
       "stock": "01810",
       "stock_name": "小米集团",
@@ -853,7 +853,7 @@
       "importance": 5,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "today",
+      "status": "done",
       "type": "新品发布",
       "description": "昆仑平台+超级增程+全域安全三大技术发布。寻天第二品牌正式亮相，澎程N90 Max/N70 Max增程SUV首秀。小米增程路线落地，2027年销量预期催化。",
       "tags": [
@@ -868,7 +868,7 @@
     {
       "id": "xiaomi-xuntian-brand-20260730",
       "date": "2026-07-30",
-      "date_label": "7月30日",
+      "date_label": "✅ 7月30日",
       "title": "小米寻天(SKY NOMAD)第二品牌发布",
       "stock": "01810",
       "stock_name": "小米集团",
@@ -876,7 +876,7 @@
       "importance": 4,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "today",
+      "status": "done",
       "type": "品牌发布",
       "description": "寻天品牌独立运营，定位家用增程SUV市场，与小米主品牌(纯电/性能)切割。首款车型昆仑N3定位最高端。打开全新市场空间。",
       "tags": [
@@ -969,8 +969,8 @@
   ],
   "stats": {
     "total_events": 44,
-    "upcoming_7d": 5,
-    "upcoming_30d": 11,
+    "upcoming_7d": 2,
+    "upcoming_30d": 8,
     "critical_events": 5,
     "monitoring": 8
   }

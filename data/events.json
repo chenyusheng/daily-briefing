@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-31T08:30:44+08:00",
-  "today": "2026-07-31",
+  "updated": "2026-08-01T08:30:07+08:00",
+  "today": "2026-08-01",
   "events": [
     {
       "id": "sk-hynix-us-ipo",
@@ -170,7 +170,7 @@
     {
       "id": "xiaomi-ev-delivery-jul",
       "date": "2026-07-31",
-      "date_label": "7月底",
+      "date_label": "✅ 7月底",
       "title": "小米YU7/SU7月交付量公布",
       "stock": "01810",
       "stock_name": "小米集团",
@@ -178,7 +178,7 @@
       "importance": 3,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "today",
+      "status": "done",
       "type": "月度数据",
       "description": "二期工厂投产后产能提升，月交付量能否再创新高。每月跟踪。",
       "tags": [
@@ -258,7 +258,7 @@
       "importance": 4,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "upcoming",
+      "status": "today",
       "type": "政策催化",
       "description": "FSD入华→整个智能驾驶板块催化剂。持12300份@1.3402。",
       "tags": [
@@ -969,8 +969,8 @@
   ],
   "stats": {
     "total_events": 44,
-    "upcoming_7d": 2,
-    "upcoming_30d": 8,
+    "upcoming_7d": 1,
+    "upcoming_30d": 7,
     "critical_events": 5,
     "monitoring": 8
   }

@@ -1,6 +1,6 @@
 {
-  "updated": "2026-08-01T08:30:07+08:00",
-  "today": "2026-08-01",
+  "updated": "2026-08-02T08:30:34+08:00",
+  "today": "2026-08-02",
   "events": [
     {
       "id": "sk-hynix-us-ipo",
@@ -250,7 +250,7 @@
     {
       "id": "tesla-fsd-china",
       "date": "2026-08-01",
-      "date_label": "7-8月",
+      "date_label": "✅ 7-8月",
       "title": "特斯拉FSD入华进展",
       "stock": "516520",
       "stock_name": "智能驾驶ETF",
@@ -258,7 +258,7 @@
       "importance": 4,
       "impact": "利好",
       "impact_dir": "up",
-      "status": "today",
+      "status": "done",
       "type": "政策催化",
       "description": "FSD入华→整个智能驾驶板块催化剂。持12300份@1.3402。",
       "tags": [
@@ -969,8 +969,8 @@
   ],
   "stats": {
     "total_events": 44,
-    "upcoming_7d": 1,
-    "upcoming_30d": 7,
+    "upcoming_7d": 0,
+    "upcoming_30d": 6,
     "critical_events": 5,
     "monitoring": 8
   }

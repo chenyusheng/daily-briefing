@@ -15,6 +15,38 @@
       "type": "技术测试",
       "description": "Flight 13于7月25日成功完成最柔和溅落后，Flight 14预计Q3进行，或为首次轨道飞行+Ship捕获尝试。每次星舰测试均为SPCX正面催化。",
       "tags": ["SpaceX", "星舰", "Starship", "轨道飞行"]
+    },
+    {
+      "id": "iran-talks-aug-2026",
+      "date": "2026-08-03",
+      "date_label": "8月3日起",
+      "title": "美伊新一轮谈判重启 特朗普称最后机会",
+      "stock": "宏观",
+      "stock_name": "宏观事件",
+      "color": "gray",
+      "importance": 5,
+      "impact": "重大利好",
+      "impact_dir": "up",
+      "status": "upcoming",
+      "type": "宏观",
+      "description": "特朗普8/2宣布新一轮美伊谈判8/3开始，称这是伊朗的最后机会，已暂缓对伊打击以追求协议。伊朗确认与阿曼就霍尔木兹海峡管理进行谈判。Brent原油暴跌6.96%至$83.85。若达成协议，油价可能进一步回落至$70+。全持仓受益：港股科技修复、通胀预期降温、Fed加息压力解除。",
+      "tags": ["美伊", "谈判", "霍尔木兹", "油价", "宏观"]
+    },
+    {
+      "id": "spcx-q2-2026-earnings",
+      "date": "2026-08-04",
+      "date_label": "8月4日盘后",
+      "title": "SpaceX Q2 2026财报 - 上市后首次公开财报",
+      "stock": "SPCX",
+      "stock_name": "SPCX (SpaceX)",
+      "color": "cyan",
+      "importance": 5,
+      "impact": "双向",
+      "impact_dir": "both",
+      "status": "upcoming",
+      "type": "财报",
+      "description": "SpaceX上市(Nasdaq:SPCX,6/12)后首次公开财报。关键看点: Starlink营收/用户增速(预期+93% YoY)、AI资本开支/cash burn、Space发射收入(Q1 $619M)、Connectivity收入(Q1 $3.257B)。持4股@$148。大涨或大跌均可能5%+。",
+      "tags": ["SpaceX", "SPCX", "财报", "Starlink", "AI"]
     }
   ]
 }

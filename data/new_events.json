@@ -47,6 +47,22 @@
       "type": "财报",
       "description": "SpaceX上市(Nasdaq:SPCX,6/12)后首次公开财报。关键看点: Starlink营收/用户增速(预期+93% YoY)、AI资本开支/cash burn、Space发射收入(Q1 $619M)、Connectivity收入(Q1 $3.257B)。持4股@$148。大涨或大跌均可能5%+。",
       "tags": ["SpaceX", "SPCX", "财报", "Starlink", "AI"]
+    },
+    {
+      "id": "smart-drive-mandatory-standard",
+      "date": "2027-07-01",
+      "date_label": "2027年7月1日实施",
+      "title": "智能驾驶安全强制国标发布 工信部8月4日公告",
+      "stock": "516520",
+      "stock_name": "智能驾驶ETF",
+      "color": "emerald",
+      "importance": 4,
+      "impact": "利好",
+      "impact_dir": "up",
+      "status": "upcoming",
+      "type": "行业政策",
+      "description": "工信部8月4日发布《智能网联汽车 自动驾驶系统安全要求》强制性国家标准(GB)，2027年7月1日实施。这是自动驾驶行业从L2向L3/L4跃迁的基础门槛——准入标准落地利好具备合规能力的龙头智驾企业。直接受益516520智能驾驶ETF。",
+      "tags": ["智驾", "政策", "强制国标", "自动驾驶", "L3/L4"]
     }
   ]
 }

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>双战法选股 · 2026-08-05</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0d1117;--surface:#161b22;--surface-alt:#1c2333;--border:#30363d;--border-light:#21262d;--text:#e6edf3;--text-secondary:#8b949e;--text-tertiary:#6e7681;--accent:#58a6ff;--accent-bg:#0d419d33;--green:#3fb950;--green-bg:#1b3a1f;--red:#f85149;--red-bg:#3d1416;--amber:#d29922;--amber-bg:#2d1f00;--purple:#a371f7;--purple-bg:#2a1a4a;--teal:#56d4dd;--teal-bg:#1d3b3d;--radius:10px;--shadow:0 1px 3px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.15);--font-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.7;min-height:100vh}
+  .container{max-width:800px;margin:0 auto;padding:0}
+  .header{background:linear-gradient(135deg,#0d1f00 0%,#1b3a1f 50%,#0d0800 100%);border-bottom:3px solid var(--green);padding:22px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+  .header::before{content:'';position:absolute;top:-50%;left:-30%;width:160%;height:200%;background:radial-gradient(ellipse at 30% 50%,#1b3a1f 0%,transparent 40%),radial-gradient(ellipse at 70% 50%,#0d1f00 0%,transparent 40%);opacity:.8;pointer-events:none}
+  .h-left{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+  .h-icon{width:38px;height:38px;background:linear-gradient(135deg,#3fb950,#1b3a1f);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+  .h-title{font-size:18px;font-weight:700;letter-spacing:-.3px}
+  .h-meta{font-size:12px;color:var(--text-tertiary);margin-top:2px}
+  .h-badge{font-size:11px;font-weight:900;color:#fff;background:linear-gradient(135deg,#1b3a1f,#3fb950);padding:4px 16px;border-radius:20px;letter-spacing:.3px;position:relative;z-index:1;border:2px solid var(--green)}
+  .h-badge.warn{background:linear-gradient(135deg,#2d1f00,#d29922);border-color:var(--amber)}
+  .h-home{font-size:20px;text-decoration:none;margin-left:8px;position:relative;z-index:1;transition:opacity .15s}
+  .h-home:hover{opacity:.7}
+  .section{padding:24px 22px}
+  .section+.section{border-top:1px solid var(--border-light)}
+  .section-alt{background:var(--surface-alt)}
+  .sec-label{font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:8px}
+  .at{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin-bottom:14px}
+  .at th{text-align:left;padding:10px 14px;font-weight:600;color:var(--text-secondary);background:var(--surface-alt);border-bottom:1px solid var(--border);font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+  .at th:first-child{border-radius:8px 0 0 0}
+  .at th:last-child{border-radius:0 8px 0 0}
+  .at td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text)}
+  .at tr:last-child td:first-child{border-radius:0 0 0 8px}
+  .at tr:last-child td:last-child{border-radius:0 0 8px 0}
+  .at tr:last-child td{border-bottom:none}
+  .callout{padding:14px 18px;border-radius:var(--radius);margin:10px 0;font-size:13px;line-height:1.6}
+  .callout.info{background:var(--accent-bg);border-left:3px solid var(--accent);color:var(--accent)}
+  .callout.success{background:var(--green-bg);border-left:3px solid var(--green);color:var(--green)}
+  .callout.warn{background:var(--amber-bg);border-left:3px solid var(--amber);color:var(--amber)}
+  .callout.danger{background:var(--red-bg);border-left:3px solid var(--red);color:var(--red)}
+  .callout.neutral{background:var(--surface-alt);border-left:3px solid var(--text-tertiary);color:var(--text-secondary)}
+  .callout.purple{background:var(--purple-bg);border-left:3px solid var(--purple);color:var(--purple)}
+  .sig{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+  .sig.g{background:var(--green)}.sig.r{background:var(--red)}.sig.y{background:var(--amber)}.sig.b{background:var(--accent)}.sig.p{background:var(--purple)}
+  .ice-timeline{display:flex;align-items:center;gap:6px;padding:14px 18px;background:var(--surface);border-radius:var(--radius);margin:10px 0;overflow-x:auto;font-size:11px;flex-wrap:wrap}
+  .ice-dot{min-width:72px;text-align:center;padding:6px 8px;border-radius:8px;font-size:11px}
+  .ice-dot.active{background:var(--amber-bg);border:2px solid var(--amber);color:var(--amber);font-weight:700}
+  .ice-dot.past{background:var(--surface-alt);color:var(--text-tertiary)}
+  .ice-dot.extreme{background:var(--red-bg);border:3px solid var(--red);color:var(--red);font-weight:900}
+  .ice-dot.now{background:var(--green-bg);border:3px solid var(--green);color:var(--green);font-weight:900}
+  .ice-arrow{color:var(--text-tertiary);font-size:14px;min-width:10px;text-align:center}
+  .ice-label{font-size:10px;color:var(--text-tertiary);min-width:40px;text-align:center;line-height:1.3}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .stat-card{padding:12px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border)}
+  .stat-num{font-family:var(--font-mono);font-size:24px;font-weight:800;line-height:1.2}
+  .stat-label{font-size:11px;color:var(--text-tertiary);margin-top:2px}
+  .conclusion-box{text-align:center;padding:28px 22px;background:linear-gradient(135deg,#0d0800,#2d1f00);border:3px solid #d2992266;border-radius:var(--radius);margin:16px 0;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .conclusion-box::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#2d1f00,#d29922,#2d1f00)}
+  .conclusion-box.green{border-color:#3fb95066}
+  .conclusion-text{font-size:18px;font-weight:800;line-height:1.6;margin-bottom:6px}
+  .conclusion-sub{font-size:13px;color:var(--text-secondary);line-height:1.7}
+  .st{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:10px 0 14px}
+  .st td{padding:10px 14px;border-bottom:1px solid var(--border-light);color:var(--text-secondary)}
+  .st td:first-child{font-weight:600;color:var(--text);white-space:nowrap;width:110px}
+  .st tr:last-child td{border-bottom:none}
+  .footer{text-align:center;padding:24px 22px 36px;font-size:11px;color:var(--text-tertiary);line-height:1.8;border-top:1px solid var(--border-light)}
+  .footer a{color:var(--accent);text-decoration:none}.footer a:hover{text-decoration:underline}
+  @media(max-width:480px){
+    .section{padding:18px 14px}
+    .header{padding:14px 14px}
+    .h-title{font-size:16px}
+    .at{font-size:12px}.at td,.at th{padding:8px 10px}
+    .conclusion-text{font-size:16px}
+    .stat-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="h-left">
+    <div class="h-icon">🐉</div>
+    <div>
+      <div class="h-title">双战法选股分析</div>
+      <div class="h-meta">2026-08-05 · 周三 · 情绪正常 · 观察期Day4/5 · 收盘后</div>
+    </div>
+  </div>
+  <span class="h-badge">✅ 1跌停 · 炸板率29.5%</span>
+  <a href="https://chenyusheng.github.io/daily-briefing/stock-picks/" class="h-home" title="首页">📋</a>
+</div>
+
+<div class="section">
+  <div class="sec-label">🧊 冰点反抽模式分析 · 情绪正常 · 不适用</div>
+
+  <div class="stat-grid" style="margin-bottom:12px">
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)">1</div>
+      <div class="stat-label">跌停家数 · 联创光电</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)">3878.43</div>
+      <div class="stat-label">上证指数 · +1.47%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--amber)">29.5%</div>
+      <div class="stat-label">炸板率 43/146 · 警惕</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--amber)">70.5%</div>
+      <div class="stat-label">封板率 103/146 · 偏弱</div>
+    </div>
+  </div>
+
+  <div class="callout success" style="font-size:14px">
+    <strong>✅ 冰点序列已终结 · 情绪正常(1跌停&lt;20) · 冰点反抽不适用</strong><br>
+    07-24→07-28→07-30三次冰点序列 → 07-31 D1修复确认(0跌停) → 观察期<br>
+    <strong style="color:var(--green)">冰点序列终结后第4个交易日 · 观察期Day 4/5</strong><br>
+    <strong style="color:var(--amber)">炸板率29.5%从昨日9.8%反弹至近30%!! 涨停板可靠性从极佳回落到警惕区间!!</strong><br>
+    关联分析: 通用设备/电网设备退出Top5 + 炸板率反弹 = 主线轮动加速中的结构性分歧
+  </div>
+
+  <table class="at">
+    <tr><th>指标</th><th>07-31 D1修复</th><th>08-03 周一</th><th>08-04 周二</th><th>08-05 周三</th><th>趋势</th></tr>
+    <tr style="background:var(--green-bg)">
+      <td>跌停家数</td>
+      <td style="color:var(--green);font-weight:900">0</td>
+      <td style="color:var(--green)">8</td>
+      <td style="color:var(--green);font-weight:900">0</td>
+      <td style="color:var(--green)">1</td>
+      <td style="color:var(--green)">✅ 极低位运行</td>
+    </tr>
+    <tr>
+      <td>炸板率</td>
+      <td style="color:var(--red);font-weight:900">51.9%</td>
+      <td style="color:var(--green)">17.6%</td>
+      <td style="color:var(--green);font-weight:900">9.8%</td>
+      <td style="color:var(--amber);font-weight:900">29.5%</td>
+      <td style="color:var(--amber)">⚠️ 9.8→29.5%反弹!警惕</td>
+    </tr>
+    <tr style="background:var(--amber-bg)">
+      <td>封板率</td>
+      <td style="color:var(--red)">48.1%</td>
+      <td style="color:var(--green)">82.4%</td>
+      <td style="color:var(--green);font-weight:900">90.2%</td>
+      <td style="color:var(--amber);font-weight:900">70.5%</td>
+      <td style="color:var(--amber)">⚠️ 90.2→70.5%回落</td>
+    </tr>
+    <tr>
+      <td>上证指数</td>
+      <td style="color:var(--green)">3832 (+0.72%)</td>
+      <td style="color:var(--red)">3809.66 (-0.59%)</td>
+      <td style="color:var(--green)">3822.28 (+0.33%)</td>
+      <td style="color:var(--green)">3878.43 (+1.47%)</td>
+      <td style="color:var(--green);font-weight:900">✅ 放量突破3878!</td>
+    </tr>
+    <tr>
+      <td>涨停/触及</td>
+      <td>99/206</td>
+      <td>75/91</td>
+      <td style="color:var(--green)">138/153</td>
+      <td>103/146</td>
+      <td style="color:var(--amber)">涨停回落 · 触及+回落同步</td>
+    </tr>
+    <tr>
+      <td>冰点状态</td>
+      <td style="color:var(--green)">D1修复确认</td>
+      <td style="color:var(--green)">正常Day2</td>
+      <td style="color:var(--green)">正常Day3</td>
+      <td style="color:var(--green)">正常Day4</td>
+      <td style="color:var(--green);font-weight:900">✅ 连续4天正常 · 明天完成!</td>
+    </tr>
+  </table>
+
+  <div class="ice-timeline">
+    <div class="ice-label">7/24</div>
+    <div class="ice-dot past">首次D0<br>25跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/25-26</div>
+    <div class="ice-dot past">周末<br>休市</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/27</div>
+    <div class="ice-dot past">D1接近<br>6跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/28</div>
+    <div class="ice-dot past">二次D0<br>49跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/29</div>
+    <div class="ice-dot past">D1修复中<br>9跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/30</div>
+    <div class="ice-dot extreme">三次D0<br>74跌停!!</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">7/31</div>
+    <div class="ice-dot now">D1修复确认<br>0跌停!!</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">8/1-2</div>
+    <div class="ice-dot past">周末<br>休市</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">8/3</div>
+    <div class="ice-dot now">正常Day2<br>8跌停</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">8/4</div>
+    <div class="ice-dot now">正常Day3<br>0跌停!!</div>
+    <div class="ice-arrow">→</div>
+    <div class="ice-label">8/5</div>
+    <div class="ice-dot now">正常Day4<br>1跌停<br>明天完成!</div>
+  </div>
+
+  <div class="conclusion-box green">
+    <div class="conclusion-text" style="color:var(--green)">✅ 冰点反抽不适用 · 情绪正常 · 观察期Day4/5 · 1跌停</div>
+    <div class="conclusion-sub">
+      07-24→07-30三次冰点序列已终结 · 07-31 D1修复确认0跌停<br>
+      08-03跌停8 → 08-04跌停0 → 08-05跌停1 · 连续4天正常<br>
+      <strong style="color:var(--green)">观测期仅需再1天(至08-06) → 明天正式确认修复稳固</strong><br>
+      <strong style="color:var(--amber)">注意: 炸板率从9.8%反弹至29.5% · 涨停板质量回落需关注</strong><br>
+      期间跌停反弹至≥20则视为新冰点序列 · 立即切回D0模式
+    </div>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">🐉 龙头主升浪战法分析</div>
+
+  <div class="callout info" style="font-size:14px">
+    <strong>🐉 龙头主升浪适用性: 🟢 确认 · 观察期Day4已满足切换条件 · ⭐⭐⭐⭐</strong><br>
+    跌停1<20 · 上证+1.47%放量突破3878 · 冰点序列终结后Day4稳健<br>
+    <strong style="color:var(--green)">元件+通信设备双主线连续确认 · 汽车零部件/小金属首日爆发待验证</strong><br>
+    <strong style="color:var(--amber)">注意: 炸板率29.5%反弹至警惕区间 · 通用/电网退出Top5轮动加速</strong><br>
+    <strong style="color:var(--amber)">龙头主升浪接管 · 但炸板率反弹建议仓位保守≤10%</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">📊 涨停行业分布 · 08-05 · 103封板 · 对比08-04/08-03</div>
+
+  <table class="at">
+    <tr><th>板块</th><th>08-03<br>涨停</th><th>08-04<br>涨停</th><th>08-05<br>涨停</th><th>08-05<br>排名</th><th>连续<br>天数</th><th>主线判断</th></tr>
+    <tr style="background:var(--amber-bg)">
+      <td style="font-weight:700">汽车零部件</td>
+      <td style="color:var(--text-tertiary)">—</td>
+      <td>5</td>
+      <td style="font-weight:900;color:var(--amber)">7</td>
+      <td style="font-weight:900;color:var(--amber)">#1</td>
+      <td>2天</td>
+      <td style="color:var(--amber)">🆕 昨日#7→今日#1!! 等08-06确认连续2天Top5</td>
+    </tr>
+    <tr style="background:var(--amber-bg)">
+      <td style="font-weight:700">小金属</td>
+      <td style="color:var(--text-tertiary)">—</td>
+      <td style="color:var(--text-tertiary)">—</td>
+      <td style="font-weight:900;color:var(--amber)">6</td>
+      <td style="font-weight:900;color:var(--amber)">#2</td>
+      <td>1天</td>
+      <td style="color:var(--amber)">🆕 云南锗业涨停 · 首日等验证</td>
+    </tr>
+    <tr style="background:var(--amber-bg)">
+      <td style="font-weight:700">消费电子</td>
+      <td style="color:var(--text-tertiary)">—</td>
+      <td style="color:var(--text-tertiary)">—</td>
+      <td style="font-weight:900;color:var(--amber)">6</td>
+      <td style="font-weight:900;color:var(--amber)">#3</td>
+      <td>1天</td>
+      <td style="color:var(--amber)">🆕 联创光电跌停反差 · 首日等验证</td>
+    </tr>
+    <tr style="background:var(--amber-bg)">
+      <td style="font-weight:700">光学光电</td>
+      <td style="color:var(--text-tertiary)">—</td>
+      <td style="color:var(--text-tertiary)">—</td>
+      <td style="font-weight:900;color:var(--amber)">6</td>
+      <td style="font-weight:900;color:var(--amber)">#4</td>
+      <td>1天</td>
+      <td style="color:var(--amber)">🆕 首日等验证</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-weight:700">元件</td>
+      <td style="color:var(--text-tertiary)">—</td>
+      <td style="font-weight:900;color:var(--amber)">15</td>
+      <td style="font-weight:900;color:var(--green)">5</td>
+      <td style="font-weight:900;color:var(--green)">#5</td>
+      <td style="font-weight:900">2天</td>
+      <td style="color:var(--green)">✅ 连续2天Top5确认主线!</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-weight:700">通信设备</td>
+      <td>3</td>
+      <td>9</td>
+      <td style="font-weight:900;color:var(--green)">5</td>
+      <td style="font-weight:900;color:var(--green)">#6</td>
+      <td style="font-weight:900">3天</td>
+      <td style="color:var(--green)">✅ 连续3天Top5! 最坚挺主线</td>
+    </tr>
+    <tr>
+      <td style="font-weight:700">通用设备</td>
+      <td>6</td>
+      <td>7</td>
+      <td>4</td>
+      <td style="color:var(--text-secondary)">#7</td>
+      <td>3天</td>
+      <td style="color:var(--amber)">⚠️ 退出Top5 · 轮动出清</td>
+    </tr>
+    <tr>
+      <td>化学制品</td>
+      <td>4</td>
+      <td style="color:var(--red)">退出</td>
+      <td>4</td>
+      <td style="color:var(--text-secondary)">#8</td>
+      <td>1天</td>
+      <td style="color:var(--text-tertiary)">反复横跳 · 非主线</td>
+    </tr>
+    <tr>
+      <td>半导体</td>
+      <td style="color:var(--text-tertiary)">—</td>
+      <td style="color:var(--text-tertiary)">—</td>
+      <td>4</td>
+      <td style="color:var(--text-secondary)">#9</td>
+      <td>1天</td>
+      <td style="color:var(--amber)">首日 · 待验证</td>
+    </tr>
+    <tr style="background:var(--amber-bg)">
+      <td>电网设备</td>
+      <td style="font-weight:900">8</td>
+      <td>6</td>
+      <td>4</td>
+      <td style="color:var(--text-secondary)">#10</td>
+      <td>3天</td>
+      <td style="color:var(--amber)">⚠️ 8→6→4连续降温退出Top5</td>
+    </tr>
+    <tr>
+      <td style="color:var(--red)">电力</td>
+      <td>4</td>
+      <td style="color:var(--red)">退出</td>
+      <td style="color:var(--red)">未上榜</td>
+      <td style="color:var(--red)">—</td>
+      <td>0天</td>
+      <td style="color:var(--red)">❌ 彻底退出 · 一日游确认</td>
+    </tr>
+  </table>
+
+  <div class="callout neutral" style="margin-top:8px">
+    <strong>103封板 · 元件+通信设备双主线 · 汽车零部件跃升#1 · 通用+电网退出Top5</strong><br>
+    元件(15→5涨停 #1→#5)连续2天Top5确认主线 · 通信设备(3→9→5涨停)连续3天最坚挺<br>
+    通用设备(6→7→4涨停 #2→#4→#7)连续降温退出Top5 · 电网设备(8→6→4涨停 #1→#5→#10)加速退潮<br>
+    <strong style="color:var(--amber)">汽车零部件(5→7涨停 #7→#1!!)昨日仅在#7今日跃升#1 · 等08-06连续2天Top5确认</strong><br>
+    小金属/消费电子/光学光电三板块首日空降#2#3#4 · 轮动加速 · 需连续验证<br>
+    市场特征: 旧主线(通用/电网)退潮+新方向(汽车/小金属/消费电子)接力 · 主线切换期
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">📡 通信设备主线 · 连续3天Top5 · 最坚挺主线</div>
+
+  <div class="callout success" style="font-size:13px">
+    <strong>通信设备 3→9→5涨停 · 连续3天在Top5 · 唯一穿越全观察期的主线</strong><br>
+    08-03: 3涨停#5 → 08-04: 9涨停#2 → 08-05: 5涨停(与前#6但涨停数=元件)<br>
+    <strong style="color:var(--green)">龙头: 欣天科技(300615) 20cm一字板·20.02% · 连续3天领涨</strong><br>
+    欣天科技PE-279亏损 · 20cm连板无法参与 · 等待一字板打开后分歧上车机会<br>
+    板块内: 大立科技(军工电子)+通宇通讯(炸板) · 涨停集中在设备硬件方向
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">🔬 元件主线 · 15→5涨停 · 连续2天Top5确认</div>
+
+  <div class="callout success" style="font-size:13px">
+    <strong>元件 15→5涨停 · 昨日#1→今日#5 · 连续2天Top5确认第四主线!!</strong><br>
+    昨日15涨停爆发后今天大幅回落至5涨停但守住Top5 · 爆发力强后劲回落<br>
+    板块内涨停分散 · 无明显一家独大龙头 · <strong style="color:var(--amber)">需等龙头脱颖而出</strong><br>
+    <strong style="color:var(--green)">与通信设备形成硬件科技链共振: 元件(基础层)→通信设备(应用层)</strong>
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">🚗 汽车零部件 · 5→7涨停跃升#1 · 等08-06连续2天验证</div>
+
+  <div class="callout warn" style="font-size:13px">
+    <strong>汽车零部件昨日5涨停#7 → 今日7涨停#1!! · 跃升速度最快的新方向</strong><br>
+    浙江世宝(002703)秒板+10.00% · 索菱股份(002766)秒板+10.03% · 兴民智通(002355)+10.02%<br>
+    万集科技(300552)20cm涨停+20.02% · 汽车智能化+无人驾驶方向<br>
+    <strong style="color:var(--amber)">按龙头主升浪规则: 昨日不在Top5(仅#7)·今日跃升#1 · 需08-06连续2天Top5才确认主线</strong><br>
+    若08-06汽车零部件继续涨停≥5只+Top5 → 确认为新主线 · 寻找龙头候选<br>
+    若08-06退出前10或涨停<5 → 一日游 · 候选作废
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">🪙 小金属 · 首日6涨停空降#2</div>
+
+  <div class="callout neutral" style="font-size:13px">
+    <strong>小金属6涨停空降#2 · 云南锗业(002428)+10.00%领涨</strong><br>
+    云南锗业09:30封板 · 成交4.65亿 · 换手6.14% · PE 542(高估值)<br>
+    小金属板块属于资源周期属性 · 与科技主线逻辑不同 · 等连续2天确认
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">🔥 传智教育 · 七连板 · 神雾节能断板</div>
+
+  <div class="callout purple" style="font-size:13px">
+    <strong>传智教育(003032) 七连板 +87% · 今日+10.04%继续封板</strong><br>
+    成交6.26亿 · 换手18.79% · PE -52.19亏损 · 内盘36万手>>外盘18万手(主力在出货!)<br>
+    七连板触发多重不推规则: >3天不推 + PE亏损 + 观察期连板停牌风险<br>
+    <strong style="color:var(--red)">爱丽家居六连板后停牌先例 · 传智七连板停牌风险更大 · 坚决不参与</strong><br>
+    内盘是外盘2倍说明主力高位派发 · 散户接盘特征明显
+  </div>
+
+  <div class="callout danger" style="font-size:13px">
+    <strong>神雾节能(000820): -3.29% 五连板后首次断板!!</strong><br>
+    成交2.94亿 · 换手31.61%(极端!) · 从五连板+45%到-3.29%断板<br>
+    昨日振幅17%极端分歧已预警 · 今日确认断板 · <strong style="color:var(--red)">不推规则再次完美验证</strong><br>
+    换手31%+断板=顶部出货确认 · 移出追踪
+  </div>
+
+  <div class="sec-label" style="margin-top:16px">💀 爱丽家居 · 停牌 · 天普 · 哈药</div>
+
+  <div class="callout danger" style="font-size:13px">
+    <strong>爱丽家居(603221): 22.54 继续停牌 · 六连板S+后锁仓状态</strong>
+  </div>
+  <div class="callout neutral" style="font-size:13px">
+    <strong>天普股份(605255): 69.30 (+1.91%) · 连续2天小幅反弹</strong><br>
+    成交4548万 · 换手0.71% · 量缩反弹无资金接盘 · 不改变死亡螺旋定性
+  </div>
+  <div class="callout success" style="font-size:13px">
+    <strong>哈药股份(600664): 6.77 (+4.96%) · 连续回暖</strong><br>
+    成交4.44亿 · 换手18.87% · 旧周期S+活口修复中 · 仅观察不操作
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-label">🔁 上一交易日(08-04)结论回测</div>
+
+  <div class="callout success" style="font-size:13px;margin-bottom:14px">
+    <strong>✅ 08-04回测总结: 7/8正确!! 87.5%命中率!! 通用设备降温判断略偏乐观</strong><br>
+    <strong style="color:var(--green)">连续第13个交易日仓位0%零亏损保护 · 观察期Day4/5顺利推进</strong><br>
+    <strong style="color:var(--amber)">唯一失误: 通用设备持续升温判断偏早 · 实际从#4降至#7退出Top5</strong>
+  </div>
+
+  <table class="at" style="font-size:12px">
+    <tr><th>#</th><th>08-04推荐/预测</th><th>08-05实际结果</th><th>判断</th></tr>
+    <tr style="background:var(--green-bg)">
+      <td>1</td>
+      <td><strong>冰点反抽不适用(0跌停)</strong></td>
+      <td style="color:var(--green)">08-05跌停1 · 情绪正常</td>
+      <td style="color:var(--green);font-weight:900">✅ 正确</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>2</td>
+      <td><strong>观察期Day3/5 · 等08-05确认</strong></td>
+      <td style="color:var(--green)">Day4/5顺利推进 · 1跌停&lt;20</td>
+      <td style="color:var(--green);font-weight:900">✅ 正确</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>3</td>
+      <td><strong>龙头主升浪待确认</strong></td>
+      <td style="color:var(--green)">元件+通信双主线确认·可切换</td>
+      <td style="color:var(--green);font-weight:900">✅ 正确</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>4</td>
+      <td><strong>电网设备8涨停需连续验证</strong></td>
+      <td style="color:var(--amber)">4涨停退出Top5·降温趋势</td>
+      <td style="color:var(--green);font-weight:900">✅ 正确(等验证策略保护)</td>
+    </tr>
+    <tr style="background:var(--amber-bg)">
+      <td>5</td>
+      <td><strong>通用设备6涨停持续升温</strong></td>
+      <td style="color:var(--red)">4涨停#7退出Top5·实际降温</td>
+      <td style="color:var(--amber);font-weight:900">⚠️ 部分错误·升温判断偏乐观</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>6</td>
+      <td><strong>传智教育五连板·>3天不推</strong></td>
+      <td style="color:var(--green)">七连板+10.04%·规则保护正确</td>
+      <td style="color:var(--green);font-weight:900">✅ 正确+内盘>外盘主力出货</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>7</td>
+      <td><strong>神雾节能四连板·不纳入候选</strong></td>
+      <td style="color:var(--red)">-3.29%断板·五连板终结</td>
+      <td style="color:var(--green);font-weight:900">✅ 正确(换手31%极端出货)</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td>8</td>
+      <td><strong>化学制品/电力首日·待验证</strong></td>
+      <td style="color:var(--text-secondary)">化学制品回Top10·电力彻底退出</td>
+      <td style="color:var(--green);font-weight:900">✅ 正确(待验证策略保护)</td>
+    </tr>
+  </table>
+
+  <div class="sec-label" style="margin-top:20px">📊 持续追踪池 · 近5日推荐/追踪股表现</div>
+
+  <table class="at" style="font-size:11px">
+    <tr><th>代码</th><th>名称</th><th>推荐日</th><th>推荐时判断</th><th>08-05收盘</th><th>累计表现</th><th>状态</th></tr>
+    <tr style="background:var(--purple-bg)">
+      <td style="font-family:var(--font-mono)">603221</td>
+      <td><strong style="color:var(--purple)">爱丽家居</strong></td>
+      <td>07-27</td>
+      <td style="color:var(--red)">六连板·禁止追入</td>
+      <td style="color:var(--purple)">22.54(停牌)</td>
+      <td style="color:var(--purple);font-weight:900">六连板+77%→停牌</td>
+      <td style="color:var(--purple)">🔒 停牌中</td>
+    </tr>
+    <tr style="background:var(--green-bg)">
+      <td style="font-family:var(--font-mono)">003032</td>
+      <td><strong>传智教育</strong></td>
+      <td>07-30</td>
+      <td style="color:var(--amber)">四连板·>3天不推</td>
+      <td style="color:var(--green)">11.73 (+10.04%)</td>
+      <td style="color:var(--green)">七连板 +87%</td>
+      <td style="color:var(--amber)">🔥 内盘出货特征</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">000820</td>
+      <td><strong style="color:var(--red)">神雾节能</strong></td>
+      <td>07-28</td>
+      <td style="color:var(--amber)">不推·振幅17%分歧</td>
+      <td style="color:var(--red)">4.12 (-3.29%)</td>
+      <td style="color:var(--red)">断板 · 换手31%出货</td>
+      <td style="color:var(--red)">💀 移出追踪</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">605255</td>
+      <td><strong style="color:var(--red)">天普股份</strong></td>
+      <td>07-15</td>
+      <td style="color:var(--red)">A级→D2跌停·永久移出</td>
+      <td style="color:var(--green)">69.30 (+1.91%)</td>
+      <td style="color:var(--red)">-31% · 量缩反弹</td>
+      <td style="color:var(--red)">💀 永久移出</td>
+    </tr>
+    <tr style="background:var(--red-bg)">
+      <td style="font-family:var(--font-mono)">000566</td>
+      <td><strong style="color:var(--red)">海南海药</strong></td>
+      <td>07-28</td>
+      <td style="color:var(--red)">复活失败·永久移出</td>
+      <td style="color:var(--text-secondary)">—</td>
+      <td style="color:var(--red)">继续下跌</td>
+      <td style="color:var(--red)">💀 永久移出</td>
+    </tr>
+    <tr>
+      <td style="font-family:var(--font-mono)">600664</td>
+      <td><strong>哈药股份</strong></td>
+      <td>07-13</td>
+      <td style="color:var(--purple)">S+四连板→炸板</td>
+      <td style="color:var(--green)">6.77 (+4.96%)</td>
+      <td style="color:var(--green)">连续回暖</td>
+      <td style="color:var(--amber)">观察旧周期修复</td>
+    </tr>
+  </table>
+</div>
+
+<div class="section section-alt">
+  <div class="sec-label">📝 自我闭环 · 错误根因与规则改进</div>
+
+  <div class="callout info" style="font-size:13px;margin-bottom:10px">
+    <strong>🔍 08-04回测核心发现: 7/8正确 · 通用设备升温判断略偏乐观 · 主线轮动速度超预期</strong>
+  </div>
+
+  <table class="st">
+    <tr><td>⚠️ 偏乐观</td><td><strong>通用设备持续升温</strong>: 昨日判断通用设备6→7涨停持续升温，但今日从7涨停降至4涨停、从#4降至#7退出Top5。根因: 观察期内主线轮动速度远超预期，仅连续2天Top5后即被新方向替代。改进: 在观察期内，主线确认后应标注更明确的波动风险警示，不应使用升温等单向判断词汇。</td></tr>
+    <tr><td>✅ 完美验证</td><td><strong>元件15→5涨停 · 连续2天确认</strong>: 昨日判断等08-05验证元件连续2天 → 5涨停守住Top5 → 确认第四主线。元件+通信设备硬件科技链共振逻辑成立。</td></tr>
+    <tr><td>✅ 双杀验证</td><td><strong>传智教育七连板+神雾节能断板</strong>: 对传智的>3天不推规则再次验证 · 内盘2倍于外盘确认主力出货。神雾昨日振幅17%预警今日-3.29%断板确认 · 极端分歧=出货前兆规则100%验证。</td></tr>
+    <tr><td>⚡ 新信号</td><td><strong>主线轮动加速 · 旧主线退潮+新方向接力</strong>: 通用设备(6→7→4)+电网设备(8→6→4)同时退出Top5，而汽车零部件(5→7#1)+小金属(6#2)+消费电子(6#3)+光学光电(6#4)首日空降。观察期内主线存活周期仅2天，轮动速度极快。这是修复期结束前的典型特征: 资金快速试探各方向。</td></tr>
+    <tr><td>⚠️ 炸板率反弹</td><td><strong>炸板率9.8%→29.5%反弹</strong>: 昨日炸板率9.8%创近7年新低，今日反弹至29.5%进入警惕区间。封板率90.2%→70.5%同步回落。虽然仍在20-30%非陷阱区间，但反弹速度值得关注。若明日炸板率继续上升>30%则触发涨停板陷阱模式。</td></tr>
+    <tr><td>🔧 规则维护</td><td><strong>ice-point-reversal</strong>: 通用设备持续升温判断不当，建议在观察期主线分析中增加波动风险标注规范——不使用单向判断词汇(升温/降温)，改为数据驱动的方向说明。无需修改核心规则。 <strong>leading-stock-wave</strong>: 无需修改。连续2天Top5确认规则+>3天不推规则+炸板率分层规则均正确运行。</td></tr>
+    <tr><td>📊 累计统计</td><td>07-24→08-05连续保护: 仓位0%零买入零亏损(13天)。从25→6→49→9→74→0→8→0→1跌停穿越完成。观察期4/5天通过。冰点反抽模式以仓位0%策略完美穿越整个冰点序列。即将切换至龙头主升浪。</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <div class="sec-label">📋 综合策略建议</div>
+
+  <div class="conclusion-box green">
+    <div class="conclusion-text" style="color:var(--green)">✅ 观察期Day4/5 · 明日08-06正式完成 · 龙头主升浪接管在即</div>
+    <div class="conclusion-sub" style="text-align:left;line-height:2">
+      <strong style="color:var(--green)">🐉 龙头主升浪 · 双主线已确认:</strong><br>
+      · 通信设备(连续3天Top5) · 龙头候选: 欣天科技(20cm一字板无法参与)<br>
+      · 元件(连续2天Top5) · 等龙头脱颖而出<br>
+      <br>
+      <strong style="color:var(--amber)">🆕 汽车零部件(#1跃升)·等08-06连续验证:</strong><br>
+      · 5→7涨停 #7→#1 · 浙江世宝/索菱股份/兴民智通/万集科技<br>
+      · 若08-06涨停≥5只+Top5 → 确认为新主线 · 寻找龙头候选<br>
+      · 小金属/消费电子/光学光电首日空降 · 等08-06首次验证<br>
+      <br>
+      <strong style="color:var(--amber)">⚠️ 主线轮动加速 · 旧主线退潮:</strong><br>
+      · 通用设备退出Top5(7→4涨停) · 电网设备加速退潮(8→6→4)<br>
+      · 再等一日验证轮动方向 · 不宜急于锁定主线<br>
+      <br>
+      <strong style="color:var(--amber)">⚠️ 炸板率29.5%反弹:</strong><br>
+      · 从9.8%反弹至29.5% · 涨停板质量从极佳回落至警惕<br>
+      · 若08-06炸板率>30%触发陷阱模式 · 所有买入暂停<br>
+      <br>
+      <strong style="color:var(--accent)">📋 08-06操作计划:</strong><br>
+      · 观察期最后一天 · 若跌停继续&lt;20→正式完成5天观察<br>
+      · 优先关注: 汽车零部件连续验证 + 元件龙头出现<br>
+      · ⚠️ 传智教育七连板→不推(>3天+停牌风险+内盘出货)<br>
+      · ⚠️ 爱丽家居停牌 + 神雾节能断板→移出<br>
+      · 仓位: 观察期结束后首日保守≤10% · 确认信号后再加仓<br>
+      · 若炸板率继续>30%→即使观察期结束也禁止买入
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>📊 双战法选股 · 2026-08-05 · 周三 · 情绪正常 · 观察期Day4/5 · 1跌停</p>
+  <p>数据源: data-hub(行情) + AKShare(涨停板) · 国投证券API(sdicsc)</p>
+  <p>方法论: ice-point-reversal + leading-stock-wave + comprehensive-analysis-framework 三skill交叉验证</p>
+  <p><a href="https://chenyusheng.github.io/daily-briefing/">返回首页</a> · <a href="https://chenyusheng.github.io/daily-briefing/stock-picks/">所有分析</a></p>
+</div>
+
+</div>
+</body>
+</html>

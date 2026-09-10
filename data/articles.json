@@ -118,5 +118,11 @@
     "dow": "系统学习",
     "desc": "",
     "path": "learning/roadmap.html"
+  },
+  {
+    "date": "2026-09-10 · 政策面",
+    "dow": "证监会十五五资本市场纲领",
+    "desc": "李超国新办发布会 · 八大方向 + 三色信号 + 政策文件六步读法",
+    "path": "learning/policy-2026-09-10-csrc-15th-five.html"
   }
 ]

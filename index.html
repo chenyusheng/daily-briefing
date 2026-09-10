@@ -292,7 +292,9 @@ function rl(el, data, prefix, tc, tt, showTags) {
   if (!data || !data.length) { el.innerHTML = '<div class="empty"><div class="eic">📭</div>暂无记录</div>'; return; }
   var deduped = [], s2 = {};
   for (var i = 0; i < data.length; i++) { if (!s2[data[i].date]) { s2[data[i].date] = true; deduped.push(data[i]); } }
-  deduped.sort(function(a,b){ return b.date.localeCompare(a.date); });
+  // 排序：带 YYYY-MM-DD 前缀的条目按真实日期倒序排在最前；无前缀的（如大师名）保持原排序在后
+  function _sk(x){ var s = x.date || ''; var m = /^(\d{4}-\d{2}-\d{2})/.exec(s); return m ? '2' + m[1] : '1' + s; }
+  deduped.sort(function(a,b){ return _sk(b).localeCompare(_sk(a)); });
 
   var MAX = 10;
   var hasMore = deduped.length > MAX;

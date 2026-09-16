@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vue 3 学习路线 · React 开发者加速版</title>
+<meta name="description" content="面向 React 开发者的 Vue 3 学习路线：版本现状、心智模型对照、四周计划、资料清单、实战选型与踩坑清单。">
+<style>
+:root{
+  --bg:#ffffff; --fg:#1f2430; --muted:#6b7280; --accent:#2563eb; --accent-soft:#eff4ff;
+  --border:#e4e7ec; --card:#f9fafb; --code-bg:#f6f8fa; --warn-bg:#fff8e6; --warn-bd:#f0c36d;
+  --ok:#0f9d58; --radius:10px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; gap:32px; max-width:1240px; margin:0 auto; padding:28px 20px 90px; align-items:flex-start}
+nav.side{
+  position:sticky; top:20px; flex:0 0 258px; max-height:calc(100vh - 40px); overflow:auto;
+  border:1px solid var(--border); border-radius:var(--radius); padding:14px 12px; background:var(--card);
+}
+nav.side .brand{font-weight:700; font-size:14px; margin:0 0 8px; color:var(--accent)}
+nav.side .brand small{display:block; font-weight:400; color:var(--muted); font-size:11.5px; margin-top:2px}
+ul.toc{list-style:none; margin:6px 0 0; padding:0; font-size:13px}
+ul.toc li{margin:1px 0}
+ul.toc a{color:var(--fg); text-decoration:none; display:block; padding:3px 8px; border-radius:6px; line-height:1.45}
+ul.toc a:hover{background:var(--accent-soft); color:var(--accent)}
+ul.toc-sub{padding-left:12px}
+article{flex:1 1 auto; min-width:0; max-width:900px}
+h1{font-size:26px; line-height:1.4; margin:0 0 6px}
+h2{font-size:20px; margin:38px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--border)}
+h3{font-size:16.5px; margin:26px 0 10px; color:#111827}
+h4{font-size:15px; margin:20px 0 8px}
+h1 code,h2 code,h3 code{font-size:.92em}
+a{color:var(--accent)}
+a.anchor{margin-left:8px; color:var(--border); text-decoration:none; font-weight:400; opacity:0; transition:opacity .15s}
+h2:hover a.anchor,h3:hover a.anchor{opacity:1}
+p{margin:10px 0}
+hr{border:none; border-top:1px solid var(--border); margin:32px 0}
+blockquote{
+  margin:14px 0; padding:12px 16px; background:var(--warn-bg);
+  border-left:4px solid var(--warn-bd); border-radius:0 8px 8px 0; color:#5b4a1e;
+}
+blockquote p{margin:4px 0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace; font-size:12.8px;
+  background:var(--code-bg); padding:1.5px 5px; border-radius:5px; border:1px solid var(--border)}
+pre{background:var(--code-bg); border:1px solid var(--border); border-radius:var(--radius);
+  padding:14px 16px; overflow:auto; margin:12px 0}
+pre code{background:none; border:none; padding:0; font-size:12.8px; line-height:1.7}
+table{border-collapse:collapse; width:100%; margin:14px 0; font-size:13.5px; display:block; overflow-x:auto}
+th,td{border:1px solid var(--border); padding:8px 10px; text-align:left; vertical-align:top}
+th{background:var(--card); font-weight:600; white-space:nowrap}
+tr:nth-child(even) td{background:#fcfcfd}
+ul,ol{padding-left:22px}
+li{margin:4px 0}
+li.task{list-style:none; margin-left:-20px; display:flex; gap:8px; align-items:flex-start}
+.cb{flex:0 0 15px; width:15px; height:15px; margin-top:5px; border:1.5px solid #9aa3af; border-radius:4px; display:inline-block}
+.cb-on{background:var(--ok); border-color:var(--ok); position:relative}
+.cb-on::after{content:""; position:absolute; left:4px; top:1px; width:4px; height:8px;
+  border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg)}
+li.done{color:var(--muted); text-decoration:line-through}
+.top-note{background:var(--accent-soft); border:1px solid #cddcff; border-radius:var(--radius);
+  padding:12px 16px; font-size:13.5px; color:#1e3a8a; margin:14px 0}
+.top-note b{color:#1e40af}
+@media (max-width:960px){
+  .layout{flex-direction:column; gap:16px; padding:18px 14px 70px}
+  nav.side{position:static; width:100%; flex:none; max-height:none}
+  ul.toc{columns:2; column-gap:16px}
+  h1{font-size:22px}
+  h2{font-size:18px}
+}
+@media (max-width:560px){
+  body{font-size:14.5px}
+  ul.toc{columns:1}
+  table{font-size:12.8px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="side">
+    <p class="brand">Vue 3 学习路线<small>React 开发者加速版 · 2026-09-16</small></p>
+    <ul class="toc">
+<li><a href="#0-先看结论-3-分钟版">0. 先看结论（3 分钟版）</a></li>
+<ul class="toc-sub">
+<li><a href="#0-1-你不需要-quot-从零学-vue-quot-你需要补三块">0.1 你不需要&amp;quot;从零学 Vue&amp;quot;，你需要补三块</a></li>
+<li><a href="#0-2-两条必须先处理的实机问题-①-已完成-②-待你决定">0.2 两条必须先处理的实机问题（① 已完成，② 待你决定）</a></li>
+<li><a href="#0-3-版本现状-2026-09-16-实测-含一条纠错">0.3 版本现状（2026-09-16 实测，含一条纠错）</a></li>
+<li><a href="#0-4-该不该补-vue-一句判断">0.4 该不该补 Vue：一句判断</a></li>
+</ul>
+<li><a href="#1-环境准备-15-分钟-一次做好">1. 环境准备（15 分钟，一次做好）</a></li>
+<ul class="toc-sub">
+<li><a href="#1-1-已经帮你建好的可运行工程">1.1 已经帮你建好的可运行工程</a></li>
+</ul>
+<li><a href="#2-react-vue-心智模型对照-核心章节-建议打印">2. React → Vue 心智模型对照（核心章节，建议打印）</a></li>
+<ul class="toc-sub">
+<li><a href="#2-1-状态与派生">2.1 状态与派生</a></li>
+<li><a href="#2-2-副作用与生命周期">2.2 副作用与生命周期</a></li>
+<li><a href="#2-3-模板-vs-jsx">2.3 模板 vs JSX</a></li>
+<li><a href="#2-4-生态对照表">2.4 生态对照表</a></li>
+</ul>
+<li><a href="#3-四周学习路线-每天-2-3-小时-周末多一点">3. 四周学习路线（每天 2–3 小时，周末多一点）</a></li>
+<ul class="toc-sub">
+<li><a href="#第-1-周-模板-响应式-打地基">第 1 周：模板 + 响应式（打地基）</a></li>
+<li><a href="#第-2-周-组件化-路由-状态">第 2 周：组件化 + 路由 + 状态</a></li>
+<li><a href="#第-3-周-工程化-质量">第 3 周：工程化 + 质量</a></li>
+<li><a href="#第-4-周-实战-选一个方向-做完整项目">第 4 周：实战（选一个方向，做完整项目）</a></li>
+</ul>
+<li><a href="#4-资料清单-按可信度分层-别乱撒网">4. 资料清单（按可信度分层，别乱撒网）</a></li>
+<ul class="toc-sub">
+<li><a href="#第-1-层-官方一手资料-中文-质量最高-优先看这些">第 1 层：官方一手资料（中文，质量最高，优先看这些）</a></li>
+<li><a href="#第-2-层-官方库文档">第 2 层：官方库文档</a></li>
+<li><a href="#第-3-层-中文视频课-补齐-quot-讲解感-quot-别当主线">第 3 层：中文视频课（补齐&amp;quot;讲解感&amp;quot;，别当主线）</a></li>
+<li><a href="#第-4-层-原理与进阶-第-3-4-周或面试前">第 4 层：原理与进阶（第 3–4 周或面试前）</a></li>
+</ul>
+<li><a href="#5-实战技术栈-选型-理由">5. 实战技术栈（选型 + 理由）</a></li>
+<ul class="toc-sub">
+<li><a href="#5-1-推荐组合-新项目直接照抄">5.1 推荐组合（新项目直接照抄）</a></li>
+<li><a href="#5-2-与-react-项目共存的策略">5.2 与 React 项目共存的策略</a></li>
+</ul>
+<li><a href="#6-react-开发者高频踩坑-14-条">6. React 开发者高频踩坑 14 条</a></li>
+<li><a href="#7-面试考点-你在找前端岗-按命中率排">7. 面试考点（你在找前端岗，按命中率排）</a></li>
+<li><a href="#8-自测验收清单-能做到就打勾">8. 自测验收清单（能做到就打勾）</a></li>
+<li><a href="#9-四周速查-贴墙上">9. 四周速查（贴墙上）</a></li>
+<li><a href="#10-来源与核验-每条数据的出处-2026-09-16-实测">10. 来源与核验（每条数据的出处，2026-09-16 实测）</a></li>
+</ul>
+  </nav>
+  <article>
+    <h1 id="vue-3-学习路线-react-开发者加速版">Vue 3 学习路线 · React 开发者加速版<a class="anchor" href="#vue-3-学习路线-react-开发者加速版" aria-label="链接到此节">#</a></h1>
+<blockquote>
+<p>生成时间：<strong>2026-09-16</strong>（本机 macOS，Node/npm 实机核验）
+所有版本号、下载量、Node 要求均于当日实测，来源逐条列在文末「来源与核验」章节。
+配套可运行工程：<code>/Users/eason/hermes/vue-learning/vue-starter/</code>（已通过 type-check / lint / 单测 / build / 真实浏览器渲染验证）</p>
+</blockquote>
+<hr />
+<h2 id="0-先看结论-3-分钟版">0. 先看结论（3 分钟版）<a class="anchor" href="#0-先看结论-3-分钟版" aria-label="链接到此节">#</a></h2>
+<h3 id="0-1-你不需要-quot-从零学-vue-quot-你需要补三块">0.1 你不需要&quot;从零学 Vue&quot;，你需要补三块<a class="anchor" href="#0-1-你不需要-quot-从零学-vue-quot-你需要补三块" aria-label="链接到此节">#</a></h3>
+<p>你 10 年前端 + React 主栈，所以：</p>
+<table>
+<thead>
+<tr>
+<th>你要补的</th>
+<th>大概要花多久</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>模板这层 DSL</strong>（v-if/v-for/v-model/slot/指令修饰符）</td>
+<td>1 天</td>
+<td>React 是 JSX（纯 JS），Vue 模板是受限表达式语法，规则不同但极少</td>
+</tr>
+<tr>
+<td><strong>响应式心智模型</strong>（ref / reactive / computed / watch 的追踪规则）</td>
+<td>1–2 天</td>
+<td>这是唯一真正会绊住 React 开发者的地方（自动依赖收集 vs 手动依赖数组）</td>
+</tr>
+<tr>
+<td><strong>生态与工程化</strong>（Router / Pinia / 组件库 / 构建 / 测试）</td>
+<td>2–3 天</td>
+<td>概念都能一对一对上 React 生态，属于&quot;查表即用&quot;</td>
+</tr>
+</tbody>
+</table>
+<p>结论：<strong>认真投入 1 周可以上手写业务，2 周能在项目里独立交付</strong>。剩下的深度（编译优化、响应式源码、性能调优）按需补。</p>
+<h3 id="0-2-两条必须先处理的实机问题-①-已完成-②-待你决定">0.2 两条必须先处理的实机问题（① 已完成，② 待你决定）<a class="anchor" href="#0-2-两条必须先处理的实机问题-①-已完成-②-待你决定" aria-label="链接到此节">#</a></h3>
+<p><strong>① Node 版本：升级前有&quot;三个 node 打架&quot;，已于 2026-09-16 统一到 v22.23.2。</strong></p>
+<p>升级前实测，你机器上同时存在三个 node 来源，谁生效取决于从哪启动：</p>
+<table>
+<thead>
+<tr>
+<th>来源</th>
+<th>版本</th>
+<th>谁在用它</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.local/bin/node</code> → <code>~/.hermes/node/bin/node</code></td>
+<td>v22.22.3</td>
+<td><strong>你的 Terminal 新窗口</strong>（PATH 里排最前）</td>
+</tr>
+<tr>
+<td>nvm 默认别名（<code>~/.nvm/alias/default</code>）</td>
+<td>v18.18.0</td>
+<td>Hermes 会话、部分脚本（PATH 里排第二）</td>
+</tr>
+<tr>
+<td>Homebrew <code>/opt/homebrew/bin/node</code></td>
+<td>v23.11.0</td>
+<td>几乎轮不到</td>
+</tr>
+</tbody>
+</table>
+<p>官方工具链要求（均取自各包 <code>engines</code> 字段 / 官方文档）：</p>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>Node 要求</th>
+<th>升级前的 v18.18.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>create-vue</code>（官方脚手架）</td>
+<td><code>^22.18.0 || &gt;=24.12.0</code></td>
+<td>❌ 不满足</td>
+</tr>
+<tr>
+<td>Vite 8.3.0</td>
+<td><code>^20.19.0 || &gt;=22.12.0</code></td>
+<td>❌ 不满足</td>
+</tr>
+<tr>
+<td>Nuxt 4.5.2</td>
+<td><code>^22.19.0 || ^24.11.0 || &gt;=26.0.0</code></td>
+<td>❌ 不满足</td>
+</tr>
+<tr>
+<td>Vitest 5.0.1</td>
+<td><code>^22.12.0 || ^24.0.0 || &gt;=26.0.0</code></td>
+<td>❌ 不满足</td>
+</tr>
+</tbody>
+</table>
+<p><strong>做法（已于 2026-09-16 执行完毕）</strong>：①把 <code>~/.local/bin/node|npm|npx</code> 从 Hermes 自带 node 改指到 nvm 的 <strong>v22.23.2</strong>；②<code>nvm alias default 22.23.2</code>，让 nvm 上下文（Hermes 会话/脚本）也用 22.23.2；③原先装在 node 18 下的全局 CLI（claude-code / vercel / http-server / task-master-ai / @ant-design/cli / @line/liff-cli）已在 22.23.2 下重装，全部复测可用。现在新开终端 <code>node -v</code> 直接是 <strong>v22.23.2</strong>，不用再 <code>nvm use</code>。</p>
+<blockquote>
+<p>未动的两个 node：<code>~/.hermes/node</code>（v22.22.3，Hermes 自带运行时，动它有风险）和 Homebrew 的 node 23.11.0。想彻底清掉 Homebrew 那个：<code>brew uninstall node</code>。
+回滚方式：<code>ln -sfn ~/.hermes/node/bin/node ~/.local/bin/node</code>（npm/npx 同理），<code>nvm alias default 18.18.0</code>。</p>
+</blockquote>
+<p><strong>② Vue CLI 已卸掉，换成 <code>create-vue</code>（2026-09-16 完成）。</strong></p>
+<p>Vue CLI 是 webpack 时代产物（<code>@vue/cli@5.0.8</code> 只做维护，配套的 <code>vue-cli-service</code> 跟 Vite 8 / Vue Router 5 生态不匹配）。已执行：</p>
+<ol>
+<li>从 node 18 全局卸载 <code>@vue/cli</code>（removed 837 packages），<code>vue</code> / <code>vue-cli-service</code> 命令一并清除；</li>
+<li>移除 Vue CLI 专属配置 <code>~/.vuerc</code>（内容是 2024 年设的 <code>useTaobaoRegistry: true</code> + <code>packageManager: yarn</code>，已备份为 <code>~/.vuerc.bak.20260916</code>）；</li>
+<li>在新默认 node 22.23.2 下全局安装 <strong><code>create-vue</code> 3.24.0</strong>，新终端可直接调用：</li>
+</ol>
+<pre><code class="language-bash">create-vue my-app                                                   # 交互模式（首次推荐）
+create-vue my-app --typescript --router --pinia --vitest --eslint   # 非交互，一次到位
+</code></pre>
+<p>官方文档写法 <code>npm create vue@latest</code>（走 npx，不需全局安装）同样可用——<strong>两者是同一个包</strong>，全局装只是省一次下载。实测（2026-09-16）：新终端 <code>create-vue --version</code> → v3.24.0；真实建项目 → <code>pnpm install</code> → <code>pnpm run build</code> ✅ 275ms，产物 <code>dist/index.html</code> 正常生成。</p>
+<h3 id="0-3-版本现状-2026-09-16-实测-含一条纠错">0.3 版本现状（2026-09-16 实测，含一条纠错）<a class="anchor" href="#0-3-版本现状-2026-09-16-实测-含一条纠错" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>包</th>
+<th>npm <code>latest</code></th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vue</code></td>
+<td><strong>3.5.42</strong>（2026-08-27 发布）</td>
+<td>当前稳定版，学习/上线用这个</td>
+</tr>
+<tr>
+<td><code>vue</code>（RC）</td>
+<td><strong>3.6.0-rc.8</strong>（2026-09-11）</td>
+<td>3.6 仍在 RC：Vapor Mode + alien-signals 响应式重构</td>
+</tr>
+<tr>
+<td><code>vite</code></td>
+<td><strong>8.3.0</strong>（2026-09-10）</td>
+<td>单引擎（Rolldown 取代 esbuild+Rollup）</td>
+</tr>
+<tr>
+<td><code>vue-router</code></td>
+<td><strong>5.3.1</strong>（2026-09-02）</td>
+<td>v5 把 <code>unplugin-vue-router</code>（文件路由）并进核心</td>
+</tr>
+<tr>
+<td><code>pinia</code></td>
+<td><strong>4.0.3</strong>（2026-08-12）</td>
+<td>v4 只有技术性破坏变更：ESM only + 需另装 <code>@vue/devtools-api</code></td>
+</tr>
+<tr>
+<td><code>nuxt</code></td>
+<td><strong>4.5.2</strong></td>
+<td>全栈框架（Nuxt 3.x 仍在维护：3.21.11）</td>
+</tr>
+<tr>
+<td><code>@vueuse/core</code></td>
+<td>14.4.0</td>
+<td>组合式工具集（≈ react-use，但更全）</td>
+</tr>
+<tr>
+<td><code>element-plus</code> / <code>naive-ui</code> / <code>ant-design-vue</code></td>
+<td>2.14.5 / 2.45.3 / 4.2.6</td>
+<td>三大 UI 库</td>
+</tr>
+<tr>
+<td><code>typescript</code></td>
+<td>7.0.2</td>
+<td>TS 7（Go 重写版编译器）；脚手架默认锁 ~6.0 更稳</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>⚠️ 纠错（值得你知道，网上说法不可信）</strong>：中文技术社区有文章称「尤雨溪 2026-07-18 在上海 Vue&amp;ViteConf 宣布 Vue 3.6 正式发布」。这条与权威源矛盾——npm registry 的 <code>latest</code> 仍是 3.5.42，官方 <code>minor</code> 分支 CHANGELOG 最新条目是 <strong>3.6.0-rc.8（2026-09-11）</strong>，仍属预发布；Vue 官方大会回顾（2026-03，阿姆斯特丹）的表述是 &quot;stable release is nearing—hopefully later this year&quot;。<strong>结论：3.6 尚未正式发布</strong>，学习与生产都用 3.5.x，Vapor Mode 先了解不动手。</p>
+</blockquote>
+<h3 id="0-4-该不该补-vue-一句判断">0.4 该不该补 Vue：一句判断<a class="anchor" href="#0-4-该不该补-vue-一句判断" aria-label="链接到此节">#</a></h3>
+<ul>
+<li><strong>值得补的场景</strong>：国内中后台/政企项目 Vue 占比高；Vue 的中文文档、组件库、后台模板生态比 React 更&quot;开箱即用&quot;；你自己要做的报表/后台类应用，Vue + Element Plus 的开发速度优势明显。</li>
+<li><strong>不值得的</strong>：只为&quot;多一门框架&quot;而学、目标岗位明确只招 React（那就把 React 深度做透）。</li>
+<li><strong>顺便说清一个数据</strong>：上周（2026-09-05~09-11）npm 下载量 vue 11,281,013 / react 128,119,130。<strong>这两个数字不能直接对比</strong>——<code>react</code> 是无数包的传递依赖，真实用户基数差距远没有 11 倍。网上&quot;Vue 岗位占前端 38–45%&quot;的说法来自自媒体/博客（非招聘平台官方数据），<strong>仅作方向参考，别当论据</strong>。</li>
+</ul>
+<hr />
+<h2 id="1-环境准备-15-分钟-一次做好">1. 环境准备（15 分钟，一次做好）<a class="anchor" href="#1-环境准备-15-分钟-一次做好" aria-label="链接到此节">#</a></h2>
+<pre><code class="language-bash"># 1) 确认 Node（2026-09-16 起默认就是 v22.23.2，不用再切）
+node -v                         # 期望输出 v22.23.2（2026-09-16 已设为默认，无需 nvm use）
+
+# 2) 用官方脚手架建项目（两种写法等价，跑的是同一个包）
+create-vue my-app --typescript --router --pinia --vitest --eslint --prettier   # 已全局安装，直接敲
+npm create vue@latest my-app -- --typescript --router --pinia --vitest --eslint --prettier  # 官方文档写法，走 npx
+cd my-app &amp;&amp; npm install &amp;&amp; npm run dev
+</code></pre>
+<p><code>create-vue</code> 3.24.0 可用参数（实测 <code>--help</code> 输出）：<code>--ts</code> <code>--jsx</code> <code>--router</code> <code>--pinia</code> <code>--vitest</code> <code>--cypress</code> <code>--playwright</code> <code>--eslint</code> <code>--prettier</code> <code>--oxfmt</code> <code>--bare</code>，另有 <code>--vue-rc</code>（用 Vue 3.6 RC）和 <code>--tsgo</code>。选 <code>--eslint</code> 时 <strong>oxlint 会自动一并装上</strong>。</p>
+<p><strong>编辑器/调试器（必装）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>作用</th>
+<th>链接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vue (Official) 扩展（原 Volar）</td>
+<td><code>.vue</code> 文件类型检查/跳转/重构；源码 <code>vuejs/language-tools</code></td>
+<td>https://marketplace.visualstudio.com/items?itemName=Vue.volar</td>
+</tr>
+<tr>
+<td>Vue DevTools 8</td>
+<td>组件树/状态/路由/时间旅行调试</td>
+<td>https://devtools.vuejs.org/</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong>：如果编辑器里还装着和 Volar 冲突的旧插件（Vetur），先禁用，否则类型提示会乱。</p>
+<h3 id="1-1-已经帮你建好的可运行工程">1.1 已经帮你建好的可运行工程<a class="anchor" href="#1-1-已经帮你建好的可运行工程" aria-label="链接到此节">#</a></h3>
+<p>路径：<code>/Users/eason/hermes/vue-learning/vue-starter/</code></p>
+<p>我按上面命令建好并实测通过，里面额外加了一个**「React → Vue 对照演示页」**（路由 <code>/react-vs-vue</code>），把 9 个心智模型转换点做成了可交互 demo：</p>
+<pre><code class="language-bash">cd /Users/eason/hermes/vue-learning/vue-starter
+node -v                         # 应为 v22.23.2
+pnpm install          # 已装过，重装才需要
+pnpm dev              # 打开 http://localhost:5173/react-vs-vue
+</code></pre>
+<p>实测结果（2026-09-16）：</p>
+<table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>命令</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>类型检查</td>
+<td><code>pnpm type-check</code></td>
+<td>✅ 通过（vue-tsc 3.3.11）</td>
+</tr>
+<tr>
+<td>Lint</td>
+<td><code>pnpm lint</code></td>
+<td>✅ 通过（oxlint + eslint 10 + eslint-plugin-vue 10.11）</td>
+</tr>
+<tr>
+<td>单测</td>
+<td><code>pnpm test:unit -- --run</code></td>
+<td>✅ <strong>7 passed</strong>（含组件挂载 + 点击交互断言）</td>
+</tr>
+<tr>
+<td>构建</td>
+<td><code>pnpm run build</code></td>
+<td>✅ 165ms，主包 110.28 kB / gzip 42.64 kB</td>
+</tr>
+<tr>
+<td>真实浏览器渲染</td>
+<td>headless Chrome <code>--dump-dom</code></td>
+<td>✅ 8 张卡片渲染、onMounted 已触发、无错误覆盖层</td>
+</tr>
+</tbody>
+</table>
+<p>工程里可学的文件：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>演示的概念</th>
+<th>React 对照</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/views/ReactVsVueView.vue</code></td>
+<td>9 个对照点的可交互 demo</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>src/composables/useTodos.ts</code></td>
+<td>组合式函数（ref/computed/watch 协作）</td>
+<td>自定义 Hook</td>
+</tr>
+<tr>
+<td><code>src/composables/useTheme.ts</code> + <code>src/keys.ts</code></td>
+<td>provide / inject</td>
+<td>Context + 类型化标识</td>
+</tr>
+<tr>
+<td><code>src/components/ConceptCard.vue</code></td>
+<td>props + 默认/具名/作用域插槽 + emits</td>
+<td>children + 回调 prop</td>
+</tr>
+<tr>
+<td><code>src/components/ModelChild.vue</code></td>
+<td><code>defineModel()</code> 一行实现 v-model</td>
+<td>value + onChange</td>
+</tr>
+<tr>
+<td><code>src/stores/counter.ts</code></td>
+<td>Pinia setup store + <code>storeToRefs</code></td>
+<td>Zustand</td>
+</tr>
+<tr>
+<td><code>src/views/__tests__/ReactVsVueView.spec.ts</code></td>
+<td>组件测试 + 交互断言</td>
+<td>RTL</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-react-vue-心智模型对照-核心章节-建议打印">2. React → Vue 心智模型对照（核心章节，建议打印）<a class="anchor" href="#2-react-vue-心智模型对照-核心章节-建议打印" aria-label="链接到此节">#</a></h2>
+<h3 id="2-1-状态与派生">2.1 状态与派生<a class="anchor" href="#2-1-状态与派生" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>关注点</th>
+<th>React</th>
+<th>Vue 3</th>
+<th>关键差异</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>局部状态</td>
+<td><code>useState(0)</code></td>
+<td><code>ref(0)</code> / <code>reactive({})</code></td>
+<td>JS 里要写 <code>count.value</code>；<strong>模板里自动解包</strong>（<code>{{ count }}</code>）</td>
+</tr>
+<tr>
+<td>派生值</td>
+<td><code>useMemo(fn, [deps])</code></td>
+<td><code>computed(fn)</code></td>
+<td>不用写依赖数组，Vue 自动追踪；依赖不变时不重算</td>
+</tr>
+<tr>
+<td>对象状态</td>
+<td><code>useState({})</code> + 展开新对象</td>
+<td><code>ref({})</code> 或 <code>reactive({})</code></td>
+<td><code>reactive</code> 是 Proxy，<strong>直接改属性就触发更新</strong>；解构 <code>reactive</code> 会丢响应性（用 <code>toRefs</code>）</td>
+</tr>
+<tr>
+<td>手动触发更新</td>
+<td><code>setState(n =&gt; n+1)</code></td>
+<td>无</td>
+<td>改值即更新，没有 setter 概念</td>
+</tr>
+<tr>
+<td>批量更新</td>
+<td>React 18 自动批处理</td>
+<td>默认批处理（微任务队列 flushed 前合并）</td>
+<td>下一帧读 DOM 用 <code>await nextTick()</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-vue">&lt;script setup lang=&quot;ts&quot;&gt;
+import { ref, computed } from 'vue'
+const count = ref(0)
+const doubled = computed(() =&gt; count.value * 2)   // ≈ useMemo，无 deps
+&lt;/script&gt;
+&lt;template&gt;
+  &lt;button @click=&quot;count++&quot;&gt;{{ count }} / {{ doubled }}&lt;/button&gt;
+&lt;/template&gt;
+</code></pre>
+<h3 id="2-2-副作用与生命周期">2.2 副作用与生命周期<a class="anchor" href="#2-2-副作用与生命周期" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>React</th>
+<th>Vue</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>useEffect(cb, [])</code></td>
+<td><code>onMounted(cb)</code></td>
+<td>挂载后执行</td>
+</tr>
+<tr>
+<td><code>useEffect(cb, [x])</code></td>
+<td><code>watch(x, cb)</code></td>
+<td>指定源变化才跑</td>
+</tr>
+<tr>
+<td><code>useEffect(cb)</code> + 内部读值</td>
+<td><code>watchEffect(cb)</code></td>
+<td>自动收集依赖，等价&quot;读过谁就依赖谁&quot;</td>
+</tr>
+<tr>
+<td><code>useLayoutEffect</code></td>
+<td><code>onMounted</code> + <code>await nextTick()</code> / <code>onUpdated</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>cleanup return</td>
+<td><code>onUnmounted(cb)</code> 或 <code>watch</code> 的 <code>onCleanup</code> 参数</td>
+<td>语义一致</td>
+</tr>
+<tr>
+<td>依赖数组漏写导致闭包陷阱</td>
+<td>不存在</td>
+<td>Vue 的 watch 回调拿到的是最新值，不需要 <code>useRef</code> 兜</td>
+</tr>
+</tbody>
+</table>
+<p>生命周期钩子映射：<code>onBeforeMount / onMounted / onBeforeUpdate / onUpdated / onBeforeUnmount / onUnmounted / onActivated / onDeactivated / onErrorCaptured</code>。</p>
+<h3 id="2-3-模板-vs-jsx">2.3 模板 vs JSX<a class="anchor" href="#2-3-模板-vs-jsx" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>React (JSX)</th>
+<th>Vue (模板)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>条件渲染</td>
+<td><code>{ok &amp;&amp; &lt;A/&gt;}</code> / 三元</td>
+<td><code>v-if</code> / <code>v-else-if</code> / <code>v-else</code>；<code>v-show</code>（只切 display）</td>
+</tr>
+<tr>
+<td>列表</td>
+<td><code>items.map(i =&gt; &lt;Li key={i.id}/&gt;)</code></td>
+<td><code>&lt;li v-for=&quot;i in items&quot; :key=&quot;i.id&quot;&gt;</code></td>
+</tr>
+<tr>
+<td>事件</td>
+<td><code>onClick={fn}</code></td>
+<td><code>@click=&quot;fn&quot;</code>；修饰符 <code>@submit.prevent</code> <code>@click.stop</code> <code>@keyup.enter</code></td>
+</tr>
+<tr>
+<td>属性绑定</td>
+<td><code>className={cls}</code></td>
+<td><code>:class=&quot;cls&quot;</code>；对象语法 <code>:class=&quot;{ active: ok }&quot;</code></td>
+</tr>
+<tr>
+<td>文本插值</td>
+<td><code>{value}</code></td>
+<td><code>{{ value }}</code>（只在模板里，不能用任意 JS 语句）</td>
+</tr>
+<tr>
+<td>组件引用</td>
+<td><code>&lt;Child/&gt;</code></td>
+<td>同名，但<strong>大小写不敏感</strong>：<code>&lt;Child/&gt;</code> / <code>&lt;child/&gt;</code> 都行</td>
+</tr>
+<tr>
+<td>子内容</td>
+<td><code>props.children</code></td>
+<td><code>&lt;slot/&gt;</code>（默认）、<code>&lt;template #name&gt;</code>（具名）、作用域插槽</td>
+</tr>
+<tr>
+<td>双向绑定</td>
+<td><code>value</code> + <code>onChange</code></td>
+<td><code>v-model=&quot;x&quot;</code>；子组件用 <code>defineModel()</code></td>
+</tr>
+<tr>
+<td>DOM 引用</td>
+<td><code>useRef</code> + <code>ref={}</code></td>
+<td><code>useTemplateRef('inputEl')</code>（3.5+）</td>
+</tr>
+<tr>
+<td>片段</td>
+<td><code>&lt;&gt;&lt;/&gt;</code></td>
+<td><code>&lt;template&gt;</code> 多根节点，<strong>不需要 Fragment</strong></td>
+</tr>
+<tr>
+<td>传透 attributes</td>
+<td>手动展开 <code>{...rest}</code></td>
+<td>自动透传到根元素（<code>v-bind=&quot;$attrs&quot;</code> 控制）</td>
+</tr>
+<tr>
+<td>HTML 注入</td>
+<td><code>dangerouslySetInnerHTML</code></td>
+<td><code>v-html</code>（同样有 XSS 风险，官方明确警告）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>模板限制</strong>：模板里只能写<strong>表达式</strong>，不能写语句；能访问的白名单全局有 <code>Math</code>、<code>Date</code>、<code>JSON</code> 等（具体列表见官方「模板语法」）。复杂逻辑一律抽到 <code>computed</code> 或函数里——这反而是 Vue 代码整洁的原因。</p>
+<h3 id="2-4-生态对照表">2.4 生态对照表<a class="anchor" href="#2-4-生态对照表" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>关注点</th>
+<th>React</th>
+<th>Vue 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构建</td>
+<td>Vite / Next</td>
+<td>Vite 8 / Nuxt 4.5</td>
+</tr>
+<tr>
+<td>路由</td>
+<td>React Router</td>
+<td>Vue Router 5（+ 内置文件路由）</td>
+</tr>
+<tr>
+<td>状态</td>
+<td>Redux / Zustand / Jotai</td>
+<td>Pinia 4（官方推荐，Vuex 已退场）</td>
+</tr>
+<tr>
+<td>数据请求</td>
+<td>TanStack Query / SWR</td>
+<td>TanStack Query 的 Vue 版 <code>@tanstack/vue-query</code>；Nuxt 里用 <code>useFetch</code>；Router 5 新增 <strong>Data Loaders</strong></td>
+</tr>
+<tr>
+<td>工具函数</td>
+<td>react-use / ahooks</td>
+<td><code>@vueuse/core</code>（14.4）</td>
+</tr>
+<tr>
+<td>表单</td>
+<td>react-hook-form + zod</td>
+<td>vee-validate（4.15）+ zod（4.6），或 Element Plus 表单校验</td>
+</tr>
+<tr>
+<td>UI 库</td>
+<td>antd / MUI</td>
+<td>Element Plus / Ant Design Vue（antd 的 Vue 版，你迁移最省脑）/ Naive UI</td>
+</tr>
+<tr>
+<td>原子化 CSS</td>
+<td>Tailwind</td>
+<td>Tailwind 4.3 同样可用；Vue 生态另有 UnoCSS 66</td>
+</tr>
+<tr>
+<td>单测 / E2E</td>
+<td>Jest/Vitest + RTL / Playwright</td>
+<td>Vitest 5 + <code>@vue/test-utils</code> / Playwright</td>
+</tr>
+<tr>
+<td>调试</td>
+<td>React DevTools</td>
+<td>Vue DevTools 8</td>
+</tr>
+<tr>
+<td>SSR/全栈</td>
+<td>Next.js</td>
+<td>Nuxt 4.5（<code>useFetch</code>、server routes、SSG/SSR/ISR 混合）</td>
+</tr>
+<tr>
+<td>微前端</td>
+<td>Module Federation</td>
+<td>Module Federation 同样可用；Vue 侧另有 <code>qiankun</code> 生态</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-四周学习路线-每天-2-3-小时-周末多一点">3. 四周学习路线（每天 2–3 小时，周末多一点）<a class="anchor" href="#3-四周学习路线-每天-2-3-小时-周末多一点" aria-label="链接到此节">#</a></h2>
+<blockquote>
+<p>原则：<strong>每学一个概念，立刻在 vue-starter 里改一行看效果</strong>。不要先看完 45 集视频再动手。</p>
+</blockquote>
+<h3 id="第-1-周-模板-响应式-打地基">第 1 周：模板 + 响应式（打地基）<a class="anchor" href="#第-1-周-模板-响应式-打地基" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Day</th>
+<th>学什么</th>
+<th>官方章节</th>
+<th>交付物</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>应用实例 / 模板语法 / 插值</td>
+<td><code>guide/essentials/application</code>、<code>template-syntax</code></td>
+<td>把 HelloWorld 改成显示你的名字+时间</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>ref</code> / <code>reactive</code> / <code>computed</code></td>
+<td><code>guide/essentials/reactivity-fundamentals</code>、<code>computed</code></td>
+<td>在 demo 页加一个&quot;购物车小计&quot;卡片</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>watch</code> / <code>watchEffect</code> / 生命周期</td>
+<td><code>guide/essentials/watchers</code>、<code>lifecycle</code></td>
+<td>做一个&quot;输入防抖搜索建议&quot;</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>v-if/v-for/v-show</code> / class 与 style 绑定</td>
+<td><code>conditional</code>、<code>list</code>、<code>class-and-style</code></td>
+<td>做一个可筛选、可排序的表格（不用 UI 库）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>事件处理 / 表单 <code>v-model</code> / 修饰符</td>
+<td><code>event-handling</code>、<code>forms</code></td>
+<td>做一个带校验的注册表单（纯手写）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>模板引用 / 组件基础</td>
+<td><code>template-refs</code>、<code>component-basics</code></td>
+<td>输入框自动聚焦、父调子方法</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>复盘 + 产出</strong>：用 Vue 重写一个你做过的 React 小组件</td>
+<td>—</td>
+<td>组件上线到 demo 页</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 1 周验收</strong>：能不看文档写出&quot;列表 + 筛选 + 搜索 + 计数&quot;的完整页面。</p>
+<h3 id="第-2-周-组件化-路由-状态">第 2 周：组件化 + 路由 + 状态<a class="anchor" href="#第-2-周-组件化-路由-状态" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Day</th>
+<th>学什么</th>
+<th>交付物</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>Props / 组件事件 / <code>defineModel</code></td>
+<td>把 demo 里的 ConceptCard 扩展成&quot;可折叠卡片&quot;</td>
+</tr>
+<tr>
+<td>9</td>
+<td>插槽（默认/具名/作用域）/ 透传 attrs / 动态组件</td>
+<td>做一个通用表格组件（列配置 + 具名插槽自定义单元格）</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>provide/inject</code> / 组合式函数（重点）</td>
+<td>抽出 <code>useRequest</code>（loading/error/refresh）</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Vue Router 5：动态路由、嵌套路由、导航守卫、懒加载</td>
+<td>多页后台骨架（侧边栏 + 面包屑 + 登录守卫）</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Vue Router 5 新能力：文件路由 / 类型化路由 / Data Loaders</td>
+<td>把路由改成文件路由，拿到路由名类型提示</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Pinia 4：setup store、<code>storeToRefs</code>、插件、持久化</td>
+<td>全局用户信息 + 权限 store</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>产出</strong>：一个带登录守卫的最小后台（路由+store+组件库）</td>
+<td>可演示的 3 页应用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 2 周验收</strong>：能解释&quot;为什么解构 store 会丢响应性&quot;并现场修复。</p>
+<h3 id="第-3-周-工程化-质量">第 3 周：工程化 + 质量<a class="anchor" href="#第-3-周-工程化-质量" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Day</th>
+<th>学什么</th>
+<th>交付物</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>15</td>
+<td>TS 与组合式 API（<code>defineProps&lt;T&gt;()</code>、泛型组件、<code>InjectionKey</code>）</td>
+<td>全项目类型零错误（<code>vue-tsc</code>）</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Vitest + <code>@vue/test-utils</code>：组件测试、mock store/router</td>
+<td>核心组件覆盖率 &gt;60%</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Playwright：登录 → 列表 → 表单提交 的 E2E</td>
+<td>1 条可跑的 E2E 用例</td>
+</tr>
+<tr>
+<td>18</td>
+<td>ESLint 10 + oxlint + Prettier / 提交规范</td>
+<td><code>pnpm lint</code> 零告警</td>
+</tr>
+<tr>
+<td>19</td>
+<td>构建与部署：环境变量、分包、<code>vite build</code> 产物分析、静态托管</td>
+<td>部署到 GitHub Pages / Vercel</td>
+</tr>
+<tr>
+<td>20</td>
+<td>性能：<code>shallowRef</code>、<code>v-memo</code>、<code>v-once</code>、<code>KeepAlive</code>、虚拟列表</td>
+<td>1 万行表格流畅滚动（Element Plus <code>el-table-v2</code>）</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>产出</strong>：把上面串成 CI（type-check + lint + test + build）</td>
+<td>一条命令全绿</td>
+</tr>
+</tbody>
+</table>
+<h3 id="第-4-周-实战-选一个方向-做完整项目">第 4 周：实战（选一个方向，做完整项目）<a class="anchor" href="#第-4-周-实战-选一个方向-做完整项目" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th>技术组合</th>
+<th>适合你的理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A. 后台管理系统</strong></td>
+<td>Vue3 + TS + Element Plus + Pinia + Vue Router 5 + ECharts</td>
+<td>与你&quot;大表格/虚拟滚动/ECharts&quot;的既有强项叠加，面试最好讲</td>
+</tr>
+<tr>
+<td><strong>B. 全栈 SSR（Nuxt 4）</strong></td>
+<td>Nuxt 4.5 + server routes + <code>useFetch</code></td>
+<td>对标 Next.js 经历，补&quot;全栈/SSR&quot;关键词，求职加分</td>
+</tr>
+<tr>
+<td><strong>C. 重写你现有项目</strong></td>
+<td>把 <code>daily-briefing</code> 的 HTML 报表改成 Vue SPA（JSON 驱动 + 组件化）</td>
+<td>立刻有真实业务价值，还能作为作品集</td>
+</tr>
+<tr>
+<td><strong>D. 组件库/工具库</strong></td>
+<td>Vue3 + TS + Vite library mode + Vitest + VitePress 文档站</td>
+<td>展示工程深度，面试官最爱问&quot;你怎么做组件库的&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 4 周验收</strong>：项目有 README、有测试、有部署链接、能讲清 3 个技术决策的取舍。</p>
+<hr />
+<h2 id="4-资料清单-按可信度分层-别乱撒网">4. 资料清单（按可信度分层，别乱撒网）<a class="anchor" href="#4-资料清单-按可信度分层-别乱撒网" aria-label="链接到此节">#</a></h2>
+<h3 id="第-1-层-官方一手资料-中文-质量最高-优先看这些">第 1 层：官方一手资料（中文，质量最高，优先看这些）<a class="anchor" href="#第-1-层-官方一手资料-中文-质量最高-优先看这些" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>资料</th>
+<th>链接</th>
+<th>什么时候用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>官方中文文档首页</td>
+<td>https://cn.vuejs.org/</td>
+<td>全程主入口</td>
+</tr>
+<tr>
+<td>快速上手</td>
+<td>https://cn.vuejs.org/guide/quick-start</td>
+<td>Day 0</td>
+</tr>
+<tr>
+<td><strong>互动式教程</strong>（浏览器里写代码）</td>
+<td>https://cn.vuejs.org/tutorial/</td>
+<td>Day 1–3，边写边学</td>
+</tr>
+<tr>
+<td>深度指南（基础 → 深入组件 → 逻辑复用 → 规模化）</td>
+<td>https://cn.vuejs.org/guide/introduction</td>
+<td>第 1–3 周</td>
+</tr>
+<tr>
+<td>组合式 API 常见问答（<strong>React 开发者必读</strong>）</td>
+<td>https://cn.vuejs.org/guide/extras/composition-api-faq</td>
+<td>Day 2</td>
+</tr>
+<tr>
+<td>深入响应式系统</td>
+<td>https://cn.vuejs.org/guide/extras/reactivity-in-depth</td>
+<td>第 3 周原理日</td>
+</tr>
+<tr>
+<td>渲染机制（编译优化）</td>
+<td>https://cn.vuejs.org/guide/extras/rendering-mechanism</td>
+<td>第 4 周/面试前</td>
+</tr>
+<tr>
+<td>性能优化 / 测试 / SSR / 安全</td>
+<td><code>/guide/best-practices/*</code>、<code>/guide/scaling-up/*</code></td>
+<td>第 3 周</td>
+</tr>
+<tr>
+<td>官方风格指南（优先级 A–D 规则）</td>
+<td>https://cn.vuejs.org/style-guide/</td>
+<td>写团队代码前</td>
+</tr>
+<tr>
+<td>演练场（在线 SFC 编译）</td>
+<td>https://play.vuejs.org/</td>
+<td>随时试代码</td>
+</tr>
+<tr>
+<td><strong><code>/llms.txt</code>（AI 友好索引）</strong></td>
+<td>https://cn.vuejs.org/llms.txt</td>
+<td>⭐ 见下方说明</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⭐ <strong>一个隐藏利器</strong>：官方文档每个页面都有 Markdown 源，把链接 <code>.html</code> 换成 <code>.md</code> 就能拿到纯 Markdown（例：<code>https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.md</code>）。配合 <code>/llms.txt</code> 索引，可以让 AI 助手直接读原文而不是靠&quot;记忆&quot;——写学习笔记、让 AI 帮你解释概念时，用它比问搜索引擎靠谱得多。</p>
+</blockquote>
+<h3 id="第-2-层-官方库文档">第 2 层：官方库文档<a class="anchor" href="#第-2-层-官方库文档" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>库</th>
+<th>中文文档</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vue Router 5</td>
+<td>https://router.vuejs.org/zh/</td>
+<td>v4 用户升级无破坏性变更（官方 v4→v5 迁移文档原文确认）</td>
+</tr>
+<tr>
+<td>Pinia 4</td>
+<td>https://pinia.vuejs.org/zh/</td>
+<td>官方状态管理方案</td>
+</tr>
+<tr>
+<td>Vite 8</td>
+<td>https://cn.vite.dev/</td>
+<td>构建工具</td>
+</tr>
+<tr>
+<td>Vitest</td>
+<td>https://cn.vitest.dev/</td>
+<td>单测</td>
+</tr>
+<tr>
+<td>Vue DevTools</td>
+<td>https://devtools.vuejs.org/</td>
+<td>调试</td>
+</tr>
+<tr>
+<td>Nuxt 4</td>
+<td>https://nuxt.com/docs/getting-started/introduction</td>
+<td>全栈框架（中文站未挂，用英文站）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="第-3-层-中文视频课-补齐-quot-讲解感-quot-别当主线">第 3 层：中文视频课（补齐&quot;讲解感&quot;，别当主线）<a class="anchor" href="#第-3-层-中文视频课-补齐-quot-讲解感-quot-别当主线" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>链接</th>
+<th>我的看法（<strong>已核实链接可达，未逐集看完</strong>）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>coderwhy（王红元）Vue3 + TypeScript 公开课</td>
+<td>https://www.bilibili.com/video/BV1GcdTYQEk5/</td>
+<td>中文社区口碑最好的 Vue3 系统课之一；官方账号 https://space.bilibili.com/36139192</td>
+</tr>
+<tr>
+<td>小满 zs（B 站）</td>
+<td>B 站搜索&quot;小满 zs vue3&quot;</td>
+<td>讲响应式/源码片段，适合第 3 周</td>
+</tr>
+<tr>
+<td>尚硅谷 Vue3 系列</td>
+<td>B 站搜索&quot;尚硅谷 vue3&quot;</td>
+<td>体系全、偏长，适合当参考手册式刷</td>
+</tr>
+</tbody>
+</table>
+<p><strong>建议用法</strong>：官方文档为主（读起来比视频快），视频只在&quot;某概念看文档看不懂&quot;时按需看对应章节。</p>
+<h3 id="第-4-层-原理与进阶-第-3-4-周或面试前">第 4 层：原理与进阶（第 3–4 周或面试前）<a class="anchor" href="#第-4-层-原理与进阶-第-3-4-周或面试前" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>《Vue.js 设计与实现》霍春阳</td>
+<td>人民邮电出版社（图灵原创），ISBN 9787115583864。讲&quot;为什么这么设计&quot;，是 Vue 原理书里公认最好的一本（来源：多个图书平台书目信息一致）</td>
+</tr>
+<tr>
+<td>Vue 官方认证考试</td>
+<td>https://certification.vuejs.org/ → 跳转 https://certificates.dev/vuejs（官方合作方；<strong>要不要考看你求职需要</strong>，我以为对 10 年经验的人价值有限）</td>
+</tr>
+<tr>
+<td>Vue 团队 RFC / Roadmap</td>
+<td>https://github.com/vuejs/core/issues/13687（Vapor Mode roadmap）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-实战技术栈-选型-理由">5. 实战技术栈（选型 + 理由）<a class="anchor" href="#5-实战技术栈-选型-理由" aria-label="链接到此节">#</a></h2>
+<h3 id="5-1-推荐组合-新项目直接照抄">5.1 推荐组合（新项目直接照抄）<a class="anchor" href="#5-1-推荐组合-新项目直接照抄" aria-label="链接到此节">#</a></h3>
+<pre><code>运行时：Vue 3.5 + TypeScript 6/7
+构建：  Vite 8（Rolldown 单引擎，构建速度提升明显）
+路由：  Vue Router 5（+ 文件路由可选）
+状态：  Pinia 4（+ @vue/devtools-api 8，v4 起需显式安装）
+请求：  @tanstack/vue-query 5（缓存/重试/失效）或 axios + 自建 useRequest
+工具：  @vueuse/core 14（useDebounceFn / useLocalStorage / useElementSize…）
+UI：    Element Plus 2.14（国内生态最全，官方有虚拟化表格 el-table-v2）｜ Ant Design Vue 4.2（你是 antd 老手，最省脑）｜ Naive UI 2.45（TS 友好、体积小）
+样式：  Tailwind 4 或 UnoCSS 66 + scoped CSS
+质量：  Vitest 5 + @vue/test-utils 2.5 + Playwright 1.63 + ESLint 10/oxlint + Prettier
+</code></pre>
+<p>选 UI 库的实测参考（npm 上周下载量，2026-09-05~09-11）：<code>element-plus</code> 498,584 → <code>ant-design-vue</code> 141,972 → <code>naive-ui</code> 124,525。<strong>Element Plus 生态最大，Ant Design Vue 对你迁移成本最低</strong>——如果做给自己的项目，我会选 Ant Design Vue（你的 antd 肌肉记忆直接复用）；如果为了求职展示，选 Element Plus（面试官/同事更熟）。</p>
+<h3 id="5-2-与-react-项目共存的策略">5.2 与 React 项目共存的策略<a class="anchor" href="#5-2-与-react-项目共存的策略" aria-label="链接到此节">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>说明</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>独立新项目</td>
+<td>最简单，别硬融</td>
+<td>新业务、你自己的项目</td>
+</tr>
+<tr>
+<td>微前端（qiankun / Module Federation）</td>
+<td>Vue 子应用挂到 React 主应用，按路由拆分</td>
+<td>存量系统渐进替换</td>
+</tr>
+<tr>
+<td>Web Components 包装</td>
+<td>Vue 支持 <code>defineCustomElement</code> 把组件编译成原生自定义元素</td>
+<td>只想复用几个 Vue 组件</td>
+</tr>
+<tr>
+<td>iframe/独立页</td>
+<td>最低成本，最脏</td>
+<td>临时过渡</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-react-开发者高频踩坑-14-条">6. React 开发者高频踩坑 14 条<a class="anchor" href="#6-react-开发者高频踩坑-14-条" aria-label="链接到此节">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>坑</th>
+<th>正确做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>在 <code>&lt;script setup&gt;</code> 里忘了 <code>.value</code></td>
+<td><code>ref</code> 在 JS 里必须 <code>count.value</code>；<strong>模板里不用</strong>（自动解包）。例外：<code>ref</code> 嵌在对象/数组里不解包</td>
+</tr>
+<tr>
+<td>2</td>
+<td>解构 <code>reactive</code> 对象后改值不更新</td>
+<td><code>const { a } = toRefs(state)</code>；Pinia 用 <code>storeToRefs(store)</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>解构 Pinia store 后响应式失效</td>
+<td>同上，必须 <code>storeToRefs</code>（action 可以直接解构）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>直接改 props</td>
+<td>props 只读。要改：<code>emit</code> 通知父组件，或用 <code>defineModel()</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>v-if</code> 和 <code>v-for</code> 写在同一元素上</td>
+<td>Vue 3 里 <code>v-if</code> <strong>优先级更高</strong>，拿不到 <code>v-for</code> 的变量。正确：外层 <code>&lt;template v-for&gt;</code>，内层 <code>v-if</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>用数组 index 当 <code>key</code></td>
+<td>用业务唯一 id。列表增删排序时 index 会导致状态错位（和 React 同理）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>以为到处都要手动优化</td>
+<td>Vue 更新粒度是组件级+依赖追踪，不需要 <code>memo/useCallback</code>。只有超大列表/大数据对象才用 <code>shallowRef</code>、<code>v-memo</code> 或虚拟滚动</td>
+</tr>
+<tr>
+<td>8</td>
+<td>用 <code>shallowRef</code> 后改对象属性不更新</td>
+<td><code>shallowRef</code> 只追踪 <code>.value</code> 整体替换；改属性要用 <code>ref</code> 或手动 <code>triggerRef</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td>想在模板里写复杂 JS</td>
+<td>模板只支持表达式。抽到 <code>computed</code> / 方法里</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>v-model</code> 用于子组件时手写 props+emit</td>
+<td>Vue 3.4+ 用 <code>defineModel()</code> 一行搞定</td>
+</tr>
+<tr>
+<td>11</td>
+<td>复制的 React 习惯：<code>useEffect</code> 里做数据请求</td>
+<td>用 <code>@tanstack/vue-query</code> 或 <code>onMounted</code> + <code>watch</code>；SSR 场景用 Nuxt <code>useFetch</code>。<strong>避免在 <code>watchEffect</code> 里发请求</strong>（依赖变化会重复发）</td>
+</tr>
+<tr>
+<td>12</td>
+<td>以为 scoped CSS 能穿透子组件</td>
+<td>scoped 会加 <code>data-v-xxx</code> 属性；要改子组件内部样式用 <code>:deep(...)</code>，改插槽内容用 <code>:slotted(...)</code></td>
+</tr>
+<tr>
+<td>13</td>
+<td>手动 <code>document.querySelector</code> 操作 DOM</td>
+<td>用 <code>useTemplateRef</code> 拿 ref；DOM 操作放 <code>onMounted</code> 或 <code>await nextTick()</code> 之后</td>
+</tr>
+<tr>
+<td>14</td>
+<td>现在就把 Vapor Mode 上生产</td>
+<td>3.6 仍是 RC（截至 2026-09-16）。生产用 3.5.x；Vapor 只做实验（<code>&lt;script setup vapor&gt;</code> opt-in，可单组件渐进）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-面试考点-你在找前端岗-按命中率排">7. 面试考点（你在找前端岗，按命中率排）<a class="anchor" href="#7-面试考点-你在找前端岗-按命中率排" aria-label="链接到此节">#</a></h2>
+<p><strong>必答（中高级岗几乎必问）</strong></p>
+<ol>
+<li><strong>响应式原理</strong>：Vue 3 用 <code>Proxy</code> 递归代理 + <code>effect</code> 依赖收集（track/trigger）；Vue 2 用 <code>Object.defineProperty</code> 的缺陷（无法监听数组下标/新增属性、需递归初始化）。</li>
+<li><strong><code>computed</code> vs <code>watch</code> vs <code>watchEffect</code></strong>：computed 有缓存且必须有返回值、是派生值；watch 明确指定源、可拿到新旧值、有 <code>immediate/deep/flush</code>；watchEffect 自动收集依赖、无新旧值。</li>
+<li><strong><code>ref</code> vs <code>reactive</code></strong>：基本类型只能 <code>ref</code>；<code>ref</code> 内部用 <code>reactive</code> 包装对象；<code>reactive</code> 解构丢响应性、reassigned 会失去代理。</li>
+<li><strong>组件更新粒度</strong>：Vue 组件级更新 + 依赖驱动（不需要手动 memo），React 是自顶向下 re-render + 手动 <code>memo/useMemo</code>。<strong>这是最常被拿来对比的问题</strong>，能讲清楚就赢一半。</li>
+<li><strong><code>key</code> 与 diff</strong>：Vue 3 用编译期 patchFlag + Block Tree 标记动态节点，运行时 diff 只处理动态部分；<code>key</code> 影响列表复用与状态错位。</li>
+</ol>
+<p><strong>加分项（能讲就是亮点）</strong></p>
+<ol start="6">
+<li><strong>编译优化</strong>：静态提升（hoistStatic）、补丁标记、Block Tree、<code>v-once</code>/<code>v-memo</code> 的用途。</li>
+<li><strong>Vapor Mode（3.6）</strong>：跳过虚拟 DOM，编译成直接 DOM 操作，<code>&lt;script setup vapor&gt;</code> opt-in，可与 VDOM 组件混用（<code>vaporInteropPlugin</code>）；包体积和基线运行时显著减小。<strong>答&quot;目前还是 RC，生产未采用&quot;反而显得你跟踪得准</strong>。</li>
+<li><strong>alien-signals 响应式重构（3.6）</strong>：基于 push-pull 的细粒度响应式，替换原 <code>@vue/reactivity</code> 实现，3.6 的性能/内存提升主要来自这里。</li>
+<li><strong>Pinia vs Vuex</strong>：去 mutation（只有 state/getters/actions）、TS 推断友好、setup store 写法、模块化拆分、<code>storeToRefs</code> 原理。</li>
+<li><strong>Vue Router 5 变化</strong>：把 unplugin-vue-router 并入核心（文件路由）、类型化路由、Data Loaders；<strong>对 v4 用户无破坏性变更</strong>（官方迁移文档原文）。</li>
+<li><strong>SSR 相关</strong>：<code>onServerPrefetch</code>、hydration 不匹配（mismatch）的常见原因、<code>useId()</code>（3.5+）、懒水合（Lazy Hydration）。</li>
+<li><strong>性能排查套路</strong>：DevTools Performance → 组件重渲染次数 → <code>shallowRef</code>/<code>v-memo</code>/虚拟列表 → 大依赖分包。</li>
+</ol>
+<hr />
+<h2 id="8-自测验收清单-能做到就打勾">8. 自测验收清单（能做到就打勾）<a class="anchor" href="#8-自测验收清单-能做到就打勾" aria-label="链接到此节">#</a></h2>
+<ul>
+<li class="task"><span class="cb" aria-hidden="true"></span>不看文档写出「列表 + 搜索 + 筛选 + 分页」，含空状态与 loading</li>
+<li class="task"><span class="cb" aria-hidden="true"></span>解释清 <code>ref</code> / <code>reactive</code> / <code>computed</code> / <code>watch</code> 四者的边界，并说出 2 个坑</li>
+<li class="task"><span class="cb" aria-hidden="true"></span>用 <code>defineModel</code> 写一个自定义表单控件，父组件 <code>v-model</code> 直接用</li>
+<li class="task"><span class="cb" aria-hidden="true"></span>用插槽写一个通用表格组件（列配置 + 自定义单元格）</li>
+<li class="task"><span class="cb" aria-hidden="true"></span>抽出过一个真正被复用的 composable（不是 demo 级别）</li>
+<li class="task"><span class="cb" aria-hidden="true"></span>写出带登录守卫 + 动态路由 + 懒加载的 Router 配置</li>
+<li class="task"><span class="cb" aria-hidden="true"></span>Pinia store 拆分与 <code>storeToRefs</code> 用得不出错</li>
+<li class="task"><span class="cb" aria-hidden="true"></span>全项目 <code>vue-tsc</code> 类型零错误（含泛型组件/inject 类型）</li>
+<li class="task"><span class="cb" aria-hidden="true"></span>写过组件单测 + 1 条 E2E，并在 CI 里跑通</li>
+<li class="task"><span class="cb" aria-hidden="true"></span>能讲清&quot;Vue 与 React 更新粒度的差异&quot;，以及 Vapor Mode 的定位</li>
+</ul>
+<hr />
+<h2 id="9-四周速查-贴墙上">9. 四周速查（贴墙上）<a class="anchor" href="#9-四周速查-贴墙上" aria-label="链接到此节">#</a></h2>
+<pre><code>W1 模板 + 响应式   → 产出：一个纯手写 CRUD 页面
+W2 组件 + 路由 + 状态 → 产出：带守卫的最小后台（3 页）
+W3 工程化 + 性能    → 产出：CI 全绿的工程 + 1 万行表格流畅
+W4 实战项目        → 产出：部署上线 + 可讲 3 个技术决策
+</code></pre>
+<hr />
+<h2 id="10-来源与核验-每条数据的出处-2026-09-16-实测">10. 来源与核验（每条数据的出处，2026-09-16 实测）<a class="anchor" href="#10-来源与核验-每条数据的出处-2026-09-16-实测" aria-label="链接到此节">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>数据项</th>
+<th>数值</th>
+<th>来源</th>
+<th>获取方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vue / vite / pinia / vue-router / nuxt / vitest / element-plus / ant-design-vue / naive-ui / @vueuse/core / typescript 版本</td>
+<td>见 §0.3</td>
+<td>npm registry <code>https://registry.npmjs.org/&lt;pkg&gt;/latest</code></td>
+<td>Python urllib 直接读 JSON</td>
+</tr>
+<tr>
+<td>Vue 各最新版本发布时间、dist-tags（<code>latest</code> / <code>rc</code> / <code>beta</code>）</td>
+<td>3.5.42=2026-08-27；3.6.0-rc.8=2026-09-11</td>
+<td>同上 + <code>https://github.com/vuejs/core/blob/main/CHANGELOG.md</code>（3.5.42）与 <code>minor/CHANGELOG.md</code>（3.6.0-rc.8）</td>
+<td>HTTP 直读原文</td>
+</tr>
+<tr>
+<td>Vue 3.6 beta 内容（Vapor Mode 特性对齐、Suspense 限制、alien-signals）</td>
+<td>—</td>
+<td>GitHub Release <code>v3.6.0-beta.1</code>（2025-12-23）release notes 原文</td>
+<td>GitHub API</td>
+</tr>
+<tr>
+<td>Vue Router 5 = 合并 unplugin-vue-router、v4 用户无破坏性变更</td>
+<td>—</td>
+<td>官方迁移文档原文 <code>https://router.vuejs.org/guide/migration/v4-to-v5.md</code></td>
+<td>HTTP 直读原文</td>
+</tr>
+<tr>
+<td>Pinia 4 = ESM only + 需装 <code>@vue/devtools-api</code> + Nostics</td>
+<td>—</td>
+<td>GitHub Release <code>v4.0.0</code> release notes 原文</td>
+<td>GitHub API</td>
+</tr>
+<tr>
+<td>Node 版本要求</td>
+<td>create-vue <code>^22.18.0 || &gt;=24.12.0</code>；Vite <code>^20.19.0 || &gt;=22.12.0</code>；Nuxt <code>^22.19.0 || ^24.11.0 || &gt;=26.0.0</code>；Vitest <code>^22.12.0 || ^24.0.0 || &gt;=26.0.0</code></td>
+<td>各包 npm 元数据 <code>engines</code> 字段 + <code>https://cn.vuejs.org/guide/quick-start.md</code></td>
+<td>Python 直读</td>
+</tr>
+<tr>
+<td>下载量（2026-09-05~09-11）</td>
+<td>vue 11,281,013；react 128,119,130；nuxt 1,436,097；next 43,416,095；pinia 3,540,102；vue-router 6,072,517；element-plus 498,584；ant-design-vue 141,972；naive-ui 124,525；@vueuse/core 8,103,975</td>
+<td><code>https://api.npmjs.org/downloads/point/last-week/&lt;pkg&gt;</code></td>
+<td>Python 直读</td>
+</tr>
+<tr>
+<td>官方文档有 Markdown 源 + <code>/llms.txt</code></td>
+<td>—</td>
+<td><code>https://cn.vuejs.org/llms.txt</code> 与 <code>https://cn.vuejs.org/guide/quick-start.md</code> 实测 200</td>
+<td>HTTP 直读</td>
+</tr>
+<tr>
+<td>create-vue 参数列表</td>
+<td><code>--ts --jsx --router --pinia --vitest --cypress --playwright --eslint --prettier --oxfmt --vue-rc --tsgo --bare</code></td>
+<td>本机执行 <code>npm create vue@latest -- --help</code>（create-vue 3.24.0）</td>
+<td>实机执行</td>
+</tr>
+<tr>
+<td>你机器的 Node/pnpm/yarn 与全局包（升级前）</td>
+<td>三个 node 来源：<code>~/.local/bin/node</code>→v22.22.3、nvm 默认 v18.18.0、Homebrew v23.11.0；pnpm 9.12.2；yarn 1.22.22；全局 <code>@vue/cli@5.0.8</code>、claude-code、vercel 等挂在 node 18 下</td>
+<td>本机 <code>node -v</code>、<code>npm ls -g</code>、<code>ls ~/.nvm/versions/node</code>、<code>env -i zsh -ic</code></td>
+<td>实机执行</td>
+</tr>
+<tr>
+<td>Node 升级结果（2026-09-16 执行）</td>
+<td><code>~/.local/bin/node</code> → nvm <strong>v22.23.2</strong>；<code>nvm alias default</code> = 22.23.2；新终端 <code>node -v</code> = v22.23.2；claude 2.1.273 / vercel 59.19.0 / http-server 14.1.1 / task-master-ai / dsh 0.1.0-rc.8 / tencent-news-cli 复测可用；vue-starter 在新默认 node 下 type-check ✅、7 tests ✅、build 320ms ✅</td>
+<td>本机 <code>env -i zsh -ic</code>、<code>readlink ~/.local/bin/*</code></td>
+<td>实机执行</td>
+</tr>
+<tr>
+<td>Vue CLI → create-vue 替换（2026-09-16 执行）</td>
+<td>node 18 全局卸载 <code>@vue/cli</code>（removed 837 packages）、<code>vue</code> 命令无残留；<code>~/.vuerc</code> 移走（备份 <code>~/.vuerc.bak.20260916</code>）；node 22.23.2 下全局装 <code>create-vue@3.24.0</code>；新终端建项目 + <code>pnpm install</code> + <code>pnpm run build</code> → ✅ 275ms，<code>dist/index.html</code> 正常</td>
+<td>本机 <code>npm uninstall -g</code>、<code>npm i -g create-vue</code>、<code>env -i zsh -ic</code> 实跑</td>
+<td>实机执行</td>
+</tr>
+<tr>
+<td>脚手架全链路可用性</td>
+<td>type-check ✅ / lint ✅ / 7 tests ✅ / build 165ms ✅ / headless Chrome 渲染 8 卡片无报错 ✅</td>
+<td>本机 <code>vue-starter</code> 工程</td>
+<td>实机执行</td>
+</tr>
+<tr>
+<td>Element Plus 虚拟化表格</td>
+<td><code>el-table-v2</code>，需 element-plus ≥ 2.2.0</td>
+<td>官方文档 https://element-plus.org/zh-CN/component/table-v2</td>
+<td>HTTP 直读</td>
+</tr>
+<tr>
+<td>《Vue.js 设计与实现》</td>
+<td>霍春阳，人民邮电出版社（图灵原创），ISBN 9787115583864</td>
+<td>多个图书平台书目信息一致</td>
+<td>网络检索（非官方出版社页面，属中等可信）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>未能核实/明确标注为不权威的信息</strong>：</p>
+<ol>
+<li>「Vue 3.6 已于 2026-07-18 上海 Vue&amp;ViteConf 正式发布」——来源为掘金自媒体文章，与 npm registry + 官方 CHANGELOG 矛盾，<strong>判定不实</strong>。</li>
+<li>「国内 Vue 岗位占前端总量 38–45%，React 35–42%」——来源为博客/自媒体&quot;样本观察&quot;，非招聘平台官方统计，<strong>仅作方向参考</strong>。</li>
+<li>中文视频课的具体章节质量、是否覆盖 3.5+ 新特性（如 <code>useTemplateRef</code>）——我只核实了链接可达，未逐集观看，<strong>请自行按需取舍</strong>。</li>
+<li>「Vue 4.0 时间线」类说法——搜索到的若干来源互相矛盾（有称 2026 年 2 月进 beta，有称 Q3），<strong>我没有找到官方一手时间表，故本文不采用任何 Vue 4 时间线</strong>。</li>
+</ol>
+
+  </article>
+</div>
+</body>
+</html>

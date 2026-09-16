@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>男装电商 · 90 天执行看板</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f4f5f7;color:#1a2333;padding-bottom:40px;line-height:1.6;}
+  .wrap{max-width:680px;margin:0 auto;}
+  .hero{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;padding:20px 16px;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.15);}
+  .hero h1{font-size:1.2rem;}
+  .hero .sub{font-size:.8rem;opacity:.92;margin-top:3px;}
+  .bar{height:8px;background:rgba(255,255,255,.25);border-radius:4px;margin-top:10px;overflow:hidden;}
+  .bar i{display:block;height:100%;width:0;background:#fbbf24;border-radius:4px;transition:width .3s;}
+  .hero .count{font-size:.78rem;margin-top:5px;opacity:.95;}
+  .kpi{background:#fff;border:1px solid #e5e9f0;border-radius:12px;margin:12px 16px;padding:12px 14px;}
+  .kpi h3{font-size:.95rem;margin-bottom:8px;color:#1e40af;}
+  .kpi .row{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:.88rem;}
+  .kpi .row label{flex:1;color:#334155;}
+  .kpi input{width:96px;padding:6px 8px;border:1px solid #cbd2e0;border-radius:8px;font-size:.88rem;text-align:right;background:#fafbfd;}
+  .kpi .tip{font-size:.76rem;color:#64748b;margin-top:8px;}
+  .toolbar{display:flex;gap:8px;padding:4px 16px 8px;}
+  .toolbar button{flex:1;border:1px solid #cbd2e0;background:#fff;color:#1e40af;border-radius:20px;padding:8px 0;font-size:.85rem;font-weight:600;}
+  section{background:#fff;border:1px solid #e5e9f0;border-radius:12px;margin:10px 16px;overflow:hidden;}
+  section>h2{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;font-size:.98rem;cursor:pointer;}
+  section>h2 .t{display:flex;align-items:center;gap:8px;}
+  .badge{font-size:.72rem;color:#2563eb;background:#eef4ff;border-radius:10px;padding:1px 8px;white-space:nowrap;}
+  .arrow{color:#94a3b8;font-size:.8rem;transition:transform .2s;}
+  section.closed .arrow{transform:rotate(-90deg);}
+  section.closed .body{display:none;}
+  .body{padding:2px 6px 10px;border-top:1px dashed #e5e9f0;}
+  ul{list-style:none;}
+  li{display:flex;gap:10px;padding:10px;border-bottom:1px solid #f1f3f7;font-size:.92rem;align-items:flex-start;}
+  li:last-child{border-bottom:none;}
+  li.done{color:#94a3b8;text-decoration:line-through;text-decoration-color:#cbd2e0;}
+  .ck{flex-shrink:0;width:22px;height:22px;border:2px solid #cbd2e0;border-radius:6px;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;background:#fff;}
+  li.done .ck{background:#10b981;border-color:#10b981;}
+  .w{flex-shrink:0;font-size:.74rem;color:#fff;background:#2563eb;border-radius:6px;padding:2px 6px;margin-top:3px;height:fit-content;}
+  .w.hot{background:#dc2626;}
+  .foot{text-align:center;color:#64748b;font-size:.78rem;margin-top:16px;padding:0 20px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <h1>📅 男装电商 · 90 天执行看板</h1>
+  <div class="sub">W1–W13 · 勾选进度自动保存 · 红线：累计净亏 1.5 万 / 第 60 天日销&lt;10 单 → 复盘</div>
+  <div class="bar"><i id="bar"></i></div>
+  <div class="count" id="count">已完成 0 / 0</div>
+</div>
+
+<div class="kpi">
+  <h3>📊 关键指标（每周填一次，自动保存）</h3>
+  <div class="row"><label>本周 GMV（元）</label><input id="k_gmv" inputmode="numeric" placeholder="0"></div>
+  <div class="row"><label>本周订单数（单）</label><input id="k_ord" inputmode="numeric" placeholder="0"></div>
+  <div class="row"><label>退货率（%）</label><input id="k_ret" inputmode="decimal" placeholder="0"></div>
+  <div class="row"><label>推广花费（元）</label><input id="k_ads" inputmode="numeric" placeholder="0"></div>
+  <div class="row"><label>推广 ROI</label><input id="k_roi" inputmode="decimal" placeholder="0"></div>
+  <div class="row"><label>累计净利（元）</label><input id="k_pft" inputmode="numeric" placeholder="0"></div>
+  <div class="tip">红线：累计净利 &lt; −15,000 或第 60 天日销 &lt; 10 单 → 停止追加、全面复盘</div>
+</div>
+
+<div class="toolbar">
+  <button onclick="toggleAll(false)">全部收起</button>
+  <button onclick="toggleAll(true)">全部展开</button>
+  <button onclick="resetAll()">重置勾选</button>
+</div>
+
+<div id="q"></div>
+
+<div class="foot">
+  数据来源：menwear-plan-v3.md §4/§9.0 · 完成后打勾，每周填一次指标<br>
+  <b>两件卡住全流程的事：① 品牌名查重 ② 佛山取经</b>
+</div>
+</div>
+
+<script>
+const WEEKS = [
+ {w:"W1", hot:true, t:"打地基（不依赖品牌名）", qs:[
+  "粤商通提交个体工商户执照申请（免费 1–3 天）",
+  "拼多多商家版 + 淘宝卖家中心实名注册",
+  "注册企业微信（私域引流用）",
+  "给三位姐姐打电话：各要 2–3 家靠谱工厂名单",
+  "联系姐夫：约吊牌/洗水标打样",
+  "联系嫂子：约尺码表标准咨询",
+  "找财务朋友问个体户报税节点",
+  "找京东快递员朋友问网点电商价"]},
+ {w:"W1–2", hot:true, t:"佛山取经（本周第一优先）", qs:[
+  "妻牵线约佛山同行，带礼上门+请吃饭",
+  "带上 40 问清单（手机版已存邮箱），重点问★12 问",
+  "征得同意后录音；吊牌/包装/打包流程随手拍照",
+  "拜访后 24 小时内整理答案，发 Iris 校准计划"]},
+ {w:"W1", t:"品牌名 + 商标", qs:[
+  "按待查名单查 25 类：妙织生花→逸品→悦己→严造→妙趣衣生→自在→得闲",
+  "选定名字 → 提交商标申请（25 类 + 35 类）",
+  "拿到受理回执后开始用 ™（未拿证不印 ®）"]},
+ {w:"W2–3", t:"选款 + 物料", qs:[
+  "长江辅料城（瑞康路 2 号）看空白加厚快递袋/OPP 袋现货",
+  "1688 比价 + 下单 logo 不干胶贴纸（主视觉 + 封口）",
+  "采购拍摄道具：挂烫机 + 背景纸 + 衣架（二手优先）",
+  "用《选款对比表.xlsx》填 15–20 个候选款（普宁衬衫裤 + 鹭江卫衣夹克）",
+  "淘汰：没现货/不能换标/MOQ 太高/发货慢的款"]},
+ {w:"W3–4", t:"上架测款", qs:[
+  "首批上架 15–20 款（先白牌，不换标）",
+  "标题按「爸爸装/中年男装/宽松 纯棉」公式写",
+  "详情页放尺码表（第 2 屏）+ 售后承诺",
+  "感谢信 A4 三折版式去打印店打 20–50 张试水",
+  "上架前用违禁词工具扫一遍标题+详情页"]},
+ {w:"W4–8", hot:true, t:"付费测款 → 聚焦", qs:[
+  "每日推广预算 50–100 元封顶（超了停）",
+  "每周填一次指标（上方看板）：GMV/单量/退货率/ROI",
+  "点击率>3%、加购>8% 才算有苗头",
+  "三天内砍掉无数据款，聚焦 3–5 个数据款",
+  "第 60 天日销 < 10 单 → 触发强制复盘"]},
+ {w:"W9–13", t:"放量 + 私域", qs:[
+  "爆款补货 300–500 件 / 或谈工厂小单",
+  "爆款换自家吊牌（姐夫辅料 + 姐姐们换标散活）",
+  "包裹卡上企微码：加微领老客券（不涉好评返现）",
+  "报名平台活动（双 11/双 12 备货）",
+  "月净利破 3000 → 阶段目标达成"]},
+ {w:"全程", t:"纪律与安全网", qs:[
+  "每周 IT 技能保温 5–10 小时（工具自己写、开源到 GitHub）",
+  "社保医保以灵活就业身份续上",
+  "每月对账：收入−货本−运费−推广−包材−退款 = 真实净利",
+  "第 90 天强制评估：继续 or 执行回职场预案"]}
+];
+
+const $=id=>document.getElementById(id);
+let idx=0, html='';
+WEEKS.forEach((sec,si)=>{
+  let lis='';
+  sec.qs.forEach(q=>{ idx++; lis+='<li data-g="'+si+'-'+sec.qs.indexOf(q)+'" onclick="tick(this)"><span class="w'+(sec.hot?' hot':'')+'">'+sec.w+'</span><span class="ck">✓</span><span>'+q+'</span></li>'; });
+  html+='<section id="s'+si+'"><h2 onclick="fold('+si+')"><span class="t">'+sec.t+'<span class="badge" id="b'+si+'">0/'+sec.qs.length+'</span></span><span class="arrow">▼</span></h2><div class="body"><ul>'+lis+'</ul></div></section>';
+});
+$('q').innerHTML=html;
+const total=idx;
+
+let done=JSON.parse(localStorage.getItem('m90')||'{}');
+function paint(){
+  let n=0;
+  WEEKS.forEach((sec,si)=>{
+    let c=0;
+    sec.qs.forEach((q,qi)=>{
+      const li=document.querySelectorAll('#s'+si+' li')[qi];
+      if(done[si+'-'+qi]){li.classList.add('done');c++;}
+    });
+    $('b'+si).textContent=c+'/'+sec.qs.length; n+=c;
+  });
+  $('bar').style.width=(n/total*100)+'%';
+  $('count').textContent='已完成 '+n+' / '+total;
+}
+function tick(li){
+  const k=li.getAttribute('data-g');
+  done[k]=!done[k]; if(!done[k])delete done[k];
+  localStorage.setItem('m90',JSON.stringify(done)); paint();
+}
+function fold(si){$('s'+si).classList.toggle('closed');}
+function toggleAll(open){document.querySelectorAll('section').forEach(s=>s.classList.toggle('closed',!open));}
+function resetAll(){if(confirm('确定清空所有勾选？')){done={};localStorage.setItem('m90','{}');paint();}}
+
+// KPI 输入持久化
+['gmv','ord','ret','ads','roi','pft'].forEach(k=>{
+  const el=$('k_'+k);
+  el.value=localStorage.getItem('m90_'+k)||'';
+  el.addEventListener('input',()=>localStorage.setItem('m90_'+k,el.value));
+});
+paint();
+</script>
+</body>
+</html>

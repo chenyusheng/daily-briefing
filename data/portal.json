@@ -1,0 +1,737 @@
+{
+ "updated": "2026-09-16",
+ "cats": [
+  {
+   "id": "invest",
+   "name": "投资研究",
+   "icon": "📈",
+   "color": "blue"
+  },
+  {
+   "id": "learn",
+   "name": "投资学习",
+   "icon": "📖",
+   "color": "green"
+  },
+  {
+   "id": "ecom",
+   "name": "电商创业",
+   "icon": "🛒",
+   "color": "red"
+  },
+  {
+   "id": "career",
+   "name": "职业发展",
+   "icon": "💼",
+   "color": "teal"
+  },
+  {
+   "id": "tools",
+   "name": "工具档案",
+   "icon": "🗂️",
+   "color": "purple"
+  }
+ ],
+ "entries": [
+  {
+   "cat": "invest",
+   "icon": "📰",
+   "title": "晨间速览",
+   "date": "2026-06-30 ~ 2026-08-06",
+   "desc": "每日早8:00 隔夜美股 · 宏观 · 持仓 · 新闻速览",
+   "tags": [
+    "每日",
+    "宏观",
+    "持仓"
+   ],
+   "type": "collection",
+   "link": "index.html",
+   "count": 28,
+   "items": [
+    {
+     "t": "2026-08-06 周四",
+     "p": "2026-08-06.html"
+    },
+    {
+     "t": "2026-08-05 周三",
+     "p": "2026-08-05.html"
+    },
+    {
+     "t": "2026-08-04 周二",
+     "p": "2026-08-04.html"
+    },
+    {
+     "t": "2026-08-03 周一",
+     "p": "2026-08-03.html"
+    },
+    {
+     "t": "2026-07-31 周五",
+     "p": "2026-07-31.html"
+    },
+    {
+     "t": "2026-07-30 周四",
+     "p": "2026-07-30.html"
+    },
+    {
+     "t": "2026-07-28 周二",
+     "p": "2026-07-28.html"
+    },
+    {
+     "t": "2026-07-27 周一",
+     "p": "2026-07-27.html"
+    },
+    {
+     "t": "2026-07-24 周五",
+     "p": "2026-07-24.html"
+    },
+    {
+     "t": "2026-07-22 周三",
+     "p": "2026-07-22.html"
+    },
+    {
+     "t": "2026-07-21 周二",
+     "p": "2026-07-21.html"
+    },
+    {
+     "t": "2026-07-20 周一",
+     "p": "2026-07-20.html"
+    },
+    {
+     "t": "2026-07-17 周五",
+     "p": "2026-07-17.html"
+    },
+    {
+     "t": "2026-07-16 周四",
+     "p": "2026-07-16.html"
+    },
+    {
+     "t": "2026-07-15 周三",
+     "p": "2026-07-15.html"
+    },
+    {
+     "t": "2026-07-14 周二",
+     "p": "2026-07-14.html"
+    },
+    {
+     "t": "2026-07-10 周五",
+     "p": "2026-07-10.html"
+    },
+    {
+     "t": "2026-07-09 周四",
+     "p": "2026-07-09.html"
+    },
+    {
+     "t": "2026-07-08 周三",
+     "p": "2026-07-08.html"
+    },
+    {
+     "t": "2026-07-07 周二",
+     "p": "briefing/2026-07-07/"
+    },
+    {
+     "t": "2026-07-02 周四",
+     "p": "2026-07-02.html"
+    },
+    {
+     "t": "2026-07-01 周三",
+     "p": "2026-07-01.html"
+    },
+    {
+     "t": "2026-06-30 周二",
+     "p": "2026-06-30.html"
+    },
+    {
+     "t": "2026-07-03 周五",
+     "p": "2026-07-03.html"
+    },
+    {
+     "t": "2026-07-06 周一",
+     "p": "2026-07-06.html"
+    },
+    {
+     "t": "2026-07-13 周一",
+     "p": "2026-07-13.html"
+    },
+    {
+     "t": "2026-07-23 周四",
+     "p": "2026-07-23.html"
+    },
+    {
+     "t": "2026-07-29 周三",
+     "p": "2026-07-29.html"
+    }
+   ]
+  },
+  {
+   "cat": "invest",
+   "icon": "📊",
+   "title": "双战法选股",
+   "date": "2026-06-30 ~ 2026-08-05",
+   "desc": "🧊冰点反抽 + 🐉龙头主升浪 双战法每日分析",
+   "tags": [
+    "选股",
+    "双战法"
+   ],
+   "type": "collection",
+   "link": "stock-picks/",
+   "count": 32,
+   "items": [
+    {
+     "t": "2026-06-30 周二",
+     "p": "stock-picks/2026-06-30.html"
+    },
+    {
+     "t": "2026-07-01 周三",
+     "p": "stock-picks/2026-07-01.html"
+    },
+    {
+     "t": "2026-07-02 周四",
+     "p": "stock-picks/2026-07-02.html"
+    },
+    {
+     "t": "2026-07-03 周五",
+     "p": "stock-picks/2026-07-03.html"
+    },
+    {
+     "t": "2026-07-05 周日",
+     "p": "stock-picks/2026-07-05.html"
+    },
+    {
+     "t": "2026-07-06 周一",
+     "p": "stock-picks/2026-07-06.html"
+    },
+    {
+     "t": "2026-07-07 周二",
+     "p": "stock-picks/2026-07-07.html"
+    },
+    {
+     "t": "2026-07-08 周三",
+     "p": "stock-picks/2026-07-08.html"
+    },
+    {
+     "t": "2026-07-09 周四",
+     "p": "stock-picks/2026-07-09.html"
+    },
+    {
+     "t": "2026-07-10 周五",
+     "p": "stock-picks/2026-07-10.html"
+    },
+    {
+     "t": "2026-07-11 周六",
+     "p": "stock-picks/2026-07-11.html"
+    },
+    {
+     "t": "2026-07-13 周一",
+     "p": "stock-picks/2026-07-13.html"
+    },
+    {
+     "t": "2026-07-14 周二",
+     "p": "stock-picks/2026-07-14.html"
+    },
+    {
+     "t": "2026-07-15 周三",
+     "p": "stock-picks/2026-07-15.html"
+    },
+    {
+     "t": "2026-07-16 周四",
+     "p": "stock-picks/2026-07-16.html"
+    },
+    {
+     "t": "2026-07-17 周五",
+     "p": "stock-picks/2026-07-17.html"
+    },
+    {
+     "t": "2026-07-18 周五",
+     "p": "stock-picks/2026-07-18.html"
+    },
+    {
+     "t": "2026-07-20 周一",
+     "p": "stock-picks/2026-07-20.html"
+    },
+    {
+     "t": "2026-07-21 周二",
+     "p": "stock-picks/2026-07-21.html"
+    },
+    {
+     "t": "2026-07-22 周三",
+     "p": "stock-picks/2026-07-22.html"
+    },
+    {
+     "t": "2026-07-23 周四",
+     "p": "stock-picks/2026-07-23.html"
+    },
+    {
+     "t": "2026-07-24 周五",
+     "p": "stock-picks/2026-07-24.html"
+    },
+    {
+     "t": "2026-07-25 周六",
+     "p": "stock-picks/2026-07-25.html"
+    },
+    {
+     "t": "2026-07-27 周一",
+     "p": "stock-picks/2026-07-27.html"
+    },
+    {
+     "t": "2026-07-28 周二",
+     "p": "stock-picks/2026-07-28.html"
+    },
+    {
+     "t": "2026-07-29 周三",
+     "p": "stock-picks/2026-07-29.html"
+    },
+    {
+     "t": "2026-07-30 周四",
+     "p": "stock-picks/2026-07-30.html"
+    },
+    {
+     "t": "2026-07-31 周五",
+     "p": "stock-picks/2026-07-31.html"
+    },
+    {
+     "t": "2026-08-02 周日",
+     "p": "stock-picks/2026-08-02.html"
+    },
+    {
+     "t": "2026-08-03 周一",
+     "p": "stock-picks/2026-08-03.html"
+    },
+    {
+     "t": "2026-08-04 周二",
+     "p": "stock-picks/2026-08-04.html"
+    },
+    {
+     "t": "2026-08-05 周三",
+     "p": "stock-picks/2026-08-05.html"
+    }
+   ]
+  },
+  {
+   "cat": "invest",
+   "icon": "📌",
+   "title": "持仓事件时间轴",
+   "date": "2026-08-06",
+   "desc": "全持仓事件垂直时间轴（37个事件，按股票颜色编码 + 筛选）",
+   "tags": [
+    "事件",
+    "时间轴",
+    "风控"
+   ],
+   "path": "events/",
+   "star": true
+  },
+  {
+   "cat": "invest",
+   "icon": "📋",
+   "title": "港股IPO分析",
+   "date": "2026-07-01 ~ 2026-07-13",
+   "desc": "七维度量化评分 · 新股申购建议",
+   "tags": [
+    "港股",
+    "打新",
+    "IPO"
+   ],
+   "type": "collection",
+   "link": "index.html",
+   "count": 8,
+   "items": [
+    {
+     "t": "2026-07-13 · 港股打新",
+     "p": "learning/ipo-2026-07-13.html"
+    },
+    {
+     "t": "2026-07-10 · 港股打新",
+     "p": "learning/ipo-2026-07-10.html"
+    },
+    {
+     "t": "2026-07-09 · 港股打新",
+     "p": "learning/ipo-2026-07-09.html"
+    },
+    {
+     "t": "2026-07-08 · 港股打新",
+     "p": "learning/ipo-2026-07-08.html"
+    },
+    {
+     "t": "2026-07-06 · 港股打新",
+     "p": "learning/ipo-2026-07-06.html"
+    },
+    {
+     "t": "2026-07-05 · 港股打新",
+     "p": "learning/ipo-2026-07-05.html"
+    },
+    {
+     "t": "2026-07-03 · 港股打新",
+     "p": "learning/ipo-2026-07-03.html"
+    },
+    {
+     "t": "2026-07-01 · 港股打新 · 7月总览",
+     "p": "learning/ipo-analysis.html"
+    }
+   ]
+  },
+  {
+   "cat": "learn",
+   "icon": "👤",
+   "title": "投资大师心法",
+   "date": "20篇",
+   "desc": "巴菲特 · 芒格 · 段永平 · 冯柳 · 索罗斯 · 利弗莫尔 · 赵老哥 · 炒股养家 · Asking 等",
+   "tags": [
+    "大师",
+    "流派",
+    "心法"
+   ],
+   "type": "collection",
+   "link": "index.html",
+   "count": 20,
+   "items": [
+    {
+     "t": "A神Asking · 龙头心法",
+     "p": "learning/asking.html"
+    },
+    {
+     "t": "Ray Dalio · 经济机器",
+     "p": "learning/ray-dalio.html"
+    },
+    {
+     "t": "冯柳-茅台03 · 投资心法",
+     "p": "learning/feng-liu.html"
+    },
+    {
+     "t": "利弗莫尔 · 关键点交易",
+     "p": "learning/livermore.html"
+    },
+    {
+     "t": "十年悟道 · 交易实录",
+     "p": "learning/yu-boluo-journey.html"
+    },
+    {
+     "t": "威廉·欧奈尔 · CAN SLIM",
+     "p": "learning/william-oneil.html"
+    },
+    {
+     "t": "巴菲特 · 价值投资",
+     "p": "learning/buffett.html"
+    },
+    {
+     "t": "彼得·林奇 · 十倍股",
+     "p": "learning/peter-lynch.html"
+    },
+    {
+     "t": "徐翔 · 涨停板战法",
+     "p": "learning/xu-xiang.html"
+    },
+    {
+     "t": "投资路线图 · 系统学习",
+     "p": "learning/roadmap.html"
+    },
+    {
+     "t": "查理·芒格 · 多元思维",
+     "p": "learning/charlie-munger.html"
+    },
+    {
+     "t": "段永平 · 投资心法",
+     "p": "learning/duan-yongping.html"
+    },
+    {
+     "t": "炒股养家 · 情绪周期",
+     "p": "learning/chaogu-yangjia.html"
+    },
+    {
+     "t": "瑞鹤仙 · 短线心法",
+     "p": "learning/rui-hexian.html"
+    },
+    {
+     "t": "章盟主 · 格局派",
+     "p": "learning/zhang-mengzhu.html"
+    },
+    {
+     "t": "索罗斯 · 反身性理论",
+     "p": "learning/soros.html"
+    },
+    {
+     "t": "赵老哥 · 二板定龙头",
+     "p": "learning/zhao-laoge.html"
+    },
+    {
+     "t": "霍华德·马克斯 · 第二层思维",
+     "p": "learning/howard-marks.html"
+    },
+    {
+     "t": "青泽 · 交易哲学",
+     "p": "learning/qingze.html"
+    },
+    {
+     "t": "马克·米勒维尼 · SEPA策略",
+     "p": "learning/mark-minervini.html"
+    }
+   ]
+  },
+  {
+   "cat": "learn",
+   "icon": "📜",
+   "title": "证监会\"十五五\"资本市场纲领",
+   "date": "2026-09-10",
+   "desc": "政策面研读 · 八个进一步 + 政策黑话翻译 + 三色信号 + 六步读法",
+   "tags": [
+    "政策",
+    "十五五",
+    "制度"
+   ],
+   "path": "learning/policy-2026-09-10-csrc-15th-five.html",
+   "star": true
+  },
+  {
+   "cat": "learn",
+   "icon": "🗺️",
+   "title": "投资学习路线图",
+   "date": "2026-07-01",
+   "desc": "系统学习路径 · 从入门到体系的完整地图",
+   "tags": [
+    "路线图",
+    "体系"
+   ],
+   "path": "learning/roadmap.html"
+  },
+  {
+   "cat": "learn",
+   "icon": "🌊",
+   "title": "十年悟道 · 交易实录",
+   "date": "2026-07-01",
+   "desc": "一位股民 2012 年入市到稳定盈利的十年真实历程",
+   "tags": [
+    "实录",
+    "冰点反抽",
+    "心态"
+   ],
+   "path": "learning/yu-boluo-journey.html"
+  },
+  {
+   "cat": "ecom",
+   "icon": "👔",
+   "title": "中老年男装作战计划 v3",
+   "date": "2026-09-10",
+   "desc": "品牌\"妙趣横生\" · 16 个 Tab 完整作战文档（定位/供应链/选款/合规/品牌VI/社保/展会）",
+   "tags": [
+    "男装",
+    "创业",
+    "16Tab"
+   ],
+   "path": "menwear/menwear-plan.html",
+   "star": true
+  },
+  {
+   "cat": "ecom",
+   "icon": "📅",
+   "title": "90 天执行看板",
+   "date": "2026-09-08",
+   "desc": "阶段任务拆解与进度追踪",
+   "tags": [
+    "执行",
+    "看板",
+    "90天"
+   ],
+   "path": "menwear/90day-board.html"
+  },
+  {
+   "cat": "ecom",
+   "icon": "🏷️",
+   "title": "品牌 VI 规范页",
+   "date": "2026-09-10",
+   "desc": "妙趣横生 · 矢量标识 + 规范（主标/反白/竖版/圆徽章/纯字标/单色）",
+   "tags": [
+    "品牌",
+    "VI",
+    "Logo"
+   ],
+   "path": "menwear/brand-sheet.html"
+  },
+  {
+   "cat": "ecom",
+   "icon": "📊",
+   "title": "选款评分表",
+   "date": "2026-09-08",
+   "desc": "多维度选款打分（面料/版型/价格带/竞品密度）",
+   "tags": [
+    "选款",
+    "评分"
+   ],
+   "path": "menwear/selection-scorecard.html"
+  },
+  {
+   "cat": "ecom",
+   "icon": "🔍",
+   "title": "佛山同行拜访 40 问",
+   "date": "2026-09-08",
+   "desc": "上门取经提纲 · 白牌贴牌活教材的 40 个问题",
+   "tags": [
+    "调研",
+    "供应链",
+    "同行走访"
+   ],
+   "path": "menwear/foshan-visit-40q.html"
+  },
+  {
+   "cat": "ecom",
+   "icon": "🌏",
+   "title": "跨境电商 / TikTok 实战",
+   "date": "10篇",
+   "desc": "全流程 · 工具清单 · 启动成本 · 售后合规 · 广州产业带 · 个体户注册 · 60天冷启动",
+   "tags": [
+    "TikTok",
+    "跨境",
+    "出海"
+   ],
+   "type": "collection",
+   "link": "index.html",
+   "count": 10,
+   "items": [
+    {
+     "t": "2026-07-18",
+     "p": "learning/tiktok-60day-cold-start.html"
+    },
+    {
+     "t": "2026-07-07 · 跨境电商工具清单与实操流程 · 工具清单",
+     "p": "learning/tiktok-tool-list.html"
+    },
+    {
+     "t": "2026-07-07 · TK跨境电商全流程解析 · 全流程指南",
+     "p": "learning/tiktok-seasia-full-process-guide.html"
+    },
+    {
+     "t": "2026-07-07 · TK东南亚跨境电商学习资源大全 · 学习指南",
+     "p": "learning/tk-cross-border-learning-resources.html"
+    },
+    {
+     "t": "2026-07-07 · TK东南亚启动成本解析 · 成本核算",
+     "p": "learning/tiktok-seasia-startup-costs.html"
+    },
+    {
+     "t": "2026-07-07",
+     "p": "learning/guangzhou-supply-chain-guide.html"
+    },
+    {
+     "t": "2026-07-07",
+     "p": "learning/tiktok-after-sales-compliance-handbook.html"
+    },
+    {
+     "t": "2026-07-07",
+     "p": "learning/tiktok-seasia-guide-for-it-guys.html"
+    },
+    {
+     "t": "2026-07-06 · 广州个体户注册+TikTok开店指南 · 实操指南",
+     "p": "learning/guangzhou-business-license-tiktok.html"
+    },
+    {
+     "t": "2026-07-06",
+     "p": "learning/cross-border-5-steps.html"
+    }
+   ]
+  },
+  {
+   "cat": "career",
+   "icon": "🤖",
+   "title": "AI 智能体转型执行计划",
+   "date": "2026-09-16",
+   "desc": "90天路线 + 逐日排期 + MCP Server 实战 + 简历定位改造 + 面试考点",
+   "tags": [
+    "AI",
+    "Agent",
+    "MCP",
+    "90天"
+   ],
+   "path": "career/ai-agent-transition-plan.html",
+   "star": true
+  },
+  {
+   "cat": "career",
+   "icon": "📊",
+   "title": "程序员转行调研报告（2026）",
+   "date": "2026-09-16",
+   "desc": "宏观数据 + 就业结构 + 行业趋势 + 路径清单 + 适配判断（含数据缺口标注）",
+   "tags": [
+    "调研",
+    "经济",
+    "就业",
+    "转行"
+   ],
+   "path": "career/career-transition-research.html",
+   "star": true
+  },
+  {
+   "cat": "career",
+   "icon": "🎯",
+   "title": "前端面试复习资料",
+   "date": "2026-08-20",
+   "desc": "9大模块 + 16道 Q&A，含 AI 前端实战（SSE / RAG / 大模型API对接 / 两套AI架构）",
+   "tags": [
+    "面试",
+    "React",
+    "AI前端"
+   ],
+   "path": "career/interview-frontend-react.html"
+  },
+  {
+   "cat": "career",
+   "icon": "📋",
+   "title": "求职跟踪看板",
+   "date": "2026-09-04",
+   "desc": "8家公司对比：薪资 · 通勤 · 公司风险 · 成长性 · 关键疑点 · 面试问题",
+   "tags": [
+    "求职",
+    "背调",
+    "offer对比"
+   ],
+   "path": "career/job_tracking.html"
+  },
+  {
+   "cat": "career",
+   "icon": "💚",
+   "title": "Vue 学习路线",
+   "date": "2026-09-16",
+   "desc": "Vue 系统学习路线（技术栈补强）",
+   "tags": [
+    "Vue",
+    "学习路线"
+   ],
+   "path": "career/vue-roadmap.html"
+  },
+  {
+   "cat": "career",
+   "icon": "🛤️",
+   "title": "普通人副业双赛道",
+   "date": "2026-07-05",
+   "desc": "副业选择框架 · 双赛道并行策略",
+   "tags": [
+    "副业",
+    "转型"
+   ],
+   "path": "learning/side-hustle-dual-tracks.html"
+  },
+  {
+   "cat": "tools",
+   "icon": "🔖",
+   "title": "站点首页（六大板块）",
+   "date": "2026-09-10",
+   "desc": "晨间速览 · 双战法选股 · 学习 · IPO · 电商 · 职业转型 总入口",
+   "tags": [
+    "首页",
+    "板块"
+   ],
+   "path": "index.html"
+  },
+  {
+   "cat": "tools",
+   "icon": "📄",
+   "title": "HTML 简报模板",
+   "date": "2026-07-10",
+   "desc": "晨间速览 HTML 模板（字体已加大 / 强制带来源链接和日期）",
+   "tags": [
+    "模板",
+    "工具"
+   ],
+   "path": "template.html"
+  }
+ ],
+ "total_pages": 115,
+ "total_cards": 22
+}

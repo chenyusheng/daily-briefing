@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>中老年男装 · 选品打分卡</title>
+<style>
+:root{
+  --blue:#1a5cc8; --blue-dark:#123f8c; --ink:#1f2937; --muted:#6b7280;
+  --border:#e5e7eb; --bg:#f5f6fa; --card:#ffffff;
+  --red:#dc2626; --red-bg:#fee2e2; --green:#059669; --green-bg:#d1fae5;
+  --orange:#d97706; --orange-bg:#fef3c7;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{
+  margin:0;padding:14px 12px 40px;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:15px;line-height:1.6;
+}
+h1{font-size:19px;margin:0 0 4px;letter-spacing:-.3px;}
+.sub{font-size:12.5px;color:var(--muted);margin-bottom:14px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 13px;margin-bottom:12px;}
+.card h2{font-size:15px;margin:0 0 8px;color:var(--blue-dark);letter-spacing:-.2px;}
+.card h3{font-size:14px;margin:12px 0 6px;color:var(--ink);}
+.card h3:first-of-type{margin-top:0;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th,td{border-bottom:1px solid #f0f2f5;padding:7px 4px;text-align:left;vertical-align:top;}
+th{font-size:12px;color:var(--muted);font-weight:600;background:#fafbfc;}
+td.num{white-space:nowrap;font-weight:600;color:var(--blue-dark);}
+ul{margin:6px 0 0;padding-left:18px;}
+li{margin-bottom:5px;}
+.kill{background:var(--red-bg);border:1px solid #fecaca;border-radius:10px;padding:10px 12px;margin-bottom:8px;}
+.kill b{color:var(--red);}
+.ok{background:var(--green-bg);border:1px solid #a7f3d0;border-radius:10px;padding:10px 12px;}
+.warn{background:var(--orange-bg);border:1px solid #fde68a;border-radius:10px;padding:10px 12px;}
+.quote{background:#f8fafc;border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:9px 11px;font-size:13px;color:#334155;margin-top:8px;}
+/* 打分控件 */
+.row{display:flex;align-items:flex-start;gap:8px;padding:9px 0;border-bottom:1px solid #f0f2f5;}
+.row:last-child{border-bottom:none;}
+.row .label{flex:1;font-size:13.5px;}
+.row .label small{display:block;color:var(--muted);font-size:11.5px;line-height:1.45;margin-top:2px;}
+.scores{flex:0 0 auto;display:flex;gap:4px;}
+.scores input{position:absolute;opacity:0;width:1px;height:1px;}
+.scores label{
+  display:flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border:1px solid var(--border);border-radius:8px;
+  background:#fff;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;
+}
+.scores input:checked + label{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 2px 6px rgba(26,92,200,.28);}
+.total{display:flex;align-items:baseline;gap:8px;margin-top:10px;}
+.total .big{font-size:30px;font-weight:800;color:var(--blue);letter-spacing:-1px;}
+.total .of{font-size:13px;color:var(--muted);}
+.verdict{font-size:14px;font-weight:700;margin-top:6px;}
+.v-a{color:var(--green);} .v-b{color:var(--orange);} .v-c{color:var(--red);}
+.foot{font-size:11.5px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.7;}
+@media (max-width:400px){
+  .scores label{width:27px;height:27px;font-size:12px;}
+  body{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<h1>👔 中老年男装 · 选品打分卡</h1>
+<div class="sub">供货商现场用 · 满分 60 分 · 数据依据见作战计划文档 §20/§21/§24</div>
+
+<div class="card">
+  <h2>⛔ 第一关：一票否决（任一条不满足，直接放弃）</h2>
+  <div class="kill"><b>1. 色差</b>：实物颜色与图片明显不符（低价款退货第一主因是"颜色不对板"）</div>
+  <div class="kill"><b>2. 吊牌/质检</b>：无吊牌、无 GB 18401 安全类别标识、无法提供质检报告</div>
+  <div class="kill"><b>3. 毛利</b>：做不到「售价 ≥ 进货价 × 2」（毛利率 &lt;50% 的款不做）</div>
+  <div class="kill"><b>4. 尺码偏差</b>：实测尺寸与标注偏差 &gt; 2 cm</div>
+  <div class="kill"><b>5. 换标</b>：不允许换自己的吊牌/洗水标（现货贴牌模式的前提）</div>
+  <div class="quote">这一关不看分数，任何一条踩线就换下一家——省下的时间比省下的钱值钱。</div>
+</div>
+
+<div class="card">
+  <h2>📊 第二关：12 维度打分（每项 0–5 分）</h2>
+  <div id="rows">
+    <div class="row">
+      <div class="label">1. 人群匹配<small>40–65 岁爸爸装 / 下沉市场日常穿着场景</small></div>
+      <div class="scores"><input type="radio" name="d1" id="d1-0" value="0"><label for="d1-0">0</label><input type="radio" name="d1" id="d1-1" value="1"><label for="d1-1">1</label><input type="radio" name="d1" id="d1-2" value="2"><label for="d1-2">2</label><input type="radio" name="d1" id="d1-3" value="3"><label for="d1-3">3</label><input type="radio" name="d1" id="d1-4" value="4"><label for="d1-4">4</label><input type="radio" name="d1" id="d1-5" value="5"><label for="d1-5">5</label></div>
+    </div>
+    <div class="row">
+      <div class="label">2. 颜色<small>黑 / 深灰 / 藏青优先（三色合计 68%）；浅色和图案谨慎</small></div>
+      <div class="scores"><input type="radio" name="d2" id="d2-0" value="0"><label for="d2-0">0</label><input type="radio" name="d2" id="d2-1" value="1"><label for="d2-1">1</label><input type="radio" name="d2" id="d2-2" value="2"><label for="d2-2">2</label><input type="radio" name="d2" id="d2-3" value="3"><label for="d2-3">3</label><input type="radio" name="d2" id="d2-4" value="4"><label for="d2-4">4</label><input type="radio" name="d2" id="d2-5" value="5"><label for="d2-5">5</label></div>
+    </div>
+    <div class="row">
+      <div class="label">3. 面料与功能<small>纯棉/棉麻/冰丝棉优先；透气、速干、免烫、耐穿至少占两项</small></div>
+      <div class="scores"><input type="radio" name="d3" id="d3-0" value="0"><label for="d3-0">0</label><input type="radio" name="d3" id="d3-1" value="1"><label for="d3-1">1</label><input type="radio" name="d3" id="d3-2" value="2"><label for="d3-2">2</label><input type="radio" name="d3" id="d3-3" value="3"><label for="d3-3">3</label><input type="radio" name="d3" id="d3-4" value="4"><label for="d3-4">4</label><input type="radio" name="d3" id="d3-5" value="5"><label for="d3-5">5</label></div>
+    </div>
+    <div class="row">
+      <div class="label">4. 版型<small>宽松直筒、不收腰、下摆不紧；能容下 89cm 腰围</small></div>
+      <div class="scores"><input type="radio" name="d4" id="d4-0" value="0"><label for="d4-0">0</label><input type="radio" name="d4" id="d4-1" value="1"><label for="d4-1">1</label><input type="radio" name="d4" id="d4-2" value="2"><label for="d4-2">2</label><input type="radio" name="d4" id="d4-3" value="3"><label for="d4-3">3</label><input type="radio" name="d4" id="d4-4" value="4"><label for="d4-4">4</label><input type="radio" name="d4" id="d4-5" value="5"><label for="d4-5">5</label></div>
+    </div>
+    <div class="row">
+      <div class="label">5. 尺码覆盖<small>能提供 M–3XL；L/XL/2XL 为主力；可提供平铺实测表</small></div>
+      <div class="scores"><input type="radio" name="d5" id="d5-0" value="0"><label for="d5-0">0</label><input type="radio" name="d5" id="d5-1" value="1"><label for="d5-1">1</label><input type="radio" name="d5" id="d5-2" value="2"><label for="d5-2">2</label><input type="radio" name="d5" id="d5-3" value="3"><label for="d5-3">3</label><input type="radio" name="d5" id="d5-4" value="4"><label for="d5-4">4</label><input type="radio" name="d5" id="d5-5" value="5"><label for="d5-5">5</label></div>
+    </div>
+    <div class="row">
+      <div class="label">6. 价格与毛利<small>售价落在 100–200 元；毛利率 ≥50%；加运费后仍有空间</small></div>
+      <div class="scores"><input type="radio" name="d6" id="d6-0" value="0"><label for="d6-0">0</label><input type="radio" name="d6" id="d6-1" value="1"><label for="d6-1">1</label><input type="radio" name="d6" id="d6-2" value="2"><label for="d6-2">2</label><input type="radio" name="d6" id="d6-3" value="3"><label for="d6-3">3</label><input type="radio" name="d6" id="d6-4" value="4"><label for="d6-4">4</label><input type="radio" name="d6" id="d6-5" value="5"><label for="d6-5">5</label></div>
+    </div>
+    <div class="row">
+      <div class="label">7. 供货稳定性<small>能否一件代发/小批量起订；补货周期 ≤7 天；断码能补</small></div>
+      <div class="scores"><input type="radio" name="d7" id="d7-0" value="0"><label for="d7-0">0</label><input type="radio" name="d7" id="d7-1" value="1"><label for="d7-1">1</label><input type="radio" name="d7" id="d7-2" value="2"><label for="d7-2">2</label><input type="radio" name="d7" id="d7-3" value="3"><label for="d7-3">3</label><input type="radio" name="d7" id="d7-4" value="4"><label for="d7-4">4</label><input type="radio" name="d7" id="d7-5" value="5"><label for="d7-5">5</label></div>
+    </div>
+    <div class="row">
+      <div class="label">8. 质量风险<small>无缩水/掉色/起球隐患；走线整齐；无刺鼻异味</small></div>
+      <div class="scores"><input type="radio" name="d8" id="d8-0" value="0"><label for="d8-0">0</label><input type="radio" name="d8" id="d8-1" value="1"><label for="d8-1">1</label><input type="radio" name="d8" id="d8-2" value="2"><label for="d8-2">2</label><input type="radio" name="d8" id="d8-3" value="3"><label for="d8-3">3</label><input type="radio" name="d8" id="d8-4" value="4"><label for="d8-4">4</label><input type="radio" name="d8" id="d8-5" value="5"><label for="d8-5">5</label></div>
+    </div>
+    <div class="row">
+      <div class="label">9. 退货风险<small>颜色还原度高、尺码标注准确、材质描述不夸大</small></div>
+      <div class="scores"><input type="radio" name="d9" id="d9-0" value="0"><label for="d9-0">0</label><input type="radio" name="d9" id="d9-1" value="1"><label for="d9-1">1</label><input type="radio" name="d9" id="d9-2" value="2"><label for="d9-2">2</label><input type="radio" name="d9" id="d9-3" value="3"><label for="d9-3">3</label><input type="radio" name="d9" id="d9-4" value="4"><label for="d9-4">4</label><input type="radio" name="d9" id="d9-5" value="5"><label for="d9-5">5</label></div>
+    </div>
+    <div class="row">
+      <div class="label">10. 竞争度<small>同款在平台上没被 9.9 打烂；有差异化卖点（面料/版型/尺码）</small></div>
+      <div class="scores"><input type="radio" name="d10" id="d10-0" value="0"><label for="d10-0">0</label><input type="radio" name="d10" id="d10-1" value="1"><label for="d10-1">1</label><input type="radio" name="d10" id="d10-2" value="2"><label for="d10-2">2</label><input type="radio" name="d10" id="d10-3" value="3"><label for="d10-3">3</label><input type="radio" name="d10" id="d10-4" value="4"><label for="d10-4">4</label><input type="radio" name="d10" id="d10-5" value="5"><label for="d10-5">5</label></div>
+    </div>
+    <div class="row">
+      <div class="label">11. 内容可拍性<small>实物上镜、能拍出卖点（面料特写/版型对比/实穿）</small></div>
+      <div class="scores"><input type="radio" name="d11" id="d11-0" value="0"><label for="d11-0">0</label><input type="radio" name="d11" id="d11-1" value="1"><label for="d11-1">1</label><input type="radio" name="d11" id="d11-2" value="2"><label for="d11-2">2</label><input type="radio" name="d11" id="d11-3" value="3"><label for="d11-3">3</label><input type="radio" name="d11" id="d11-4" value="4"><label for="d11-4">4</label><input type="radio" name="d11" id="d11-5" value="5"><label for="d11-5">5</label></div>
+    </div>
+    <div class="row">
+      <div class="label">12. 供应链优势<small>能用到家族资源（普宁/鹭江/中大/姐夫吊牌）或本地工厂</small></div>
+      <div class="scores"><input type="radio" name="d12" id="d12-0" value="0"><label for="d12-0">0</label><input type="radio" name="d12" id="d12-1" value="1"><label for="d12-1">1</label><input type="radio" name="d12" id="d12-2" value="2"><label for="d12-2">2</label><input type="radio" name="d12" id="d12-3" value="3"><label for="d12-3">3</label><input type="radio" name="d12" id="d12-4" value="4"><label for="d12-4">4</label><input type="radio" name="d12" id="d12-5" value="5"><label for="d12-5">5</label></div>
+    </div>
+  </div>
+
+  <div class="total">
+    <span class="big" id="total">0</span><span class="of">/ 60 分</span>
+  </div>
+  <div class="verdict" id="verdict">请逐项打分</div>
+  <div class="quote" id="hint">判定线：≥45 分优选 · 35–44 分可小批量试 · &lt;35 分放弃（别占 SKU 位置）</div>
+</div>
+
+<div class="card">
+  <h2>🔍 现场三看 · 三问 · 三测</h2>
+  <h3>三看</h3>
+  <ul>
+    <li><b>看颜色</b>：自然光下看实物，和图片对比（色差是退货第一杀手）</li>
+    <li><b>看面料</b>：手感、克重、透光看密度；有没有刺鼻异味</li>
+    <li><b>看做工</b>：领口/袖口/走线/锁边/纽扣/拉链，翻内里看</li>
+  </ul>
+  <h3>三问</h3>
+  <ul>
+    <li><b>问起订与代发</b>：能不能一件代发？小批量最低多少件？</li>
+    <li><b>问补货</b>：补货周期多久？断码能不能补？旺季会不会缺货？</li>
+    <li><b>问换标与资质</b>：能否换我的吊牌/洗水标？有质检报告吗？</li>
+  </ul>
+  <h3>三测</h3>
+  <ul>
+    <li><b>测尺码</b>：拿样平铺实测（胸围/衣长/肩宽/袖长/腰围），和标注比对</li>
+    <li><b>测水洗</b>：洗一次看缩水、掉色、起球、变形</li>
+    <li><b>测试穿</b>：找体型接近的家人试穿（170cm/72kg 左右），看版型是否卡肚子</li>
+  </ul>
+  <div class="warn"><b>拿样规则：</b>每家最多拿 2 个样，拿样前先按上面的"一票否决"过一遍——不要拿一堆样回来再挑。</div>
+</div>
+
+<div class="card">
+  <h2>📌 打分速查（打分时对照）</h2>
+  <table>
+    <tr><th>分档</th><th>含义</th><th>动作</th></tr>
+    <tr><td class="num">5</td><td>完全符合，且有额外亮点</td><td>优先上架</td></tr>
+    <tr><td class="num">4</td><td>符合，无硬伤</td><td>可上架</td></tr>
+    <tr><td class="num">3</td><td>基本符合，有小瑕疵</td><td>看整体分数决定</td></tr>
+    <tr><td class="num">2</td><td>明显不足</td><td>谨慎</td></tr>
+    <tr><td class="num">1</td><td>勉强</td><td>基本放弃</td></tr>
+    <tr><td class="num">0</td><td>不满足</td><td>放弃</td></tr>
+  </table>
+</div>
+
+<div class="foot">
+  数据依据：《第五次国民体质监测公报》§20 · 尚普咨询中老年男装调研 §21/§24 · 华信人咨询下沉市场调研<br>
+  作战计划全文：menwear-plan-v3.html · Iris 编制 2026-09-08
+</div>
+
+<script>
+(function(){
+  var totalEl = document.getElementById('total');
+  var verdictEl = document.getElementById('verdict');
+  var inputs = document.querySelectorAll('.scores input[type=radio]');
+  function update(){
+    var sum = 0, n = 0;
+    for (var i = 1; i <= 12; i++){
+      var c = document.querySelector('input[name="d' + i + '"]:checked');
+      if (c){ sum += parseInt(c.value, 10); n++; }
+    }
+    totalEl.textContent = sum;
+    if (n < 12){ verdictEl.className = 'verdict'; verdictEl.textContent = '已打分 ' + n + '/12 项'; return; }
+    if (sum >= 45){ verdictEl.className = 'verdict v-a'; verdictEl.textContent = '✅ 优选款 —— 优先上架'; }
+    else if (sum >= 35){ verdictEl.className = 'verdict v-b'; verdictEl.textContent = '🟡 可试 —— 小批量试销'; }
+    else { verdictEl.className = 'verdict v-c'; verdictEl.textContent = '❌ 放弃 —— 别占 SKU 位置'; }
+  }
+  inputs.forEach(function(el){ el.addEventListener('change', update); });
+  update();
+})();
+</script>
+</body>
+</html>
